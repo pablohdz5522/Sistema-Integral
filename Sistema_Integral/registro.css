@@ -1,0 +1,263 @@
+@media (min-width: 481px) and (max-width: 900px){
+    p{
+        text-align: center;
+    }
+    h3{
+        text-align: center;
+    }
+
+
+}
+
+@media (max-width: 480px){
+    p{
+        text-align: center;
+        font-size: 1.1rem;
+    }
+    h3{
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+
+}
+
+
+.titulos{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inria Sans', sans-serif; 
+    
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.matriculac{
+    display: flex;
+    gap: 8px;
+    font-family: 'Inria Sans', sans-serif; 
+    align-items: center;
+    justify-content: center;
+}
+.matriculainput{
+    width: 100px;
+    text-align: center;
+    font-size: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.nombrec{
+    display: flex;
+    gap: 8px;
+    font-family: 'Inria Sans', sans-serif; 
+    align-items: center;
+    justify-content: center;
+}
+.nombreinput{
+    width: 200px;
+    text-align: center;
+    font-size: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.apepac{
+    display: flex;
+    gap: 8px;
+    font-family: 'Inria Sans', sans-serif; 
+    align-items: center;
+    justify-content: center;
+}
+.apepainput{
+    width: 200px;
+    text-align: center;
+    font-size: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.apemac{
+    display: flex;
+    gap: 8px;
+    font-family: 'Inria Sans', sans-serif; 
+    align-items: center;
+    justify-content: center;
+}
+.apemainput{
+    width: 200px;
+    text-align: center;
+    font-size: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.edadc{
+    display: flex;
+    gap: 8px;
+    font-family: 'Inria Sans', sans-serif; 
+    align-items: center;
+    justify-content: center;
+}
+.edadinput{
+    width: 80px;
+    text-align: center;
+    font-size: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.sexoc{
+    display: flex;
+    gap: 8px;
+    font-family: 'Inria Sans', sans-serif; 
+    align-items: center;
+    justify-content: center;
+}
+.sexoinput{
+    width: 150px;
+    text-align: center;
+    font-size: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.correoc{
+    display: flex;
+    gap: 8px;
+    font-family: 'Inria Sans', sans-serif; 
+    align-items: center;
+    justify-content: center;
+}
+.correoinput{
+    width: 220px;
+    text-align: center;
+    font-size: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    font-size: small;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.fechac{
+    display: flex;
+    gap: 8px;
+    font-family: 'Inria Sans', sans-serif; 
+    align-items: center;
+    justify-content: center;
+}
+.fechainput{
+    width: 130px;
+    text-align: center;
+    font-size: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    font-size: small;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.facultadc{
+    display: flex;
+    gap: 8px;
+    font-family: 'Inria Sans', sans-serif; 
+    align-items: center;
+    justify-content: center;
+}
+.facultadinput{
+    width: 300px;
+    text-align: center;
+    font-size: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.carrerac{
+    display: flex;
+    gap: 8px;
+    font-family: 'Inria Sans', sans-serif; 
+    align-items: center;
+    justify-content: center;
+}
+.carrerainput{
+    width: 300px;
+    text-align: center;
+    font-size: 16px;
+    padding: 1px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+
+
+.guardar {
+    background: transparent;
+    position: relative;
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid rgb(255,0,0);
+    border-radius: 25px;
+    outline: none;
+    overflow: hidden;
+    color: rgb(255,0,0);
+    transition: color 0.3s 0.1s ease-out;
+    text-align: center;
+  }
+  
+  .guardar span {
+    margin: 10px;
+  }
+  
+  .guardar::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    content: '';
+    border-radius: 50%;
+    display: block;
+    width: 20em;
+    height: 20em;
+    left: -5em;
+    text-align: center;
+    transition: box-shadow 0.5s ease-out;
+    z-index: -1;
+  }
+  
+  .guardar:hover {
+    color: #fff;
+    border: 1px solid rgb(255,0,0);
+  }
+  
+  .guardar:hover::before {
+    box-shadow: inset 0 0 0 10em rgb(255, 0, 0);
+  }
+
+  .divguardar{
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    text-align: center;
+  }

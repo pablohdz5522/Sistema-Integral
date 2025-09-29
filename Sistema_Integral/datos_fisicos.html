@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>Datos Fisicos</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+
+        <link rel="stylesheet" href="datos_fisicos.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+        
+    </head>
+    
+    <body  style="background: linear-gradient(135deg, #003366,#ADB0B6,#003366);  margin: 0;height: 100%; min-height: 100vh;">
+        <div class="container mt-3 display: flex">
+            <button class="salir"  title="salir" onclick="window.location.href='menu.php'">
+                <div class="salir-box">
+                <span class="salir-elem">
+                    <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
+                    ></path>
+                    </svg>
+                </span>
+                <span class="button-elem">
+                    <svg viewBox="0 0 46 40">
+                    <path
+                        d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
+                    ></path>
+                    </svg>
+                </span>
+                </div>
+            </button>
+        </div>
+
+        <div class="container display: flex">
+            
+                <span style="text-align: left;" class="col-md-5 text-white">¿A quién va dirigido?</span>
+                <span class="titulo text-white" style=" width: 550px;">DATOS FISICOS</span>
+                <div class="col-3">
+                    <select id="ambos" class="form-select" onchange="mostrarFormulario()">
+                        <option selected disabled>Escoge</option>
+                        <option value="maestros">Maestros</option>
+                        <option value="alumnos">Alumnos</option>
+                    </select>
+                </div>
+
+                <!-- Aqui se divide -->
+            <form action="guardar_datos_fisicos_alumnos.php" id="formalumnos" style="display: none;" method="post">
+                <div class="containerdentro mt-2 display: flex">
+                    <div class="mb-3" style="display: flex; justify-content: center;">
+                        <span style="text-align: center;">Ingresa la Matricula y presione enter para buscar al alumno</span>
+                    </div>
+
+                    <div class="derecho">
+                        <div class="matriculac">
+                            <label for="matricula" class="form-label">Matricula</label>
+                            <input type="number" class="form-control inputmatricula" name="matricula" id="matricula" required />
+                        </div>
+
+                        <div class="fechac">
+                            <label for="fecha1" class="form-label">Fecha</label>
+                            <input type="date" class="form-control inputfecha" name="fecha1" id="fecha1" required />
+                        </div>
+
+                        <div class="nombrec">
+                            <label for="nombre1" class="form-label">Nombre</label>
+                            <input type="text" class="form-control inputnombre" name="nombre1" id="nombre1" readonly/>
+                        </div>
+
+                        <div class="apellidosc">
+                            <label for="apellidos1" class="form-label" >Apellidos</label>
+                            <input type="text" class="form-control inputapellidos" name="apellidos1" id="apellidos1" readonly />
+                        </div>
+                    </div>
+
+                    <div class="derecho">
+                        <div class="sexoc">
+                            <label for="sexo1" class="form-label">Sexo</label>
+                            <select class="form-select selectsexo"  name="sexo1" id="sexo1" >
+                                <option value="" selected disabled></option>
+                            </select>
+                        </div>
+                        
+                        <div class="edadc">
+                            <label for="edad1" class="form-label" >Edad</label>
+                            <input type="text" class="form-control inputedad" name="edad1" id="edad1" />
+                        </div>
+
+
+                        <div class="facultadc">
+                            <label for="facultad1" class="form-label">Facultad</label>
+                            <select class="form-select selectfacultad" name="facultad1" id="facultad1" >
+                                <option value="" selected disabled></option>
+                            </select>
+                        </div>
+
+                        <div class="carrerac">
+                            <label for="carrera1" class="form-label">Carrera</label>
+                            <select class="form-select selectcarrera" name="carrera1" id="carrera1" >
+                                <option value="" selected disabled></option>
+                            </select>
+                        </div>
+                    </div>  
+                    
+                    <div>
+                        <div class="correoc">
+                            <label for="correo1" class="form-label">Correo</label>
+                            <input type="email" class="form-control inputcorreo" name="correo1" id="correo1"/>
+                        </div>
+                    </div>
+                    
+                    <!-- Aqui se divide -->
+                     <br>
+
+                    <div class="row h-100hv mt-2 d-flex justify-content-between">
+                        <div class="col-md-4 separacion">
+                            <span class="abajo" style="margin-left: 70px;">Valores cintura / Cadera</span>
+
+                            <br><br>
+
+                            <span class="spang">Cintura</span>
+                            <input type="number" class="form-control1" id="cintura1" name="cintura1" style="width: 120px;" step="0.01" required>
+
+                            <br><br>
+
+                            <span class="spang">Cadera</span>
+                            <input type="number" class="form-control1" id="cadera1" name="cadera1" style="width: 120px;" step="0.01" required>
+
+                            <br><br>
+
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación de Cad-Cintura</span>
+                            <input type="text" class="inputclasificacion" id="clasificacioncadcin1" name="clasificacioncadcin1" style="width: 150px;" readonly>
+
+                            <br><br>
+
+                            <span class="spang">ICC</span>
+                            <input type="text" class="form-control1" id="icc1" name="icc1" style="width: 120px;" step="0.01" required readonly>
+
+                            <br><br>
+
+                            <span class="spang" >Clasificación ICC</span>
+                            <input type="text" class="inputclasificacion" id="clasificacionicc1" name="clasificacionicc1" style="width: 150px;" readonly>
+                        </div>
+
+                        <!-- Aqui se divide -->
+
+                        <div class="col-md-4 separacion">
+                            <span class="abajo" style="margin-left: 60px;">Valores de peso y talla</span>
+
+                            <br><br>
+
+                            <span class="spang">Peso</span>
+                            <input type="number" class="form-control1" id="peso1" name="peso1" style="width: 120px;" step="0.01" required>
+
+                            <br><br>
+                            
+                            <span class="spang">Talla(centimetros)</span>
+                            <input type="number" class="form-control1" id="talla1" name="talla1" style="width: 120px;" required>
+
+                            <br><br>
+
+                            <span class="spang">IMC</span>
+                            <input type="text" class="form-control1" id="imc1" name="imc1" style="width: 120px;" step="0.01" readonly>
+
+                            <br><br>
+
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación IMC</span>
+                            <input type="text" class="inputclasificacion" id="clasificacionimc1" name="clasificacionimc1" style="width: 150px;" readonly>
+                            
+                        </div>
+
+                        <!-- Aqui se divide -->
+
+                        <div class="col-md-4 separacion">
+                            <span class="abajo">Valores de porcentaje masa grasa</span>
+                            <br><br>
+
+                            <span class="spang">MB(Kcal)</span>
+                            <input type="number" class="form-control1" id="mb1" name="mb1" style="width: 120px;" step="0.01" required>
+                            <br><br>
+                            <span class="spang">Get</span>
+                            <input type="number" class="form-control1" id="get1" name="get1" style="width: 120px;" step="0.01" required readonly>
+                            <br><br>
+                            <span class="spang">Porcentaje de masa grasa</span>
+                            <input type="number" class="form-control1" id="pormasagrasa1" name="pormasagrasa1" style="width: 90px;" step="0.01" required>
+                            <br><br>
+                            <span class="spang" >Valor ideal % grasa</span>
+                            <input type="text" class="inputclasificacion" id="valoridealgrasa1" name="valoridealgrasa1" style="width: 150px;" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación % grasa</span>
+                            <input type="text" class="inputclasificacion" id="clasificaciongrasa1" name="clasificaciongrasa1" style="width: 150px;" readonly>
+                        </div>
+                    </div>
+
+                    <!-- Aqui se divide ------------------------------------------------------------------------------------------------------------------------------------------------>
+
+                    <div class="row h-100hv d-flex justify-content-between row" >
+                        <div class="col-md-4 separacion ">
+                            <span class="abajo" style="font-size: 17px;">Valores de Porcentaje de Masa magra y Agua</span>
+                            <br><br>
+
+                            <span class="spang">Masa magra</span>
+                            <input type="number" class="form-control1" id="masamagra1" name="masamagra1" style="width: 120px;" step="0.01" required>
+                            <br><br>
+                            <span class="spang">Agua Total(kg)</span>
+                            <input type="number" class="form-control1" id="aguatotal1" name="aguatotal1" style="width: 120px;" step="0.01" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Porcentaje de agua total</span>
+                            <input type="text" class="inputclasificacion" id="porcentajeaguatotal1" name="porcentajeaguatotal1" style="width: 140px;" required readonly>
+
+                        </div>
+
+                        <!-- Aqui se divide -->
+
+                        <div class="col-md-4 separacion">
+                            <span class="abajo" >Valores de Glucosa y Colesterol</span>
+                            <br><br>
+
+                            <span class="spang">Glucosa</span>
+                            <input type="number" class="form-control1" id="glucosa1" name="glucosa1" style="width: 120px;" step="0.01" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación de Glucosa</span>
+                            <input type="text" class="inputclasificacion" id="clasificacionglucosa1" name="clasificacionglucosa1" style="width: 140px;" required readonly>
+                            <br><br>
+                            <br>
+                            <span class="spang">Colesterol</span>
+                            <input type="number" class="form-control1" id="colesterol1" name="colesterol1" style="width: 120px;" step="0.01" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación de Colesterol</span>
+                            <input type="text" class="inputclasificacion" id="clasificacioncolesterol1" name="clasificacioncolesterol1" style="width: 140px;" required readonly>
+
+                        </div>
+
+                        <!-- Aqui se divide -->
+
+                        <div class="col-md-4 separacion">
+                            <span class="abajo" style="font-size: 18px;">Valores de Triglicéridos y Tensión Arterial</span>
+                            <br><br>
+
+                            <span class="spang">Triglicéridos</span>
+                            <input type="number" class="form-control1" id="trigliceridos1" name="trigliceridos1" style="width: 120px;" step="0.01" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación de Triglicéridos</span>
+                            <input type="text" class="inputclasificacion" id="clasificaciontrigliceridos1" name="clasificaciontrigliceridos1" style="width: 140px;" required readonly>
+                            <br><br>
+                            <br>
+                            <span class="spang">Tensión Arterial</span>
+                            <input type="text" class="form-control1" id="tensionarterial1" name="tensionarterial1" style="width: 120px;" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación de T.A</span>
+                            <input type="text" class="inputclasificacion" id="clasificacionta1" name="clasificacionta1" style="width: 140px;" required readonly>
+                        </div>
+                    </div>
+
+                    <!--Division para el botón de guardar-->
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <button class="guardar"  title="Guardar datos" onclick="guardarFormulario()">
+                            <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                                <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="30"
+                                height="30"
+                                class="icon"
+                                >
+                                <path
+                                    d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z"
+                                ></path>
+                                </svg>
+                            </div>
+                            </div>
+                            <span>Guardar</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+
+            <!-- FORMULARIO PARA MAESTROS -->
+
+            <form action="" id="formmaestros" style="display: none;">
+                <div class="containerdentro mt-2 display: flex">
+                    <div>
+                        <span class="spang">No° Empleado</span>
+                        <input type="number" class="form-control1" id="empleado" name="matricula" style="width: 90px;">
+
+                        <span class="spang">fecha</span>
+                        <input type="date" class="form-control1" id="fecha" name="fecha" style="width: 120px;">
+
+                        <span class="spang">nombre</span>
+                        <input type="text" class="form-control1" id="nombre" name="nombre" style="width: 180px;">
+                        
+                        <span class="spang">Apellidos</span>
+                        <input type="text" class="form-control1" id="apellidos" name="apellidos" style="width: 200px;">
+                    
+                        <br>
+                        <br>
+
+                        <span class="spang">Sexo</span>
+                        <select id="sexo" class="form-select1" >
+                            <option selected disabled>Escoge</option>
+                            <option id="maestros">Masculino</option>
+                            <option id="alumnos">Femenino</option>
+                        </select>
+
+                        <span class="spang">Edad</span>
+                        <input type="number" class="form-control1" id="edad" name="edad" style="width: 60px;">
+
+                        <span class="spang">Facutad</span>
+                        <select id="facultad" class="form-select1" >
+                            <option selected disabled>Facutad</option>
+                            <option id="informacion">Facultad de Ciencias de la Información</option>
+                            <option id="derecho">Facultad de Derecho</option>
+                            <option id="ingenieria">Facultad de Ingeniería</option>
+                            <option id="salud">Facultad de Ciencias de la Salud</option>
+                            <option id="administrativas">Facultad de Economicas Administrativas</option>
+                            <option id="educativas">Facultad de Ciencias Educativas</option>
+                            <option id="naturales">Facultad de Ciencias Naturales y Exactas</option>
+                            <option id="quimica">Facultad de Química</option>
+                            
+                        </select>
+
+                        <span class="spang">Correo</span>
+                        <input type="email" class="form-control1" id="correo" name="correo" style="width: 250px;">
+                    </div>
+                    <!-- Aqui se divide -->
+
+                    <div class="row h-100hv mt-4 d-flex justify-content-between" >
+                        <div class="col-md-4 separacion">
+                            <span class="abajo" style="margin-left: 70px;">Valores cintura / Cadera</span>
+
+                            <br><br>
+
+                            <span class="spang">Cintura</span>
+                            <input type="number" class="form-control1" id="cintura" name="cintura" style="width: 120px;" required>
+
+                            <br><br>
+
+                            <span class="spang">Cadera</span>
+                            <input type="number" class="form-control1" id="cadera" name="cadera" style="width: 120px;" required>
+
+                            <br><br>
+
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación de Cad-Cintura</span>
+                            <input type="text" class="inputclasificacion" id="clasificacioncadcin" name="clasificacioncadcin" style="width: 150px;" readonly>
+
+                            <br><br>
+
+                            <span class="spang">ICC</span>
+                            <input type="text" class="form-control1" id="icc" name="icc" style="width: 120px;" required readonly>
+
+                            <br><br>
+
+                            <span class="spang" >Clasificación ICC</span>
+                            <input type="text" class="inputclasificacion" id="clasificacionicc" name="clasificacionicc" style="width: 150px;" readonly>
+                        </div>
+
+                        <!-- Aqui se divide -->
+
+                        <div class="col-md-4 separacion">
+                            <span class="abajo" style="margin-left: 60px;">Valores de peso y talla</span>
+
+                            <br><br>
+
+                            <span class="spang">Peso</span>
+                            <input type="number" class="form-control1" id="peso" name="peso" style="width: 120px;" required>
+
+                            <br><br>
+                            
+                            <span class="spang">Talla(Metros)</span>
+                            <input type="number" class="form-control1" id="talla" name="talla" style="width: 120px;" required>
+
+                            <br><br>
+
+                            <span class="spang">IMC</span>
+                            <input type="number" class="form-control1" id="imc" name="imc" style="width: 120px;" required>
+
+                            <br><br>
+
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación IMC</span>
+                            <input type="text" class="inputclasificacion" id="clasificacionimc" name="clasificacionimc" style="width: 150px;" readonly>
+                            
+                        </div>
+
+                        <!-- Aqui se divide -->
+
+                        <div class="col-md-4 separacion">
+                            <span class="abajo">Valores de porcentaje masa grasa</span>
+                            <br><br>
+
+                            <span class="spang">MB(Kcal)</span>
+                            <input type="number" class="form-control1" id="mb" name="mb" style="width: 120px;" required>
+                            <br><br>
+                            <span class="spang">Get</span>
+                            <input type="number" class="form-control1" id="get" name="get" style="width: 120px;" required readonly>
+                            <br><br>
+                            <span class="spang">Porcentaje de masa grasa</span>
+                            <input type="text" class="form-control1" id="pormasagrasa" name="pormasagrasa" style="width: 90px;" required>
+                            <br><br>
+                            <span class="spang" >Valor ideal % grasa</span>
+                            <input type="text" class="inputclasificacion" id="valoridealgrasa" name="valoridealgrasa" style="width: 150px;" readonly>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación % grasa</span>
+                            <input type="text" class="inputclasificacion" id="clasificaciongrasa" name="clasificaciongrasa" style="width: 150px;" readonly>
+                        </div>
+                    </div>
+
+                    <!-- Aqui se divide ------------------------------------------------------------------------------------------------------------------------------------------------>
+
+                    <div class="row h-100hv d-flex justify-content-between row" >
+                        <div class="col-md-4 separacion ">
+                            <span class="abajo" style="font-size: 17px;">Valores de Porcentaje de Masa Grasa y Agua</span>
+                            <br><br>
+
+                            <span class="spang">Masa grasa</span>
+                            <input type="number" class="form-control1" id="masagrasa" name="masagrasa" style="width: 120px;" required>
+                            <br><br>
+                            <span class="spang">Agua Total(kg)</span>
+                            <input type="number" class="form-control1" id="aguatotal" name="aguatotal" style="width: 120px;" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Porcentaje de agua total</span>
+                            <input type="text" class="inputclasificacion" id="porcentajeaguatotal" name="porcentajeaguatotal" style="width: 140px;" readonly required>
+
+                        </div>
+
+                        <!-- Aqui se divide -->
+
+                        <div class="col-md-4 separacion">
+                            <span class="abajo" >Valores de Glucosa y Colesterol</span>
+                            <br><br>
+
+                            <span class="spang">Glucosa</span>
+                            <input type="number" class="form-control1" id="glucosa" name="glucosa" style="width: 120px;" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación de Glucosa</span>
+                            <input type="text" class="inputclasificacion" id="clasificacionglucosa" name="clasificacionglucosa" style="width: 140px;" required readonly>
+                            <br><br>
+                            <br>
+                            <span class="spang">Colesterol</span>
+                            <input type="number" class="form-control1" id="colesterol" name="colesterol" style="width: 120px;" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación de Colesterol</span>
+                            <input type="text" class="inputclasificacion" id="clasificacioncolesterol" name="clasificacioncolesterol" style="width: 140px;" required readonly>
+
+                        </div>
+
+                        <!-- Aqui se divide -->
+
+                        <div class="col-md-4 separacion">
+                            <span class="abajo" style="font-size: 18px;">Valores de Triglicéridos y Tensión Arterial</span>
+                            <br><br>
+
+                            <span class="spang">Triglicéridos</span>
+                            <input type="number" class="form-control1" id="trigliceridos" name="trigliceridos" style="width: 120px;" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación de Triglicéridos</span>
+                            <input type="text" class="inputclasificacion" id="clasificaciontrigliceridos" name="clasificaciontrigliceridos" style="width: 140px;" required readonly>
+                            <br><br>
+                            <br>
+                            <span class="spang">Tensión Arterial</span>
+                            <input type="text" class="form-control1" id="tensionarterial" name="tensionarterial" style="width: 120px;" required>
+                            <br><br>
+                            <span class="clasificacion1" style="font-size: 12px;">Clasificación de T.A</span>
+                            <input type="text" class="inputclasificacion" id="clasificacionta" name="clasificacionta" style="width: 140px;" required readonly>
+                        </div>
+                    </div>
+
+                    <!--Division para el botón de guardar-->
+                    <br>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="guardar" title="Guardar datos">
+                            <div class="svg-wrapper-1">
+                                <div class="svg-wrapper">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" class="icon">
+                                        <path d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span>Guardar</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+
+
+        <script>
+            function mostrarFormulario() {
+                var tipoUsuario = document.getElementById("ambos").value;
+            
+                document.getElementById("formmaestros").style.display = "none";
+                document.getElementById("formalumnos").style.display = "none";
+            
+                if (tipoUsuario === "maestros") {
+                    document.getElementById("formmaestros").style.display = "block";
+                } else if (tipoUsuario === "alumnos") {
+                    document.getElementById("formalumnos").style.display = "block";
+                }
+            }
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            // Evitar el envío del formulario cuando se presiona "Enter"
+        
+
+            // Detectar "Enter" en el campo matrícula y buscar el alumno
+            document.getElementById("matricula").addEventListener("keydown", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); // ✅ Evita que se envíe el formulario
+                    const matricula = this.value.trim();
+                    if (matricula) {
+                        buscarAlumno(matricula);
+                    }
+                }
+            });
+        });
+
+        function buscarAlumno(matricula) {
+            fetch(`buscar_alumno.php?matricula=${matricula}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        document.getElementById("nombre1").value = data.nombres_alum;
+                        document.getElementById("apellidos1").value = `${data.ape_paterno_alum} ${data.ape_materno_alum}`;
+                        document.getElementById("edad1").value = data.edad_alum;
+                        document.getElementById("correo1").value = data.correo_alum;
+
+                        // Actualizar selects
+                        document.getElementById("sexo1").innerHTML = `<option selected>${data.sexo}</option>`;
+                        document.getElementById("facultad1").innerHTML = `<option selected>${data.nombre_facultad}</option>`;
+                        document.getElementById("carrera1").innerHTML = `<option selected>${data.nombre_carrera}</option>`;
+
+                        // Asignar fecha actual
+                        document.getElementById("fecha1").value = new Date().toISOString().split("T")[0];
+                    }
+                })
+                .catch(error => {
+                    console.error("Error en la solicitud:", error);
+                });
+        }
+        </script>
+
+        <script>
+            document.getElementById("peso1").addEventListener("input", calcularIMC);
+            document.getElementById("talla1").addEventListener("input", calcularIMC);
+
+            function calcularIMC() {
+                const peso = parseFloat(document.getElementById("peso1").value);
+                const talla = parseFloat(document.getElementById("talla1").value)/100;
+                let clasificacion = "";
+                
+                // Verificar si ambos campos son válidos
+                if (!isNaN(peso) && peso > 0 && !isNaN(talla) && talla > 0) {
+                    const imc = peso / (talla * talla);
+
+                    // Clasificación según el IMC
+                    if (imc < 18.5) {
+                        clasificacion = "Peso insuficiente";
+                    } else if (imc >= 18.5 && imc <= 24.9) {
+                        clasificacion = "Peso normal";
+                    } else if (imc >= 25.0 && imc <= 29.9) {
+                        clasificacion = "Sobrepeso";
+                    } else if (imc >= 30.0 && imc <= 34.9) {
+                        clasificacion = "Obesidad grado 1";
+                    } else if (imc >= 35.0 && imc <= 39.9) {
+                        clasificacion = "Obesidad grado 2";
+                    } else {
+                        clasificacion = "Obesidad grado 3 (mórbida)";
+                    }
+                    
+                    // Mostrar clasificación en el campo de texto
+                    document.getElementById("clasificacionimc1").value = clasificacion;
+                    document.getElementById("imc1").value = imc.toFixed(2);
+                } else {
+                    // Limpiar los valores si alguno de los campos no es válido
+                    document.getElementById("clasificacionimc1").value = "";
+                    document.getElementById("imc1").value = "";
+                }
+            }
+        </script>
+
+        <script>
+            document.getElementById("cintura1").addEventListener("input", calcularICC);
+            document.getElementById("cadera1").addEventListener("input", calcularICC);
+            document.getElementById("sexo1").addEventListener("change", calcularICC);
+
+            function calcularICC() {
+                const cintura = parseFloat(document.getElementById("cintura1").value);
+                const cadera = parseFloat(document.getElementById("cadera1").value);
+                const sexo = document.getElementById("sexo1").value;
+                let clasificacion = "";
+                let clasificacion1 = "";
+
+                if (cintura > 0 && cadera > 0 && sexo) {
+                    const icc = cintura / cadera;
+
+                    if (sexo === "MASCULINO") {
+                        if (icc < 0.9) {
+                            clasificacion = "Riesgo Bajo";
+                        } else if (icc >= 0.90 && icc <= 0.99) {
+                            clasificacion = "Riesgo Moderado";
+                        } else {
+                            clasificacion = "Riesgo Alto";
+                        }
+                    } else if (sexo === "FEMENINO") {
+                        if (icc < 0.80) {
+                            clasificacion = "Riesgo Bajo";
+                        } else if (icc >= 0.80 && icc <= 0.84) {
+                            clasificacion = "Riesgo Moderado";
+                        } else {
+                            clasificacion = "Riesgo Alto";
+                        }
+                    }
+
+                    if (sexo === "MASCULINO") {
+                        if(icc<1.0){
+                        clasificacion1 = "Ginecoide";
+                        }else{
+                            clasificacion1= "Androide";
+                        }
+                    } else if (sexo === "FEMENINO") {
+                        if(icc<0.8){
+                            clasificacion1 = "Ginecoide";
+                        }else{
+                            clasificacion1= "Androide";
+                        }
+                    }
+                    
+                    // Mostrar clasificación en el campo de texto
+                    document.getElementById("clasificacioncadcin1").value = clasificacion;
+                    document.getElementById("clasificacionicc1").value = clasificacion1;
+                    document.getElementById("icc1").value = icc.toFixed(2);
+                } else {
+                    document.getElementById("clasificacioncintura1").value = "";
+                    document.getElementById("clasificacionicc1").value = "";
+                    document.getElementById("icc1").value = "";
+                }
+            }
+        </script>
+
+        <script>
+            document.getElementById("mb1").addEventListener("input", calcularGet);
+
+            function calcularGet() {
+                const kcal = parseFloat(document.getElementById("mb1").value);
+                    
+                if (!isNaN(kcal)) {
+                    // Realiza el cálculo solo si el valor ingresado es un número válido
+                    const kc = kcal + ((kcal * 10) / 100) + ((kcal * 10) / 100);
+
+                    document.getElementById("get1").value = kc.toFixed(2);
+                }
+            }
+        </script>
+
+        <script>
+            document.getElementById("pormasagrasa1").addEventListener("input", clasificacionGra);
+            document.getElementById("sexo1").addEventListener("change", clasificacionGra);
+
+            function clasificacionGra() {
+                const masa = parseFloat(document.getElementById("pormasagrasa1").value);
+                const sexo = document.getElementById("sexo1").value;
+                let clasificacion = "";
+                
+                if (sexo == "MASCULINO") {
+                    if (masa < 10) {
+                        clasificacion = "Debajo Recomendado";
+                    } else if (masa >= 10 && masa <= 20) {
+                        clasificacion = "Recomendado";
+                    } else {
+                        clasificacion = "Arriba Recomendado";
+                    }
+                } else if (sexo == "FEMENINO") {
+                    if (masa < 20) {
+                        clasificacion = "Debajo Recomendado";
+                    } else if (masa > 20 && masa <= 30) {
+                        clasificacion = "Recomendado";
+                    } else {
+                        clasificacion = "Arriba Recomendado";
+                    }
+                } else {
+                    clasificacion = "";
+                }
+
+                document.getElementById("clasificaciongrasa1").value = clasificacion;
+            }
+        </script>
+
+        <script>
+            document.getElementById("aguatotal1").addEventListener("input", calcularagua);
+            document.getElementById("peso1").addEventListener("input", calcularagua);
+
+            function calcularagua() {
+                const agua = parseFloat(document.getElementById("aguatotal1").value);
+                const peso = parseFloat(document.getElementById("peso1").value);
+                    
+                if (!isNaN(agua) && !isNaN(peso)) {
+                    // Realiza el cálculo solo si el valor ingresado es un número válido
+                    const poragua = (agua*100)/peso;
+
+                    document.getElementById("porcentajeaguatotal1").value = poragua.toFixed(2);
+                }else {
+                    document.getElementById("porcentajeaguatotal1").value = ""; // Limpia el campo si alguno no es un número válido
+                }
+            }
+        </script>
+
+        <script>
+            document.getElementById("glucosa1").addEventListener("input", calcularGlu);
+
+            function calcularGlu() {
+                const glucosa = parseFloat(document.getElementById("glucosa1").value);
+                let clasificacion = "";
+
+                if (!isNaN(glucosa)) {
+                    if(glucosa == 0){
+                        clasificacion="Sin resultados"
+                    }else if(glucosa<100){
+                        clasificacion="Normal"
+                    }else if(glucosa>=100 && glucosa<=125){
+                        clasificacion="Glucosa Alterada (Pre-diabetes)"
+                    }else{
+                        clasificacion="DM"
+                    }
+                    document.getElementById("clasificacionglucosa1").value = clasificacion;
+                }else{
+                    document.getElementById("clasificacionglucosa1").value = "";
+                }
+            }
+        </script>
+
+        <script>
+            document.getElementById("colesterol1").addEventListener("input", calcularcole);
+
+            function calcularcole() {
+                const colesterol = parseFloat(document.getElementById("colesterol1").value);
+                let clasificacion = "";
+
+                if (!isNaN(colesterol)) {
+                    
+                    if(colesterol == 0){
+                        clasificacion="Sin resultados"
+                    }else if(colesterol<200){
+                        clasificacion="Optimo"
+                    }else if(colesterol>=200 && colesterol<=239){
+                        clasificacion="Límite Alto"
+                    }else{
+                        clasificacion="Alto"
+                    }
+                    document.getElementById("clasificacioncolesterol1").value = clasificacion;
+                }else{
+                    document.getElementById("clasificacioncolesterol1").value = "";
+                }
+            }
+        </script>
+
+        <script>
+                    
+            document.getElementById("trigliceridos1").addEventListener("input", calculartri);
+
+            function calculartri() {
+                const trigliceridos = parseFloat(document.getElementById("trigliceridos1").value);
+                let clasificacion = "";
+
+                if (!isNaN(trigliceridos)) {
+                    
+                    if (trigliceridos == 0) {
+                        clasificacion = "Sin resultados";
+                    } else if (trigliceridos < 150) {
+                        clasificacion = "Normal";
+                    } else if (trigliceridos >= 150 && trigliceridos <= 199) {
+                        clasificacion = "Limite Alto";
+                    }  else if (trigliceridos >= 200 && trigliceridos <= 499) {
+                        clasificacion = "Alto";
+                    
+                    }else {
+                        clasificacion = "Muy Alto";
+                    }
+                    document.getElementById("clasificaciontrigliceridos1").value = clasificacion;
+                } else {
+                    document.getElementById("clasificaciontrigliceridos1").value = "";
+                }
+            }
+        </script>
+
+        <script>
+            document.getElementById("tensionarterial1").addEventListener("input", function() {
+            let valor = this.value;
+            let clasificacionInput = document.getElementById("clasificacionta1");
+            
+            let partes = valor.split("/");
+            if (partes.length === 2) {
+                let sistolica = parseInt(partes[0]);
+                let diastolica = parseInt(partes[1]);
+                
+                if (!isNaN(sistolica) && !isNaN(diastolica)) {
+                    let clasificacion = "";
+                    
+                    if (sistolica < 90 || diastolica < 60) {
+                        clasificacion = "Hipotensión";
+                    } else if (sistolica <= 120 && diastolica <= 80) {
+                        clasificacion = "Normal";
+                    } else if (sistolica <= 129 && diastolica < 80) {
+                        clasificacion = "Elevada";
+                    } else if (sistolica <= 139 || diastolica <= 89) {
+                        clasificacion = "Hipertensión Grado 1";
+                    } else if (sistolica >= 140 || diastolica >= 90) {
+                        clasificacion = "Hipertensión Grado 2";
+                    } else if (sistolica >= 180 || diastolica >= 120) {
+                        clasificacion = "Crisis Hipertensiva";
+                    }
+                    
+                    clasificacionInput.value = clasificacion;
+                } else {
+                    clasificacionInput.value = "Valor no válido";
+                }
+            } else {
+                clasificacionInput.value = "Formato incorrecto";
+            }
+        });
+        </script>
+
+
+    </body>
+</html>

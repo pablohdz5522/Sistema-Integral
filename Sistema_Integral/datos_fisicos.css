@@ -1,0 +1,396 @@
+html, body {
+  height: 100%;
+  overflow: hidden; /* Evita que el contenido se desplace cuando la ventana es pequeña */
+}
+
+body {
+  overflow: auto; /* Activa el desplazamiento solo si el contenido excede el tamaño de la pantalla */
+}
+
+.container { 
+
+  overflow: auto; /* Añade barras de desplazamiento cuando sea necesario */
+}
+
+
+.salir {
+    display: block;
+    position: relative;
+    width: 56px;
+    height: 56px;
+    margin: 0;
+    overflow: hidden;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+  }
+  
+  .salir:before,
+  .salir:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    inset: 7px;
+  }
+  
+  .salir:before {
+    border: 4px solid #000000;
+    transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
+      transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
+  }
+  
+  .salir:after {
+    border: 4px solid #f81100;
+    transform: scale(1.3);
+    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0;
+  }
+  
+  .salir:hover:before,
+  .salir:focus:before {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .salir:hover:after,
+  .salir:focus:after {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
+      transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
+  }
+  
+  .salir-box {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .salir-elem {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: 22px 18px 0 18px;
+    transform: rotate(180deg);
+    fill: #000000;
+  }
+  
+  .button:hover .salir-box,
+  .salir:focus .salir-box {
+    transition: 0.4s;
+    transform: translateX(-56px);
+  }
+  
+
+.custom-dropdown .dropdown-menu {
+    background-color: #fdfdfd !important; /* Color naranja */
+    min-width: 250px !important; /* Más ancho */
+}
+
+.custom-dropdown .dropdown-item {
+    font-size: 15px !important;
+    padding: 10px 40px !important;
+}
+
+.custom-btn {
+    font-size: 15px !important; /* Aumenta el tamaño del texto */
+    padding: 10px 40px !important; /* Más espacio interno */
+    width: 250px !important; /* Aumenta el ancho */
+    height: 40px !important; /* Aumenta la altura */
+    background-color: #fdfdfd !important; /* Cambia el color de fondo */
+    color: rgb(0, 0, 0) !important; /* Cambia el color del texto */
+    border-radius: 7px !important; /* Bordes redondeados */
+    text-align: left;
+}
+
+
+
+
+.containerdentro{
+  border: 3px solid black; /* Borde visible */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 15px; /* Espaciado interno */
+  background-color: transparent; /* Fondo transparente */
+  margin: 10px auto; /* Centra el container */
+  min-height: 100vh; /* Asegura que el contenedor siempre tenga al menos el 100% de la altura de la pantalla */
+  box-sizing: border-box; /* Evita que el padding afecte el tamaño total */
+  overflow: hidden; /* Asegura que el contenedor no se desborde */
+  width: 100%;
+  max-width: 1200px;
+  padding: 10px;
+}
+
+.titulo {
+  display: inline-block;
+  text-align: right;
+  font-size: 28px;
+  margin: 0 auto;
+  font-family: 'Inria Sans', sans-serif; 
+}
+
+
+
+.spang {
+  margin-left: 25px;
+  font-family: 'Inria Sans', sans-serif;
+  padding: 6px 12px;
+  background-color: #ddd; /* Color de fondo para diferenciar */
+}
+
+.form-control1 {
+  border: none; /* Quitamos el borde del input para que parezca parte del cuadro */
+  border-radius: 0px 5px 5px 0px; /* Eliminamos bordes redondeados del input */
+  flex-grow: 0; /* Para que el input tome el resto del espacio */
+  
+  padding: 4px;
+}
+
+.form-select1{
+  border: none; /* Quitamos el borde del input para que parezca parte del cuadro */
+  border-radius: 0px 5px 5px 0px; /* Eliminamos bordes redondeados del input */
+  flex-grow: 0; /* Para que el input tome el resto del espacio */
+  font-size: 14px;
+  padding: 6px;
+
+}
+
+.separacion {
+  border-right: 1px solid #000000;
+  padding-right: 20px;
+  border-bottom: 1px solid #000000;
+  border-left: 1px solid #000000;
+  height: 350px;
+  max-height: 78vh; /* Mantener el alto máximo con un porcentaje de la pantalla */
+  overflow: auto; /* Permite desplazamiento si el contenido es muy grande */
+  word-wrap: break-word; /* Evita que el contenido se desborde */
+  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+}
+
+/* Solo aplica width: 100% cuando la pantalla sea pequeña */
+@media (max-width: 1024px) {
+  .separacion {
+    width: 100%; /* Aplica solo en pantallas pequeñas */
+  }
+  
+}
+
+.abajo{
+  font-family: 'Inria Sans', sans-serif;
+  text-align: center;
+  font-size: 22px; 
+  
+}
+
+.clasificacion1{
+  margin-left: 25px;
+  font-family: 'Inria Sans', sans-serif;
+  padding: 9px 5px;
+  background-color: #ddd; /* Color de fondo para diferenciar */
+  
+}
+.inputclasificacion{
+  border: none; /* Quitamos el borde del input para que parezca parte del cuadro */
+  border-radius: 0px 5px 5px 0px; /* Eliminamos bordes redondeados del input */
+  flex-grow: 0; /* Para que el input tome el resto del espacio */
+  font-size: 14px;
+  padding: 7.5px;
+  font-size: 12px;
+}
+
+
+.guardar {
+  font-family: inherit;
+  font-size: 20px;
+  background: #212121;
+  color: white;
+  fill: rgb(155, 153, 153);
+  padding: 0.5em 1em;
+  padding-left: 0.9em;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  border-radius: 15px;
+  font-weight: 1000;
+}
+
+.guardar span {
+  display: block;
+  margin-left: 0.3em;
+  transition: all 0.3s ease-in-out;
+}
+
+.guardar svg {
+  display: block;
+  transform-origin: center center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.guardar:hover {
+  background: #000;
+}
+
+.guardar:hover .svg-wrapper {
+  transform: scale(1.25);
+  transition: 0.5s linear;
+}
+
+.guardar:hover svg {
+  transform: translateX(1.2em) scale(1.1);
+  fill: #fff;
+}
+
+.guardar:hover span {
+  opacity: 0;
+  transition: 0.5s linear;
+}
+
+.guardar:active {
+  transform: scale(0.95);
+}
+
+
+.derecho{
+  display: flex;
+  gap: 15px; /* Espacio entre elementos */
+  justify-content: center;
+}
+
+.nombrec{
+  display: flex;
+  gap: 8px;
+  font-family: 'Inria Sans', sans-serif; 
+  margin-top: 20px;
+}
+.inputnombre{
+  width: 200px;
+  font-size: 16px;
+  padding: 1px;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.matriculac{
+  display: flex;
+  gap: 8px;
+  font-family: 'Inria Sans', sans-serif; 
+  margin-top: 20px;
+}
+.inputmatricula{
+  width: 80px;
+  font-size: 16px;
+  padding: 1px;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.fechac{
+  display: flex;
+  gap: 8px;
+  font-family: 'Inria Sans', sans-serif; 
+  margin-top: 20px;
+}
+.inputfecha{
+  width: 120px;
+  font-size: 16px;
+  padding: 1px;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.apellidosc{
+  display: flex;
+  gap: 8px;
+  font-family: 'Inria Sans', sans-serif; 
+  margin-top: 20px;
+}
+
+.inputapellidos{
+  width: 250px;
+  font-size: 16px;
+  padding: 1px;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.edadc{
+  display: flex;
+  gap: 8px;
+  font-family: 'Inria Sans', sans-serif; 
+  margin-top: 20px;
+}
+
+.inputedad{
+  width: 40px;
+  font-size: 16px;
+  padding: 1px;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.correoc{
+  display: flex;
+  gap: 8px;
+  font-family: 'Inria Sans', sans-serif; 
+  margin-top: 20px;
+}
+
+.inputcorreo{
+  width: 200px;
+  font-size: 16px;
+  padding: 1px;
+  border-radius: 5px;
+  border: 1px solid #000;
+
+}
+
+.sexoc{
+  display: flex;
+  gap: 8px;
+  font-family: 'Inria Sans', sans-serif; 
+  margin-top: 20px;
+}
+
+.selectsexo{
+  width: 120px;
+
+  font-size: 16px;
+  padding: 1px;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.facultadc{
+  display: flex;
+  gap: 8px;
+  font-family: 'Inria Sans', sans-serif; 
+  margin-top: 20px;
+}
+
+.selectfacultad{
+  width: 350px;
+  font-size: 16px;
+  padding: 1px;
+  border-radius: 5px;
+  border: 1px solid #000;
+}
+
+.carrerac{
+  display: flex;
+  gap: 8px;
+  font-family: 'Inria Sans', sans-serif; 
+  margin-top: 20px;
+}
+.selectcarrera{
+  width: 320px;
+  font-size: 16px;
+  padding: 1px;
+  border-radius: 5px;
+  border: 1px solid #000;
+  
+}

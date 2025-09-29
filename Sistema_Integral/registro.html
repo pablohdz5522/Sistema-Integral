@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>Registro</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="registro.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    </head>
+
+    <body style="background: linear-gradient(278deg, rgba(23, 19, 235, 0.50) 13.7%, rgba(255, 255, 255, 0.25) 13.7%), linear-gradient(263deg, rgba(71, 15, 255, 0.00) 87.02%, rgba(71, 15, 255, 0.50) 87.03%), linear-gradient(277deg, rgba(255, 242, 0, 0.00) 89.31%, #FFF600 89.63%), linear-gradient(87deg, #FFF 88.1%, #FDEE18 88.48%); margin: 0;height: 100%; min-height: 100vh;">
+        <div class="titulos" style="margin-top: 40px;">
+            <h3>BIENVENIDO AL REGISTRO</h3>
+            <p>Introduce tus datos de forma correcta</p>
+        </div>
+        <form action="registro.php" method="post">
+            <div style="margin-top: 35px;">
+                <div class="mb-3 matriculac">
+                    <label for="Matricula" class="form-label" style="font-weight: bold;">Matricula</label>
+                    <input type="number" class="form-control matriculainput" name="matricula" id="matricula" placeholder="000000" required/>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="mb-3 nombrec">
+                    <label for="nombre" class="form-label" style="font-weight: bold;">Nombres</label>
+                    <input type="text" class="form-control nombreinput" name="nombre" id="nombre" placeholder="José Rodrigo" required/>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="mb-3 apepac">
+                    <label for="apepa" class="form-label" style="font-weight: bold;">Apellido Paterno</label>
+                    <input type="text" class="form-control apepainput" name="apepa" id="apepa" placeholder="Gutierrez" required/>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="mb-3 apemac">
+                    <label for="apema" class="form-label" style="font-weight: bold;">Apellido Materno</label>
+                    <input type="text" class="form-control apemainput" name="apema" id="apema" placeholder="Ramirez" required/>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="mb-3 fechac">
+                    <label for="fecha" class="form-label" style="font-weight: bold;">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control fechainput" name="fecha" id="fecha" required>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="mb-3 edadc">
+                    <label for="edad" class="form-label" style="font-weight: bold;">Edad</label>
+                    <input type="number" class="form-control edadinput" name="edad" id="edad" placeholder="Años" disabled required/>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="mb-3 sexoc">
+                    <label for="sexo" class="form-label" style="font-weight: bold;">Sexo</label>
+                    <select class="form-select form-select-lg sexoinput" name="sexo" id="sexo" required>
+                        <option value="" selected disabled>Seleccione</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="mb-3 correoc">
+                    <label for="correo" class="form-label" style="font-weight: bold;">Correo Inst.</label>
+                    <input type="email" class="form-control correoinput" name="correo" id="correo" placeholder="000000@mail.unacar.mx" disabled required>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="mb-3 facultadc">
+                    <label for="facultades" class="form-label" style="font-weight: bold;">Facultad</label>
+                    <select class="form-select form-select-lg facultadinput" name="facultades" id="facultades" required>
+                        <option value="" selected disabled>Seleccione</option>
+                        
+                    </select>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <div class="mb-3 carrerac">
+                    <label for="carreras" class="form-label" style="font-weight: bold;">Carrera</label>
+                    <select class="form-select form-select-lg carrerainput" name="carreras" id="carreras" required>
+                        <option value="" selected disabled>Seleccione</option>
+                        
+                    </select>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px; margin-bottom: 20px;" class="divguardar">
+                <button type="submit" id="enviar" class="guardar"> Guardar Datos </button>
+            </div>
+        </form>
+
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Obtener facultades al cargar la página
+                fetch("obtener-datos.php?tipo=facultades")
+                    .then(response => response.json())
+                    .then(data => {
+                        let selectFacultad = document.getElementById("facultades");
+                        data.forEach(facultad => {
+                            let option = document.createElement("option");
+                            option.value = facultad.id_facultad;
+                            option.textContent = facultad.nombre_facultad;
+                            selectFacultad.appendChild(option);
+                        });
+                    });
+            
+                // Filtrar carreras según la facultad seleccionada
+                document.getElementById("facultades").addEventListener("change", function () {
+                    let facultadID = this.value;
+                    let selectCarrera = document.getElementById("carreras");
+                    selectCarrera.innerHTML = '<option value="" selected disabled>Seleccione</option>'; // Reset
+            
+                    fetch(`obtener-datos.php?tipo=carreras&idfacultad=${facultadID}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            data.forEach(carrera => {
+                                let option = document.createElement("option");
+                                option.value = carrera.id_carrera;
+                                option.textContent = carrera.nombre_carrera;
+                                selectCarrera.appendChild(option);
+                            });
+                        });
+                });
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                // Calcular edad automáticamente
+                document.getElementById("fecha").addEventListener("change", function () {
+                    let fechaNacimiento = new Date(this.value);
+                    let hoy = new Date();
+                    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+                    let mes = hoy.getMonth() - fechaNacimiento.getMonth();
+                    
+                    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                        edad--;
+                    }
+                    
+                    document.getElementById("edad").value = edad;
+                });
+                
+                // Generar correo institucional basado en matrícula
+                document.getElementById("matricula").addEventListener("input", function () {
+                    let matricula = this.value;
+                    if (matricula.length === 6) {
+                        document.getElementById("correo").value = matricula + "@mail.unacar.mx";
+                    } else {
+                        document.getElementById("correo").value = ""; // Borra el correo si la matrícula no tiene 6 dígitos
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            document.getElementById("enviar").addEventListener("click", function(event) {
+    event.preventDefault(); // Evitar envío por defecto
+    let edadInput = document.getElementById("edad");
+    let correoInput = document.getElementById("correo");
+
+    edadInput.removeAttribute("disabled");
+    correoInput.removeAttribute("disabled");
+
+    let form = document.querySelector("form");
+    let formData = new FormData(form);
+
+    fetch("registro.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json()) // Aquí mejor usamos .json()
+    .then(data => {
+        if (data.success) {
+            window.location.href = data.redirect; // Redirigir automáticamente
+        } else if (data.error) {
+            alert(data.error); // Mostrar error
+        } else {
+            alert("Ocurrió un error inesperado.");
+        }
+    })
+    .catch(error => console.error("Error:", error));
+});
+
+        </script>
+
+    </body>
+</html>

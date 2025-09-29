@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <title>Formulario de Estrés CISCO</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="cisco.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    </head>
+
+    <body style="background: linear-gradient(278deg, rgba(23, 19, 235, 0.50) 13.7%, rgba(255, 255, 255, 0.25) 13.7%), linear-gradient(263deg, rgba(71, 15, 255, 0.00) 87.02%, rgba(71, 15, 255, 0.50) 87.03%), linear-gradient(277deg, rgba(255, 242, 0, 0.00) 89.31%, #FFF600 89.63%), linear-gradient(87deg, #FFF 88.1%, #FDEE18 88.48%); margin: 0;height: 100%; min-height: 100vh;">
+        <div class="contenedor">
+            <img src="imagenes/logo_unacar.png" alt="logo_unacar" class="logo_izquierdo" >
+
+            <button
+                class="btn p-0"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasHover"
+                aria-controls="Id1"
+                title="Accesibilidad"
+                style="margin-right: 50px;"
+            >
+                <img src="imagenes/accesibilidad.png" alt="accesibilidad" style="width: 40px; height: 35px;">
+            </button>
+            
+            <div
+                class="offcanvas offcanvas-start"
+                data-bs-scroll="true"
+                tabindex="-1"
+                id="offcanvasHover"
+                aria-labelledby="Enable both scrolling & backdrop"
+            >
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="Enable both scrolling & backdrop">
+                        Backdrop with scrolling
+                    </h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="offcanvas"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="offcanvas-body">
+                    <p>
+                        Try scrolling the rest of the page to see this option in
+                        action.
+                    </p>
+                </div>
+            </div>
+
+            <img src="imagenes/logo_pequeño.jpeg" alt="logo" class="logo_derecho">
+        </div>
+
+        <div class="contenido">
+            <h2>Validación de escala de estrés percibido (PSS-14)</h2>
+            <p>Este formulario es para conocer tus niveles de estrés, responde de forma adecuada</p>
+            
+
+            <form action="guardar_cisco.php" method="post" id="preguntas">
+
+                <div class="mb-3 mati" id="matri">
+                    <label for="matricula" class="form-label">Matricula</label>
+                    <input type="text" class="form-control" name="matricula" id="matricula" placeholder="Matricula" style="width: 200px;" required/>
+                </div>
+
+                <div class="mb-3 tele" style="margin-top: 30px;">
+                    <label for="preguntainicial" class="form-label">1.Durante el transcurso de este semestre ¿Has tenido momentos de preocupación o nerviosismo (estrés)?</label>
+                    <select class="form-select selec1" name="preguntainicial" id="preguntainicial" required>
+                        <option selected disabled>Selecciona</option>
+                        <option value="Si">Si</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+
+                <div id="preguntasadicionales" style="display: none;">
+                        <div class="mb-3 tele" style="margin-top: 30px;">
+                            <label for="escala" class="form-label">2.Con la idea de obtener mayor precisión y utilizando una escala del 1 al 5, señala tu nivel de estrés donde 1 es poco y 5 es mucho</label>
+                            <select class="form-select selec1" name="escala" id="escala" required>
+                                <option selected disabled>Selecciona</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                
+                            </select>
+                        </div>
+
+                        <!--ESTRESORES PRIMERA PARTE-->
+
+                        <div style="text-align: center;">
+                            <button class="btn btn-primary colapso cola" type="button" data-bs-toggle="collapse" data-bs-target="#estresores" aria-expanded="false" aria-controls="estresores">
+                                Estresores
+                            </button>
+                        </div>
+                            <div class="collapse collapse-horizontal" id="estresores">
+                                <div class="mb-3 titulos" style="margin-top: 30px;">
+                                    <p style="font-weight: bold;">3.Dimensiones de estresores</p>
+                                    <p style="margin-top: -15px;">Instrucciones: A continuación se presentan una serie de aspectos que, en mayor a menor medida, suelen estresar a algunos alumnos. <br>Responde seleccionando una opción</p>
+                                </div>
+                                
+                                <div class="mb-3 tele" >
+                                    <label for="p1" class="form-label">3.1 La competencia con mis compañeros del grupo.</label>
+                                    <select class="form-select selec1" name="p1" id="p1" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p2" class="form-label">3.2 La sobrecarga de tareas y trabajos escolares que tengo que realizar todos los días.</label>
+                                    <select class="form-select selec1" name="p2" id="p2" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p3" class="form-label">3.3 La personalidad y el caracter de los/as profesores/as que me imparten clases.</label>
+                                    <select class="form-select selec1" name="p3" id="p3" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p4" class="form-label">3.4 La forma de evaluación de mis profesores/as (a través de ensayos trabajos de investigación, <br> búsquedas en internet, etc.).</label>
+                                    <select class="form-select selec1" name="p4" id="p4" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p5" class="form-label">3.5 El nivel de exigencia de mis profesores/as.</label>
+                                    <select class="form-select selec1" name="p5" id="p5" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p6" class="form-label">3.6 El tipo de trabajo que me piden los profesores (Consulta de temas, fichas de trabajo, <br> ensayos, mapas conceptuales, etc.).</label>
+                                    <select class="form-select selec1" name="p6" id="p6" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p7" class="form-label">3.7 Que me toquen profesores/as muy teóricos/as.</label>
+                                    <select class="form-select selec1" name="p7" id="p7" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p8" class="form-label">3.8 Mi participación en clase (Responder a preguntas, hacer comentarios, etc.).</label>
+                                    <select class="form-select selec1" name="p8" id="p8" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p9" class="form-label">3.9 Tener tiempo limitado para hacer el trabajo que me encargan los/as profesores/as.</label>
+                                    <select class="form-select selec1" name="p9" id="p9" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p10" class="form-label">3.10 La realización de un examen.</label>
+                                    <select class="form-select selec1" name="p10" id="p10" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p11" class="form-label">3.11 Exposición de un tema ante los compañeros de mi grupo.</label>
+                                    <select class="form-select selec1" name="p11" id="p11" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p12" class="form-label">3.12 La poca claridad que tengo sobre lo que quieren los/as profesores/as.</label>
+                                    <select class="form-select selec1" name="p12" id="p12" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p13" class="form-label">3.13 Que mis profesores/as estén mal preparados/as.</label>
+                                    <select class="form-select selec1" name="p13" id="p13" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p14" class="form-label">3.14 Asistí a clases aburridas o monótonas.</label>
+                                    <select class="form-select selec1" name="p14" id="p14" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p15" class="form-label">3.15 No entender los temas que se abordan en clase.</label>
+                                    <select class="form-select selec1" name="p15" id="p15" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+                            </div>
+                        <!--SINTOMAS-->
+                        <div style="text-align: center;">
+                            <button class="btn btn-primary colapso cola" type="button" data-bs-toggle="collapse" data-bs-target="#sintomas" aria-expanded="false" aria-controls="sintomas">
+                                Sintomas
+                            </button>
+                        </div>
+                            <div class="collapse collapse-horizontal" id="sintomas">
+                                <div class="mb-3 titulos" style="margin-top: 30px;">
+                                    <p style="font-weight: bold;">4.Dimensiones de síntomas (reacciones)</p>
+                                    <p style="margin-top: -15px;">Instrucciones: A continuación se presentan una serie de reacciones que, en mayor a menor medida, suelen presentarse en algunos 
+                                        alumnos <br> cuando están estresados. Responde seleccionando una opción</p>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p16" class="form-label">4.1 Trastornos en el sueño (Insomnio o pesadillas).</label>
+                                    <select class="form-select selec1" name="p16" id="p16" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p17" class="form-label">4.2 Fatiga crónica (cansancio permanente).</label>
+                                    <select class="form-select selec1" name="p17" id="p17" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p18" class="form-label">4.3 Dolores de cabeza o migraña.</label>
+                                    <select class="form-select selec1" name="p18" id="p18" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p19" class="form-label">4.4 Problemas de digestión, dolor abdominal o diarrea.</label>
+                                    <select class="form-select selec1" name="p19" id="p19" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p20" class="form-label">4.5 Rascarse, morderse las uñas, frotarse, etc...</label>
+                                    <select class="form-select selec1" name="p20" id="p20" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p21" class="form-label">4.6 Somnolencia o mayor necesidad de dormir.</label>
+                                    <select class="form-select selec1" name="p21" id="p21" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p22" class="form-label">4.7 Inquietud (Incapacidad de relajarse y estar tranquilo).</label>
+                                    <select class="form-select selec1" name="p22" id="p22" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p23" class="form-label">4.8 Sentimientos de depresión y tristeza (decaído).</label>
+                                    <select class="form-select selec1" name="p23" id="p23" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p24" class="form-label">4.9 Ansiedad, angustia o desesperación.</label>
+                                    <select class="form-select selec1" name="p24" id="p24" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p25" class="form-label">4.10 Problemas de concentración.</label>
+                                    <select class="form-select selec1" name="p25" id="p25" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p26" class="form-label">4.11 Sentimiento de agresividad o aumento de irritabilidad.</label>
+                                    <select class="form-select selec1" name="p26" id="p26" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p27" class="form-label">4.12 Conflictos o tendencia a polemizar o discutir.</label>
+                                    <select class="form-select selec1" name="p27" id="p27" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p28" class="form-label">4.13 Aislamiento de los demás.</label>
+                                    <select class="form-select selec1" name="p28" id="p28" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p29" class="form-label">4.14 Desgano para realizar las labores escolares.</label>
+                                    <select class="form-select selec1" name="p29" id="p29" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p30" class="form-label">4.15 Aumento o reducción del consumo de alimentos.</label>
+                                    <select class="form-select selec1" name="p30" id="p30" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        <!--DIMENSIONES DE ESTRATEGIAS-->
+                        <div style="text-align: center;">
+                            <button class="btn btn-primary colapso cola" type="button" data-bs-toggle="collapse" data-bs-target="#estrategias" aria-expanded="false" aria-controls="estrategias">
+                                Estrategias
+                            </button>
+                        </div>
+                            <div class="collapse collapse-horizontal" id="estrategias">
+                                <div class="mb-3 titulos" style="margin-top: 30px;">
+                                    <p style="font-weight: bold;">5.Dimensión de estrategias de afrontamiento</p>
+                                    <p style="margin-top: -15px;">Instrucciones: A continuación se presentan una serie de acciones que, en mayor a menor medida, suelen utilizar algunos alumnos para enfrentar 
+                                    su estrés. <br>Selecciona una opción.</p>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p31" class="form-label">5.1 Habilidad asertiva (defender nuestras preferencias, ideas o sentimientos sin dañar a otros).</label>
+                                    <select class="form-select selec1" name="p31" id="p31" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p32" class="form-label">5.2 Escuchar música o distraerme viendo televisión.</label>
+                                    <select class="form-select selec1" name="p32" id="p32" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p33" class="form-label">5.3 Concentrarse en resolver la situación que me preocupa.</label>
+                                    <select class="form-select selec1" name="p33" id="p33" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p34" class="form-label">5.4 Elogiar mi forma de actuar para enfrentar la situación que me preocupa (Echarme porras).</label>
+                                    <select class="form-select selec1" name="p34" id="p34" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p35" class="form-label">5.5 La religiosidad (Hacer oraciones o asistir a misa).</label>
+                                    <select class="form-select selec1" name="p35" id="p35" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p36" class="form-label">5.6 Búsqueda de información sobre la situación que me preocupa.</label>
+                                    <select class="form-select selec1" name="p36" id="p36" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p37" class="form-label">5.7 Solicitar el apoyo de mi familia o de mis amigos.</label>
+                                    <select class="form-select selec1" name="p37" id="p37" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p38" class="form-label">5.8 Ventilación y confidencias (Verbalización o plática de la situación que me preocupa).</label>
+                                    <select class="form-select selec1" name="p38" id="p38" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p39" class="form-label">5.9 Establecer soluciones concretas para resolver la situación que me preocupa.</label>
+                                    <select class="form-select selec1" name="p39" id="p39" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p40" class="form-label">5.10 Analizar lo positivo y negativo de las soluciones pensadas para solucionar la situación que me preocupa.</label>
+                                    <select class="form-select selec1" name="p40" id="p40" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p41" class="form-label">5.11 Mantener el control sobre mis emociones para que no me afecte lo que me estresa.</label>
+                                    <select class="form-select selec1" name="p41" id="p41" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p42" class="form-label">5.12 Recordar situaciones similares ocurridas anteriormente y pensar en cómo las solucioné.</label>
+                                    <select class="form-select selec1" name="p42" id="p42" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p43" class="form-label">5.13 Salir a caminar o hacer algun deporte.</label>
+                                    <select class="form-select selec1" name="p43" id="p43" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p44" class="form-label">5.14 Elaboración de un plan para enfrentar lo que me estresa y ejecución de sus tareas.</label>
+                                    <select class="form-select selec1" name="p44" id="p44" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+
+                                <div class="mb-3 tele" >
+                                    <label for="p45" class="form-label">5.15 Fijarse o tratar de obtener lo positivo de la situacion que me preocupa.</label>
+                                    <select class="form-select selec1" name="p45" id="p45" required>
+                                        <option selected disabled>Selecciona</option>
+                                        <option value="nunca">Nunca</option>
+                                        <option value="casi nunca">Casi Nunca</option>
+                                        <option value="rara vez">Rara Vez</option>
+                                        <option value="algunas veces">Algunas Veces</option>
+                                        <option value="casi siempre">Casi Siempre</option>
+                                        <option value="siempre">Siempre</option>
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+                <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;" class="divguardar">
+                    <button class="guardar" style="display: none;" id="enviar">Enviar Resultados</button>
+                </div>
+            </form>
+
+            <div id="mensajeGracias" class="gracias" style="display: none;">
+                <p style="font-size: 18px; font-weight: bold;">Gracias por tu tiempo.</p>
+            </div>
+        </div>
+
+
+
+
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+
+        <script>
+            document.getElementById("preguntas").addEventListener("submit", function(event) {
+                let formularioValido = true;
+        
+                // Verifica que la matrícula no esté vacía
+                let matricula = document.getElementById("matricula").value.trim();
+                if (matricula === "") {
+                    formularioValido = false;
+                    document.getElementById("matricula").classList.add("is-invalid");
+                } else {
+                    document.getElementById("matricula").classList.remove("is-invalid");
+                }
+        
+                // Obtener todos los select y verificar si están vacíos
+                let selects = document.querySelectorAll("select");
+                selects.forEach(select => {
+                    if (select.value === "Selecciona" || select.value === "") {
+                        formularioValido = false;
+                        select.classList.add("is-invalid");
+                    } else {
+                        select.classList.remove("is-invalid");
+                    }
+                });
+        
+                // Si hay algún campo vacío, mostrar alerta y evitar envío
+                if (!formularioValido) {
+                    alert("Por favor, completa todos los campos antes de continuar.");
+                    event.preventDefault(); // Detiene el envío del formulario
+                }
+            });
+        </script>
+
+        <script>
+            document.getElementById("preguntainicial").addEventListener("change", function() {
+            let seleccion = this.value;
+            let preguntasExtra = document.getElementById("preguntasadicionales");
+            let mensajeGracias = document.getElementById("mensajeGracias");
+            let matricula = document.getElementById("matricula").value.trim(); // Eliminar espacios en blanco
+            let matri = document.getElementById("matri");
+            let guardar = document.getElementById("enviar"); // Botón de guardar
+            let escala = document.getElementById("escala") ? document.getElementById("escala").value.trim() : "N/A"; // Obtener escala si existe
+
+            if (seleccion === "Si") {
+                preguntasExtra.style.display = "block";
+                mensajeGracias.style.display = "none";
+                guardar.style.display = "block";  // Mostrar botón de guardar
+            } else if (seleccion === "No") {
+                if (matricula === "") {
+                    alert("Por favor, ingrese su matrícula antes de continuar.");
+                    this.value = "Selecciona"; // Reiniciar el select
+                    return; // Detener el proceso hasta que ingrese la matrícula
+                }
+
+                preguntasExtra.style.display = "none";
+                mensajeGracias.style.display = "block";
+                guardar.style.display = "none";  // Ocultar botón de guardar
+                matri.style.display = "none";  // Ocultar matrícula
+
+                // Enviar los datos a la base de datos
+                fetch("guardar_cisco.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: `matricula=${encodeURIComponent(matricula)}&preguntainicial=No&escala=${encodeURIComponent(escala)}`
+                })
+                
+                .then(response => response.text())  // Convertir la respuesta a texto
+                .then(data => {
+                    document.querySelector(".tele").style.display = "none";
+                    console.log("Respuesta del servidor:", data); // Mostrar en consola
+                    document.body.innerHTML += `<p>${data}</p>`; // Mostrar en la página
+                })
+                .catch(error => console.error("Error al guardar la respuesta:", error));
+            }
+        });
+        </script>
+
+
+    </body>
+</html>

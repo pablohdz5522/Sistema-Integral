@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Barras con Chart.js</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="graficoBarras"></canvas>
+
+    <script>
+        // Obtener el contexto del canvas
+        var ctx = document.getElementById('graficoBarras').getContext('2d');
+
+        // Crear el gráfico
+        var miGrafico = new Chart(ctx, {
+            type: 'bar', // Tipo de gráfico
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'], // Etiquetas del eje X
+                datasets: [{
+                    label: 'Ventas en USD',
+                    data: [500, 700, 800, 600, 900], // Datos del eje Y
+                    backgroundColor: ['red', 'blue', 'green', 'purple', 'orange'], // Colores de las barras
+                    borderColor: 'black',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

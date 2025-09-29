@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfil Alumno</title>
+  <link rel="stylesheet" href="css/expediente.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Sidebar -->
+    <div class="col-md-2 sidebar d-flex flex-column p-3">
+      <h4 class="text-center">Menú</h4>
+      <a href="#"><i class="bi bi-person-circle me-2"></i> Perfil</a>
+      <a href="#"><i class="bi bi-clipboard-data me-2"></i> Reportes</a>
+      <div class="dropdown">
+        <button class="bi bi-heart-pulse dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Formularios
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">DASS-21</a></li>
+            <li><a class="dropdown-item" href="#">Estilo de Vida</a></li>
+        </ul>
+      </div>
+      <a id="linkHistorial" href="#"><i class="bi bi-house-heart-fill me-2"></i> Historial Patológico</a>
+      <a href="listadoAlumnos.html"><i class="bi bi-box-arrow-left me-2"></i> Salir</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-10 p-4">
+      <div class="nav d-flex justify-content-between align-items-center mb-4">
+        <img src="images/logo_unacar (1).png" alt="logo" class="unacar">
+        <h2>Perfil del Alumno</h2>
+        <button class="btn btn-primary"></button>
+      </div>
+
+       <!-- Datos del alumno -->
+  <div class="card card-custom mb-4">
+    <div class="card-body d-flex">
+      <div class="left-section">
+        <img src="imagenes/usuario.png" alt="Foto Alumno" class="profile-img mb-3">
+      </div>
+      <div class="right-section">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">Nombre:</span>
+              <input type="text" class="form-control" id="nombre" name="nombre" disabled>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">Edad:</span>
+              <input type="text" class="form-control" id="edad" name="edad" disabled>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">Sexo:</span>
+              <input type="text" class="form-control" id="sexo" name="sexo" disabled>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">Matrícula:</span>
+              <input type="text" class="form-control" id="matricula" name="matricula" disabled>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">Carrera:</span>
+              <input type="text" class="form-control" name="carrera" id="carrera" disabled>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">Facultad:</span>
+              <input type="text" class="form-control" name="facultad" id="facultad" disabled>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-text">Correo Electrónico:</span>
+              <input type="email" class="form-control" name="email" id="email" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- Signos vitales / otros datos -->
+      <div class="card card-custom mb-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5>Datos Físicos</h5>
+                <div><h5>Fecha: </h5> <span id="fecha-datos-fisicos"></span></div>
+            </div>
+            
+            
+          
+          <div class="row g-3 mt-3">
+            <div class="col-md-2">
+              <div><i class="bi bi-person-fill-up"></i> Talla: <span id="modal-talla">-</span> cm</div>
+            </div>
+            <div class="col-md-2">
+              <div><i class="bi bi-bar-chart-fill"></i>Peso: <span id="peso">-</span> kg</div>
+            </div>
+            <div class="col-md-2">
+              <div><i class="bi bi-calculator"></i> IMC: <span id="modal-imc">-</span></div>
+            </div>
+            <div class="col-md-3">
+                <div><i class="bi bi-clipboard-data-fill"></i> IMC: <span id= "modal-clasificacion_imc">-</span></div>
+              </div>
+            <div class="col-md-3">
+              <div><i class="bi bi-droplet-fill"></i> Glucosa: <span id="modal-glucosa">-</span> mg/dL</div>
+            </div>
+            <div class="col-md-3"> 
+              <div><i class="bi bi-heart-pulse"></i> Colesterol: <span id="modal-colesterol">-</span> mg/dL</div>
+            </div>
+            <div class="col-md-3"> 
+                <div><i class="bi bi-heart-pulse"></i> Trigliceridos: <span id="modal-trigliceridos">-</span> mg/dL</div>
+              </div>
+            <div class="col-md-3">
+              <div><i class="bi bi-heart"></i> Tension Arterial: <span id="modal-tension_arterial">-</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formularios si ya estan hechos -->
+      <div class="card card-custom ">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5>Formularios</h5>
+                <div>
+                <h5>Status: </h5>
+                </div>
+            </div>
+          
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <span><strong>Estilo de Vida:</strong></span>
+                <!-- Status con rectángulo de color dinámico -->
+                <label for="status" class="form-label"></label>
+                <div id="status-apgar" class="mb-3">
+                    <div id="status-rectangle-apgar" class="status-rectangle p-4">
+                        <span id="status-text-apgar" class="text-white">No lo ha realizado</span>
+                    </div>
+                </div>
+            </li>
+                
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>DASS-21:</strong></span>
+                <!-- Status con rectángulo de color dinámico -->
+                <label for="status" class="form-label"></label>
+                <div id="status-sisco" class="mb-3">
+                    <div id="status-rectangle-sisco" class="status-rectangle p-4">
+                        <span id="status-text-sisco" class="text-white">No lo ha realizado</span>
+                    </div>
+                </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtener la matrícula desde la URL
+        const params = new URLSearchParams(window.location.search);
+        const matricula = params.get("matricula_alum");
+
+        if (matricula) {
+            // Actualizar el enlace de "Estilo de Vida" con la matrícula
+            const enlacePuntajes = document.getElementById("enlacePuntajes");
+            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
+        }
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+    const params = new URLSearchParams(window.location.search);
+    const matricula = params.get("matricula_alum");
+
+    if (matricula) {
+        const linkHistorial = document.getElementById("linkHistorial");
+        linkHistorial.href = `HistorialPatologicoAlum.html?matricula_alum=${matricula}`;
+    }
+});
+
+</script>
+
+<script>
+    function cargarHistorialClinico(matricula) {
+        fetch(`historial.php?matricula_alum=${matricula}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                // Llenar los campos del historial clínico
+                document.getElementById("sobrepeso").value = data.sobrepeso;
+                document.getElementById("diabetes").value = data.diabetes;
+                document.getElementById("hipertension").value = data.hipertension;
+                document.getElementById("trigliceridos").value = data.trigliceridos;
+                document.getElementById("colesterol").value = data.colesterol;
+                document.getElementById("hepatitis").value = data.hepatitis;
+                document.getElementById("higado").value = data.higado_graso;
+                document.getElementById("cardiopatias").value = data.cardiopatias;
+                document.getElementById("nefropatias").value = data.nefropatias;
+                document.getElementById("estreñimiento").value = data.estreñimiento;
+                document.getElementById("gastritis").value = data.gastritis;
+                document.getElementById("cancer").value = data.cancer;
+                document.getElementById("tienesEnfermedad").value = data.otros;
+                document.getElementById("Tratamiendo").value = data.tratamiento;
+            })
+            .catch(error => console.error("Error al cargar el historial clínico:", error));
+    }
+
+    function cargarPerfil() {
+        const params = new URLSearchParams(window.location.search);
+        const matricula = params.get("matricula_alum");
+
+        if (!matricula) {
+            alert("No se proporcionó una matrícula.");
+            return;
+        }
+
+        fetch(`perfil.php?matricula_alum=${matricula}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                // Verificar historial
+                fetch(`historial.php?matricula_alum=${matricula}`)
+                  .then(res => res.json())
+                  .then(historial => {
+                    const historialVacio = !historial || Object.keys(historial).length === 0;
+
+                    // Verificar si hay datos físicos cargados
+                    const tieneDatosFisicos = data.fechas && data.fechas.length > 0;
+
+                    verificarEstadoExpediente(data, historialVacio, tieneDatosFisicos);
+                  });
+
+
+               // document.getElementById("fotoAlumno").src = data.foto;
+                document.getElementById("matricula").value = data.matricula_alum;
+                document.getElementById("nombre").value = data.nombres_alum;
+                document.getElementById("sexo").value = data.sexo;
+                //document.getElementById("apellidos").value = data.ape_paterno_alum + " " + data.ape_materno_alum;
+                document.getElementById("edad").value = data.edad_alum;
+                document.getElementById("facultad").value = data.nombre_facultad;
+                document.getElementById("carrera").value = data.nombre_carrera;
+                document.getElementById("email").value = data.correo_alum;
+
+                // 🟢 Estado del formulario Apgar
+                const statusRectangleApgar = document.getElementById('status-rectangle-apgar');
+                const statusTextApgar = document.getElementById('status-text-apgar');
+                if (data.estilo_vida_realizado) {
+                    statusTextApgar.textContent = 'Ya realizado';
+                    statusRectangleApgar.classList.add('bg-success'); // Color verde
+                } else {
+                    statusTextApgar.textContent = 'No lo ha realizado';
+                    statusRectangleApgar.classList.add('bg-danger'); // Color rojo
+                }
+
+                // 🟢 Estado del formulario Sisco
+                const statusRectangleSisco = document.getElementById('status-rectangle-sisco');
+                const statusTextSisco = document.getElementById('status-text-sisco');
+                if (data.dass_realizado) {
+                    statusTextSisco.textContent = 'Ya realizado';
+                    statusRectangleSisco.classList.add('bg-success');
+                } else {
+                    statusTextSisco.textContent = 'No lo ha realizado';
+                    statusRectangleSisco.classList.add('bg-danger');
+                }
+                })
+                .catch(error => console.error("Error al cargar el perfil:", error));
+                    // Cargar el historial clínico
+                 cargarHistorialClinico(matricula);
+
+                
+        }
+
+        document.addEventListener("DOMContentLoaded", cargarPerfil);
+
+        function cargarDatosFisicosRecientes(matricula) {
+    fetch(`perfil.php?matricula_alum=${matricula}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.fechas && data.fechas.length > 0) {
+                const ultimaFecha = data.fechas[data.fechas.length - 1];
+                document.getElementById("fecha-datos-fisicos").textContent = ultimaFecha;
+
+                fetch(`datos_fisicos_detalle.php?matricula_alum=${matricula}&fecha=${ultimaFecha}`)
+                    .then(response => response.json())
+                    .then(datos => {
+                        document.getElementById("peso").textContent = datos.peso || "-";
+                        document.getElementById("modal-talla").textContent = datos.talla || "-";
+                        document.getElementById("modal-imc").textContent = datos.imc || "-";
+                        document.getElementById("modal-clasificacion_imc").textContent = datos.clasificacion_imc || "-";
+                        document.getElementById("modal-glucosa").textContent = datos.glucosa || "-";
+                        document.getElementById("modal-colesterol").textContent = datos.colesterol || "-";
+                        document.getElementById("modal-trigliceridos").textContent = datos.trigliceridos || "-";
+                        document.getElementById("modal-tension_arterial").textContent = datos.tension_arterial || "-";
+                    })
+                    .catch(error => console.error("Error al cargar los datos físicos:", error));
+            } else {
+                document.getElementById("fecha-datos-fisicos").textContent = "Sin datos";
+            }
+        })
+        .catch(error => console.error("Error al cargar fechas:", error));
+}
+    
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const params = new URLSearchParams(window.location.search);
+        const matricula = params.get("matricula_alum");
+
+        if (matricula) {
+        cargarDatosFisicosRecientes(matricula);
+    }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtener botones
+        const btnFormularios = document.querySelector(".btn-formularios");
+        const btnHistorial = document.querySelector(".btn-historial");
+        const btnDatosFisicos = document.querySelector(".btn-datos-fisicos");
+    
+        // Obtener cuadros y título
+        const tituloFormulario = document.getElementById("titulo-formulario");
+        const tituloSeccion = document.getElementById("titulo-seccion");
+        const formularioCuadros = document.getElementById("formulario-cuadros");
+        const historialCuadro = document.getElementById("historial-cuadro");
+        const datosFisicosCuadro = document.getElementById("datos-fisicos-cuadro");
+    
+        // Función para actualizar el título y mostrar contenido
+        function mostrarSeccion(titulo, mostrarFormulario, mostrarHistorial, mostrarDatosFisicos) {
+            // Cambiar el texto del título
+            tituloSeccion.innerText = titulo;
+            // Mostrar el título
+            tituloFormulario.classList.remove("d-none");
+    
+            // Controla la visibilidad de los cuadros
+            formularioCuadros.classList.toggle("d-none", !mostrarFormulario);
+            historialCuadro.classList.toggle("d-none", !mostrarHistorial);
+            datosFisicosCuadro.classList.toggle("d-none", !mostrarDatosFisicos);
+        }
+    
+        // Al cargar la página, ocultamos todas las secciones (excepto el título)
+        formularioCuadros.classList.add("d-none");
+        historialCuadro.classList.add("d-none");
+        datosFisicosCuadro.classList.add("d-none");
+    
+        // Evento para mostrar Formularios
+        btnFormularios.addEventListener("click", function() {
+            mostrarSeccion("Formularios", true, false, false);
+        });
+    
+        // Evento para mostrar Historial Clínico
+        btnHistorial.addEventListener("click", function() {
+            mostrarSeccion("Historial Heredo-Familiar", false, true, false);
+        });
+    
+        // Evento para mostrar Datos Físicos
+        btnDatosFisicos.addEventListener("click", function() {
+            mostrarSeccion("Datos Físicos", false, false, true);
+        });
+    });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+  const params = new URLSearchParams(window.location.search);
+  const matricula = params.get("matricula_alum");
+
+  if (!matricula) return;
+
+  Promise.all([
+    fetch(`perfil.php?matricula_alum=${matricula}`).then(r => r.json()),
+    fetch(`historial.php?matricula_alum=${matricula}`).then(r => r.json())
+  ])
+  .then(([perfil, historial]) => {
+    // ⚙️ Datos físicos ya vienen desde perfil.php
+    const tieneDatosFisicos = perfil.fechas && perfil.fechas.length > 0;
+    const historialVacio = Object.keys(historial).length === 0;
+
+    // 🧠 Mostrar modal informativo
+    mostrarModalEstado(perfil, tieneDatosFisicos, historialVacio);
+  });
+});
+
+</script>
+
+<!-- Modal de estado de expediente -->
+<div class="modal fade" id="modalEstadoExpediente" tabindex="-1" aria-labelledby="modalEstadoExpedienteLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-info">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title" id="modalEstadoExpedienteLabel">Estado del Expediente</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body" id="contenido-estado-expediente">
+        <!-- Este contenido se llena por JS -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-bs-dismiss="modal">Entendido</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function mostrarModalEstado(perfil, tieneDatosFisicos, historialVacio) {
+  const mensajes = [];
+  let completo = true;
+
+  if (!perfil.estilo_vida_realizado) {
+    mensajes.push("❌ Falta completar el formulario <strong>Estilo de Vida</strong>.");
+    completo = false;
+  } else {
+    mensajes.push("✅ Formulario Estilo de Vida completado.");
+  }
+
+  if (!perfil.dass_realizado) {
+    mensajes.push("❌ Falta completar el cuestionario <strong>DASS-21</strong>.");
+    completo = false;
+  } else {
+    mensajes.push("✅ Cuestionario DASS-21 completado.");
+  }
+
+  if (!tieneDatosFisicos) {
+    mensajes.push("❌ No hay datos físicos registrados.");
+    completo = false;
+  } else {
+    mensajes.push("✅ Datos físicos disponibles.");
+  }
+
+  if (historialVacio) {
+    mensajes.push("❌ Historial clínico no registrado.");
+    completo = false;
+  } else {
+    mensajes.push("✅ Historial clínico completo.");
+  }
+
+  document.getElementById("contenido-estado-expediente").innerHTML = mensajes.join("<br>");
+  const modal = new bootstrap.Modal(document.getElementById("modalEstadoExpediente"));
+  modal.show();
+}
+
+</script>
+
+
+
+</body>
+</html>

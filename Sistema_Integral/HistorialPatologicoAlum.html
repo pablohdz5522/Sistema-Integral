@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Historial Patologico Alumnado</title>
+  <link rel="stylesheet" href="css/expediente.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <!-- Sidebar -->
+    <div class="col-md-2 sidebar d-flex flex-column p-3">
+        <h4 class="text-center">Menú</h4>
+        <a id="linkPerfil" href=""><i class="bi bi-person-circle me-2"></i> Perfil</a>
+        <a href="#"><i class="bi bi-clipboard-data me-2"></i> Reportes</a>
+        <div class="dropdown">
+          <button class="bi bi-heart-pulse dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Formularios
+          </button>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">DASS-21</a></li>
+              <li><a class="dropdown-item" href="#">Estilo de Vida</a></li>
+          </ul>
+        </div>
+        <a id="linkHistorial" href="#"><i class="bi bi-house-heart-fill me-2"></i> Historial Patológico</a>
+        <a href="listadoAlumnos.html"><i class="bi bi-box-arrow-left me-2"></i> Salir</a>
+      </div>
+  
+    <!-- Main Content -->
+    <div class="col-md-10 p-4">
+      <div class="nav d-flex justify-content-between align-items-center mb-4">
+        <img src="images/logo_unacar (1).png" alt="logo" class="unacar">
+        <h2>Historial Patologicos</h2>  
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          Información del Alumno
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label class="form-label">Matrícula</label>
+              <input type="text" class="form-control" id="matricula" disabled>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" disabled>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Sexo</label>
+              <input type="text" class="form-control" id="sexo" disabled>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Edad</label>
+              <input type="text" class="form-control" id="edad" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header bg-success text-white">
+          Historial Patológico Familiar
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Sobrepeso/Obesidad</label>
+              <input type="text" class="form-control" id="sobrepeso" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Diabetes Mellitus</label>
+              <input type="text" class="form-control" id="diabetes" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Hipertensión Arterial</label>
+              <input type="text" class="form-control" id="hipertension" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Triglicéridos Altos</label>
+              <input type="text" class="form-control" id="trigliceridos" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Colesterol Alto</label>
+              <input type="text" class="form-control" id="colesterol" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Hepatitis</label>
+              <input type="text" class="form-control" id="hepatitis" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Hígado Graso</label>
+              <input type="text" class="form-control" id="higado" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Cardiopatías</label>
+              <input type="text" class="form-control" id="cardiopatias" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Nefropatías</label>
+              <input type="text" class="form-control" id="nefropatias" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Estreñimiento</label>
+              <input type="text" class="form-control" id="estreñimiento" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Gastritis</label>
+              <input type="text" class="form-control" id="gastritis" disabled>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Cáncer</label>
+              <input type="text" class="form-control" id="cancer" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card mb-4">
+        <div class="card-header bg-warning text-dark">
+          Historial Patológico Personal
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">¿Tienes alguna enfermedad?</label>
+              <input type="text" class="form-control" id="tienesEnfermedad" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Tratamiento</label>
+              <input type="text" class="form-control" id="Tratamiendo" disabled>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtener la matrícula desde la URL
+        const params = new URLSearchParams(window.location.search);
+        const matricula = params.get("matricula_alum");
+
+        if (matricula) {
+            // Actualizar el enlace de "Estilo de Vida" con la matrícula
+            const enlacePuntajes = document.getElementById("enlacePuntajes");
+            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const params = new URLSearchParams(window.location.search);
+    const matricula = params.get("matricula_alum");
+
+    if (matricula) {
+        const linkPerfil = document.getElementById("linkPerfil");
+        linkPerfil.href = `expediente.html?matricula_alum=${matricula}`;
+    }
+});
+
+</script>
+
+<script>
+    function cargarHistorialClinico(matricula) {
+        fetch(`historial.php?matricula_alum=${matricula}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+                // Llenar los campos del historial clínico
+                document.getElementById("sobrepeso").value = data.sobrepeso;
+                document.getElementById("diabetes").value = data.diabetes;
+                document.getElementById("hipertension").value = data.hipertension;
+                document.getElementById("trigliceridos").value = data.trigliceridos;
+                document.getElementById("colesterol").value = data.colesterol;
+                document.getElementById("hepatitis").value = data.hepatitis;
+                document.getElementById("higado").value = data.higado_graso;
+                document.getElementById("cardiopatias").value = data.cardiopatias;
+                document.getElementById("nefropatias").value = data.nefropatias;
+                document.getElementById("estreñimiento").value = data.estreñimiento;
+                document.getElementById("gastritis").value = data.gastritis;
+                document.getElementById("cancer").value = data.cancer;
+                document.getElementById("tienesEnfermedad").value = data.otros;
+                document.getElementById("Tratamiendo").value = data.tratamiento;
+            })
+            .catch(error => console.error("Error al cargar el historial clínico:", error));
+    }
+
+    function cargarPerfil() {
+        const params = new URLSearchParams(window.location.search);
+        const matricula = params.get("matricula_alum");
+
+        if (!matricula) {
+            alert("No se proporcionó una matrícula.");
+            return;
+        }
+
+        fetch(`perfil.php?matricula_alum=${matricula}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+
+               // document.getElementById("fotoAlumno").src = data.foto;
+                document.getElementById("matricula").value = data.matricula_alum;
+                document.getElementById("nombre").value = data.nombres_alum;
+                document.getElementById("sexo").value = data.sexo;
+                //document.getElementById("apellidos").value = data.ape_paterno_alum + " " + data.ape_materno_alum;
+                document.getElementById("edad").value = data.edad_alum;
+                document.getElementById("facultad").value = data.nombre_facultad;
+                document.getElementById("carrera").value = data.nombre_carrera;
+                document.getElementById("email").value = data.correo_alum;
+
+                // 🟢 Estado del formulario Apgar
+                const statusRectangleApgar = document.getElementById('status-rectangle-apgar');
+                const statusTextApgar = document.getElementById('status-text-apgar');
+                if (data.estilo_vida_realizado) {
+                    statusTextApgar.textContent = 'Ya realizado';
+                    statusRectangleApgar.classList.add('bg-success'); // Color verde
+                } else {
+                    statusTextApgar.textContent = 'No lo ha realizado';
+                    statusRectangleApgar.classList.add('bg-danger'); // Color rojo
+                }
+
+                // 🟢 Estado del formulario Sisco
+                const statusRectangleSisco = document.getElementById('status-rectangle-sisco');
+                const statusTextSisco = document.getElementById('status-text-sisco');
+                if (data.sisco_realizado) {
+                    statusTextSisco.textContent = 'Ya realizado';
+                    statusRectangleSisco.classList.add('bg-success');
+                } else {
+                    statusTextSisco.textContent = 'No lo ha realizado';
+                    statusRectangleSisco.classList.add('bg-danger');
+                }
+                })
+                .catch(error => console.error("Error al cargar el perfil:", error));
+                    // Cargar el historial clínico
+                 cargarHistorialClinico(matricula);
+
+                
+        }
+
+        document.addEventListener("DOMContentLoaded", cargarPerfil);
+
+        function cargarDatosFisicosRecientes(matricula) {
+    fetch(`perfil.php?matricula_alum=${matricula}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.fechas && data.fechas.length > 0) {
+                const ultimaFecha = data.fechas[data.fechas.length - 1];
+                document.getElementById("fecha-datos-fisicos").textContent = ultimaFecha;
+
+                fetch(`datos_fisicos_detalle.php?matricula_alum=${matricula}&fecha=${ultimaFecha}`)
+                    .then(response => response.json())
+                    .then(datos => {
+                        document.getElementById("peso").textContent = datos.peso || "-";
+                        document.getElementById("modal-talla").textContent = datos.talla || "-";
+                        document.getElementById("modal-imc").textContent = datos.imc || "-";
+                        document.getElementById("modal-clasificacion_imc").textContent = datos.clasificacion_imc || "-";
+                        document.getElementById("modal-glucosa").textContent = datos.glucosa || "-";
+                        document.getElementById("modal-colesterol").textContent = datos.colesterol || "-";
+                        document.getElementById("modal-trigliceridos").textContent = datos.trigliceridos || "-";
+                        document.getElementById("modal-tension_arterial").textContent = datos.tension_arterial || "-";
+                    })
+                    .catch(error => console.error("Error al cargar los datos físicos:", error));
+            } else {
+                document.getElementById("fecha-datos-fisicos").textContent = "Sin datos";
+            }
+        })
+        .catch(error => console.error("Error al cargar fechas:", error));
+}
+    
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const params = new URLSearchParams(window.location.search);
+        const matricula = params.get("matricula_alum");
+
+        if (matricula) {
+        cargarDatosFisicosRecientes(matricula);
+    }
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtener botones
+        const btnFormularios = document.querySelector(".btn-formularios");
+        const btnHistorial = document.querySelector(".btn-historial");
+        const btnDatosFisicos = document.querySelector(".btn-datos-fisicos");
+    
+        // Obtener cuadros y título
+        const tituloFormulario = document.getElementById("titulo-formulario");
+        const tituloSeccion = document.getElementById("titulo-seccion");
+        const formularioCuadros = document.getElementById("formulario-cuadros");
+        const historialCuadro = document.getElementById("historial-cuadro");
+        const datosFisicosCuadro = document.getElementById("datos-fisicos-cuadro");
+    
+        // Función para actualizar el título y mostrar contenido
+        function mostrarSeccion(titulo, mostrarFormulario, mostrarHistorial, mostrarDatosFisicos) {
+            // Cambiar el texto del título
+            tituloSeccion.innerText = titulo;
+            // Mostrar el título
+            tituloFormulario.classList.remove("d-none");
+    
+            // Controla la visibilidad de los cuadros
+            formularioCuadros.classList.toggle("d-none", !mostrarFormulario);
+            historialCuadro.classList.toggle("d-none", !mostrarHistorial);
+            datosFisicosCuadro.classList.toggle("d-none", !mostrarDatosFisicos);
+        }
+    
+        // Al cargar la página, ocultamos todas las secciones (excepto el título)
+        formularioCuadros.classList.add("d-none");
+        historialCuadro.classList.add("d-none");
+        datosFisicosCuadro.classList.add("d-none");
+    
+        // Evento para mostrar Formularios
+        btnFormularios.addEventListener("click", function() {
+            mostrarSeccion("Formularios", true, false, false);
+        });
+    
+        // Evento para mostrar Historial Clínico
+        btnHistorial.addEventListener("click", function() {
+            mostrarSeccion("Historial Heredo-Familiar", false, true, false);
+        });
+    
+        // Evento para mostrar Datos Físicos
+        btnDatosFisicos.addEventListener("click", function() {
+            mostrarSeccion("Datos Físicos", false, false, true);
+        });
+    });
+</script>
+
+</body>
+</html>

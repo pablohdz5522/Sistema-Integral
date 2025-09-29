@@ -1,0 +1,115 @@
+body{
+            background: linear-gradient(135deg, #003366,#ADB0B6,#003366);
+            min-height: 100vh;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+        .header h2 {
+            font-size: 22px;
+            color: #ffffff;
+        }
+        .header a {
+            text-decoration: none;
+            color: #0c4481;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .header a:hover {
+            color: #1a4971;
+        }
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #d1d5db;
+            font-size: 13px;
+            background: #f9fafb;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        select:focus {
+            outline: none;
+            border-color: #2b6cb0;
+        }
+        canvas#myChart {
+            width: 900px; /* Tamaño mediano */
+            max-height: 600px;
+            margin: auto;
+            background: linear-gradient(135deg, #003366,#ADB0B6,#003366);
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        h3 {
+            font-size: 18px;
+            color: #fdfdfd;
+            margin-bottom: 15px;
+        }
+
+        /* From Uiverse.io by nikk7007 */ 
+.button {
+    --color: #003366;
+    padding: 0.8em 1.7em;
+    background-color: transparent;
+    border-radius: .3em;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .5s;
+    font-weight: 400;
+    font-size: 17px;
+    border: 1px solid;
+    font-family: inherit;
+    text-transform: uppercase;
+    color: var(--color);
+    z-index: 1;
+   }
+   
+   .button::before, .button::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border-radius: 50%;
+    z-index: -1;
+    background-color: var(--color);
+    transition: 1s ease;
+   }
+   
+   .button::before {
+    top: -1em;
+    left: -1em;
+   }
+   
+   .button::after {
+    left: calc(100% + 1em);
+    top: calc(100% + 1em);
+   }
+   
+   .button:hover::before, .button:hover::after {
+    height: 410px;
+    width: 410px;
+   }
+   
+   .button:hover {
+    color: rgb(255, 255, 255);
+   }
+   
+   .button:active {
+    filter: brightness(.8);
+   }

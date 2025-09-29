@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+ 
+        <!-- Bootstrap CSS v5.2.1 -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="Estres.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="items">
+                <div class="element2"></div> <!-- Elemento 2, aparece primero -->
+                <div class="element1"></div> <!-- Elemento 1, aparece después de Elemento 2 -->
+            </div>
+            <div class="element3">Estres Profesor</div> <!-- Elemento 3, no se ve afectado -->
+        </div>
+        
+        <div class="container">
+          <form id="formulario" action="enviar.php" method="post" onsubmit="return validarFormulario()">
+              <!-- Clave del Profesor (Identificador) -->
+              <div class="question-container">
+                <label for="matricula_mae">1. ¿Cuál es tu clave de profesor? (Identificador)</label>
+                <input type="text" class="form-control" id="matricula_mae" name="matricula_mae" required oninput="verificarMatricula()">
+                <small id="mensaje-error" class="text-danger"></small>
+            </div>
+      
+              <!-- Pregunta 1 -->
+              <div id="preguntas-container" style="display: none;">
+              <div class="question-container">
+                <label for="pregunta1">1. ¿Con qué frecuencia has estado afectado por algo ocurrido inesperadamente?</label>
+                <select class="form-select" id="pregunta1" name="pregunta1" required onchange="deshabilitarSeleccionar(this)">
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+      
+              <!-- Pregunta 2 -->
+              <div class="question-container">
+                <label for="pregunta2">2. ¿Con qué frecuencia te has sentido incapaz de controlar las cosas importantes en tu vida?</label>
+                <select class="form-select" id="pregunta2" name="pregunta2" required onchange="deshabilitarSeleccionar(this)">
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+               
+              <!-- Pregunta 3-->
+              <div class="question-container">
+                <label for="pregunta3">3. ¿Con qué frecuencia te has sentido nervioso lleno de tensión?</label>
+                <select class="form-select" id="pregunta3" name="pregunta3" required onchange="deshabilitarSeleccionar(this)">
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+               
+              <!-- Pregunta 4 -->
+              <div class="question-container">
+                <label for="pregunta4">4. ¿Con qué frecuencia has manejado con éxito los pequeños problemas de la vida?</label>
+                <select class="form-select" id="pregunta4" name="pregunta4" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+              
+              <!-- Pregunta 5 -->
+              <div class="question-container">
+                <label for="pregunta5">5. ¿Con qué frecuencia has sentido que has enfrentado efectivamente los cambios importantes que han estado ocurriendo en tu vida?</label>
+                <select class="form-select" id="pregunta5" name="pregunta5" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+              
+              <!-- Pregunta 6 -->
+              <div class="question-container">
+                <label for="pregunt6">6.¿Con qué frecuencia has estado seguro sobre tu capacidad de manejar los problemas personales?</label>
+                <select class="form-select" id="pregunta6" name="pregunta6" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+              
+              <!-- Pregunta 7 -->
+              <div class="question-container">
+                <label for="pregunta7">7.¿Con qué frecuencia has sentido que las cosas van bien?</label>
+                <select class="form-select" id="pregunta7" name="pregunta7" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+              
+              <!-- Pregunta 8 -->
+              <div class="question-container">
+                <label for="pregunta8">8. ¿Con qué frecuencia has sentido que no podías afrontar todas las cosas que tenías que hacer?</label>
+                <select class="form-select" id="pregunta8" name="pregunta8" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+              
+              <!-- Pregunta 9 -->
+              <div class="question-container">
+                <label for="pregunta9">9. ¿Con qué frecuencia has podido controlar las dificultades de tu vida?</label>
+                <select class="form-select" id="pregunta9" name="pregunta9" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+              
+              <!-- Pregunta 10 -->
+              <div class="question-container">
+                <label for="pregunta10">10. ¿ Con qué frecuencia has sentido que tienes el control de todo?</label>
+                <select class="form-select" id="pregunta10" name="pregunta10" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+              
+              <!-- Pregunta 11 -->
+              <div class="question-container">
+                <label for="pregunta11">11.  ¿Con qué frecuencia has estado enfadado porque las cosas que te han ocurrido estaban fuera de control?</label>
+                <select class="form-select" id="pregunta11" name="pregunta11" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+              
+              <!-- Pregunta 12 -->
+              <div class="question-container">
+                <label for="pregunta12">12. ¿Con qué frecuencias has pensado sobre las cosas que no has terminado (pendientes que hacer)?</label>
+                <select class="form-select" id="pregunta12" name="pregunta12" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+              
+              <!-- Pregunta 13-->
+              <div class="question-container">
+                <label for="pregunta13">13. ¿Con qué frecuencia has podido organizar tu tiempo?</label>
+                <select class="form-select" id="pregunta13" name="pregunta13" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>
+              
+              <!-- Pregunta 14-->
+              <div class="question-container">
+                <label for="pregunta14">14. ¿Con qué frecuencia has sentido que las dificultades se acumulan tanto que no puedes superarlas?</label>
+                <select class="form-select" id="pregunta14" name="pregunta14" required>
+                  <option value="" selected>Seleccionar</option>
+                  <option value="Nunca">Nunca</option>
+                  <option value="Rara vez">Rara vez</option>
+                  <option value="A veces">A veces</option>
+                  <option value="Frecuentemente">Frecuentemente</option>
+                  <option value="Siempre">Siempre</option>
+                </select>
+              </div>              
+           
+              
+              <button type="submit" class="btn btn-submit">Enviar</button>
+            </div>
+            </form>
+        </div>
+
+        
+        <!-- Bootstrap JavaScript Libraries -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"
+        ></script>
+
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+
+    <script>
+      // Función para deshabilitar la opción "Seleccionar" después de que se haya seleccionado una opción válida
+      function deshabilitarSeleccionar(select) {
+        const seleccionarOption = select.querySelector('option[value=""]');
+        
+        // Deshabilitar la opción 'Seleccionar' si el usuario seleccionó una opción válida
+        if (select.value !== "") {
+          seleccionarOption.disabled = true;
+        } else {
+          seleccionarOption.disabled = false; // Habilitar "Seleccionar" de nuevo si se deselecciona
+        }
+      }
+
+      // Función de validación para asegurar que no se deje "Seleccionar"
+      function validarFormulario() {
+        var selectElements = document.querySelectorAll('select');
+        for (var i = 0; i < selectElements.length; i++) {
+          // Verifica que el valor no sea vacío (la opción 'Seleccionar' no debe enviarse)
+          if (selectElements[i].value === "") {
+            alert("Por favor, responde todas las preguntas antes de enviar el formulario.");
+            return false; // Detiene el envío del formulario
+          }
+        }
+        return true; // Permite el envío del formulario si todas las respuestas son válidas
+      }
+    </script>
+
+    <script>
+      function verificarMatricula() {
+    let matricula = document.getElementById("matricula_mae").value;
+    let mensajeError = document.getElementById("mensaje-error");
+    let preguntasContainer = document.getElementById("preguntas-container");
+
+    // Validar longitud de la matrícula antes de verificar
+    if (matricula.length < 6 || matricula.length > 8) {
+        mensajeError.textContent = "La matrícula debe tener entre 6 y 8 caracteres.";
+        preguntasContainer.style.display = "none";
+        return;
+    }
+
+    // Hacer la solicitud AJAX solo cuando la matrícula tenga el tamaño correcto
+    fetch(`verificar.php?matricula=${matricula}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.respondido) {
+                mensajeError.textContent = "Ya has respondido este cuestionario.";
+                preguntasContainer.style.display = "none";
+                // Bloquear el formulario para evitar envío
+                document.getElementById("formulario").dataset.bloqueado = "true"; 
+            } else {
+                mensajeError.textContent = "";
+                preguntasContainer.style.display = "block";
+                // Permitir envío del formulario
+                document.getElementById("formulario").dataset.bloqueado = "false"; 
+            }
+        })
+        .catch(error => console.error("Error en la verificación:", error));
+}
+
+// Validación antes de enviar el formulario
+function validarFormulario() {
+    // Verificar si está bloqueado por haber respondido ya
+    if (document.getElementById("formulario").dataset.bloqueado === "true") {
+        alert("No puedes enviar el formulario porque ya has respondido este cuestionario.");
+        return false;
+    }
+
+    var selectElements = document.querySelectorAll('select');
+    for (var i = 0; i < selectElements.length; i++) {
+        if (selectElements[i].value === "") {
+            alert("Por favor, responde todas las preguntas antes de enviar el formulario.");
+            return false;
+        }
+    }
+    return true; 
+}
+
+// Comprobar si la matrícula tiene los caracteres correctos antes de enviar
+window.onload = function() {
+    // Inicializamos el formulario como no bloqueado
+    document.getElementById("formulario").dataset.bloqueado = "false";
+};
+
+
+  </script>
+</html>

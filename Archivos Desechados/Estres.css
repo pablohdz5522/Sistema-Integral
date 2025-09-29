@@ -1,0 +1,135 @@
+html, body {
+  background: 
+      linear-gradient(278deg, rgba(23, 19, 235, 0.50) 13.7%, rgba(255, 255, 255, 0.25) 13.7%), 
+      linear-gradient(263deg, rgba(71, 15, 255, 0.00) 87%, rgba(71, 15, 255, 0.50) 87%), 
+      linear-gradient(277deg, rgba(255, 242, 0, 0.00) 89%, #FFF600 89%), 
+      linear-gradient(87deg, #FFF 88%, #FDEE18 88%);
+  background-size: cover; 
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0;
+  background-attachment: fixed;
+}
+
+.items {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  padding-left: 60px;
+}
+
+.element1 {
+  background: url('images/g.jpg') rgb(255, 255, 255) 50% / cover no-repeat;
+  width: 321px;
+  height: 85px;
+  flex-shrink: 0;
+  aspect-ratio: 321 / 85;
+}
+
+.element2 {
+  background: url('images/Escudo_UNACAR.png') rgb(255, 253, 253) 50% / cover no-repeat;
+  width: 45px;
+  height: 63px;
+  flex-shrink: 0;
+}
+
+.element3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  flex-basis: auto;
+  color: #000;
+  text-align: center;
+  padding: 10px;
+  font-family: Inter, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.question-container {
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 50px;
+}
+
+.question-container label {
+  font-weight: bold;
+}
+
+.form-select, .form-control {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.btn-submit {
+  background-color: #6a0dad;
+  color: white;
+  border-radius: 25px;
+  width: 11%; /* Cambiar a auto para ajustar al contenido */
+  padding: 15px;
+  font-size: 18px;
+  margin-left: auto;
+  margin-right: 120px;
+  display: block;
+  
+}
+
+.btn-submit:hover {
+  background-color: #9b4dca;
+}
+
+/* Media Queries para Pantallas Pequeñas */
+@media (max-width: 768px) {
+  .items {
+      flex-direction: column; /* Apilar los elementos en pantallas pequeñas */
+      padding-left: 0; /* Elimina el padding izquierdo */
+  }
+
+  .element1, .element2 {
+      width: 100%; /* Asegura que los elementos ocupen todo el ancho disponible */
+      height: auto; /* Ajusta la altura para mantener la proporción */
+  }
+
+  .element3 {
+      font-size: 18px; /* Reduce el tamaño de la fuente en pantallas pequeñas */
+  }
+
+  .question-container {
+      padding-top: 20px; /* Reduce el espacio superior en pantallas pequeñas */
+  }
+
+  .btn-submit {
+      width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+      margin-left: 0; /* Elimina el margen izquierdo */
+      margin-right: 0; /* Elimina el margen derecho */
+  }
+}
+
+/* Media Queries para Móviles */
+@media (max-width: 480px) {
+  .element1 {
+      width: 100%; /* Elimina el ancho fijo en dispositivos móviles */
+      height: auto; /* Ajusta la altura */
+  }
+
+  .element2 {
+      width: 50px; /* Ajusta el tamaño del escudo */
+      height: 70px; /* Ajusta la altura */
+  }
+
+  .element3 {
+      font-size: 16px; /* Reduce aún más el tamaño del texto */
+  }
+
+  .form-select, .form-control {
+      padding: 8px; /* Ajusta el padding para dispositivos pequeños */
+  }
+}

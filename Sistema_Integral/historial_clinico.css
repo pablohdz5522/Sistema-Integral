@@ -1,0 +1,323 @@
+.salir {
+    display: block;
+    position: relative;
+    width: 56px;
+    height: 56px;
+    margin: 0;
+    overflow: hidden;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+  }
+  
+  .salir:before,
+  .salir:after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    inset: 7px;
+  }
+  
+  .salir:before {
+    border: 4px solid #000000;
+    transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
+      transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
+  }
+  
+  .salir:after {
+    border: 4px solid #f81100;
+    transform: scale(1.3);
+    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0;
+  }
+  
+  .salir:hover:before,
+  .salir:focus:before {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .salir:hover:after,
+  .salir:focus:after {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
+      transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
+  }
+  
+  .salir-box {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .salir-elem {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: 22px 18px 0 18px;
+    transform: rotate(180deg);
+    fill: #000000;
+  }
+  
+  .button:hover .salir-box,
+  .salir:focus .salir-box {
+    transition: 0.4s;
+    transform: translateX(-56px);
+  }
+
+
+  .titulo {
+    display: inline-block;
+    text-align: center;
+    font-size: 28px;
+    margin: 0 auto;
+    font-family: 'Inria Sans', sans-serif; 
+  }
+
+
+  .containerdentro {
+    border: 3px solid black; /* Borde visible */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    background-color: transparent; /* Fondo transparente */
+    margin: 10px auto; /* Centra el contenedor */
+    min-height: 100vh; /* Altura mínima de pantalla */
+    box-sizing: border-box; /* Evita que el padding afecte el tamaño total */
+    width: 100%;
+    max-width: 1200px;
+    overflow-x: auto; /* Habilita el scroll horizontal */
+    white-space: nowrap; /* Evita que los elementos bajen de línea */
+  }
+
+  .scroll-container {
+      display: flex;
+      flex-wrap: nowrap; /* Evita que los elementos se acomoden en varias líneas */
+      justify-content: flex-start; /* Asegura que los elementos comiencen desde la izquierda */
+      gap:0px; /* Espaciado entre elementos */
+      min-width: 990px; /* Asegura que haya espacio para todos los elementos */
+  }
+  
+
+  .label1 {
+    margin-left: 10px;
+    font-family: 'Inria Sans', sans-serif;
+    padding: 3px 10px;
+    background-color: #ddd; /* Color de fondo para diferenciar */
+    border-radius: 4px;
+  }
+
+  .inputs1{
+    border: none; /* Quitamos el borde del input para que parezca parte del cuadro */
+    border-radius: 0px 5px 5px 0px; /* Eliminamos bordes redondeados del input */
+    flex-grow: 0; /* Para que el input tome el resto del espacio */
+    padding: 3px;
+  }
+
+  .select1{
+    margin-left: 10px; /* Quitamos el borde del input para que parezca parte del cuadro */
+    border-radius: 5px; /* Eliminamos bordes redondeados del input */
+    flex-grow: 0; /* Para que el input tome el resto del espacio */
+    padding: 3px;
+    border: none;
+    text-align: center;
+  }
+
+  .separacion {
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding-right: 20px;
+    height: 800px;
+    max-height: 100vh; /* Mantener el alto máximo con un porcentaje de la pantalla */
+    overflow: auto; /* Permite desplazamiento si el contenido es muy grande */
+    word-wrap: break-word; /* Evita que el contenido se desborde */
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+    border-left: 1px solid #000000;
+    
+  }
+
+  .separacion2 {
+      overflow: auto;
+      word-wrap: break-word;
+      box-sizing: border-box;
+      border-bottom: 1px solid #000000;
+      border-right: 1px solid #000000;
+      border-left: 1px solid #000000;
+      overflow: auto; /* Permite desplazamiento si el contenido es muy grande */
+      word-wrap: break-word; /* Evita que el contenido se desborde */
+      box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
+      height: 608px;
+  }
+
+  .row {
+      flex-wrap: nowrap !important; /* Evita que las columnas bajen */
+  }
+
+  .titulogrande {
+    display: inline-block;
+    text-align: center;
+    font-size: 40px;
+    font-family: 'Inria Sans', sans-serif; 
+    
+  }
+
+  .patologias{
+    font-family: 'Inria Sans', sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+
+  /* Asegura que cada select no se estire más de lo necesario */
+  select {
+    max-width: 150px; /* Ajusta según tus necesidades */
+    flex-grow: 0; /* Evita que los selects crezcan más de lo necesario */
+  }
+
+
+  .patologias {
+    margin-right: 10px; /* Espacio entre el label y el select */
+  }
+
+  
+  .select2 {
+    padding: 1px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Añadir borde si se desea */
+    font-family: 'Inria Sans', sans-serif;
+    text-align: center;
+    flex-grow: 0; /* Para que no crezcan más de lo necesario */
+    margin-left: 8px;
+  } 
+
+  .cajatexto{
+
+    width: 300px;  /* Ancho fijo */
+    height: 120px; /* Alto fijo */
+    resize: none;  /* Evita que el usuario cambie el tamaño */
+    border-radius: 8px;
+    font-family: 'Inria Sans', sans-serif;
+  }
+
+
+
+  .guardar {
+    font-family: inherit;
+    font-size: 20px;
+    background: #212121;
+    color: white;
+    fill: rgb(155, 153, 153);
+    padding: 0.5em 1em;
+    padding-left: 0.9em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 15px;
+    font-weight: 1000;
+  }
+  
+  .guardar span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .guardar svg {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .guardar:hover {
+    background: #000;
+  }
+  
+  .guardar:hover .svg-wrapper {
+    transform: scale(1.25);
+    transition: 0.5s linear;
+  }
+  
+  .guardar:hover svg {
+    transform: translateX(1.2em) scale(1.1);
+    fill: #fff;
+  }
+  
+  .guardar:hover span {
+    opacity: 0;
+    transition: 0.5s linear;
+  }
+  
+  .guardar:active {
+    transform: scale(0.95);
+  }
+
+
+
+
+
+  .agregar {
+    position: relative;
+    width: 500px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #34974d;
+    background-color: #3aa856;
+    border-radius: 5px;
+  }
+  
+  .agregar, .agregar__icon, .agregar__text {
+    transition: all 0.3s;
+  }
+  
+  .agregar .agregar__text {
+    transform: translateX(150px);
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .agregar .agregar__icon {
+    position: absolute;
+    transform: translateX(395px);
+    height: 100%;
+    width: 100px;
+    background-color: #34974d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+  
+  .agregar .svg {
+    width: 30px;
+    stroke: #fff;
+  }
+  
+  .agregar:hover {
+    background: #34974d;
+  }
+  
+  .agregar:hover .agregar__text {
+    color: transparent;
+  }
+  
+  .agregar:hover .agregar__icon {
+    width: 90px;
+    transform: translateX(0);
+  }
+  
+  .agregar:active .agregar__icon {
+    background-color: #2e8644;
+  }
+  
+  .agregar:active {
+    border: 1px solid #2e8644;
+  }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Interactiva</title>
+    <link rel="stylesheet" href="css/Formularios.css">
+
+</head>
+<body>
+    <header>
+        <div class="profile-container">
+            <a href="menu.html">
+                <button class="profile-btn">
+                    <a href="menu.php">
+                        <img src="images/casa.png" alt="Icono" class="btn-icon"> 
+                    </a>
+                </button>
+            </a>
+        </div>
+
+    </header>
+    
+    <div class="header-container">
+        <span>FORMULARIOS</span>
+    </div>
+    
+    <div class="gallery-container">
+        <div class="gallery-item" onclick="selectGallery(0)">
+            <h2>DASS</h2>
+            <img src="images/casa.png" class="gallery-image">
+            <button class="gallery-btn" onclick="location.href='DASS-21.html'">Ver más</button>
+        </div>
+        <div class="gallery-item active" onclick="selectGallery(1)">
+            <h2>Estilo de Vida</h2>
+            <img src="images/casa.png" class="gallery-image">
+            <button class="gallery-btn" onclick="location.href='PEPS-1.html'">Ver más</button>
+        </div>
+        <div class="gallery-item" onclick="selectGallery(2)">
+            <h2>Estrés Cisco</h2>
+            <img src="images/casa.png" class="gallery-image">
+            <button class="gallery-btn" onclick="location.href='estres_cisco.html'">Ver más</button>
+        </div>
+    </div>
+    
+    <div class="gallery-indicators">
+        <span class="circle" onclick="selectGallery(0)"></span>
+        <span class="circle active" onclick="selectGallery(1)"></span>
+        <span class="circle" onclick="selectGallery(2)"></span>
+    </div>
+    
+    <script>
+    function selectGallery(index) {
+    let items = document.querySelectorAll('.gallery-item');
+    let circles = document.querySelectorAll('.gallery-indicators .circle');
+
+    items.forEach((item, i) => {
+        item.classList.remove('active');
+
+        if (i === index) {
+            item.classList.add('active');
+            item.style.transform = "translateX(0) scale(1.4)";
+            item.style.zIndex = "3";
+        } else if (i < index) {
+            item.style.transform = "translateX(-100%) scale(1)";
+            item.style.zIndex = "1";
+        } else {
+            item.style.transform = "translateX(100%) scale(1)";
+            item.style.zIndex = "1";
+        }
+    });
+
+    circles.forEach(circle => circle.classList.remove('active'));
+    circles[index].classList.add('active');
+}
+
+    </script>
+</body>
+</html>

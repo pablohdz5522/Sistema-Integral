@@ -1,0 +1,42 @@
+#matricula::-webkit-outer-spin-button,
+#matricula::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Para Firefox */
+#matricula {
+    -moz-appearance: textfield;
+}
+
+.mati{
+    border: 1px solid #000;
+    width: 200px;
+    padding: 1px;
+}
+
+.colorradio{
+    border: 1px solid #000;
+}
+
+.colorboton{
+    color: #ffffff;
+    background: #000;
+    border: 3px solid #620bee;
+}
+
+.table{
+    width: 50%;
+    inset-inline-start: center;
+    top: 170px;
+    background:none;
+    position:fixed;
+    font-size: 13px;
+    font-family:'Lucida Sans';
+}
+
+.btn-secondary{
+    position: fixed;
+    inset-inline-end: 30%;
+    background-color: #620bee;
+}

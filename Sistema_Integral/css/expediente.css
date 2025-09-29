@@ -1,0 +1,87 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.unacar{
+    width: 20%;
+}
+
+.nav{
+    background: linear-gradient(135deg, #2779AA,#ADB0B6,#2779AA)
+}
+
+.dropdown{
+    background-color: #2779AA;
+}
+
+.dropdown-menu{
+    background-color: #343a40;
+    color: #343a40;
+}
+
+button{
+    background-color: #2779AA;
+    color: #f8f9fa;
+}
+
+.status-rectangle{
+
+    border-radius: 30px;
+}
+
+
+  .sidebar {
+    height: 150vh;
+    background-color: #2779AA;
+    color: #fff;
+  }
+  .sidebar a {
+    color: #adb5bd;
+    text-decoration: none;
+    display: block;
+    padding: 15px;
+  }
+  .sidebar a:hover {
+    background-color: #003366;
+    color: #fff;
+  }
+  
+  .card-custom {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+    .card-custom {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      background-color: #fff;
+    }
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #e0e0e0;
+    }
+    .input-group-text {
+      background-color: #f8f9fa;
+      font-weight: 500;
+      min-width: 120px;
+      justify-content: flex-end;
+    }
+    .form-control:disabled {
+      background-color: #f8f9fa;
+      border: 1px solid #ced4da;
+      color: #495057;
+    }
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-right: 20px;
+    }
+    .right-section {
+      flex: 1;
+    }
