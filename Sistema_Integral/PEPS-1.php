@@ -129,9 +129,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $estado_saludable = ($total_general > 121) ? 'Saludable' : 'No Saludable';
 
         // Insertar en la tabla estilo_de_vida
-        $sql_cuestionario = "INSERT INTO estilo_de_vida (matricula_alum, total, estado_saludable) VALUES (?, ?, ?)";
+        $fecha_actual = date('Y-m-d H:i:s'); 
+        $sql_cuestionario = "INSERT INTO estilo_de_vida (matricula_alum, total, fecha, estado_saludable) VALUES (?, ?, ?, ?)";
         $stmt_cuestionario = $conn->prepare($sql_cuestionario);
-        $stmt_cuestionario->bind_param("sis", $matricula, $total_general, $estado_saludable);
+        $stmt_cuestionario->bind_param("siss", $matricula, $total_general, $fecha_actual, $estado_saludable);
         if ($stmt_cuestionario->execute()) {
             $id_cuestionario = $conn->insert_id;
 
