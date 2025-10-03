@@ -118,7 +118,6 @@ $conn->close();
     Cerrar sesión
 </button>
 
-
 <div class="card mb-4 shadow-sm">
   <div class="card-header bg-primary text-white">
     <h4 class="mb-0">Datos del Alumno</h4>
@@ -132,7 +131,6 @@ $conn->close();
   </div>
 </div>
 
-
 <div class="formulario-rect <?php echo $yaRespondioEstilo ? 'bg-success text-white' : ''; ?>">
     <h4>Formulario: Estilo de Vida</h4>
     <?php if ($yaRespondioEstilo): ?>
@@ -144,7 +142,6 @@ $conn->close();
     <?php endif; ?>
 </div>
 
-
 <div class="formulario-rect <?php echo $yaRespondioDASS ? 'bg-success text-white' : '' ?>">
     <h3>Formulario: DASS-2</h3>
     <?php if ($yaRespondioDASS): ?>
@@ -154,8 +151,8 @@ $conn->close();
     <?php endif; ?>
 </div>
 
+<!-- Modal de Felicitación (solo si ambos formularios están completados) -->
 <?php if ($yaRespondioEstilo && $yaRespondioDASS): ?>
-<!-- Modal de Felicitación -->
 <div class="modal fade" id="modalCompletado" tabindex="-1" aria-labelledby="modalCompletadoLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-success">
@@ -174,7 +171,15 @@ $conn->close();
   </div>
 </div>
 
-<!-- Modal de Confirmación para Cerrar Sesión -->
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const modal = new bootstrap.Modal(document.getElementById('modalCompletado'));
+        modal.show();
+    });
+</script>
+<?php endif; ?>
+
+<!-- Modal de Confirmación para Cerrar Sesión (SIEMPRE VISIBLE, FUERA DEL IF) -->
 <div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="modalLogoutLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content border-danger">
@@ -192,14 +197,6 @@ $conn->close();
     </div>
   </div>
 </div>
-
-<script>
-    window.addEventListener('DOMContentLoaded', () => {
-        const modal = new bootstrap.Modal(document.getElementById('modalCompletado'));
-        modal.show();
-    });
-</script>
-<?php endif; ?>
 
 </body>
 </html>

@@ -235,19 +235,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input colorradio" type="radio" name="p1" id="p1_nunca" value="1" required>
-                                    <label class="form-check-label" for="p1_nunca">1</label>
+                                    <label class="form-check-label" for="p1_nunca">nunca</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input colorradio" type="radio" name="p1" id="p1_aveces" value="2" required>
-                                    <label class="form-check-label" for="p1_aveces">2</label>
+                                    <label class="form-check-label" for="p1_aveces">A veces</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input colorradio" type="radio" name="p1" id="p1_frecuente" value="3" required>
-                                    <label class="form-check-label" for="p1_frecuente">3</label>
+                                    <label class="form-check-label" for="p1_frecuente">Frecuentemente</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input colorradio" type="radio" name="p1" id="p1_rutina" value="4" required>
-                                    <label class="form-check-label" for="p1_rutina">4</label>
+                                    <label class="form-check-label" for="p1_rutina">Rutinariamente</label>
                                 </div>
                             </div>
                         </div>
@@ -258,19 +258,19 @@ $conn->close();
                             <div>
                                <div class="form-check form-check-inline">
                                     <input class="form-check-input colorradio" type="radio" name="p2" id="p2_nunca" value="1" required>
-                                    <label class="form-check-label" for="p2_nunca">1</label>
+                                    <label class="form-check-label" for="p2_nunca">Nunca</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input colorradio" type="radio" name="p2" id="p2_aveces" value="2" required>
-                                    <label class="form-check-label" for="p2_aveces">2</label>
+                                    <label class="form-check-label" for="p2_aveces">A veces</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input colorradio" type="radio" name="p2" id="p2_frecuente" value="3" required>
-                                    <label class="form-check-label" for="p2_frecuente">3</label>
+                                    <label class="form-check-label" for="p2_frecuente">Frecuentemente</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input colorradio" type="radio" name="p2" id="p2_rutina" value="4" required>
-                                    <label class="form-check-label" for="p2_rutina">4</label>
+                                    <label class="form-check-label" for="p2_rutina">Rutinariamente</label>
                                 </div>
                             </div> 
                         </div>
@@ -280,19 +280,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p3" id="p3_nunca" value="1" required>
-                                     <label class="form-check-label" for="p3_nunca">1</label>
+                                     <label class="form-check-label" for="p3_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p3" id="p3_aveces" value="2" required>
-                                     <label class="form-check-label" for="p3_aveces">2</label>
+                                     <label class="form-check-label" for="p3_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p3" id="p3_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p3_frecuente">3</label>
+                                     <label class="form-check-label" for="p3_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p3" id="p3_rutina" value="4" required>
-                                     <label class="form-check-label" for="p3_rutina">4</label>
+                                     <label class="form-check-label" for="p3_rutina">Rutinariamente</label>
                                  </div>
                             </div> 
                         </div>
@@ -302,19 +302,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p4" id="p4_nunca" value="1" required>
-                                     <label class="form-check-label" for="p4_nunca">1</label>
+                                     <label class="form-check-label" for="p4_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p4" id="p4_aveces" value="2" required>
-                                     <label class="form-check-label" for="p4_aveces">2</label>
+                                     <label class="form-check-label" for="p4_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p4" id="p4_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p4_frecuente">3</label>
+                                     <label class="form-check-label" for="p4_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p4" id="p4_rutina" value="4" required>
-                                     <label class="form-check-label" for="p4_rutina">4</label>
+                                     <label class="form-check-label" for="p4_rutina">Rutinariamente</label>
                                  </div>
                             </div> 
                         </div>
@@ -324,19 +324,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p5" id="p5_nunca" value="1" required>
-                                     <label class="form-check-label" for="p5_nunca">1</label>
+                                     <label class="form-check-label" for="p5_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p5" id="p5_aveces" value="2" required>
-                                     <label class="form-check-label" for="p5_aveces">2</label>
+                                     <label class="form-check-label" for="p5_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p5" id="p5_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p5_frecuente">3</label>
+                                     <label class="form-check-label" for="p5_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p5" id="p5_rutina" value="4" required>
-                                     <label class="form-check-label" for="p5_rutina">4</label>
+                                     <label class="form-check-label" for="p5_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -346,19 +346,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p6" id="p6_nunca" value="1" required>
-                                     <label class="form-check-label" for="p6_nunca">1</label>
+                                     <label class="form-check-label" for="p6_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p6" id="p6_aveces" value="2" required>
-                                     <label class="form-check-label" for="p6_aveces">2</label>
+                                     <label class="form-check-label" for="p6_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p6" id="p6_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p6_frecuente">3</label>
+                                     <label class="form-check-label" for="p6_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p6" id="p6_rutina" value="4" required>
-                                     <label class="form-check-label" for="p6_rutina">4</label>
+                                     <label class="form-check-label" for="p6_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -368,19 +368,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p7" id="p7_nunca" value="1" required>
-                                     <label class="form-check-label" for="p7_nunca">1</label>
+                                     <label class="form-check-label" for="p7_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p7" id="p7_aveces" value="2" required>
-                                     <label class="form-check-label" for="p7_aveces">2</label>
+                                     <label class="form-check-label" for="p7_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p7" id="p7_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p7_frecuente">3</label>
+                                     <label class="form-check-label" for="p7_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p7" id="p7_rutina" value="4" required>
-                                     <label class="form-check-label" for="p7_rutina">4</label>
+                                     <label class="form-check-label" for="p7_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -390,19 +390,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p8" id="p8_nunca" value="1" required>
-                                     <label class="form-check-label" for="p8_nunca">1</label>
+                                     <label class="form-check-label" for="p8_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p8" id="p8_aveces" value="2" required>
-                                     <label class="form-check-label" for="p8_aveces">2</label>
+                                     <label class="form-check-label" for="p8_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p8" id="p8_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p8_frecuente">3</label>
+                                     <label class="form-check-label" for="p8_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p8" id="p8_rutina" value="4" required>
-                                     <label class="form-check-label" for="p8_rutina">4</label>
+                                     <label class="form-check-label" for="p8_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -412,19 +412,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p9" id="p9_nunca" value="1" required>
-                                     <label class="form-check-label" for="p9_nunca">1</label>
+                                     <label class="form-check-label" for="p9_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p9" id="p9_aveces" value="2" required>
-                                     <label class="form-check-label" for="p9_aveces">2</label>
+                                     <label class="form-check-label" for="p9_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p9" id="p9_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p9_frecuente">3</label>
+                                     <label class="form-check-label" for="p9_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p9" id="p9_rutina" value="4" required>
-                                     <label class="form-check-label" for="p9_rutina">4</label>
+                                     <label class="form-check-label" for="p9_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -434,19 +434,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p10" id="p10_nunca" value="1" required>
-                                     <label class="form-check-label" for="p10_nunca">1</label>
+                                     <label class="form-check-label" for="p10_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p10" id="p10_aveces" value="2" required>
-                                     <label class="form-check-label" for="p10_aveces">2</label>
+                                     <label class="form-check-label" for="p10_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p10" id="p10_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p10_frecuente">3</label>
+                                     <label class="form-check-label" for="p10_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p10" id="p10_rutina" value="4" required>
-                                     <label class="form-check-label" for="p10_rutina">4</label>
+                                     <label class="form-check-label" for="p10_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -456,19 +456,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p11" id="p11_nunca" value="1" required>
-                                     <label class="form-check-label" for="p11_nunca">1</label>
+                                     <label class="form-check-label" for="p11_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p11" id="p11_aveces" value="2" required>
-                                     <label class="form-check-label" for="p11_aveces">2</label>
+                                     <label class="form-check-label" for="p11_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p11" id="p11_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p11_frecuente">3</label>
+                                     <label class="form-check-label" for="p11_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p11" id="p11_rutina" value="4" required>
-                                     <label class="form-check-label" for="p11_rutina">4</label>
+                                     <label class="form-check-label" for="p11_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -478,19 +478,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p12" id="p12_nunca" value="1" required>
-                                     <label class="form-check-label" for="p12_nunca">1</label>
+                                     <label class="form-check-label" for="p12_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p12" id="p12_aveces" value="2" required>
-                                     <label class="form-check-label" for="p12_aveces">2</label>
+                                     <label class="form-check-label" for="p12_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p12" id="p12_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p12_frecuente">3</label>
+                                     <label class="form-check-label" for="p12_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p12" id="p12_rutina" value="4" required>
-                                     <label class="form-check-label" for="p12_rutina">4</label>
+                                     <label class="form-check-label" for="p12_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -500,19 +500,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p13" id="p13_nunca" value="1" required>
-                                     <label class="form-check-label" for="p13_nunca">1</label>
+                                     <label class="form-check-label" for="p13_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p13" id="p13_aveces" value="2" required>
-                                     <label class="form-check-label" for="p13_aveces">2</label>
+                                     <label class="form-check-label" for="p13_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p13" id="p13_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p13_frecuente">3</label>
+                                     <label class="form-check-label" for="p13_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p13" id="p13_rutina" value="4" required>
-                                     <label class="form-check-label" for="p13_rutina">4</label>
+                                     <label class="form-check-label" for="p13_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -522,19 +522,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p14" id="p14_nunca" value="1" required>
-                                     <label class="form-check-label" for="p14_nunca">1</label>
+                                     <label class="form-check-label" for="p14_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p14" id="p14_aveces" value="2" required>
-                                     <label class="form-check-label" for="p14_aveces">2</label>
+                                     <label class="form-check-label" for="p14_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p14" id="p14_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p14_frecuente">3</label>
+                                     <label class="form-check-label" for="p14_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p14" id="p14_rutina" value="4" required>
-                                     <label class="form-check-label" for="p14_rutina">4</label>
+                                     <label class="form-check-label" for="p14_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -544,19 +544,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p15" id="p15_nunca" value="1" required>
-                                     <label class="form-check-label" for="p15_nunca">1</label>
+                                     <label class="form-check-label" for="p15_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p15" id="p15_aveces" value="2" required>
-                                     <label class="form-check-label" for="p15_aveces">2</label>
+                                     <label class="form-check-label" for="p15_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p15" id="p15_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p15_frecuente">3</label>
+                                     <label class="form-check-label" for="p15_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p15" id="p15_rutina" value="4" required>
-                                     <label class="form-check-label" for="p15_rutina">4</label>
+                                     <label class="form-check-label" for="p15_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -566,19 +566,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p16" id="p16_nunca" value="1" required>
-                                     <label class="form-check-label" for="p16_nunca">1</label>
+                                     <label class="form-check-label" for="p16_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p16" id="p16_aveces" value="2" required>
-                                     <label class="form-check-label" for="p16_aveces">2</label>
+                                     <label class="form-check-label" for="p16_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p16" id="p16_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p16_frecuente">3</label>
+                                     <label class="form-check-label" for="p16_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p16" id="p16_rutina" value="4" required>
-                                     <label class="form-check-label" for="p16_rutina">4</label>
+                                     <label class="form-check-label" for="p16_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -588,19 +588,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p17" id="p17_nunca" value="1" required>
-                                     <label class="form-check-label" for="p17_nunca">1</label>
+                                     <label class="form-check-label" for="p17_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p17" id="p17_aveces" value="2" required>
-                                     <label class="form-check-label" for="p17_aveces">2</label>
+                                     <label class="form-check-label" for="p17_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p17" id="p17_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p17_frecuente">3</label>
+                                     <label class="form-check-label" for="p17_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p17" id="p17_rutina" value="4" required>
-                                     <label class="form-check-label" for="p17_rutina">4</label>
+                                     <label class="form-check-label" for="p17_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -610,19 +610,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p18" id="p18_nunca" value="1" required>
-                                     <label class="form-check-label" for="p18_nunca">1</label>
+                                     <label class="form-check-label" for="p18_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p18" id="p18_aveces" value="2" required>
-                                     <label class="form-check-label" for="p18_aveces">2</label>
+                                     <label class="form-check-label" for="p18_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p18" id="p18_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p18_frecuente">3</label>
+                                     <label class="form-check-label" for="p18_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p18" id="p18_rutina" value="4" required>
-                                     <label class="form-check-label" for="p18_rutina">4</label>
+                                     <label class="form-check-label" for="p18_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -633,19 +633,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p19" id="p19_nunca" value="1" required>
-                                     <label class="form-check-label" for="p19_nunca">1</label>
+                                     <label class="form-check-label" for="p19_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p19" id="p19_aveces" value="2" required>
-                                     <label class="form-check-label" for="p19_aveces">2</label>
+                                     <label class="form-check-label" for="p19_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p19" id="p19_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p19_frecuente">3</label>
+                                     <label class="form-check-label" for="p19_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p19" id="p19_rutina" value="4" required>
-                                     <label class="form-check-label" for="p19_rutina">4</label>
+                                     <label class="form-check-label" for="p19_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -655,19 +655,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p20" id="p20_nunca" value="1" required>
-                                     <label class="form-check-label" for="p20_nunca">1</label>
+                                     <label class="form-check-label" for="p20_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p20" id="p20_aveces" value="2" required>
-                                     <label class="form-check-label" for="p20_aveces">2</label>
+                                     <label class="form-check-label" for="p20_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p20" id="p20_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p20_frecuente">3</label>
+                                     <label class="form-check-label" for="p20_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p20" id="p20_rutina" value="4" required>
-                                     <label class="form-check-label" for="p20_rutina">4</label>
+                                     <label class="form-check-label" for="p20_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -677,19 +677,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p21" id="p21_nunca" value="1" required>
-                                     <label class="form-check-label" for="p21_nunca">1</label>
+                                     <label class="form-check-label" for="p21_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p21" id="p21_aveces" value="2" required>
-                                     <label class="form-check-label" for="p21_aveces">2</label>
+                                     <label class="form-check-label" for="p21_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p21" id="p21_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p21_frecuente">3</label>
+                                     <label class="form-check-label" for="p21_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p21" id="p21_rutina" value="4" required>
-                                     <label class="form-check-label" for="p21_rutina">4</label>
+                                     <label class="form-check-label" for="p21_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -699,19 +699,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p22" id="p22_nunca" value="1" required>
-                                     <label class="form-check-label" for="p22_nunca">1</label>
+                                     <label class="form-check-label" for="p22_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p22" id="p22_aveces" value="2" required>
-                                     <label class="form-check-label" for="p22_aveces">2</label>
+                                     <label class="form-check-label" for="p22_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p22" id="p22_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p22_frecuente">3</label>
+                                     <label class="form-check-label" for="p22_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p22" id="p22_rutina" value="4" required>
-                                     <label class="form-check-label" for="p22_rutina">4</label>
+                                     <label class="form-check-label" for="p22_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -721,19 +721,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p23" id="p23_nunca" value="1" required>
-                                     <label class="form-check-label" for="p23_nunca">1</label>
+                                     <label class="form-check-label" for="p23_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p23" id="p23_aveces" value="2" required>
-                                     <label class="form-check-label" for="p23_aveces">2</label>
+                                     <label class="form-check-label" for="p23_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p23" id="p23_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p23_frecuente">3</label>
+                                     <label class="form-check-label" for="p23_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p23" id="p23_rutina" value="4" required>
-                                     <label class="form-check-label" for="p23_rutina">4</label>
+                                     <label class="form-check-label" for="p23_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -743,19 +743,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p24" id="p24_nunca" value="1" required>
-                                     <label class="form-check-label" for="p24_nunca">1</label>
+                                     <label class="form-check-label" for="p24_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p24" id="p24_aveces" value="2" required>
-                                     <label class="form-check-label" for="p24_aveces">2</label>
+                                     <label class="form-check-label" for="p24_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p24" id="p24_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p24_frecuente">3</label>
+                                     <label class="form-check-label" for="p24_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p24" id="p24_rutina" value="4" required>
-                                     <label class="form-check-label" for="p24_rutina">4</label>
+                                     <label class="form-check-label" for="p24_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -765,19 +765,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p25" id="p25_nunca" value="1" required>
-                                     <label class="form-check-label" for="p25_nunca">1</label>
+                                     <label class="form-check-label" for="p25_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p25" id="p25_aveces" value="2" required>
-                                     <label class="form-check-label" for="p25_aveces">2</label>
+                                     <label class="form-check-label" for="p25_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p25" id="p25_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p25_frecuente">3</label>
+                                     <label class="form-check-label" for="p25_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p25" id="p25_rutina" value="4" required>
-                                     <label class="form-check-label" for="p25_rutina">4</label>
+                                     <label class="form-check-label" for="p25_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -787,19 +787,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p26" id="p26_nunca" value="1" required>
-                                     <label class="form-check-label" for="p26_nunca">1</label>
+                                     <label class="form-check-label" for="p26_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p26" id="p26_aveces" value="2" required>
-                                     <label class="form-check-label" for="p26_aveces">2</label>
+                                     <label class="form-check-label" for="p26_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p26" id="p26_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p26_frecuente">3</label>
+                                     <label class="form-check-label" for="p26_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p26" id="p26_rutina" value="4" required>
-                                     <label class="form-check-label" for="p26_rutina">4</label>
+                                     <label class="form-check-label" for="p26_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -809,19 +809,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p27" id="p27_nunca" value="1" required>
-                                     <label class="form-check-label" for="p27_nunca">1</label>
+                                     <label class="form-check-label" for="p27_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p27" id="p27_aveces" value="2" required>
-                                     <label class="form-check-label" for="p27_aveces">2</label>
+                                     <label class="form-check-label" for="p27_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p27" id="p27_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p27_frecuente">3</label>
+                                     <label class="form-check-label" for="p27_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p27" id="p27_rutina" value="4" required>
-                                     <label class="form-check-label" for="p27_rutina">4</label>
+                                     <label class="form-check-label" for="p27_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -831,19 +831,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p28" id="p28_nunca" value="1" required>
-                                     <label class="form-check-label" for="p28_nunca">1</label>
+                                     <label class="form-check-label" for="p28_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p28" id="p28_aveces" value="2" required>
-                                     <label class="form-check-label" for="p28_aveces">2</label>
+                                     <label class="form-check-label" for="p28_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p28" id="p28_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p28_frecuente">3</label>
+                                     <label class="form-check-label" for="p28_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p28" id="p28_rutina" value="4" required>
-                                     <label class="form-check-label" for="p28_rutina">4</label>
+                                     <label class="form-check-label" for="p28_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -853,19 +853,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p29" id="p29_nunca" value="1" required>
-                                     <label class="form-check-label" for="p29_nunca">1</label>
+                                     <label class="form-check-label" for="p29_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p29" id="p29_aveces" value="2" required>
-                                     <label class="form-check-label" for="p29_aveces">2</label>
+                                     <label class="form-check-label" for="p29_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p29" id="p29_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p29_frecuente">3</label>
+                                     <label class="form-check-label" for="p29_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p29" id="p29_rutina" value="4" required>
-                                     <label class="form-check-label" for="p29_rutina">4</label>
+                                     <label class="form-check-label" for="p29_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -875,19 +875,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p30" id="p30_nunca" value="1" required>
-                                     <label class="form-check-label" for="p30_nunca">1</label>
+                                     <label class="form-check-label" for="p30_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p30" id="p30_aveces" value="2" required>
-                                     <label class="form-check-label" for="p30_aveces">2</label>
+                                     <label class="form-check-label" for="p30_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p30" id="p30_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p30_frecuente">3</label>
+                                     <label class="form-check-label" for="p30_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p30" id="p30_rutina" value="4" required>
-                                     <label class="form-check-label" for="p30_rutina">4</label>
+                                     <label class="form-check-label" for="p30_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -897,19 +897,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p31" id="p31_nunca" value="1" required>
-                                     <label class="form-check-label" for="p31_nunca">1</label>
+                                     <label class="form-check-label" for="p31_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p31" id="p31_aveces" value="2" required>
-                                     <label class="form-check-label" for="p31_aveces">2</label>
+                                     <label class="form-check-label" for="p31_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p31" id="p31_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p31_frecuente">3</label>
+                                     <label class="form-check-label" for="p31_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p31" id="p31_rutina" value="4" required>
-                                     <label class="form-check-label" for="p31_rutina">4</label>
+                                     <label class="form-check-label" for="p31_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -919,19 +919,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p32" id="p32_nunca" value="1" required>
-                                     <label class="form-check-label" for="p32_nunca">1</label>
+                                     <label class="form-check-label" for="p32_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p32" id="p32_aveces" value="2" required>
-                                     <label class="form-check-label" for="p32_aveces">2</label>
+                                     <label class="form-check-label" for="p32_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p32" id="p32_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p32_frecuente">3</label>
+                                     <label class="form-check-label" for="p32_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p32" id="p32_rutina" value="4" required>
-                                     <label class="form-check-label" for="p32_rutina">4</label>
+                                     <label class="form-check-label" for="p32_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -941,19 +941,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p33" id="p33_nunca" value="1" required>
-                                     <label class="form-check-label" for="p33_nunca">1</label>
+                                     <label class="form-check-label" for="p33_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p33" id="p33_aveces" value="2" required>
-                                     <label class="form-check-label" for="p33_aveces">2</label>
+                                     <label class="form-check-label" for="p33_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p33" id="p33_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p33_frecuente">3</label>
+                                     <label class="form-check-label" for="p33_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p33" id="p33_rutina" value="4" required>
-                                     <label class="form-check-label" for="p33_rutina">4</label>
+                                     <label class="form-check-label" for="p33_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -963,19 +963,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p34" id="p34_nunca" value="1" required>
-                                     <label class="form-check-label" for="p34_nunca">1</label>
+                                     <label class="form-check-label" for="p34_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p34" id="p34_aveces" value="2" required>
-                                     <label class="form-check-label" for="p34_aveces">2</label>
+                                     <label class="form-check-label" for="p34_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p34" id="p34_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p34_frecuente">3</label>
+                                     <label class="form-check-label" for="p34_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p34" id="p34_rutina" value="4" required>
-                                     <label class="form-check-label" for="p34_rutina">4</label>
+                                     <label class="form-check-label" for="p34_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -985,19 +985,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p35" id="p35_nunca" value="1" required>
-                                     <label class="form-check-label" for="p35_nunca">1</label>
+                                     <label class="form-check-label" for="p35_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p35" id="p35_aveces" value="2" required>
-                                     <label class="form-check-label" for="p35_aveces">2</label>
+                                     <label class="form-check-label" for="p35_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p35" id="p35_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p35_frecuente">3</label>
+                                     <label class="form-check-label" for="p35_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p35" id="p35_rutina" value="4" required>
-                                     <label class="form-check-label" for="p35_rutina">4</label>
+                                     <label class="form-check-label" for="p35_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1007,19 +1007,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p36" id="p36_nunca" value="1" required>
-                                     <label class="form-check-label" for="p36_nunca">1</label>
+                                     <label class="form-check-label" for="p36_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p36" id="p36_aveces" value="2" required>
-                                     <label class="form-check-label" for="p36_aveces">2</label>
+                                     <label class="form-check-label" for="p36_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p36" id="p36_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p36_frecuente">3</label>
+                                     <label class="form-check-label" for="p36_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p36" id="p36_rutina" value="4" required>
-                                     <label class="form-check-label" for="p36_rutina">4</label>
+                                     <label class="form-check-label" for="p36_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1029,19 +1029,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p37" id="p37_nunca" value="1" required>
-                                     <label class="form-check-label" for="p37_nunca">1</label>
+                                     <label class="form-check-label" for="p37_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p37" id="p37_aveces" value="2" required>
-                                     <label class="form-check-label" for="p37_aveces">2</label>
+                                     <label class="form-check-label" for="p37_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p37" id="p37_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p37_frecuente">3</label>
+                                     <label class="form-check-label" for="p37_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p37" id="p37_rutina" value="4" required>
-                                     <label class="form-check-label" for="p37_rutina">4</label>
+                                     <label class="form-check-label" for="p37_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1051,19 +1051,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p38" id="p38_nunca" value="1" required>
-                                     <label class="form-check-label" for="p38_nunca">1</label>
+                                     <label class="form-check-label" for="p38_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p38" id="p38_aveces" value="2" required>
-                                     <label class="form-check-label" for="p38_aveces">2</label>
+                                     <label class="form-check-label" for="p38_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p38" id="p38_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p38_frecuente">3</label>
+                                     <label class="form-check-label" for="p38_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p38" id="p38_rutina" value="4" required>
-                                     <label class="form-check-label" for="p38_rutina">4</label>
+                                     <label class="form-check-label" for="p38_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1073,19 +1073,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p39" id="p39_nunca" value="1" required>
-                                     <label class="form-check-label" for="p39_nunca">1</label>
+                                     <label class="form-check-label" for="p39_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p39" id="p39_aveces" value="2" required>
-                                     <label class="form-check-label" for="p39_aveces">2</label>
+                                     <label class="form-check-label" for="p39_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p39" id="p39_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p39_frecuente">3</label>
+                                     <label class="form-check-label" for="p39_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p39" id="p39_rutina" value="4" required>
-                                     <label class="form-check-label" for="p39_rutina">4</label>
+                                     <label class="form-check-label" for="p39_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1095,19 +1095,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p40" id="p40_nunca" value="1" required>
-                                     <label class="form-check-label" for="p40_nunca">1</label>
+                                     <label class="form-check-label" for="p40_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p40" id="p40_aveces" value="2" required>
-                                     <label class="form-check-label" for="p40_aveces">2</label>
+                                     <label class="form-check-label" for="p40_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p40" id="p40_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p40_frecuente">3</label>
+                                     <label class="form-check-label" for="p40_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p40" id="p40_rutina" value="4" required>
-                                     <label class="form-check-label" for="p40_rutina">4</label>
+                                     <label class="form-check-label" for="p40_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1117,19 +1117,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p41" id="p41_nunca" value="1" required>
-                                     <label class="form-check-label" for="p41_nunca">1</label>
+                                     <label class="form-check-label" for="p41_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p41" id="p41_aveces" value="2" required>
-                                     <label class="form-check-label" for="p41_aveces">2</label>
+                                     <label class="form-check-label" for="p41_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p41" id="p41_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p41_frecuente">3</label>
+                                     <label class="form-check-label" for="p41_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p41" id="p41_rutina" value="4" required>
-                                     <label class="form-check-label" for="p41_rutina">4</label>
+                                     <label class="form-check-label" for="p41_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1139,19 +1139,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p42" id="p42_nunca" value="1" required>
-                                     <label class="form-check-label" for="p42_nunca">1</label>
+                                     <label class="form-check-label" for="p42_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p42" id="p42_aveces" value="2" required>
-                                     <label class="form-check-label" for="p42_aveces">2</label>
+                                     <label class="form-check-label" for="p42_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p42" id="p42_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p42_frecuente">3</label>
+                                     <label class="form-check-label" for="p42_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p42" id="p42_rutina" value="4" required>
-                                     <label class="form-check-label" for="p42_rutina">4</label>
+                                     <label class="form-check-label" for="p42_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1162,19 +1162,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p43" id="p43_nunca" value="1" required>
-                                     <label class="form-check-label" for="p43_nunca">1</label>
+                                     <label class="form-check-label" for="p43_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p43" id="p43_aveces" value="2" required>
-                                     <label class="form-check-label" for="p43_aveces">2</label>
+                                     <label class="form-check-label" for="p43_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p43" id="p43_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p43_frecuente">3</label>
+                                     <label class="form-check-label" for="p43_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p43" id="p43_rutina" value="4" required>
-                                     <label class="form-check-label" for="p43_rutina">4</label>
+                                     <label class="form-check-label" for="p43_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1184,19 +1184,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p44" id="p44_nunca" value="1" required>
-                                     <label class="form-check-label" for="p44_nunca">1</label>
+                                     <label class="form-check-label" for="p44_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p44" id="p44_aveces" value="2" required>
-                                     <label class="form-check-label" for="p44_aveces">2</label>
+                                     <label class="form-check-label" for="p44_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p44" id="p44_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p44_frecuente">3</label>
+                                     <label class="form-check-label" for="p44_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p44" id="p44_rutina" value="4" required>
-                                     <label class="form-check-label" for="p44_rutina">4</label>
+                                     <label class="form-check-label" for="p44_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1206,19 +1206,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p45" id="p45_nunca" value="1" required>
-                                     <label class="form-check-label" for="p45_nunca">1</label>
+                                     <label class="form-check-label" for="p45_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p45" id="p45_aveces" value="2" required>
-                                     <label class="form-check-label" for="p45_aveces">2</label>
+                                     <label class="form-check-label" for="p45_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p45" id="p45_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p45_frecuente">3</label>
+                                     <label class="form-check-label" for="p45_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p45" id="p45_rutina" value="4" required>
-                                     <label class="form-check-label" for="p45_rutina">4</label>
+                                     <label class="form-check-label" for="p45_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1228,19 +1228,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p46" id="p46_nunca" value="1" required>
-                                     <label class="form-check-label" for="p46_nunca">1</label>
+                                     <label class="form-check-label" for="p46_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p46" id="p46_aveces" value="2" required>
-                                     <label class="form-check-label" for="p46_aveces">2</label>
+                                     <label class="form-check-label" for="p46_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p46" id="p46_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p46_frecuente">3</label>
+                                     <label class="form-check-label" for="p46_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p46" id="p46_rutina" value="4" required>
-                                     <label class="form-check-label" for="p46_rutina">4</label>
+                                     <label class="form-check-label" for="p46_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1251,19 +1251,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p47" id="p47_nunca" value="1" required>
-                                     <label class="form-check-label" for="p47_nunca">1</label>
+                                     <label class="form-check-label" for="p47_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p47" id="p47_aveces" value="2" required>
-                                     <label class="form-check-label" for="p47_aveces">2</label>
+                                     <label class="form-check-label" for="p47_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p47" id="p47_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p47_frecuente">3</label>
+                                     <label class="form-check-label" for="p47_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p47" id="p47_rutina" value="4" required>
-                                     <label class="form-check-label" for="p47_rutina">4</label>
+                                     <label class="form-check-label" for="p47_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
@@ -1273,19 +1273,19 @@ $conn->close();
                             <div>
                                 <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p48" id="p48_nunca" value="1" required>
-                                     <label class="form-check-label" for="p48_nunca">1</label>
+                                     <label class="form-check-label" for="p48_nunca">Nunca</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p48" id="p48_aveces" value="2" required>
-                                     <label class="form-check-label" for="p48_aveces">2</label>
+                                     <label class="form-check-label" for="p48_aveces">A veces</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p48" id="p48_frecuente" value="3" required>
-                                     <label class="form-check-label" for="p48_frecuente">3</label>
+                                     <label class="form-check-label" for="p48_frecuente">Frecuentemente</label>
                                  </div>
                                  <div class="form-check form-check-inline">
                                      <input class="form-check-input colorradio" type="radio" name="p48" id="p48_rutina" value="4" required>
-                                     <label class="form-check-label" for="p48_rutina">4</label>
+                                     <label class="form-check-label" for="p48_rutina">Rutinariamente</label>
                                  </div>
                             </div>
                         </div>
