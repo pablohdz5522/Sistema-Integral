@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+date_default_timezone_set('America/Mexico_City');
 // Registrar hora de salida si hay ingreso
 if (isset($_SESSION['registro_ingreso'])) {
     $registroId = $_SESSION['registro_ingreso'];

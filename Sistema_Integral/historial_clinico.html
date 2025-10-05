@@ -1,925 +1,941 @@
 <!doctype html>
 <html lang="es">
-    <head>
-        <title>Historial Clínico</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
 
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-        <link rel="stylesheet" href="historial_clinico.css">
-        <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap" rel="stylesheet">
-    </head>
+<head>
+    <title>Historial Clínico</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <body style="background: linear-gradient(135deg, #003366,#ADB0B6,#003366);  margin: 0;height: 100%; min-height: 100vh;">
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="historial_clinico.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
 
-        <div class="container mt-3 display: flex">
-            <button class="salir"  title="salir" onclick="window.location.href='menu.php'"   onchange="mostrarFormulario()">
-                <div class="salir-box">
+<body style="background: linear-gradient(135deg, #003366,#ADB0B6,#003366);  margin: 0;height: 100%; min-height: 100vh;">
+
+    <div class="container mt-3 display: flex">
+        <button class="salir" title="salir" onclick="window.location.href='menu.php'" onchange="mostrarFormulario()">
+            <div class="salir-box">
                 <span class="salir-elem">
                     <svg viewBox="0 0 46 40" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
-                    ></path>
+                        <path
+                            d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z">
+                        </path>
                     </svg>
                 </span>
                 <span class="button-elem">
                     <svg viewBox="0 0 46 40">
-                    <path
-                        d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"
-                    ></path>
+                        <path
+                            d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z">
+                        </path>
                     </svg>
                 </span>
-                </div>
-            </button>
-        </div>
-
-        <div class="container">
-            <label for="principio" class="mt-3 col-md-5 text-white">¿A quién va dirigido?</label>
-            <label for="titulo" class="titulo text-white" >HISTORIAL CLÍNICO</label>
-
-            <div class="col-3">
-                <select id="ambos" class="form-select" onchange="mostrarFormulario()">
-                    <option selected disabled>Escoge</option>
-                    <option value="maestros">Maestros</option>
-                    <option value="alumnos">Alumnos</option>
-                </select>
             </div>
-
-            <form action="" id="historialmaestro" style="display: none;" method="post" > 
-                <div class="containerdentro">
-                    <div class="scroll-container">
-                        <label for="empleado" class="label1">No° de Empleado</label>
-                        <input type="number" class="inputs1" id="empleado" name="empleado" style="width: 80px;" required>
-
-                        <label for="fecha" class="label1">Fecha</label>
-                        <input type="date" class="inputs1" name="fecha" id="fecha" style="width: 120px;" required>
-
-                        <label for="nombre" class="label1">Nombre</label>
-                        <input type="text" class="inputs1" id="nombre" name="nombre" style="width: 200px;" readonly>
-
-                        <label for="apellidos" class="label1">Apellidos</label>
-                        <input type="text" class="inputs1" id="apellidos" name="apellidos" style="width: 240px;" readonly>
-                    </div>
-
-                    <div class="scroll-container mt-3" style="justify-content: center;">
-                        
-                        <select id="sexo" class="select1" style="width: 120px;" required>
-                            <option selected disabled>Sexo</option>
-                            <option id="maestros">Masculino</option>
-                            <option id="alumnos">Femenino</option>
-                        </select>
-
-                        <label for="edad" class="label1">Edad</label>
-                        <input type="number" class="inputs1" id="edad" name="edad" style="width: 60px;" required>
-
-                        <select id="facultad" class="select1"  readonly>
-                            <option selected disabled>Facutad</option>
-                            <option id="informacion">Facultad de Ciencias de la Información</option>
-                            <option id="derecho">Facultad de Derecho</option>
-                            <option id="ingenieria">Facultad de Ingeniería</option>
-                            <option id="salud">Facultad de Ciencias de la Salud</option>
-                            <option id="administrativas">Facultad de Economicas Administrativas</option>
-                            <option id="educativas">Facultad de Ciencias Educativas</option>
-                            <option id="naturales">Facultad de Ciencias Naturales y Exactas</option>
-                            <option id="quimica">Facultad de Química</option>
-                            
-                        </select>
-
-                        <label for="correo" class="label1">Correo</label>
-                        <input type="email" class="inputs1" id="Correo" name="Correo" style="width: 250px;" readonly>
-                    </div>
-
-                    <div class="row h-100hv d-flex justify-content-between">
-
-                        <!--PATOLOGIAS DIVIDIDAS-->
-                        <div class="separacion col-md-6 mt-4" style="text-align: center;">
-                            <label for="titulo1" class="titulogrande">Patologías Familiares</label>
-                            <br><br>
-                            <div style="text-align: end;">
-                                <label for="" style="margin-right: 60px;">SI / NO</label>
-                                <label for="" style="margin-right: 25px;">Padre, Madre <br> Abuelos paternos <br> Abuelos Maternos</label>
-                            </div>
-
-                            <div style="text-align: start;" class="mt-5 col-md-4">
-                                <div class="d-flex justify-content-between">
-                                    <label for="sobrepeso" class="patologias" >Sobrepeso-Obesidad</label>
-                                    <div style="margin-left: 49px;">
-                                        <select name="sobrepeso" id="sobrepeso" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-
-                                    <div style="margin-left: 10px;">
-                                        <select name="uno" id="uno" class="select2">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="diabetes" class="patologias" >Diabetes Mellitus</label>
-                                    <div style="margin-left: 70px;">
-                                        <select name="diabetes" id="diabetes" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="dos" id="dos" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="hiper" class="patologias" >Hipertensión Artificial</label>
-                                    <div style="margin-left: 38px;">
-                                        <select name="hiper" id="hiper" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="tres" id="tres" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="trigli" class="patologias" >Triglicéridos Alto</label>
-                                    <div style="margin-left: 73px;">
-                                        <select name="trigli" id="trigli" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="cuatro" id="cuatro" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="colesterol" class="patologias" >Colesterol Alto</label>
-                                    <div style="margin-left: 88px;">
-                                        <select name="colesterol" id="colesterol" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="cinco" id="cinco" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="hepatitis" class="patologias" >Hepatitis</label>
-                                    <div style="margin-left: 122px;">
-                                        <select name="hepatitis" id="hepatitis" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="seis" id="seis" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="higado" class="patologias" >Higado Graso</label>
-                                    <div style="margin-left: 98px;">
-                                        <select name="higado" id="higado" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="siete" id="siete" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="cardiopatias" class="patologias" >Cardiopatias</label>
-                                    <div style="margin-left: 102px;">
-                                        <select name="cardiopatias" id="cardiopatias" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="ocho" id="ocho" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="nefropatias" class="patologias" >Nefropatias</label>
-                                    <div style="margin-left: 105px;">
-                                        <select name="nefropatias" id="nefropatias" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="nueve" id="nueve" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="estreñimiento" class="patologias" >Estreñimiento</label>
-                                    <div style="margin-left: 88px;">
-                                        <select name="estreñimiento" id="estreñimiento" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="diez" id="diez" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="gastritis" class="patologias" >Gastritis</label>
-                                    <div style="margin-left: 127px;">
-                                        <select name="gastritis" id="gastritis" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="once" id="once" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="colitis" class="patologias" >Colitis</label>
-                                    <div style="margin-left: 142px;">
-                                        <select name="colitis" id="colitis" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="doce" id="doce" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="cancer" class="patologias" >Cancer</label>
-                                    <div style="margin-left: 139px;">
-                                        <select name="cancer" id="cancer" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="trece" id="trece" class="select2" style="width: 300px;">
-                                            <option selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="otra" class="patologias" >Otra Enfermedad</label>
-                                    <div style="margin-left: 70px;">
-                                        <select name="otra" id="otra" class="select2">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <input type="text" class="inputs1" placeholder="Indique cual" style="width: 150px;">
-                                    </div>
-                                </div>
-                                <br>
-                                
-                            </div>
-                            
-                        </div>
-
-                       <!-- PATOLOGIAS PERSONALES DIVIDIDAS -->
-                        <div class="col-md-6 mt-4 separacion2" style="text-align: center;">
-                            <label for="titulo2" class="titulogrande">Patologías Personales</label>
-                            <div style="text-align: start;" class="mt-5 col-md-4">
-                                
-                                <!-- Selección de si tiene una enfermedad -->
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="propia" class="patologias">Otra Enfermedad</label>
-                                    <div>
-                                        <select name="propia" id="propia" class="select2" style="width: 250px;">
-                                            <option selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- Contenedor para enfermedades -->
-                                <div id="enfermedadesContainer" style="display: none;">
-                                    <div id="enfermedadesList">
-                                        <div class="enfermedadItem">
-                                            <div class="d-flex mt-4">
-                                                <label for="enfermedad" class="patologias">Enfermedad</label>
-                                                <div>
-                                                    <select name="enfermedad[]" class="select2 enfermedad" style="width: 350px;">
-                                                        <option selected disabled>Seleccione</option>
-                                                        <option value="sobrepeso">Sobrepeso-Obesidad</option>
-                                                        <option value="diabetes">Diabetes Mellitus</option>
-                                                        <option value="hiper">Hipertensión Artificial</option>            
-                                                        <option value="trigli">Triglicéridos Alto</option>             
-                                                        <option value="colesterol">Colesterol Alto</option>             
-                                                        <option value="hepatitis">Hepatitis</option>             
-                                                        <option value="higado">Hígado Graso</option>             
-                                                        <option value="cardiopatias">Cardiopatías</option>             
-                                                        <option value="nefropatias">Nefropatías</option>            
-                                                        <option value="estreñimiento">Estreñimiento</option>             
-                                                        <option value="gastritis">Gastritis</option>             
-                                                        <option value="colitis">Colitis</option>            
-                                                        <option value="cancer">Cáncer</option>     
-                                                        <option value="otraenfermedad">Otra</option>       
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex mt-2">
-                                                <label for="tratamiento" class="patologias">Tratamiento</label>
-                                                <div class="mb-3">
-                                                    <textarea class="cajatexto tratamiento" name="tratamiento[]"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Botón para agregar otra enfermedad -->
-                                    <div style="text-align: center;">
-                                        <button type="button" class="agregar" id="agregarEnfermedad">
-                                            <span class="agregar__text">Agregar Enfermedad</span>
-                                            <span class="agregar__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
-                                          </button>
-                                          <br><br>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    
-                    <div class="d-flex justify-content-center mt-3">
-                        <button class="guardar" title="Guardar datos">
-                            <div class="svg-wrapper-1">
-                            <div class="svg-wrapper">
-                                <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                width="30"
-                                height="30"
-                                class="icon"
-                                >
-                                <path
-                                    d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z"
-                                ></path>
-                                </svg>
-                            </div>
-                            </div>
-                            <span>Guardar</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <form action="guardar_historial_alumnos.php" id="historialalumno" style="display: none;" >
-                <div class="containerdentro">
-                    <div class="scroll-container">
-                        <label for="matricula" class="label1">Matricula</label>
-                        <input type="number" class="inputs1" id="matricula" name="matricula" style="width: 80px;" required>
-
-                        <label for="fecha" class="label1">Fecha</label>
-                        <input type="date" class="inputs1" name="fecha1" id="fecha1" style="width: 120px;" required>
-
-                        <label for="nombre" class="label1">Nombre</label>
-                        <input type="text" class="inputs1" id="nombre1" name="nombre1" style="width: 200px;" readonly>
-
-                        <label for="apellidos" class="label1">Apellidos</label>
-                        <input type="text" class="inputs1" id="apellidos1" name="apellidos1" style="width: 240px;" readonly>
-                    </div>
-
-                    <div class="scroll-container mt-3" style="justify-content: center;">
-                        
-                        <select id="sexo1" class="select1" style="width: 120px;" required>
-                            <option selected disabled>Sexo</option>
-                            <option id= "maestros">Masculino</option>
-                            <option id= "alumnos">Femenino</option>
-                        </select>
-
-                        <label for="edad1" class="label1">Edad</label>
-                        <input type="text" class="inputs1" id="edad1" name="edad1" style="width: 60px;" required readonly>
-
-                        <select id="facultad1" class="select2"  readonly>
-                            <option selected disabled>Facutad</option>
-                            
-                        </select>
-
-                        <select id="carrera1" class="select2"  readonly>
-                            <option selected disabled>Carrera</option>
-                            
-                            
-                        </select>
-
-                        <label for="correo1" class="label1">Correo</label>
-                        <input type="email" class="inputs1" id="correo1" name="correo1" style="width: 250px;" readonly>
-                    </div>
-
-                    <div class="row h-100hv d-flex justify-content-between">
-
-                        <!--PATOLOGIAS DIVIDIDAS-->
-                        <div class="separacion col-md-6 mt-4" style="text-align: center;">
-                            <label for="titulo1" class="titulogrande">Patologías Familiares</label>
-                            <br><br>
-                            <div style="text-align: end;">
-                                <label for="" style="margin-right: 60px;">SI / NO</label>
-                                <label for="" style="margin-right: 25px;">Padre, Madre <br> Abuelos paternos <br> Abuelos Maternos</label>
-                            </div>
-
-                            <div style="text-align: start;" class="mt-5 col-md-4">
-                                <div class="d-flex justify-content-between">
-                                    <label for="sobrepeso" class="patologias " >Sobrepeso-Obesidad</label>
-                                    <div style="margin-left: 49px;">
-                                        <select name="sobrepeso1" id="sobrepeso1" class="select2" required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-
-                                    <div style="margin-left: 10px;">
-                                        <select name="uno1" id="uno1" class="select2 selectParientes" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="diabetes" class="patologias" >Diabetes Mellitus</label>
-                                    <div style="margin-left: 70px;">
-                                        <select name="diabetes1" id="diabetes1" class="select2 " required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="dos1" id="dos1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="hiper" class="patologias" >Hipertensión Artificial</label>
-                                    <div style="margin-left: 38px;">
-                                        <select name="hiper" id="hiper" class="select2 " required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="tres1" id="tres1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="trigli" class="patologias" >Triglicéridos Alto</label>
-                                    <div style="margin-left: 73px;">
-                                        <select name="trigli" id="trigli" class="select2 " required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="cuatro1" id="cuatro1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="colesterol" class="patologias" >Colesterol Alto</label>
-                                    <div style="margin-left: 88px;">
-                                        <select name="colesterol" id="colesterol" class="select2 " required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="cinco1" id="cinco1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="hepatitis" class="patologias" >Hepatitis</label>
-                                    <div style="margin-left: 122px;">
-                                        <select name="hepatitis" id="hepatitis" class="select2 " required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="seis1" id="seis1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="higado" class="patologias" >Higado Graso</label>
-                                    <div style="margin-left: 98px;">
-                                        <select name="higado" id="higado" class="select2 " required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="siete1" id="siete1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="cardiopatias" class="patologias" >Cardiopatias</label>
-                                    <div style="margin-left: 102px;">
-                                        <select name="cardiopatias" id="cardiopatias" class="select2 " required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="ocho1" id="ocho1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="nefropatias" class="patologias" >Nefropatias</label>
-                                    <div style="margin-left: 105px;">
-                                        <select name="nefropatias" id="nefropatias" class="select2 " required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="nueve1" id="nueve1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="estreñimiento" class="patologias" >Estreñimiento</label>
-                                    <div style="margin-left: 88px;">
-                                        <select name="estreñimiento" id="estreñimiento" class="select2 " required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="diez1" id="diez1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="gastritis" class="patologias" >Gastritis</label>
-                                    <div style="margin-left: 127px;">
-                                        <select name="gastritis" id="gastritis" class="select2 " required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="once1" id="once1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="colitis" class="patologias" >Colitis</label>
-                                    <div style="margin-left: 142px;">
-                                        <select name="colitis" id="colitis" class="select2" required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="doce1" id="doce1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="cancer" class="patologias" >Cancer</label>
-                                    <div style="margin-left: 139px;">
-                                        <select name="cancer" id="cancer" class="select2 ">
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <select name="trece1" id="trece1" class="select2 selectParientes" style="width: 300px;" required>
-                                            <option value="" selected disabled>Parientes</option>
-                                            <option value="padre">Padre</option>
-                                            <option value="madre">Madre</option>
-                                            <option value="Abuelos Paternos">Abuelos Paternos</option>
-                                            <option value="Abuelos Maternos">Abuelos Maternos</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="otra" class="patologias" >Otra Enfermedad</label>
-                                    <div style="margin-left: 70px;">
-                                        <select name="otra1" id="otra1" class="select2" required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                    <div style="margin-left: 10px;">
-                                        <input type="text" class="inputs1 selectParientes" placeholder="Indique cual" style="width: 150px;">
-                                    </div>
-                                </div>
-                                <br>
-                                
-                            </div>
-                            
-                        </div>
-
-                       <!-- PATOLOGIAS PERSONALES DIVIDIDAS -->
-                        <div class="col-md-6 mt-4 separacion2" style="text-align: center;">
-                            <label for="titulo2" class="titulogrande">Patologías Personales</label>
-                            <div style="text-align: start;" class="mt-5 col-md-4">
-                                
-                                <!-- Selección de si tiene una enfermedad -->
-                                <div class="mt-3 d-flex justify-content-between">
-                                    <label for="propia1" class="patologias">Otra Enfermedad</label>
-                                    <div>
-                                        <select name="propia1" id="propia1" class="select2" style="width: 250px;" required>
-                                            <option value="" selected disabled>Seleccione</option>
-                                            <option value="Si">Si</option>
-                                            <option value="No">No</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- Contenedor para enfermedades -->
-                                <div id="enfermedadesContainer1" style="display: none;">
-                                    <div id="enfermedadesList1">
-                                        <div class="enfermedadItem1">
-                                            <div class="d-flex mt-4">
-                                                <label for="enfermedad" class="patologias">Enfermedad</label>
-                                                <div>
-                                                    <select name="enfermedad[]" class="select2 enfermedad" style="width: 350px;">
-                                                        <option value="" selected disabled>Seleccione</option>
-                                                        <option value="Sobrepreso-obesidad">Sobrepeso-Obesidad</option>
-                                                        <option value="Diabetes Mellitus">Diabetes Mellitus</option>
-                                                        <option value="Hipertensión Artificial">Hipertensión Artificial</option>            
-                                                        <option value="Triglicéridos Alto">Triglicéridos Alto</option>             
-                                                        <option value="Colesterol Alto">Colesterol Alto</option>             
-                                                        <option value="Hepatitis">Hepatitis</option>             
-                                                        <option value="Higado Graso">Hígado Graso</option>             
-                                                        <option value="Cardiopatias">Cardiopatías</option>             
-                                                        <option value="Nefropatias">Nefropatías</option>            
-                                                        <option value="Estreñimiento">Estreñimiento</option>             
-                                                        <option value="Gastritis">Gastritis</option>             
-                                                        <option value="Colitis">Colitis</option>            
-                                                        <option value="Cancer">Cáncer</option>     
-                                                        <option value="Otra">Otra</option>       
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex mt-2">
-                                                <label for="tratamiento" class="patologias">Tratamiento</label>
-                                                <div class="mb-3">
-                                                    <textarea class="cajatexto tratamiento" name="tratamiento[]"></textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Botón para agregar otra enfermedad -->
-                                    <div style="text-align: center;">
-                                        <button type="button" class="agregar" id="agregarEnfermedad1">
-                                            <span class="agregar__text">Agregar Enfermedad</span>
-                                            <span class="agregar__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg"><line y2="19" y1="5" x2="12" x1="12"></line><line y2="12" y1="12" x2="19" x1="5"></line></svg></span>
-                                          </button>
-                                          <br><br>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    
-                    <div class="d-flex justify-content-center mt-3">
-                        <button class="guardar" title="Guardar datos" onclick="guardarFormulario()">
-                            <div class="svg-wrapper-1">
-                            <div class="svg-wrapper">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" class="icon">
-                                <path
-                                    d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z"
-                                ></path>
-                                </svg>
-                            </div>
-                            </div>
-                            <span>Guardar</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-
+        </button>
+    </div>
+
+    <div class="container">
+        <label for="principio" class="mt-3 col-md-5 text-white">¿A quién va dirigido?</label>
+        <label for="titulo" class="titulo text-white">HISTORIAL CLÍNICO</label>
+
+        <div class="col-3">
+            <select id="ambos" class="form-select" onchange="mostrarFormulario()">
+                <option selected disabled >Escoge</option>
+                <option value="maestros" hidden >Maestros</option>
+                <option value="alumnos">Alumnos</option>
+            </select>
         </div>
-        
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
+        <form action="" id="historialmaestro" style="display: none;" method="post">
+            <div class="containerdentro">
+                <div class="scroll-container">
+                    <label for="empleado" class="label1">No° de Empleado</label>
+                    <input type="number" class="inputs1" id="empleado" name="empleado" style="width: 80px;" required>
 
-        <script>
-            function guardarFormulario() {
+                    <label for="fecha" class="label1">Fecha</label>
+                    <input type="date" class="inputs1" name="fecha" id="fecha" style="width: 120px;" required>
+
+                    <label for="nombre" class="label1">Nombre</label>
+                    <input type="text" class="inputs1" id="nombre" name="nombre" style="width: 200px;" readonly>
+
+                    <label for="apellidos" class="label1">Apellidos</label>
+                    <input type="text" class="inputs1" id="apellidos" name="apellidos" style="width: 240px;" readonly>
+                </div>
+
+                <div class="scroll-container mt-3" style="justify-content: center;">
+
+                    <select id="sexo" class="select1" style="width: 120px;" required>
+                        <option selected disabled>Sexo</option>
+                        <option id="maestros" disabled>Masculino</option>
+                        <option id="alumnos"disabled>Femenino</option>
+                    </select>
+
+                    <label for="edad" class="label1">Edad</label>
+                    <input type="number" class="inputs1" id="edad" name="edad" style="width: 60px;" required>
+
+                    <select id="facultad" class="select1" readonly>
+                        <option selected disabled>Facutad</option>
+                        <option id="informacion">Facultad de Ciencias de la Información</option>
+                        <option id="derecho">Facultad de Derecho</option>
+                        <option id="ingenieria">Facultad de Ingeniería</option>
+                        <option id="salud">Facultad de Ciencias de la Salud</option>
+                        <option id="administrativas">Facultad de Economicas Administrativas</option>
+                        <option id="educativas">Facultad de Ciencias Educativas</option>
+                        <option id="naturales">Facultad de Ciencias Naturales y Exactas</option>
+                        <option id="quimica">Facultad de Química</option>
+
+                    </select>
+
+                    <label for="correo" class="label1">Correo</label>
+                    <input type="email" class="inputs1" id="Correo" name="Correo" style="width: 250px;" readonly>
+                </div>
+
+                <div class="row h-100hv d-flex justify-content-between">
+
+                    <!--PATOLOGIAS DIVIDIDAS-->
+                    <div class="separacion col-md-6 mt-4" style="text-align: center;">
+                        <label for="titulo1" class="titulogrande">Patologías Familiares</label>
+                        <br><br>
+                        <div style="text-align: end;">
+                            <label for="" style="margin-right: 60px;">SI / NO</label>
+                            <label for="" style="margin-right: 25px;">Padre, Madre <br> Abuelos paternos <br> Abuelos
+                                Maternos</label>
+                        </div>
+
+                        <div style="text-align: start;" class="mt-5 col-md-4">
+                            <div class="d-flex justify-content-between">
+                                <label for="sobrepeso" class="patologias">Sobrepeso-Obesidad</label>
+                                <div style="margin-left: 49px;">
+                                    <select name="sobrepeso" id="sobrepeso" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div style="margin-left: 10px;">
+                                    <select name="uno" id="uno" class="select2">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="diabetes" class="patologias">Diabetes Mellitus</label>
+                                <div style="margin-left: 70px;">
+                                    <select name="diabetes" id="diabetes" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="dos" id="dos" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="hiper" class="patologias">Hipertensión Artificial</label>
+                                <div style="margin-left: 38px;">
+                                    <select name="hiper" id="hiper" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="tres" id="tres" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="trigli" class="patologias">Triglicéridos Alto</label>
+                                <div style="margin-left: 73px;">
+                                    <select name="trigli" id="trigli" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="cuatro" id="cuatro" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="colesterol" class="patologias">Colesterol Alto</label>
+                                <div style="margin-left: 88px;">
+                                    <select name="colesterol" id="colesterol" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="cinco" id="cinco" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="hepatitis" class="patologias">Hepatitis</label>
+                                <div style="margin-left: 122px;">
+                                    <select name="hepatitis" id="hepatitis" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="seis" id="seis" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="higado" class="patologias">Higado Graso</label>
+                                <div style="margin-left: 98px;">
+                                    <select name="higado" id="higado" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="siete" id="siete" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="cardiopatias" class="patologias">Cardiopatias</label>
+                                <div style="margin-left: 102px;">
+                                    <select name="cardiopatias" id="cardiopatias" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="ocho" id="ocho" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="nefropatias" class="patologias">Nefropatias</label>
+                                <div style="margin-left: 105px;">
+                                    <select name="nefropatias" id="nefropatias" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="nueve" id="nueve" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="estreñimiento" class="patologias">Estreñimiento</label>
+                                <div style="margin-left: 88px;">
+                                    <select name="estreñimiento" id="estreñimiento" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="diez" id="diez" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="gastritis" class="patologias">Gastritis</label>
+                                <div style="margin-left: 127px;">
+                                    <select name="gastritis" id="gastritis" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="once" id="once" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="colitis" class="patologias">Colitis</label>
+                                <div style="margin-left: 142px;">
+                                    <select name="colitis" id="colitis" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="doce" id="doce" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="cancer" class="patologias">Cancer</label>
+                                <div style="margin-left: 139px;">
+                                    <select name="cancer" id="cancer" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="trece" id="trece" class="select2" style="width: 300px;">
+                                        <option selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="otra" class="patologias">Otra Enfermedad</label>
+                                <div style="margin-left: 70px;">
+                                    <select name="otra" id="otra" class="select2">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <input type="text" class="inputs1" placeholder="Indique cual" style="width: 150px;">
+                                </div>
+                            </div>
+                            <br>
+
+                        </div>
+
+                    </div>
+
+                    <!-- PATOLOGIAS PERSONALES DIVIDIDAS -->
+                    <div class="col-md-6 mt-4 separacion2" style="text-align: center;">
+                        <label for="titulo2" class="titulogrande">Patologías Personales</label>
+                        <div style="text-align: start;" class="mt-5 col-md-4">
+
+                            <!-- Selección de si tiene una enfermedad -->
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="propia" class="patologias">Otra Enfermedad</label>
+                                <div>
+                                    <select name="propia" id="propia" class="select2" style="width: 250px;">
+                                        <option selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Contenedor para enfermedades -->
+                            <div id="enfermedadesContainer" style="display: none;">
+                                <div id="enfermedadesList">
+                                    <div class="enfermedadItem">
+                                        <div class="d-flex mt-4">
+                                            <label for="enfermedad" class="patologias">Enfermedad</label>
+                                            <div>
+                                                <select name="enfermedad[]" class="select2 enfermedad"
+                                                    style="width: 350px;">
+                                                    <option selected disabled>Seleccione</option>
+                                                    <option value="sobrepeso">Sobrepeso-Obesidad</option>
+                                                    <option value="diabetes">Diabetes Mellitus</option>
+                                                    <option value="hiper">Hipertensión Artificial</option>
+                                                    <option value="trigli">Triglicéridos Alto</option>
+                                                    <option value="colesterol">Colesterol Alto</option>
+                                                    <option value="hepatitis">Hepatitis</option>
+                                                    <option value="higado">Hígado Graso</option>
+                                                    <option value="cardiopatias">Cardiopatías</option>
+                                                    <option value="nefropatias">Nefropatías</option>
+                                                    <option value="estreñimiento">Estreñimiento</option>
+                                                    <option value="gastritis">Gastritis</option>
+                                                    <option value="colitis">Colitis</option>
+                                                    <option value="cancer">Cáncer</option>
+                                                    <option value="otraenfermedad">Otra</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex mt-2">
+                                            <label for="tratamiento" class="patologias">Tratamiento</label>
+                                            <div class="mb-3">
+                                                <textarea class="cajatexto tratamiento" name="tratamiento[]"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Botón para agregar otra enfermedad -->
+                                <div style="text-align: center;">
+                                    <button type="button" class="agregar" id="agregarEnfermedad">
+                                        <span class="agregar__text">Agregar Enfermedad</span>
+                                        <span class="agregar__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round"
+                                                stroke-linecap="round" stroke="currentColor" height="24" fill="none"
+                                                class="svg">
+                                                <line y2="19" y1="5" x2="12" x1="12"></line>
+                                                <line y2="12" y1="12" x2="19" x1="5"></line>
+                                            </svg></span>
+                                    </button>
+                                    <br><br>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="d-flex justify-content-center mt-3">
+                    <button class="guardar" title="Guardar datos">
+                        <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30"
+                                    class="icon">
+                                    <path
+                                        d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>Guardar</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <form action="guardar_historial_alumnos.php" id="historialalumno" style="display: none;">
+            <div class="containerdentro">
+                <div class="scroll-container">
+                    <label for="matricula" class="label1">Matricula</label>
+                    <input type="number" class="inputs1" id="matricula" name="matricula" style="width: 80px;" required>
+
+                    <label for="fecha" class="label1">Fecha</label>
+                    <input type="date" class="inputs1" name="fecha1" id="fecha1" style="width: 120px;" required>
+
+                    <label for="nombre" class="label1">Nombre</label>
+                    <input type="text" class="inputs1" id="nombre1" name="nombre1" style="width: 200px;" readonly>
+
+                    <label for="apellidos" class="label1">Apellidos</label>
+                    <input type="text" class="inputs1" id="apellidos1" name="apellidos1" style="width: 240px;" readonly>
+                </div>
+
+                <div class="scroll-container mt-3" style="justify-content: center;">
+
+                    <select id="sexo1" class="select1" style="width: 120px;" readonly>
+                        <option selected disabled>Sexo</option>
+                        <option id="maestros">Masculino</option>
+                        <option id="alumnos">Femenino</option>
+                    </select>
+
+                    <label for="edad1" class="label1">Edad</label>
+                    <input type="text" class="inputs1" id="edad1" name="edad1" style="width: 60px;" required readonly>
+
+                    <select id="facultad1" class="select2" readonly>
+                        <option selected disabled>Facutad</option>
+
+                    </select>
+
+                    <select id="carrera1" class="select2" readonly>
+                        <option selected disabled>Carrera</option>
+
+
+                    </select>
+
+                    <label for="correo1" class="label1">Correo</label>
+                    <input type="email" class="inputs1" id="correo1" name="correo1" style="width: 250px;" readonly>
+                </div>
+
+                <div class="row h-100hv d-flex justify-content-between">
+
+                    <!--PATOLOGIAS DIVIDIDAS-->
+                    <div class="separacion col-md-6 mt-4" style="text-align: center;">
+                        <label for="titulo1" class="titulogrande">Patologías Familiares</label>
+                        <br><br>
+                        <div style="text-align: end;">
+                            <label for="" style="margin-right: 60px;">SI / NO</label>
+                            <label for="" style="margin-right: 25px;">Padre, Madre <br> Abuelos paternos <br> Abuelos
+                                Maternos</label>
+                        </div>
+
+                        <div style="text-align: start;" class="mt-5 col-md-4">
+                            <div class="d-flex justify-content-between">
+                                <label for="sobrepeso" class="patologias ">Sobrepeso-Obesidad</label>
+                                <div style="margin-left: 49px;">
+                                    <select name="sobrepeso1" id="sobrepeso1" class="select2" required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+
+                                <div style="margin-left: 10px;">
+                                    <select name="uno1" id="uno1" class="select2 selectParientes" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="diabetes" class="patologias">Diabetes Mellitus</label>
+                                <div style="margin-left: 70px;">
+                                    <select name="diabetes1" id="diabetes1" class="select2 " required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="dos1" id="dos1" class="select2 selectParientes" style="width: 300px;"
+                                        required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="hiper" class="patologias">Hipertensión Artificial</label>
+                                <div style="margin-left: 38px;">
+                                    <select name="hiper" id="hiper" class="select2 " required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="tres1" id="tres1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="trigli" class="patologias">Triglicéridos Alto</label>
+                                <div style="margin-left: 73px;">
+                                    <select name="trigli" id="trigli" class="select2 " required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="cuatro1" id="cuatro1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="colesterol" class="patologias">Colesterol Alto</label>
+                                <div style="margin-left: 88px;">
+                                    <select name="colesterol" id="colesterol" class="select2 " required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="cinco1" id="cinco1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="hepatitis" class="patologias">Hepatitis</label>
+                                <div style="margin-left: 122px;">
+                                    <select name="hepatitis" id="hepatitis" class="select2 " required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="seis1" id="seis1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="higado" class="patologias">Higado Graso</label>
+                                <div style="margin-left: 98px;">
+                                    <select name="higado" id="higado" class="select2 " required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="siete1" id="siete1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="cardiopatias" class="patologias">Cardiopatias</label>
+                                <div style="margin-left: 102px;">
+                                    <select name="cardiopatias" id="cardiopatias" class="select2 " required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="ocho1" id="ocho1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="nefropatias" class="patologias">Nefropatias</label>
+                                <div style="margin-left: 105px;">
+                                    <select name="nefropatias" id="nefropatias" class="select2 " required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="nueve1" id="nueve1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="estreñimiento" class="patologias">Estreñimiento</label>
+                                <div style="margin-left: 88px;">
+                                    <select name="estreñimiento" id="estreñimiento" class="select2 " required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="diez1" id="diez1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="gastritis" class="patologias">Gastritis</label>
+                                <div style="margin-left: 127px;">
+                                    <select name="gastritis" id="gastritis" class="select2 " required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="once1" id="once1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="colitis" class="patologias">Colitis</label>
+                                <div style="margin-left: 142px;">
+                                    <select name="colitis" id="colitis" class="select2" required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="doce1" id="doce1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="cancer" class="patologias">Cancer</label>
+                                <div style="margin-left: 139px;">
+                                    <select name="cancer" id="cancer" class="select2 ">
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <select name="trece1" id="trece1" class="select2 selectParientes"
+                                        style="width: 300px;" required>
+                                        <option value="" selected disabled>Parientes</option>
+                                        <option value="padre">Padre</option>
+                                        <option value="madre">Madre</option>
+                                        <option value="Abuelos Paternos">Abuelos Paternos</option>
+                                        <option value="Abuelos Maternos">Abuelos Maternos</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="otra" class="patologias">Otra Enfermedad</label>
+                                <div style="margin-left: 70px;">
+                                    <select name="otra1" id="otra1" class="select2" required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                                <div style="margin-left: 10px;">
+                                    <input type="text" class="inputs1 selectParientes" placeholder="Indique cual"
+                                        style="width: 150px;">
+                                </div>
+                            </div>
+                            <br>
+
+                        </div>
+
+                    </div>
+
+                    <!-- PATOLOGIAS PERSONALES DIVIDIDAS -->
+                    <div class="col-md-6 mt-4 separacion2" style="text-align: center;">
+                        <label for="titulo2" class="titulogrande">Patologías Personales</label>
+                        <div style="text-align: start;" class="mt-5 col-md-4">
+
+                            <!-- Selección de si tiene una enfermedad -->
+                            <div class="mt-3 d-flex justify-content-between">
+                                <label for="propia1" class="patologias">Otra Enfermedad</label>
+                                <div>
+                                    <select name="propia1" id="propia1" class="select2" style="width: 250px;" required>
+                                        <option value="" selected disabled>Seleccione</option>
+                                        <option value="Si">Si</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Contenedor para enfermedades -->
+                            <div id="enfermedadesContainer1" style="display: none;">
+                                <div id="enfermedadesList1">
+                                    <div class="enfermedadItem1">
+                                        <div class="d-flex mt-4">
+                                            <label for="enfermedad" class="patologias">Enfermedad</label>
+                                            <div>
+                                                <select name="enfermedad[]" class="select2 enfermedad"
+                                                    style="width: 350px;">
+                                                    <option value="" selected disabled>Seleccione</option>
+                                                    <option value="Sobrepreso-obesidad">Sobrepeso-Obesidad</option>
+                                                    <option value="Diabetes Mellitus">Diabetes Mellitus</option>
+                                                    <option value="Hipertensión Artificial">Hipertensión Artificial
+                                                    </option>
+                                                    <option value="Triglicéridos Alto">Triglicéridos Alto</option>
+                                                    <option value="Colesterol Alto">Colesterol Alto</option>
+                                                    <option value="Hepatitis">Hepatitis</option>
+                                                    <option value="Higado Graso">Hígado Graso</option>
+                                                    <option value="Cardiopatias">Cardiopatías</option>
+                                                    <option value="Nefropatias">Nefropatías</option>
+                                                    <option value="Estreñimiento">Estreñimiento</option>
+                                                    <option value="Gastritis">Gastritis</option>
+                                                    <option value="Colitis">Colitis</option>
+                                                    <option value="Cancer">Cáncer</option>
+                                                    <option value="Otra">Otra</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex mt-2">
+                                            <label for="tratamiento" class="patologias">Tratamiento</label>
+                                            <div class="mb-3">
+                                                <textarea class="cajatexto tratamiento" name="tratamiento[]"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Botón para agregar otra enfermedad -->
+                                <div style="text-align: center;">
+                                    <button type="button" class="agregar" id="agregarEnfermedad1">
+                                        <span class="agregar__text">Agregar Enfermedad</span>
+                                        <span class="agregar__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round"
+                                                stroke-linecap="round" stroke="currentColor" height="24" fill="none"
+                                                class="svg">
+                                                <line y2="19" y1="5" x2="12" x1="12"></line>
+                                                <line y2="12" y1="12" x2="19" x1="5"></line>
+                                            </svg></span>
+                                    </button>
+                                    <br><br>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="d-flex justify-content-center mt-3">
+                    <button class="guardar" title="Guardar datos" onclick="guardarFormulario()">
+                        <div class="svg-wrapper-1">
+                            <div class="svg-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30"
+                                    class="icon">
+                                    <path
+                                        d="M22,15.04C22,17.23 20.24,19 18.07,19H5.93C3.76,19 2,17.23 2,15.04C2,13.07 3.43,11.44 5.31,11.14C5.28,11 5.27,10.86 5.27,10.71C5.27,9.33 6.38,8.2 7.76,8.2C8.37,8.2 8.94,8.43 9.37,8.8C10.14,7.05 11.13,5.44 13.91,5.44C17.28,5.44 18.87,8.06 18.87,10.83C18.87,10.94 18.87,11.06 18.86,11.17C20.65,11.54 22,13.13 22,15.04Z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                        <span>Guardar</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function guardarFormulario() {
             const form = document.getElementById("historialalumno");
 
             if (form.checkValidity()) {
@@ -937,21 +953,21 @@
                 method: "POST",
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert("Historial guardado correctamente.");
-                    form.reset(); // Limpia el formulario después de guardar
-                } else {
-                    alert("Error al guardar los datos: " + data.error);
-                }
-            });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Historial guardado correctamente.");
+                        form.reset(); // Limpia el formulario después de guardar
+                    } else {
+                        alert("Error al guardar los datos: " + data.error);
+                    }
+                });
         }
-        </script>
+    </script>
 
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
             // Evitar el envío del formulario cuando se presiona "Enter"
             document.getElementById("historialalumno").addEventListener("submit", function (event) {
                 event.preventDefault();
@@ -994,131 +1010,132 @@
                     console.error("Error en la solicitud:", error);
                 });
         }
-        </script>
+    </script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                const selectPropia = document.getElementById("propia1");
-                const enfermedadesContainer1 = document.getElementById("enfermedadesContainer1");
-                const enfermedadesList1 = document.getElementById("enfermedadesList1");
-                const agregarEnfermedadBtn1 = document.getElementById("agregarEnfermedad1");
-            
-                // Mostrar u ocultar el formulario según la respuesta
-                selectPropia.addEventListener("change", function() {
-                    if (this.value === "Si") {
-                        enfermedadesContainer1.style.display = "block";
-                    } else {
-                        enfermedadesContainer1.style.display = "none";
-                    }
-                });
-            
-                // Clonar un nuevo campo de enfermedad
-                agregarEnfermedadBtn1.addEventListener("click", function() {
-                    let enfermedadItem1 = document.querySelector(".enfermedadItem1").cloneNode(true);
-                    enfermedadItem1.style.display = "block"; // Para que se vea bien
-                    enfermedadItem1.removeAttribute("id"); // Evitar duplicados de ID
-                    
-                    // Crear botón de eliminar
-                    let eliminarBtn1 = document.createElement("button");
-                    eliminarBtn1.textContent = "Eliminar";
-                    eliminarBtn1.classList.add("eliminarEnfermedad", "btn", "btn-danger", "mb-4"); // Se agrega margen arriba
-                    
-                    // Contenedor para salto de línea
-                    let divBoton1 = document.createElement("div");
-                    divBoton1.appendChild(eliminarBtn1); // Se envuelve el botón en un div para que baje
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const selectPropia = document.getElementById("propia1");
+            const enfermedadesContainer1 = document.getElementById("enfermedadesContainer1");
+            const enfermedadesList1 = document.getElementById("enfermedadesList1");
+            const agregarEnfermedadBtn1 = document.getElementById("agregarEnfermedad1");
 
-                    // Agregar evento para eliminar el elemento
-                    eliminarBtn1.addEventListener("click", function() {
-                        enfermedadItem1.remove();
-                    });
-
-                    enfermedadItem1.appendChild(divBoton1); // Agregar el div con el botón al div de enfermedad
-                    enfermedadesList1.appendChild(enfermedadItem1);
-                });
-            });
-        </script>
-
-
-            <script>
-                function mostrarFormulario() {
-                    var tipoUsuario = document.getElementById("ambos").value;
-                
-                    document.getElementById("historialmaestro").style.display = "none";
-                    document.getElementById("historialalumno").style.display = "none";
-                
-                    if (tipoUsuario === "maestros") {
-                        document.getElementById("historialmaestro").style.display = "block";
-                    } else if (tipoUsuario === "alumnos") {
-                        document.getElementById("historialalumno").style.display = "block";
-                    }
+            // Mostrar u ocultar el formulario según la respuesta
+            selectPropia.addEventListener("change", function () {
+                if (this.value === "Si") {
+                    enfermedadesContainer1.style.display = "block";
+                } else {
+                    enfermedadesContainer1.style.display = "none";
                 }
-            </script>
+            });
 
-        
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                // Iniciar todos los selects de parientes habilitados, con valor "ninguno"
-                document.querySelectorAll(".selectParientes").forEach(function (select) {
-                    select.setAttribute("disabled", "true"); // Deshabilitado inicialmente
-                    select.value = ""; // Asegurar que no haya valor seleccionado inicialmente
+            // Clonar un nuevo campo de enfermedad
+            agregarEnfermedadBtn1.addEventListener("click", function () {
+                let enfermedadItem1 = document.querySelector(".enfermedadItem1").cloneNode(true);
+                enfermedadItem1.style.display = "block"; // Para que se vea bien
+                enfermedadItem1.removeAttribute("id"); // Evitar duplicados de ID
+
+                // Crear botón de eliminar
+                let eliminarBtn1 = document.createElement("button");
+                eliminarBtn1.textContent = "Eliminar";
+                eliminarBtn1.classList.add("eliminarEnfermedad", "btn", "btn-danger", "mb-4"); // Se agrega margen arriba
+
+                // Contenedor para salto de línea
+                let divBoton1 = document.createElement("div");
+                divBoton1.appendChild(eliminarBtn1); // Se envuelve el botón en un div para que baje
+
+                // Agregar evento para eliminar el elemento
+                eliminarBtn1.addEventListener("click", function () {
+                    enfermedadItem1.remove();
                 });
-            
-                // Detectar cambios en los selects de patologías (Sí/No)
-                document.querySelectorAll(".select2").forEach(function (select) {
-                    select.addEventListener("change", function () {
-                        let parientesSelect = this.closest(".d-flex").querySelector(".selectParientes");
-            
-                        if (this.value === "Si") {
-                            parientesSelect.removeAttribute("disabled"); // Habilitar el select de parientes
-                            parientesSelect.setAttribute("required", "true"); // Obligatorio si elige "Sí"
-                        } else if (this.value === "No") {
-                            parientesSelect.setAttribute("disabled", "true"); // Deshabilitar el select de parientes
-                            parientesSelect.removeAttribute("required"); // No obligatorio si elige "No"
-                            parientesSelect.value = "ninguno"; // Se guarda "ninguno"
-                        }
-                    });
-                });
-            
-                // Para el campo "Otra Enfermedad"
-                let otraSelect = document.getElementById("otra2");
-                let otraInput = document.getElementById("otra1");
-            
-                otraSelect.addEventListener("change", function () {
+
+                enfermedadItem1.appendChild(divBoton1); // Agregar el div con el botón al div de enfermedad
+                enfermedadesList1.appendChild(enfermedadItem1);
+            });
+        });
+    </script>
+
+
+    <script>
+        function mostrarFormulario() {
+            var tipoUsuario = document.getElementById("ambos").value;
+
+            document.getElementById("historialmaestro").style.display = "none";
+            document.getElementById("historialalumno").style.display = "none";
+
+            if (tipoUsuario === "maestros") {
+                document.getElementById("historialmaestro").style.display = "block";
+            } else if (tipoUsuario === "alumnos") {
+                document.getElementById("historialalumno").style.display = "block";
+            }
+        }
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Iniciar todos los selects de parientes habilitados, con valor "ninguno"
+            document.querySelectorAll(".selectParientes").forEach(function (select) {
+                select.setAttribute("disabled", "true"); // Deshabilitado inicialmente
+                select.value = ""; // Asegurar que no haya valor seleccionado inicialmente
+            });
+
+            // Detectar cambios en los selects de patologías (Sí/No)
+            document.querySelectorAll(".select2").forEach(function (select) {
+                select.addEventListener("change", function () {
+                    let parientesSelect = this.closest(".d-flex").querySelector(".selectParientes");
+
                     if (this.value === "Si") {
-                        otraInput.removeAttribute("disabled");
-                    } else {
-                        otraInput.setAttribute("disabled", "true");
-                        otraInput.value = ""; // Se limpia si se elige "No"
-                    }
-                });
-            
-                // Validación antes de enviar el formulario
-                const formulario = document.getElementById("historialalumno");
-                formulario.addEventListener("submit", function (event) {
-                    let formValid = true;
-
-                    // Verificar si los selects requeridos tienen un valor válido
-                    document.querySelectorAll(".select2").forEach(function (select) {
-                        if (select.value === "" || select.value === null) {
-                            formValid = false;
-                        }
-                    });
-
-                    document.querySelectorAll(".selectParientes").forEach(function (select) {
-                        if (select.hasAttribute("required") && (select.value === "" || select.value === null)) {
-                            formValid = false;
-                        }
-                    });
-
-                    // Si el formulario no es válido, prevenimos el envío
-                    if (!formValid) {
-                        event.preventDefault(); // Previene el envío
-                        alert("Por favor complete todos los campos requeridos.");
+                        parientesSelect.removeAttribute("disabled"); // Habilitar el select de parientes
+                        parientesSelect.setAttribute("required", "true"); // Obligatorio si elige "Sí"
+                    } else if (this.value === "No") {
+                        parientesSelect.setAttribute("disabled", "true"); // Deshabilitar el select de parientes
+                        parientesSelect.removeAttribute("required"); // No obligatorio si elige "No"
+                        parientesSelect.value = "ninguno"; // Se guarda "ninguno"
                     }
                 });
             });
-        </script>
 
-        
-    </body>
+            // Para el campo "Otra Enfermedad"
+            let otraSelect = document.getElementById("otra2");
+            let otraInput = document.getElementById("otra1");
+
+            otraSelect.addEventListener("change", function () {
+                if (this.value === "Si") {
+                    otraInput.removeAttribute("disabled");
+                } else {
+                    otraInput.setAttribute("disabled", "true");
+                    otraInput.value = ""; // Se limpia si se elige "No"
+                }
+            });
+
+            // Validación antes de enviar el formulario
+            const formulario = document.getElementById("historialalumno");
+            formulario.addEventListener("submit", function (event) {
+                let formValid = true;
+
+                // Verificar si los selects requeridos tienen un valor válido
+                document.querySelectorAll(".select2").forEach(function (select) {
+                    if (select.value === "" || select.value === null) {
+                        formValid = false;
+                    }
+                });
+
+                document.querySelectorAll(".selectParientes").forEach(function (select) {
+                    if (select.hasAttribute("required") && (select.value === "" || select.value === null)) {
+                        formValid = false;
+                    }
+                });
+
+                // Si el formulario no es válido, prevenimos el envío
+                if (!formValid) {
+                    event.preventDefault(); // Previene el envío
+                    alert("Por favor complete todos los campos requeridos.");
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
 </html>

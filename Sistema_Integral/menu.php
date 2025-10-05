@@ -6,7 +6,7 @@ if (!isset($_SESSION['usuario'])) {
     header('Location: login.php');
     exit();
 }
-
+date_default_timezone_set('America/Mexico_City');
 $conn = new mysqli("localhost", "root", "", "pisi");
 
 // Obtener cantidad de alumnos
@@ -40,7 +40,7 @@ $_SESSION['rol'] = $rol;
 // Si no existe foto, usar default
 $foto_base64 = $foto ? base64_encode($foto) : base64_encode(file_get_contents("images/escudo_UNACAR.png"));
 
-// 🔥 Solo registrar ingreso si aún no lo hemos registrado
+// 🔥 Solo registrar ingreso si aún no lo hemos registrado 
 if (!isset($_SESSION['registro_ingreso'])) {
     $fechaIngreso = date('Y-m-d H:i:s');
 
