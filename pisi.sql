@@ -15,9 +15,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Volcando estructura de base de datos para pisi
-CREATE DATABASE IF NOT EXISTS `pisi` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `pisi`;
+
 
 -- Volcando estructura para tabla pisi.administradores
 CREATE TABLE IF NOT EXISTS `administradores` (
