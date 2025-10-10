@@ -5,7 +5,7 @@ date_default_timezone_set('America/Mexico_City');
 if (isset($_SESSION['registro_ingreso'])) {
     $registroId = $_SESSION['registro_ingreso'];
 
-    $conn = new mysqli("localhost", "root", "", "pisi");
+    $conn = new mysqli("pdb1042.awardspace.net", "4528622_pisi", "sklike5522", "4528622_pisi");
 
     if (!$conn->connect_errno) {
         $fechaSalida = date('Y-m-d H:i:s');

@@ -15,10 +15,10 @@ $alumno = $_SESSION['alumno'];
 $matricula = $alumno['matricula'];
 
 // Conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "pisi";
+$servername = "pdb1042.awardspace.net";
+$username = "4528622_pisi";
+$password = "sklike5522";
+$database = "4528622_pisi";
 
 $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
@@ -209,6 +209,7 @@ $conn->close();
             crossorigin="anonymous"
         />
         <link href="PEPS-1.css" rel="stylesheet"/> 
+        <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
     </head> 
 
     <body style="background: linear-gradient(278deg, rgba(23, 19, 235, 0.50) 13.7%, rgba(255, 255, 255, 0.25) 13.7%), linear-gradient(263deg, rgba(71, 15, 255, 0.00) 87.02%, rgba(71, 15, 255, 0.50) 87.03%), linear-gradient(277deg, rgba(255, 242, 0, 0.00) 89.31%, #FFF600 89.63%), linear-gradient(87deg, #FFF 88.1%, #FDEE18 88.48%); margin: 0;height: 100%; min-height: 100vh;">

@@ -8,7 +8,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] != 'Administrador') {
 }
 
 // Conexión a base de datos
-$conn = new mysqli("localhost", "root", "", "pisi");
+ $conn = new mysqli("pdb1042.awardspace.net", "4528622_pisi", "sklike5522", "4528622_pisi");
 
 if ($conn->connect_errno) {
     die("Error de conexión: " . $conn->connect_error);
@@ -26,6 +26,7 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Control - Accesos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
 </head>
 <body style="background: linear-gradient(135deg, #003366,#ADB0B6,#003366);  margin: 0;height: 100%; min-height: 100vh;">
 <div class="container mt-5">

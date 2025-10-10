@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 date_default_timezone_set('America/Mexico_City');
-$conn = new mysqli("localhost", "root", "", "pisi");
+$conn = new mysqli("pdb1042.awardspace.net", "4528622_pisi", "sklike5522", "4528622_pisi");
 
 // Obtener cantidad de alumnos
 $sqlAlumnos = "SELECT COUNT(*) FROM alumnos";
@@ -70,6 +70,7 @@ $conn->close();
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
   <style>
 
   </style>
@@ -195,7 +196,7 @@ $conn->close();
         // Cerrar Sesión
         document.getElementById("cerrarSesion").addEventListener("click", function() {
             sessionStorage.clear(); // Borra datos de sesión
-            window.location.href = "login.html"; // Redirige al login
+            window.location.href = "login.php"; // Redirige al login
         });
     });
     </script>

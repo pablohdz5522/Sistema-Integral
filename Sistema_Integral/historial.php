@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "pisi");
+ $conn = new mysqli("pdb1042.awardspace.net", "4528622_pisi", "sklike5522", "4528622_pisi");
 
 if (isset($_GET['matricula_alum'])) {
     $matricula = $_GET['matricula_alum'];

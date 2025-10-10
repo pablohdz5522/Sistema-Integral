@@ -10,10 +10,10 @@ $alumno = $_SESSION['alumno'];
 $nombreCompleto = htmlspecialchars($alumno['nombre']. ' ' . $alumno['apepa'].' '. $alumno['apema']);
 
 // Conexión a la base de datos
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "pisi";
+$servername = "pdb1042.awardspace.net";
+$username = "4528622_pisi";
+$password = "sklike5522";
+$database = "4528622_pisi";
 $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
@@ -64,6 +64,7 @@ $conn->close();
     <meta charset="UTF-8">
     <title>Menú del Alumno</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
     <style>
         .formulario-rect {
             border: 4px solid #333;

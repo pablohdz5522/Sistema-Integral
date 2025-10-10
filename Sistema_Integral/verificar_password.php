@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario'])) {
 $usuario = $_SESSION['usuario'];
 $inputPassword = $_POST['password'] ?? '';
 
-$conn = new mysqli("localhost", "root", "", "pisi");
+ $conn = new mysqli("pdb1042.awardspace.net", "4528622_pisi", "sklike5522", "4528622_pisi");
 
 if ($conn->connect_errno) {
     echo json_encode(['success' => false, 'mensaje' => 'Error de conexión']);

@@ -12,10 +12,10 @@ if (!isset($_SESSION['alumno']) || !isset($_SESSION['alumno']['matricula'])) {
 $alumno = $_SESSION['alumno'];
 $matricula = $alumno['matricula'];
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "pisi";
+$servername = "pdb1042.awardspace.net";
+$username = "4528622_pisi";
+$password = "sklike5522";
+$database = "4528622_pisi";
 
 $conn = new mysqli($servername, $username, $password, $database);
 if ($conn->connect_error) {
@@ -139,6 +139,7 @@ $conn->close();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link href="PEPS-1.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
 </head>
 
 <body
@@ -497,7 +498,7 @@ $conn->close();
                         <div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input colorradio" type="radio" name="p13" id="p13_nunca"
-                                    value="" required>
+                                    value="0" required>
                                 <label class="form-check-label" for="p13_nunca">No me ha ocurrido</label>
                             </div>
                             <div class="form-check form-check-inline">

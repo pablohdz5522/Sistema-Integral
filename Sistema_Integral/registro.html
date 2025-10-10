@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
 </head>
 
 <body
@@ -197,33 +198,6 @@
         });
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Calcular edad automáticamente
-            document.getElementById("fecha").addEventListener("change", function () {
-                let fechaNacimiento = new Date(this.value);
-                let hoy = new Date();
-                let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-                let mes = hoy.getMonth() - fechaNacimiento.getMonth();
-
-                if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
-                    edad--;
-                }
-
-                document.getElementById("edad").value = edad;
-            });
-
-            // Generar correo institucional basado en matrícula
-            document.getElementById("matricula").addEventListener("input", function () {
-                let matricula = this.value;
-                if (matricula.length === 6) {
-                    document.getElementById("correo").value = matricula + "@mail.unacar.mx";
-                } else {
-                    document.getElementById("correo").value = ""; // Borra el correo si la matrícula no tiene 6 dígitos
-                }
-            });
-        });
-    </script>
 
     <script>
         document.getElementById("enviar").addEventListener("click", function (event) {
@@ -258,7 +232,33 @@
 
     <script>
         $(document).ready(function () {
-            // Instanciar ambos modales
+            // --- Lógica de la interfaz (unificada aquí) ---
+
+            // Calcular edad automáticamente
+            $("#fecha").on("change", function () {
+                let fechaNacimiento = new Date(this.value);
+                let hoy = new Date();
+                let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+                let mes = hoy.getMonth() - fechaNacimiento.getMonth();
+
+                if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                    edad--;
+                }
+                $("#edad").val(edad);
+            });
+
+            // CORRECCIÓN: Usar jQuery para escuchar el evento 'input'
+            $("#matricula").on("input", function () {
+                let matricula = $(this).val();
+                if (matricula.length === 6) {
+                    $("#correo").val(matricula + "@mail.unacar.mx");
+                } else {
+                    $("#correo").val("");
+                }
+            });
+
+            // --- Lógica de los modales y AJAX ---
+
             const modalConsentimiento = new bootstrap.Modal(document.getElementById('modalConsentimiento'), {
                 backdrop: 'static',
                 keyboard: false
@@ -268,29 +268,21 @@
                 keyboard: false
             });
 
-            // Mostrar el primer modal (consentimiento) al cargar la página
             modalConsentimiento.show();
 
-            // Manejar el clic en el botón "Sí, continuar"
             $('#btnSiConsentimiento').click(function () {
                 modalConsentimiento.hide();
-                modalMatricula.show(); // Mostrar el siguiente modal
+                modalMatricula.show();
             });
             
-            // Manejar el clic en el botón "No, gracias"
             $('#btnNoConsentimiento').click(function () {
-                // Cambiar el contenido del modal y deshabilitar botones
                 $('#modalConsentimiento .modal-body').html('<p>Gracias por tu tiempo.</p>');
                 $('#btnSiConsentimiento, #btnNoConsentimiento').prop('disabled', true);
-
-                // Redirigir a la página de despedida después de un momento
                 setTimeout(function() {
                     window.location.href = 'despedida.html';
-                }, 1500); // Espera 1.5 segundos para que el usuario lea el mensaje
+                }, 1500);
             });
 
-
-            // Lógica original del modal de matrícula
             $('#verificarMatricula').click(function () {
                 const matricula = $('#matriculaInput').val().trim().toUpperCase();
                 if (!matricula) {
@@ -305,14 +297,14 @@
                     dataType: 'json',
                     success: function (response) {
                         if (response.success) {
-                            // Redirigir a menuAlumno.php si la matrícula existe
                             window.location.href = response.redirect;
                         } else {
-                            // Ocultar el modal y rellenar el campo de matrícula
                             modalMatricula.hide();
                             $('#matriculaError').hide();
                             $('#matricula').val(matricula);
-                            $('#matricula').trigger('input'); // Dispara el evento input para generar el correo
+                            
+                            // Esta línea ahora funcionará correctamente
+                            $('#matricula').trigger('input'); 
                         }
                     },
                     error: function (xhr) {
@@ -320,6 +312,35 @@
                     }
                 });
             });
+        });
+
+        // Lógica del botón de guardar (se queda igual)
+        document.getElementById("enviar").addEventListener("click", function (event) {
+            event.preventDefault(); 
+            let edadInput = document.getElementById("edad");
+            let correoInput = document.getElementById("correo");
+
+            edadInput.removeAttribute("disabled");
+            correoInput.removeAttribute("disabled");
+
+            let form = document.querySelector("form");
+            let formData = new FormData(form);
+
+            fetch("registro.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = data.redirect;
+                } else if (data.error) {
+                    alert(data.error);
+                } else {
+                    alert("Ocurrió un error inesperado.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
         });
     </script>
 
