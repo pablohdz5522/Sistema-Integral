@@ -209,7 +209,6 @@ $conn->close();
             crossorigin="anonymous"
         />
         <link href="PEPS-1.css" rel="stylesheet"/> 
-        <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
     </head> 
 
     <body style="background: linear-gradient(278deg, rgba(23, 19, 235, 0.50) 13.7%, rgba(255, 255, 255, 0.25) 13.7%), linear-gradient(263deg, rgba(71, 15, 255, 0.00) 87.02%, rgba(71, 15, 255, 0.50) 87.03%), linear-gradient(277deg, rgba(255, 242, 0, 0.00) 89.31%, #FFF600 89.63%), linear-gradient(87deg, #FFF 88.1%, #FDEE18 88.48%); margin: 0;height: 100%; min-height: 100vh;">
@@ -231,7 +230,7 @@ $conn->close();
                     <form action="PEPS-1.php" method="post" style="display: block;" id="formulario">
                         <input type="hidden" name="matricula" id="matriculaOculta">
 
-                        <div class="mt-5">
+                        <div class="mt-5 cuadro">
                             <label for="p1" class="form-label">1. Tomas algún alimento al levantarte por las mañanas</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -254,7 +253,7 @@ $conn->close();
                         </div>
                         
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p2" class="form-label">2. Relatas al médico cualquier síntoma extraño relacionado con tu salud</label>
                             <div>
                                <div class="form-check form-check-inline">
@@ -276,7 +275,7 @@ $conn->close();
                             </div> 
                         </div>
                         
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p3" class="form-label">3. Te quieres a ti misma(o) </label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -298,7 +297,7 @@ $conn->close();
                             </div> 
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p4" class="form-label">4. Realizas ejercicios para relajar tus músculos al menos 3 veces por día o por semana </label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -320,7 +319,7 @@ $conn->close();
                             </div> 
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p5" class="form-label">5. seleccionas comidas que no contienen ingredientes artificiales o químicos para conservarlos (sustancias que te eleven tu presión arterial) </label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -342,7 +341,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">6. Tomas tiempo cada dia para el relajamiento</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -364,7 +363,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">7. Conoces el nivel de colesterol en tu sangre</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -386,7 +385,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">8. Eres entusiasta y optimista con referencia a tu vida</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -408,7 +407,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">9. Crees que estás creciendo y cambiando personalmente en direcciones positivas</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -430,7 +429,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">10. Discutes con personas cercanas tus preocupaciones y problemas personasles</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -452,7 +451,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">11. Eres consciente de las fuentes que producen tensión (Comúnmente nervios) en tu vida</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -474,7 +473,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">12. Te sientes feliz y contento(a)</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -496,7 +495,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">13. Realizas ejercicio vigoroso por 20 o 30 minutos al menos tres veces a la semana</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -518,7 +517,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">14. Comes tres comidas al día</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -540,7 +539,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">15. Lees revistas o folletos sobre como cuidar tu salud</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -562,7 +561,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">16. Eres consciente de tus capacidades y debilidades personales</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -584,7 +583,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">17. Trabajas en apoyo de metas a largo plazo en tu vida</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -606,7 +605,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">18. Elogias fácilmente a otras personas por sus éxitos</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -628,7 +627,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">19. Lees las etiquetas de las comidas empaquetadas para identificar nutrientes (artificiales y/o naturales, colesterol, 
                                 sodio o sal, conservadores)</label>
                             <div>
@@ -651,7 +650,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">20. Le preguntas a otro médico o buscas otra opción cuando no estas de acuerdo con lo que el tuyo te recomienda para cuidar tu salud</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -673,7 +672,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">21. Miras hacia el futuro</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -695,7 +694,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">22. Participas en programas o actividades de ejercicio físico bajo supervisión</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -717,7 +716,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">23. Eres consciente de lo que te importa en la vida</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -739,7 +738,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">24. Te gusta expresar y que te expresen cariño personas cercanas a ti</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -761,7 +760,7 @@ $conn->close();
                             </div>
                         </div>
                         
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">25. Mantienes relaciones interpersonales que te dan satisfacción</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -783,7 +782,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">26. Incluyes en tu dieta alimentos que contienen fibra (ejemplo: granos enteros, frutas crudas, verduras crudas)</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -805,7 +804,7 @@ $conn->close();
                             </div>
                         </div>
                     
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">27. Pasas de 15 a 20 minutos diariamente en relajamiento o meditación</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -827,7 +826,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">28. Discutes con profesionales calificados tus inquietudes respecto al cuidado de tu salud</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -849,7 +848,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">29. Respetas tus propios éxitos</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -871,7 +870,7 @@ $conn->close();
                             </div>
                         </div>
                        
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">30. Checas tu pulso durante el ejercicio físico</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -893,7 +892,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">31. Pasas tiempo con amigos cercanos</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -915,7 +914,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">32. Haces medir tu presión arterial y sabes el resultado</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -937,7 +936,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">33. Asistes a programas educativos sobre el mejoramiento del medio ambiente en que vives</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -959,7 +958,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">34. Ves cada día como interesante y desafiante</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -981,7 +980,7 @@ $conn->close();
                             </div>
                         </div>
                         
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">35. Planeas o escoges comidas que incluyan los cuatro grupos básicos de nutrientes cada día (Proteínas, carbohidratos, grasas y vitaminas)</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1003,7 +1002,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">36. Relajas conscientemente tus musculos antes de dormir</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1025,7 +1024,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">37. Encuentras agradable y satisfecho el ambiente de tu vida</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1047,7 +1046,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">38. Realizas actividades físicas de recreo como caminar, nadar, jugar futbol, ciclisco</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1069,7 +1068,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">39. Expresas fácilmente interés, amor y calor humano hacia otros</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1091,7 +1090,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">40. Te concentras en pensamientos agradables a la hora de dormir</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1113,7 +1112,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">41. Pides información a los profesionales para cuidar de tu salud</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1135,7 +1134,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">42. Encuentras maneras positivas para expresar tus sentimientos</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1158,7 +1157,7 @@ $conn->close();
                         </div>
 
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">43. Observas al menos cada mes tu cuerpo para ver cambios físicos o señas de peligro</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1180,7 +1179,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">44. Eres realista en las metas que te propones</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1202,7 +1201,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">45. Usas métodos específicos para controlar la tensión (nervios)</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1224,7 +1223,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">46. Asistes a programas educativos sobre el cuidado de la salud personal</label>
                             <div>
                                 <div class="form-check form-check-inline">
@@ -1246,7 +1245,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3">
+                        <div class="mt-3 cuadro">
                             <label for="p6" class="form-label">47. Te gusta mostrar y que te muestren afecto con palmadas, abrazos y caricias, por personas que te importan 
                                 (papás, familiares, profesores y amigos)</label>
                             <div>
@@ -1269,7 +1268,7 @@ $conn->close();
                             </div>
                         </div>
 
-                        <div class="mt-3" style="margin-bottom: 20px;">
+                        <div class="mt-3 cuadro" style="margin-bottom: 20px;">
                             <label for="p6" class="form-label">48. Crees que tu vida tiene un propósito</label>
                             <div>
                                 <div class="form-check form-check-inline">

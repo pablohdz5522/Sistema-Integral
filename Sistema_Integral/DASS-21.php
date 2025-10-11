@@ -139,7 +139,6 @@ $conn->close();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link href="PEPS-1.css" rel="stylesheet" />
-    <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
 </head>
 
 <body
@@ -159,24 +158,10 @@ $conn->close();
                         boton.</p>
                 </div>
 
-                <!--<button type="button" class="btn btn-secondary"
-                        data-bs-toggle="tooltip" 
-                        data-bs-placement="right"
-                        data-bs-html="true"
-                        title=" 0 = No me ha ocurrido. <br>
-                                1 = Me ha ocurrido un poco, o durante parte del tiempo. <br>
-                                2 = Me ha ocurrido bastante, o durante una buena parte del tiempo. <br>
-                                3 = Me ha ocurrido mucho, o la mayor parte del tiempo.">
-                                Escala de Calificacion
-                    </button>-->
                 <br>
                 <form action="DASS-21.php" method="post" style="display: block;" id="formulario">
-                    <!-- <div class="form-floating mt-5">
-                            <input type="number" class="form-control mati" id="matricula" name="matricula" placeholder="Matricula" required>
-                            <label for="matricula">Matricula</label>
-                        </div>              -->
 
-                    <div class="mt-5">
+                    <div class="mt-2 cuadro">
                         <label for="p1" class="form-label">1. Me ha costado mucho descargar la tensió...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -203,7 +188,7 @@ $conn->close();
                     </div>
 
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p2" class="form-label">2. Me di cuenta que tenía la boca seca...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -229,7 +214,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p3" class="form-label">3. No podía sentir ningún sentimiento positivo...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -255,7 +240,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p4" class="form-label">4. Se me hizo difícil respirar...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -281,7 +266,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p5" class="form-label">5. Se me hizo difícil tomar la iniciativa para hacer
                             cosas...</label>
                         <div>
@@ -308,7 +293,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">6. Reaccioné exageradamente en ciertas situaciones...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -334,7 +319,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">7. Sentí que mis manos temblaban...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -360,7 +345,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">8. He sentido que estaba gastando una gran cantidad de
                             energía...</label>
                         <div>
@@ -387,7 +372,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">9. Estaba preocupado por situaciones en las cuales podía
                             tener pánico o en las que podría
                             hacer el ridículo...</label>
@@ -415,7 +400,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">10. He sentido que no había nada que me ilusionara...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -441,7 +426,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">11. Me he sentido inquieto...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -467,7 +452,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">12. Se me hizo difícil relajarme...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -493,12 +478,12 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">13. Me sentí triste y deprimido...</label>
                         <div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input colorradio" type="radio" name="p13" id="p13_nunca"
-                                    value="0" required>
+                                    value="" required>
                                 <label class="form-check-label" for="p13_nunca">No me ha ocurrido</label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -519,7 +504,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">14. No toleré nada que no me permitiera continuar con lo que
                             estaba haciendo...</label>
                         <div>
@@ -546,7 +531,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">15. Sentí que estaba al punto de pánico...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -572,7 +557,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">16. No me pude entusiasmar por nada...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -598,7 +583,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">17. Sentí que valía muy poco como persona...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -624,7 +609,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">18. He tendido a sentirme enfadado con facilidad...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -650,7 +635,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">19. Sentí los latidos de mi corazón a pesar de no haber hecho
                             ningún esfuerzo físico...</label>
                         <div>
@@ -677,7 +662,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">20. Tuve miedo sin razón...</label>
                         <div>
                             <div class="form-check form-check-inline">
@@ -703,7 +688,7 @@ $conn->close();
                         </div>
                     </div>
 
-                    <div class="mt-3">
+                    <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">21. Sentí que la vida no tenía ningún sentido...</label>
                         <div>
                             <div class="form-check form-check-inline">
