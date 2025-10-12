@@ -58,25 +58,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Depresión
-        $total_depresion = ($p3 + $p5 + $p10 + $p13 + $p16 + $p17 + $p21) * 2;
-        $severidad_dep = ($total_depresion <= 9) ? 'Normal' :
-            (($total_depresion <= 13) ? 'Leve' :
-                (($total_depresion <= 20) ? 'Moderado' :
-                    (($total_depresion <= 27) ? 'Severo' : 'Extremadamente Severo')));
+        $total_depresion = $p3 + $p5 + $p10 + $p13 + $p16 + $p17 + $p21;
+        $severidad_dep = ($total_depresion <= 4) ? 'Normal' :
+            (($total_depresion <= 6) ? 'Leve' :
+                (($total_depresion <= 10) ? 'Moderado' :
+                    (($total_depresion <= 13) ? 'Severo' : 'Extremadamente Severo')));
 
         // Ansiedad
-        $total_ansiedad = ($p2 + $p4 + $p7 + $p9 + $p15 + $p19 + $p20) * 2;
-        $severidad_ans = ($total_ansiedad <= 7) ? 'Normal' :
-            (($total_ansiedad <= 9) ? 'Leve' :
-                (($total_ansiedad <= 14) ? 'Moderado' :
-                    (($total_ansiedad <= 19) ? 'Severo' : 'Extremadamente Severo')));
+        $total_ansiedad = $p2 + $p4 + $p7 + $p9 + $p15 + $p19 + $p20;
+        $severidad_ans = ($total_ansiedad <= 3) ? 'Normal' :
+            (($total_ansiedad <= 4) ? 'Leve' :
+                (($total_ansiedad <= 7) ? 'Moderado' :
+                    (($total_ansiedad <= 9) ? 'Severo' : 'Extremadamente Severo')));
 
         // Estrés
-        $total_estres = ($p1 + $p6 + $p8 + $p11 + $p12 + $p14 + $p18) * 2;
-        $severidad_estres = ($total_estres <= 14) ? 'Normal' :
-            (($total_estres <= 18) ? 'Leve' :
-                (($total_estres <= 25) ? 'Moderado' :
-                    (($total_estres <= 33) ? 'Severo' : 'Extremadamente Severo')));
+        $total_estres = $p1 + $p6 + $p8 + $p11 + $p12 + $p14 + $p18;
+        $severidad_estres = ($total_estres <= 7) ? 'Normal' :
+            (($total_estres <= 9) ? 'Leve' :
+                (($total_estres <= 12) ? 'Moderado' :
+                    (($total_estres <= 16) ? 'Severo' : 'Extremadamente Severo')));
 
         $total_general = $total_depresion + $total_ansiedad + $total_estres;
 
@@ -162,7 +162,7 @@ $conn->close();
                 <form action="DASS-21.php" method="post" style="display: block;" id="formulario">
 
                     <div class="mt-2 cuadro">
-                        <label for="p1" class="form-label">1. Me ha costado mucho descargar la tensió...</label>
+                        <label for="p1" class="form-label">1. Me ha costado mucho descargar la tensión...</label>
                         <div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input colorradio" type="radio" name="p1" id="p1_nunca"
