@@ -1,12 +1,11 @@
 <?php
 // Configuración de la base de datos
-$servername = "localhost"; // Cambia si es necesario
-$username = "root"; // Reemplaza con tu usuario de BD
-$password = ""; // Reemplaza con tu contraseña de BD
-$dbname = "pisi";
-
+$servername = "pdb1042.awardspace.net";
+$username = "4528622_pisi";
+$password = "sklike5522";
+$database = "4528622_pisi";
 // Crear conexión
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $database);
 
 // Verificar conexión
 if ($conn->connect_error) {
@@ -68,8 +67,11 @@ $conn->close();
         <label for="apellidos_admi">Apellidos Admin:</label><br>
         <input type="text" id="apellidos_admi" name="apellidos_admi" maxlength="80" required><br><br>
         
-        <label for="rol">Rol:</label><br>
-        <input type="text" id="rol" name="rol" maxlength="360" required><br><br>
+        <label>Elige un Rol</label><br>
+        <select name="rol" id="rol">
+            <option value="Admininistrador">Administrador</option>
+            <option value="Capturista">Capturista</option>
+        </select>
         
         <label for="foto">Foto (archivo):</label><br>
         <input type="file" id="foto" name="foto" accept="image/*"><br><br>

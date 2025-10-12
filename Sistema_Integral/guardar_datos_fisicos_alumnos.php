@@ -31,6 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $ice=$_POST["ice"];
 
     $mb=$_POST["mb1"];
+    $actividad=$_POST["actividad1"];
     $get1=$_POST["get1"];
     $porcentajemasagrasa=$_POST["pormasagrasa1"];
     $valorideal=$_POST["valoridealgrasa1"];
@@ -55,15 +56,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Preparar la consulta SQL para insertar los datos
     $sql = "INSERT INTO datos_fisicos_alumnos 
-            (matricula_alum, fecha, cintura, cadera, clasificacion_cintura_cadera, icc, clasificacion_de_icc, peso, talla, imc, clasificacion_imc, ice, mb, get1, porcentaje_masa_grasa, valor_ideal_porcentaje_grasa,
+            (matricula_alum, fecha, cintura, cadera, clasificacion_cintura_cadera, icc, clasificacion_de_icc, peso, talla, imc, clasificacion_imc, ice, mb, actividad1, get1, porcentaje_masa_grasa, valor_ideal_porcentaje_grasa,
             clasificacion_porcentaje_grasa, masa_magra, agua_total, porcentaje_agua_total, glucosa, clasificacion_glucosa, trigliceridos, clasificacion_trigliceridos, colesterol, clasificacion_colesterol, tension_arterial, clasificacion_tension_arterial) 
-            VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            VALUES (?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
     // Usar una consulta preparada para mayor seguridad
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("isddsdsdddsddddssddddsdsdsss", $matricula, $fecha,$cintura, $cadera, $clasificacioncincad, $icc, $clasificacionicc, $peso, $talla, $imc, $clasificacionimc, $ice, $mb, $get1, $porcentajemasagrasa,
-                            $valorideal, $clasificacionporgrasa, $masamagra, $aguatotal, $porcentajeagua, $glucosa, $clasificacionglucosa, $trigliceridos, $clasificaciontrigliceridos, $colesterol, $clasificacioncolesterol,
-                        $tension_arterial, $clasificacion_tension_arterial);
+    $stmt->bind_param("isddsdsdddsddsdssssdddsdsdsss", 
+        $matricula, $fecha, $cintura, $cadera, $clasificacioncincad, $icc, $clasificacionicc, 
+        $peso, $talla, $imc, $clasificacionimc, $ice, $mb, $actividad, $get1, $porcentajemasagrasa,
+        $valorideal, $clasificacionporgrasa, $masamagra, $aguatotal, $porcentajeagua, 
+        $glucosa, $clasificacionglucosa, $trigliceridos, $clasificaciontrigliceridos, 
+        $colesterol, $clasificacioncolesterol, $tension_arterial, $clasificacion_tension_arterial
+    );
 
     // Ejecutar la consulta y verificar si se insertó correctamente
     if ($stmt->execute()) {

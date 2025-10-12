@@ -18,6 +18,15 @@ if ($resultAlumnos) {
     $totalAlumnos = $fila[0];
 }
 
+//cantidad de datos fisicos calculados
+$sqlDatos = "SELECT COUNT(*) FROM datos_fisicos_alumnos";
+$resultDatos = $conn->query($sqlDatos);
+$totalDatos = 0;
+if($resultDatos){
+  $dts = $resultDatos->fetch_row();
+  $totalDatos = $dts[0];
+}
+
 if ($conn->connect_errno) {
     die("Error de conexión: " . $conn->connect_error);
 }
@@ -70,7 +79,6 @@ $conn->close();
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
   <style>
 
   </style>
@@ -124,8 +132,8 @@ $conn->close();
     <!-- Cuadro derecho -->
     <div class="col-md-3 mt-3 mt-md-0">
       <div class="p-3 bg-light border rounded shadow-sm">
-        <h6 class="mb-1 text-primary">Otro indicador</h6>
-        <div class="fw-bold fs-4 text-dark">Pendiente</div> <!-- Puedes cambiarlo -->
+        <h6 class="mb-1 text-primary">Total de Datos Físicos de alumnos Registrados</h6>
+        <div class="fw-bold fs-4 text-dark"><?php echo $totalDatos; ?></div></div> <!-- Puedes cambiarlo -->
       </div>
     </div>
 
@@ -145,31 +153,27 @@ $conn->close();
     <h5 class="mt-3">Registro de Datos Físicos</h5>
   </div>
 
-  <div class="menu-card" onclick="location.href='estadisticas.html'" data-aos="fade-up" data-aos-delay="300">
-    <i class="bi bi-graph-up"></i>
-    <h5 class="mt-3">Estadísticas</h5>
-  </div>
+  <?php if ($_SESSION['rol'] === 'Administrador') { ?>
+    <div class="menu-card" onclick="location.href='estadisticas.html'" data-aos="fade-up" data-aos-delay="300">
+      <i class="bi bi-graph-up"></i>
+      <h5 class="mt-3">Estadísticas</h5>
+    </div>
 
-  <div class="menu-card dropdown" data-aos="fade-up" data-aos-delay="400">
-  <i class="bi bi-search"></i>
-  <h5 class="mt-3 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">Búsqueda</h5>
-  <ul class="dropdown-menu text-center">
-    <li><a class="dropdown-item" href="ListadoAlumnos.html"><i class="bi bi-mortarboard"></i> Alumnos</a></li>
-    <li><a class="dropdown-item" href="ListadoDocentes.html"><i class="bi bi-person-badge"></i> Docentes</a></li>
-    <li><a class="dropdown-item" href="ListadoEmpleados.html"><i class="bi bi-briefcase"></i> Empleados</a></li>
-  </ul>
-</div>
+    <div class="menu-card dropdown" data-aos="fade-up" data-aos-delay="400">
+      <i class="bi bi-search"></i>
+      <h5 class="mt-3 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">Búsqueda</h5>
+      <ul class="dropdown-menu text-center">
+        <li><a class="dropdown-item" href="ListadoAlumnos.html"><i class="bi bi-mortarboard"></i> Alumnos</a></li>
+        <li><a class="dropdown-item" href="ListadoDocentes.html"><i class="bi bi-person-badge"></i> Docentes</a></li>
+        <li><a class="dropdown-item" href="ListadoEmpleados.html"><i class="bi bi-briefcase"></i> Empleados</a></li>
+      </ul>
+    </div>
 
-
-  <!--<div class="menu-card" onclick="location.href='formularios.html'" data-aos="fade-up" data-aos-delay="500">
-    <i class="bi bi-ui-checks"></i>
-    <h5 class="mt-3">Formularios</h5>
-  </div>-->
-
-  <div class="menu-card" onclick="location.href='panel_control.php'" data-aos="fade-up" data-aos-delay="600">
-    <i class="bi bi-people"></i>
-    <h5 class="mt-3">Control Del Sistema</h5>
-  </div>
+    <div class="menu-card" onclick="location.href='panel_control.php'" data-aos="fade-up" data-aos-delay="600">
+      <i class="bi bi-people"></i>
+      <h5 class="mt-3">Control Del Sistema</h5>
+    </div>
+  <?php } ?>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -196,7 +200,7 @@ $conn->close();
         // Cerrar Sesión
         document.getElementById("cerrarSesion").addEventListener("click", function() {
             sessionStorage.clear(); // Borra datos de sesión
-            window.location.href = "login.php"; // Redirige al login
+            window.location.href = "login.html"; // Redirige al login
         });
     });
     </script>

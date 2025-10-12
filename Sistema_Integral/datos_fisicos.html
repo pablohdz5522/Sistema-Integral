@@ -203,7 +203,18 @@
                         <input type="number" class="form-control1" id="mb1" name="mb1" style="width: 120px;" step="0.01"
                             required>
                         <br><br>
-                        <span class="spang">Get</span>
+
+                        <select id="actividad1" class="form-select form-select-sm" style="width: 200px; margin-left: 25px;" name="actividad1" required>
+                            <option value="" selected disable>Elija el nivel de actividad</option>
+                            <option value="1.2">Sedentario</option>
+                            <option value="1.375">Actividad</option>
+                            <option value="1.55">Actividad Moderada</option>
+                            <option value="1.725">Actividad Intensa</option>
+                            <option value="1.9">Actividad Muy Intensa</option>
+                        </select>
+                        <br>
+
+                        <span class="spang">GET</span>
                         <input type="number" class="form-control1" id="get1" name="get1" style="width: 120px;"
                             step="0.01" required readonly>
                         <br><br>
@@ -211,9 +222,9 @@
                         <input type="number" class="form-control1" id="pormasagrasa1" name="pormasagrasa1"
                             style="width: 90px;" step="0.01" readonly>
                         <br><br>
-                        <span class="spang">Valor ideal % grasa</span>
+                        <span class="spang" style="font-size: 13px;">Valor ideal % grasa</span>
                         <input type="text" class="inputclasificacion" id="valoridealgrasa1" name="valoridealgrasa1"
-                            style="width: 150px;" required>
+                            style="width: 150px;" readonly>
                         <br><br>
                         <span class="clasificacion1" style="font-size: 12px;">Clasificación % grasa</span>
                         <input type="text" class="inputclasificacion" id="clasificaciongrasa1"
@@ -605,6 +616,8 @@
 
                         // Asignar fecha actual
                         document.getElementById("fecha1").value = new Date().toISOString().split("T")[0];
+
+                        ideales();
                     }
                 })
                 .catch(error => {
@@ -738,16 +751,78 @@
     </script>
 
     <script>
+        document.getElementById("sexo1").addEventListener("input", calculargrasa);
+        document.getElementById("peso1").addEventListener("input", calculargrasa);
+        document.getElementById("talla1").addEventListener("input", calculargrasa);
+
+        function calculargrasa(){
+            const peso = parseFloat(document.getElementById("peso1").value);
+            const talla = parseFloat(document.getElementById("talla1").value);
+            const sexo = document.getElementById("sexo1").value;
+            let resultado = "";
+
+            if(peso > 0 && talla > 0 && sexo){
+                if(sexo == "MASCULINO"){
+                    resultado = (0.407 * peso) + (0.267 * talla) - 19.2;
+                }else if (sexo == "FEMENINO"){
+                    resultado = (0.252 * peso) + (0.473 * talla) - 48.3
+                }
+
+                document.getElementById("masamagra1").value = resultado.toFixed(2);
+            } else{
+                document.getElementById("masamagra1").value ="";
+            }
+        }
+        
+    </script>
+
+    <script>
+        document.getElementById("sexo1").addEventListener("input", calcularmb);
+        document.getElementById("peso1").addEventListener("input", calcularmb);
+        document.getElementById("talla1").addEventListener("input", calcularmb);
+        document.getElementById("edad1").addEventListener("input", calcularmb)
+
+        function calcularmb(){
+            const peso = parseFloat(document.getElementById("peso1").value);
+            const talla = parseFloat(document.getElementById("talla1").value);
+            const edad = parseInt(document.getElementById("edad1").value)
+            const sexo = document.getElementById("sexo1").value;
+            let resultado = "";
+
+            if (peso > 0 && talla > 0 && edad > 0 && sexo){
+
+                if(sexo=="MASCULINO"){
+                    resultado = (10*peso)+(6.25*talla)-(5*edad)+5;
+                }else if (sexo=="FEMENINO"){
+                    resultado = (10*peso)+(6.25*talla)-(5*edad)-161
+                }
+
+                calcularGet();
+                document.getElementById("mb1").value=resultado.toFixed(2);
+            }else{
+                document.getElementById("mb1").value ="";
+            }
+        }
+    </script>
+
+    <script>
+    // Debes llamar a esta función cuando el MB o el nivel de actividad cambien
         document.getElementById("mb1").addEventListener("input", calcularGet);
+        document.getElementById("actividad1").addEventListener("input", calcularGet); // ¡Añade este!
 
         function calcularGet() {
             const kcal = parseFloat(document.getElementById("mb1").value);
+            // Obtenemos el factor de actividad del nuevo selector
+            const factorActividad = parseFloat(document.getElementById("actividad1").value);
 
-            if (!isNaN(kcal)) {
-                // Realiza el cálculo solo si el valor ingresado es un número válido
-                const kc = kcal + ((kcal * 10) / 100) + ((kcal * 10) / 100);
+            if (!isNaN(kcal) && !isNaN(factorActividad)) {
+                
+                // FÓRMULA CORREGIDA: MB * Factor de Actividad
+                const get = kcal * factorActividad;
 
-                document.getElementById("get1").value = kc.toFixed(2);
+                document.getElementById("get1").value = get.toFixed(2);
+            } else {
+                document.getElementById("get1").value = "";
             }
         }
     </script>
@@ -828,19 +903,15 @@
         document.getElementById("sexo1").addEventListener("input", aguatotal);
 
         function aguatotal() {
-            // CORRECCIÓN: Se leen los IDs correctos para cada variable.
             const peso = parseFloat(document.getElementById("peso1").value);
             const talla = parseFloat(document.getElementById("talla1").value);
             const edad = parseFloat(document.getElementById("edad1").value);
             const sexo = document.getElementById("sexo1").value;
-
-            // CORRECCIÓN: 'result' se declara con 'let' para poder cambiar su valor.
             let result = "";
 
-            // MEJORA: Se valida que todos los campos numéricos sean válidos.
+            
             if (!isNaN(peso) && !isNaN(talla) && !isNaN(edad) && peso > 0 && talla > 0 && edad > 0) {
 
-                // MEJORA: Se convierte el sexo a mayúsculas para una comparación segura.
                 if (sexo.toUpperCase() === "MASCULINO") {
                     result = 2.447 - (0.09516 * edad) + (0.1074 * talla) + (0.3362 * peso);
                 } else if (sexo.toUpperCase() === "FEMENINO") {
@@ -848,7 +919,7 @@
                 }
             }
 
-            // MEJORA: Si 'result' es un número, se formatea a 2 decimales.
+            
             if (typeof result === 'number') {
                 document.getElementById("aguatotal1").value = result.toFixed(2);
                 calcularagua();
@@ -857,6 +928,25 @@
                 calcularagua();
             }
         }
+    </script>
+
+    <script>
+        document.getElementById("sexo1").addEventListener("input", ideales);
+        
+            function ideales() {
+            // Usamos .toUpperCase() para que funcione con "MASCULINO", "masculino", etc.
+            const sexo = document.getElementById("sexo1").value.toUpperCase();
+            let result = "";
+
+            if (sexo === "MASCULINO") {
+                result = "18 - 24%";
+            } else if (sexo === "FEMENINO") {
+                result = "25 - 31%";
+            }
+            
+            document.getElementById("valoridealgrasa1").value = result;
+        }
+        ideales();
     </script>
 
     <script>
