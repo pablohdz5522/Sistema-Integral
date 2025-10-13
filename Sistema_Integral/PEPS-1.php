@@ -10,7 +10,7 @@ if (!isset($_SESSION['alumno']) || !isset($_SESSION['alumno']['matricula'])) {
     header("Location: registro.php");
     exit;
 }
-
+date_default_timezone_set('America/Mexico_City');
 $alumno = $_SESSION['alumno'];
 $matricula = $alumno['matricula'];
 
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $p26 = (int)$_POST['p26'];
         $p35 = (int)$_POST['p35'];
         $total_nutricion = $p1 + $p5 + $p14 + $p19 + $p26 + $p35;
-        $saludable_nutricion = ($total_nutricion > 16) ? 'Saludable' : 'No Saludable';
+        $saludable_nutricion = ($total_nutricion > 15) ? 'Saludable' : 'No Saludable';
 
         $p4 = (int)$_POST['p4'];
         $p13 = (int)$_POST['p13'];
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $p30 = (int)$_POST['p30'];
         $p38 = (int)$_POST['p38'];
         $total_ejercicio = $p4 + $p13 + $p22 + $p30 + $p38;
-        $saludable_ejercicio = ($total_ejercicio > 14) ? 'Saludable' : 'No Saludable';
+        $saludable_ejercicio = ($total_ejercicio > 13) ? 'Saludable' : 'No Saludable';
 
         $p2 = (int)$_POST['p2'];
         $p7 = (int)$_POST['p7'];
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $p43 = (int)$_POST['p43'];
         $p46 = (int)$_POST['p46'];
         $total_salud = $p2 + $p7 + $p15 + $p20 + $p28 + $p32 + $p33 + $p42 + $p43 + $p46;
-        $saludable_salud = ($total_salud > 26) ? 'Saludable' : 'No Saludable';
+        $saludable_salud = ($total_salud > 25) ? 'Saludable' : 'No Saludable';
 
         $p10 = (int)$_POST['p10'];
         $p18 = (int)$_POST['p18'];
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $p39 = (int)$_POST['p39'];
         $p47 = (int)$_POST['p47'];
         $total_soporte = $p10 + $p18 + $p24 + $p25 + $p31 + $p39 + $p47;
-        $saludable_soporte = ($total_soporte > 18) ? 'Saludable' : 'No Saludable';
+        $saludable_soporte = ($total_soporte > 17) ? 'Saludable' : 'No Saludable';
 
         $p6 = (int)$_POST['p6'];
         $p11 = (int)$_POST['p11'];
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $p41 = (int)$_POST['p41'];
         $p45 = (int)$_POST['p45'];
         $total_estres = $p6 + $p11 + $p27 + $p36 + $p40 + $p41 + $p45;
-        $saludable_estres = ($total_estres > 18) ? 'Saludable' : 'No Saludable';
+        $saludable_estres = ($total_estres > 17) ? 'Saludable' : 'No Saludable';
 
         $p3 = (int)$_POST['p3'];
         $p8 = (int)$_POST['p8'];
@@ -123,10 +123,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $p44 = (int)$_POST['p44'];
         $p48 = (int)$_POST['p48'];
         $total_auto = $p3 + $p8 + $p9 + $p12 + $p16 + $p17 + $p21 + $p23 + $p29 + $p34 + $p37 + $p44 + $p48;
-        $saludable_auto = ($total_auto > 33) ? 'Saludable' : 'No Saludable';
+        $saludable_auto = ($total_auto > 32) ? 'Saludable' : 'No Saludable';
 
         $total_general = $total_nutricion + $total_ejercicio + $total_salud + $total_soporte + $total_estres + $total_auto;
-        $estado_saludable = ($total_general > 121) ? 'Saludable' : 'No Saludable';
+        $estado_saludable = ($total_general > 120) ? 'Saludable' : 'No Saludable';
 
         // Insertar en la tabla estilo_de_vida
         $fecha_actual = date('Y-m-d H:i:s'); 

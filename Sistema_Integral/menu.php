@@ -164,8 +164,8 @@ $conn->close();
       <h5 class="mt-3 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">Búsqueda</h5>
       <ul class="dropdown-menu text-center">
         <li><a class="dropdown-item" href="ListadoAlumnos.html"><i class="bi bi-mortarboard"></i> Alumnos</a></li>
-        <li><a class="dropdown-item" href="ListadoDocentes.html"><i class="bi bi-person-badge"></i> Docentes</a></li>
-        <li><a class="dropdown-item" href="ListadoEmpleados.html"><i class="bi bi-briefcase"></i> Empleados</a></li>
+        <li hidden><a class="dropdown-item" href="ListadoDocentes.html"><i class="bi bi-person-badge"></i> Docentes</a></li>
+        <li hidden><a class="dropdown-item" href="ListadoEmpleados.html"><i class="bi bi-briefcase"></i> Empleados</a></li>
       </ul>
     </div>
 

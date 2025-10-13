@@ -483,7 +483,7 @@ $conn->close();
                         <div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input colorradio" type="radio" name="p13" id="p13_nunca"
-                                    value="" required>
+                                    value="0" required>
                                 <label class="form-check-label" for="p13_nunca">No me ha ocurrido</label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -715,7 +715,7 @@ $conn->close();
                     </div>
 
                     <div class="text-center" style="margin-bottom: 40px;" id="enviarResultados">
-                        <button class="btn btn-outline-primary colorboton">Enviar Resultados</button>
+                        <button class="btn btn-outline-primary colorboton" type="submit">Enviar Resultados</button>
                     </div>
 
 

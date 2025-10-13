@@ -18,7 +18,8 @@ if ($conn->connect_error) {
 }
 
 // Consulta para obtener los datos físicos en la fecha seleccionada
-$sql = "SELECT peso, talla, imc, clasificacion_imc, glucosa, colesterol, trigliceridos, tension_arterial 
+$sql = "SELECT cintura, cadera, clasificacion_cintura_cadera, icc, clasificacion_de_icc, peso, talla, imc, clasificacion_imc, ice, mb, actividad1, get1, porcentaje_masa_grasa, valor_ideal_porcentaje_grasa,
+            clasificacion_porcentaje_grasa, masa_magra, agua_total, porcentaje_agua_total, glucosa, clasificacion_glucosa, trigliceridos, clasificacion_trigliceridos, colesterol, clasificacion_colesterol, tension_arterial, clasificacion_tension_arterial
         FROM datos_fisicos_alumnos 
         WHERE matricula_alum = ? AND fecha = ?";
 
@@ -29,7 +30,7 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $datos = $result->fetch_assoc();
-    echo json_encode($datos);
+    echo json_encode($datos); 
 } else {
     echo json_encode(["error" => "No se encontraron datos para la fecha seleccionada"]);
 }

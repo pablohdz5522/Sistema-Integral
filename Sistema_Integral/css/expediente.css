@@ -1,5 +1,8 @@
 body {
     background-color: #f8f9fa;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .unacar{
@@ -31,9 +34,11 @@ button{
 
 
   .sidebar {
-    height: 150vh;
+    height: auto;
     background-color: #2779AA;
     color: #fff;
+    position: sticky;  /* Opcional: hace que la sidebar se quede fija al desplazar */
+    top: 0;
   }
   .sidebar a {
     color: #adb5bd;
@@ -85,3 +90,18 @@ button{
     .right-section {
       flex: 1;
     }
+
+    .cuadro {
+    border: 2px solid #3e087a;
+    /* Borde verde */
+    padding: 10px;
+    /* Espaciado interno */
+    margin: 10px;
+    /* Espaciado externo */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    background-color: #eeecec;
+    /* Fondo claro */
+
+
+}
