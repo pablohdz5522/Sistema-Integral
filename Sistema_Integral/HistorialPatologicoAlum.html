@@ -27,8 +27,8 @@
               <i class="bi bi-heart-pulse me-2"></i> Formularios
           </a>
           <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">DASS-21</a></li>
-              <li><a class="dropdown-item" href="#">Estilo de Vida</a></li>
+              <li><a class="dropdown-item" id="linkDass" href="#">DASS-21</a></li>
+              <li><a class="dropdown-item" id="linkEstilo" href="#">Estilo de Vida</a></li>
           </ul>
       </div>
       <a id="linkHistorial" href="#"><i class="bi bi-house-heart-fill me-2"></i> Historial Patológico</a>
@@ -224,6 +224,56 @@
 });
 
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Obtener la matrícula desde la URL
+        const params = new URLSearchParams(window.location.search);
+        const matricula = params.get("matricula_alum");
+
+        if (matricula) {
+            // Actualizar el enlace de "Estilo de Vida" con la matrícula
+            const enlacePuntajes = document.getElementById("enlacePuntajes");
+            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const params = new URLSearchParams(window.location.search);
+    const matricula = params.get("matricula_alum");
+
+    if (matricula) {
+        const linkDass = document.getElementById("linkDass");
+        linkDass.href = `formulariodass.html?matricula_alum=${matricula}`;
+    }
+});
+
+</script>
+
+<script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener la matrícula desde la URL
+            const params = new URLSearchParams(window.location.search);
+            const matricula = params.get("matricula_alum");
+
+            if (matricula) {
+                // Actualizar el enlace de "Estilo de Vida" con la matrícula
+                const enlacePuntajes = document.getElementById("enlacePuntajes");
+                enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const params = new URLSearchParams(window.location.search);
+            const matricula = params.get("matricula_alum");
+
+            if (matricula) {
+                const linkEstilo = document.getElementById("linkEstilo");
+                linkEstilo.href = `formularioestilo.html?matricula_alum=${matricula}`;
+            }
+        });
+
+    </script>
 
 <script>
     function cargarHistorialClinico(matricula) {

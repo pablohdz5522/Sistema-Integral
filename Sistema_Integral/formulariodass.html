@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Datos Físicos</title>
+    <title>Formulario DASS-21</title>
     <link rel="stylesheet" href="css/expediente.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
@@ -23,7 +23,7 @@
             <div class="col-md-2 sidebar d-flex flex-column p-3">
                 <h4 class="text-center">Menú</h4>
                 <a id="linkPerfil" href="#"><i class="bi bi-person-circle me-2"></i> Perfil</a>
-                <a href="#"><i class="bi bi-clipboard-data me-2"></i> Datos Físicos</a>
+                <a id="linkDatos" href="#"><i class="bi bi-clipboard-data me-2"></i> Datos Físicos</a>
                 <div class="dropdown">
                     <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-heart-pulse me-2"></i> Formularios
@@ -41,7 +41,7 @@
             <div class="col-md-10 p-4">
                 <div class="nav d-flex justify-content-between align-items-center mb-4">
                     <img src="/images/logo_unacar (1).png" alt="logo" class="unacar">
-                    <h2>Datos Físicos del Alumno</h2>
+                    <h2>Perfil del Alumno</h2>
                     <button class="btn btn-primary" disabled></button>
                 </div>
 
@@ -101,175 +101,133 @@
                     </div>
                 </div>
 
-                <!-- Signos vitales / otros datos -->
+                
                 <div class="card card-custom mb-4">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="display-6">Datos Físicos</h5>
-                            <div>
-                                <h5><i class="bi bi-calendar2-date-fill"></i>Fecha: </h5> <span
-                                    id="fecha-datos-fisicos"></span>
-                            </div>
-                        </div>
+                        <table class="table">
+                            <thead>
+                                <h5 class="text-center">Resultados de Ansiedad</h5>
+                                <tr>
+                                    <th scope="col">Pregunta 1</th>
+                                    <th scope="col">Pregunta 4</th>
+                                    <th scope="col">Pregunta 7</th>
+                                    <th scope="col">Pregunta 9</th>
+                                    <th scope="col">Pregunta 15</th>
+                                    <th scope="col">Pregunta 19</th>
+                                    <th scope="col">Pregunta 20</th>
+                                    <th scope="col">Severidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-primary">
+                                    <td id="p2"></td>
+                                    <td id="p4"></td>
+                                    <td id="p7"></td>
+                                    <td id="p9"></td>
+                                    <td id="p15"></td>
+                                    <td id="p19"></td>
+                                    <td id="p20"></td>
+                                    <td id="severidad_ansiedad"></td>
+                                </tr>
 
-
-
-                        <div class="row g-3 mt-3">
-                            <!--cadera cintura-->
-                            <div class="col-md-12">
-                                <h5> Valores de Cintura / Cadera</h5>
-                            </div>
-
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-receipt-cutoff"></i> cintura: <span id="modal-cintura">-</span> cm
-                                </div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-receipt-cutoff"></i> Cadera: <span id="modal-cadera">-</span> cm
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-clipboard-data-fill"></i> Clasificación de Cintura/Cadera: <span
-                                        id="modal-clacin">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-person-fill-up"></i> ICC: <span id="modal-icc">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-person-fill-up"></i> Clasificación de ICC: <span
-                                        id="modal-clasicc">-</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <h5> Valores de Peso y Talla</h5>
-                            </div>
-                            <!--tallas-->
-
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-piggy-bank"></i>Peso: <span id="peso">-</span> kg</div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-person-fill-up"></i> Talla: <span id="modal-talla">-</span> cm
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-clipboard-data-fill"></i> IMC: <span id="modal-imc">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-person-check-fill"></i> Clasificación IMC: <span
-                                        id="modal-clasificacionimc">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-patch-check"></i> ICE: <span id="modal-ice">-</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <h5> Valores de Porcentaje Masa Grasa</h5>
-                            </div>
-
-                            <!--masa grasa-->
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-exclamation-square"></i> MB(Kcal): <span id="modal-mb">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-activity"></i> Nivel de actividad: <span id="modal-acti">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-person-check-fill"></i> GET: <span id="modal-get">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-exclamation-square"></i> Porcentaje de masa grasa: <span
-                                        id="modal-pormasagrasa">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-clipboard-check"></i> Valor ideal de % grasa: <span
-                                        id="modal-ideal">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-bar-chart-steps"></i> Clasificación de % grasa: <span
-                                        id="modal-clasificaciongrasa">-</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <h5> Valores de Porcentaje de Masa Magra y Agua</h5>
-                            </div>
-                            <!--masa magra-->
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-droplet-fill"></i> Masa magra: <span id="modal-masamagra">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-droplet-half"></i> Agua Total(litros): <span
-                                        id="modal-aguatotal">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-water"></i> Porcentaje de agua total: <span
-                                        id="modal-porcentajeagua">-</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <h5>Valores de Glucosa y Colesterol</h5>
-                            </div>
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-heart-pulse"></i> Glucosa: <span id="modal-glucosa">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-droplet-half"></i> Clasificacion de Glucosa: <span
-                                        id="modal-clasificacionglucosa">-</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-clipboard-data"></i> Colesterol: <span
-                                        id="modal-colesterol">-</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-clipboard2-heart-fill"></i> Clasificacion de Colesterol: <span
-                                        id="modal-clasificacioncolesterol">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <h5> Valores de Triglicéridos y Tensión Arterial</h5>
-                            </div>
-
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-clipboard-pulse"></i> Trigliceridos: <span
-                                        id="modal-trigliceridos">-</span></div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-clipboard2-heart-fill"></i> Clasificacion de Trigliceridos: <span
-                                        id="modal-clasificaciontrigli">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-heart-pulse"></i> Tension Arterial: <span
-                                        id="modal-tensionarterial">-</span></div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-person-hearts"></i> Clasificación de T.A: <span
-                                        id="modal-clasificacionta">-</span></div>
-                            </div>
-                        </div>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+
+                <div class="card card-custom mb-4">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <h5 class="text-center">Resultados de Depresión</h5>
+                                <tr>
+                                    <th scope="col">Pregunta 3</th>
+                                    <th scope="col">Pregunta 5</th>
+                                    <th scope="col">Pregunta 10</th>
+                                    <th scope="col">Pregunta 13</th>
+                                    <th scope="col">Pregunta 16</th>
+                                    <th scope="col">Pregunta 17</th>
+                                    <th scope="col">Pregunta 21</th>
+                                    <th scope="col">Severidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-primary">
+                                    <td id="p3"></td>
+                                    <td id="p5"></td>
+                                    <td id="p10"></td>
+                                    <td id="p13"></td>
+                                    <td id="p16"></td>
+                                    <td id="p17"></td>
+                                    <td id="p21"></td>
+                                    <td id="severidad_depresion"></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card card-custom mb-4">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <h5 class="text-center">Resultados de Estrés</h5>
+                                <tr>
+                                    <th scope="col">Pregunta 1</th>
+                                    <th scope="col">Pregunta 6</th>
+                                    <th scope="col">Pregunta 8</th>
+                                    <th scope="col">Pregunta 11</th>
+                                    <th scope="col">Pregunta 12</th>
+                                    <th scope="col">Pregunta 14</th>
+                                    <th scope="col">Pregunta 18</th>
+                                    <th scope="col">Severidad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-primary">
+                                    <td id="p1"></td>
+                                    <td id="p6"></td>
+                                    <td id="p8"></td>
+                                    <td id="p11"></td>
+                                    <td id="p12"></td>
+                                    <td id="p14"></td>
+                                    <td id="p18"></td>
+                                    <td id="severidad_estres"></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card card-custom mb-4">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <h5 class="text-center">Resultados Generales</h5>
+                                <tr>
+                                    <th scope="col">Total Ansiedad</th>
+                                    <th scope="col">Total Depresión</th>
+                                    <th scope="col">Total Estrés</th>
+                                    <th scope="col">Total General</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-success">
+                                    <td id="total_ansiedad"></td>
+                                    <td id="total_depresion"></td>
+                                    <td id="total_estres"></td>
+                                    <td id="total_general"></td>
+                                    
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
 
             </div>
         </div>
@@ -404,7 +362,6 @@
 
 
     <script>
-
         function cargarPerfil() {
             const params = new URLSearchParams(window.location.search);
             const matricula = params.get("matricula_alum");
@@ -445,55 +402,51 @@
 
                 })
                 .catch(error => console.error("Error al cargar el perfil:", error));
+            // Cargar el historial clínico
+            cargarHistorialClinico(matricula);
+
+
         }
 
         document.addEventListener("DOMContentLoaded", cargarPerfil);
 
         function cargarDatosFisicosRecientes(matricula) {
-            fetch(`perfil.php?matricula_alum=${matricula}`)
+            fetch(`datosdass.php?matricula_alum=${matricula}`)
                 .then(response => response.json())
-                .then(data => {
-                    if (data.fechas && data.fechas.length > 0) {
-                        const ultimaFecha = data.fechas[data.fechas.length - 1];
-                        document.getElementById("fecha-datos-fisicos").textContent = ultimaFecha;
+                .then(datos => {
+                    document.getElementById("p2").textContent = datos.p2 || "0";
+                    document.getElementById("p4").textContent = datos.p4 || "0";
+                    document.getElementById("p7").textContent = datos.p7 || "0";
+                    document.getElementById("p9").textContent = datos.p9 || "0";
+                    document.getElementById("p15").textContent = datos.p15 || "0";
+                    document.getElementById("p19").textContent = datos.p19 || "0";
+                    document.getElementById("p20").textContent = datos.p20 || "0";
+                    document.getElementById("severidad_ansiedad").textContent = datos.severidad_ansiedad || "0";
 
-                        fetch(`datos_fisicos_detalle.php?matricula_alum=${matricula}&fecha=${ultimaFecha}`)
-                            .then(response => response.json())
-                            .then(datos => {
-                                document.getElementById("modal-cintura").textContent = datos.cintura || "-";
-                                document.getElementById("modal-cadera").textContent = datos.cadera || "-";
-                                document.getElementById("modal-clacin").textContent = datos.clasificacion_cintura_cadera || "-";
-                                document.getElementById("modal-icc").textContent = datos.icc || "-";
-                                document.getElementById("modal-clasicc").textContent = datos.clasificacion_de_icc || "-";
-                                document.getElementById("peso").textContent = datos.peso || "-";
-                                document.getElementById("modal-talla").textContent = datos.talla || "-";
-                                document.getElementById("modal-imc").textContent = datos.imc || "-";
-                                document.getElementById("modal-clasificacionimc").textContent = datos.clasificacion_imc || "-";
-                                document.getElementById("modal-ice").textContent = datos.ice || "-";
-                                document.getElementById("modal-mb").textContent = datos.mb || "-";
-                                document.getElementById("modal-acti").textContent = datos.actividad1 || "-";
-                                document.getElementById("modal-get").textContent = datos.get1 || "-";
-                                document.getElementById("modal-pormasagrasa").textContent = datos.porcentaje_masa_grasa || "-";
-                                document.getElementById("modal-ideal").textContent = datos.valor_ideal_porcentaje_grasa || "-";
-                                document.getElementById("modal-clasificaciongrasa").textContent = datos.clasificacion_porcentaje_grasa || "-";
-                                document.getElementById("modal-masamagra").textContent = datos.masa_magra || "-";
-                                document.getElementById("modal-aguatotal").textContent = datos.agua_total || "-";
-                                document.getElementById("modal-porcentajeagua").textContent = datos.porcentaje_agua_total || "-";
-                                document.getElementById("modal-glucosa").textContent = datos.glucosa || "-";
-                                document.getElementById("modal-clasificacionglucosa").textContent = datos.clasificacion_glucosa || "-";
-                                document.getElementById("modal-colesterol").textContent = datos.colesterol || "-";
-                                document.getElementById("modal-clasificacioncolesterol").textContent = datos.clasificacion_colesterol || "-";
-                                document.getElementById("modal-trigliceridos").textContent = datos.trigliceridos || "-";
-                                document.getElementById("modal-clasificaciontrigli").textContent = datos.clasificacion_trigliceridos || "-";
-                                document.getElementById("modal-tensionarterial").textContent = datos.tension_arterial || "-";
-                                document.getElementById("modal-clasificacionta").textContent = datos.clasificacion_tension_arterial || "-";
-                            })
-                            .catch(error => console.error("Error al cargar los datos físicos:", error));
-                    } else {
-                        document.getElementById("fecha-datos-fisicos").textContent = "Sin datos";
-                    }
+                    document.getElementById("p3").textContent = datos.p3 || "0";
+                    document.getElementById("p5").textContent = datos.p5 || "0";
+                    document.getElementById("p10").textContent = datos.p10 || "0";
+                    document.getElementById("p13").textContent = datos.p13 || "0";
+                    document.getElementById("p16").textContent = datos.p16 || "0";
+                    document.getElementById("p17").textContent = datos.p17 || "0";
+                    document.getElementById("p21").textContent = datos.p21 || "0";
+                    document.getElementById("severidad_depresion").textContent = datos.severidad_depresion || "0";
+
+                    document.getElementById("p1").textContent = datos.p1 || "0";
+                    document.getElementById("p6").textContent = datos.p6 || "0";
+                    document.getElementById("p8").textContent = datos.p8 || "0";
+                    document.getElementById("p11").textContent = datos.p11 || "0";
+                    document.getElementById("p12").textContent = datos.p12 || "0";
+                    document.getElementById("p14").textContent = datos.p14 || "0";
+                    document.getElementById("p18").textContent = datos.p18 || "0";
+                    document.getElementById("severidad_estres").textContent = datos.severidad_estres || "0";
+
+                    document.getElementById("total_ansiedad").textContent = datos.total_ansiedad || "0";
+                    document.getElementById("total_depresion").textContent = datos.total_depresion || "0";
+                    document.getElementById("total_estres").textContent = datos.total_estres || "0";
+                    document.getElementById("total_general").textContent = datos.total_general || "0";
                 })
-                .catch(error => console.error("Error al cargar fechas:", error));
+                .catch(error => console.error("Error al cargar los datos físicos:", error));
         }
 
 

@@ -39,11 +39,10 @@ $stmt_verificar->close();
 $error_message = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $required_fields = range(1, 21);
+    $required_fields = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15', 'p16', 'p17', 'p18', 'p19', 'p20', 'p21'];
     $all_valid = true;
-    foreach ($required_fields as $num) {
-        $key = 'p' . $num;
-        if (!isset($_POST[$key]) || !is_numeric($_POST[$key]) || $_POST[$key] < 0 || $_POST[$key] > 3) {
+    foreach ($required_fields as $field) {
+        if (!isset($_POST[$field]) || !is_numeric($_POST[$field]) || $_POST[$field] < 0 || $_POST[$field] > 3) {
             $all_valid = false;
             break;
         }
@@ -52,12 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$all_valid) {
         $error_message = "Error: Todas las preguntas deben ser respondidas con un valor entre 0 y 3.";
     } else {
-        // Respuestas
-        for ($i = 1; $i <= 21; $i++) {
-            ${"p$i"} = (int) $_POST["p$i"];
-        }
 
         // Depresión
+        $p3 = (int)$_POST['p3'];
+        $p5 = (int)$_POST['p5'];
+        $p10 = (int)$_POST['p10'];
+        $p13= (int)$_POST['p13'];
+        $p16 = (int)$_POST['p16'];
+        $p17 = (int)$_POST['p17'];
+        $p21 = (int)$_POST['p21'];
         $total_depresion = $p3 + $p5 + $p10 + $p13 + $p16 + $p17 + $p21;
         $severidad_dep = ($total_depresion <= 4) ? 'Normal' :
             (($total_depresion <= 6) ? 'Leve' :
@@ -65,6 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     (($total_depresion <= 13) ? 'Severo' : 'Extremadamente Severo')));
 
         // Ansiedad
+        $p2 = (int)$_POST['p2'];
+        $p4 = (int)$_POST['p4'];
+        $p7 = (int)$_POST['p7'];
+        $p9= (int)$_POST['p9'];
+        $p15 = (int)$_POST['p15'];
+        $p19 = (int)$_POST['p19'];
+        $p20 = (int)$_POST['p20'];
         $total_ansiedad = $p2 + $p4 + $p7 + $p9 + $p15 + $p19 + $p20;
         $severidad_ans = ($total_ansiedad <= 3) ? 'Normal' :
             (($total_ansiedad <= 4) ? 'Leve' :
@@ -72,6 +81,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     (($total_ansiedad <= 9) ? 'Severo' : 'Extremadamente Severo')));
 
         // Estrés
+        $p1 = (int)$_POST['p1'];
+        $p6 = (int)$_POST['p6'];
+        $p8 = (int)$_POST['p8'];
+        $p11= (int)$_POST['p11'];
+        $p12 = (int)$_POST['p12'];
+        $p14 = (int)$_POST['p14'];
+        $p18 = (int)$_POST['p18'];
         $total_estres = $p1 + $p6 + $p8 + $p11 + $p12 + $p14 + $p18;
         $severidad_estres = ($total_estres <= 7) ? 'Normal' :
             (($total_estres <= 9) ? 'Leve' :
@@ -79,7 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     (($total_estres <= 16) ? 'Severo' : 'Extremadamente Severo')));
 
         $total_general = $total_depresion + $total_ansiedad + $total_estres;
-
         // Insertar en tabla principal
         $sql_cuestionario = "INSERT INTO dass (matricula_alum, total_depresion, total_ansiedad, total_estres, total_general) VALUES (?, ?, ?, ?, ?)";
         $stmt_cuestionario = $conn->prepare($sql_cuestionario);
@@ -93,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql_dep = "INSERT INTO dass_depresion (id_cuestionario, p3, p5, p10, p13, p16, p17, p21, total_depresion, severidad)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt_dep = $conn->prepare($sql_dep);
-            $stmt_dep->bind_param("iiiiiiiiss", $id_cuestionario, $p3, $p5, $p10, $p13, $p16, $p17, $p21, $total_depresion, $severidad_dep);
+            $stmt_dep->bind_param("iiiiiiiiis", $id_cuestionario, $p3, $p5, $p10, $p13, $p16, $p17, $p21, $total_depresion, $severidad_dep);
             $stmt_dep->execute();
             $stmt_dep->close();
 
@@ -101,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql_ans = "INSERT INTO dass_ansiedad (id_cuestionario, p2, p4, p7, p9, p15, p19, p20, total_ansiedad, severidad)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt_ans = $conn->prepare($sql_ans);
-            $stmt_ans->bind_param("iiiiiiiiss", $id_cuestionario, $p2, $p4, $p7, $p9, $p15, $p19, $p20, $total_ansiedad, $severidad_ans);
+            $stmt_ans->bind_param("iiiiiiiiis", $id_cuestionario, $p2, $p4, $p7, $p9, $p15, $p19, $p20, $total_ansiedad, $severidad_ans);
             $stmt_ans->execute();
             $stmt_ans->close();
 
@@ -109,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql_est = "INSERT INTO dass_estres (id_cuestionario, p1, p6, p8, p11, p12, p14, p18, total_estres, severidad)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt_est = $conn->prepare($sql_est);
-            $stmt_est->bind_param("iiiiiiiiss", $id_cuestionario, $p1, $p6, $p8, $p11, $p12, $p14, $p18, $total_estres, $severidad_estres);
+            $stmt_est->bind_param("iiiiiiiiis", $id_cuestionario, $p1, $p6, $p8, $p11, $p12, $p14, $p18, $total_estres, $severidad_estres);
             $stmt_est->execute();
             $stmt_est->close();
 
@@ -736,10 +751,6 @@ $conn->close();
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
 
-    <script>
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-    </script>
 </body>
 
 </html>
