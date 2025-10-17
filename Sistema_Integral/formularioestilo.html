@@ -114,6 +114,7 @@
                                     <th scope="col">Pregunta 19</th>
                                     <th scope="col">Pregunta 26</th>
                                     <th scope="col">Pregunta 35</th>
+                                    <th scope="col">Total</th>
                                     <th scope="col">Saludable</th>
                                 </tr>
                             </thead>
@@ -125,6 +126,7 @@
                                     <td id="p19"></td>
                                     <td id="p26"></td>
                                     <td id="p35"></td>
+                                    <td id="total_nutricion"></td>
                                     <td id="saludable_nutricion"></td>
                                 </tr>
 
@@ -144,6 +146,7 @@
                                     <th scope="col">Pregunta 22</th>
                                     <th scope="col">Pregunta 30</th>
                                     <th scope="col">Pregunta 38</th>
+                                    <th scope="col">Total</th>
                                     <th scope="col">Saludable</th>
                                 </tr>
                             </thead>
@@ -154,6 +157,7 @@
                                     <td id="p22"></td>
                                     <td id="p30"></td>
                                     <td id="p38"></td>
+                                    <td id="total_ejercicio"></td>
                                     <td id="saludable_ejercicio"></td>
                                 </tr>
 
@@ -200,6 +204,7 @@
                                     <th scope="col">Pregunta 42</th>
                                     <th scope="col">Pregunta 43</th>
                                     <th scope="col">Pregunta 46</th>
+                                    <th scope="col">Total</th>
                                     <th scope="col">Saludable</th>
                                 </tr>
                             </thead>
@@ -209,6 +214,7 @@
                                     <td id="p42"></td>
                                     <td id="p43"></td>
                                     <td id="p46"></td>
+                                    <td id="total_salud"></td>
                                     <td id="saludable_salud"></td>
                                 </tr>
 
@@ -230,6 +236,7 @@
                                     <th scope="col">Pregunta 31</th>
                                     <th scope="col">Pregunta 39</th>
                                     <th scope="col">Pregunta 47</th>
+                                    <th scope="col">Total</th>
                                     <th scope="col">Saludable</th>
                                 </tr>
                             </thead>
@@ -242,6 +249,7 @@
                                     <td id="p31"></td>
                                     <td id="p39"></td>
                                     <td id="p47"></td>
+                                    <td id="total_soporte"></td>
                                     <td id="saludable_soporte"></td>
                                 </tr>
 
@@ -263,6 +271,7 @@
                                     <th scope="col">Pregunta 40</th>
                                     <th scope="col">Pregunta 41</th>
                                     <th scope="col">Pregunta 45</th>
+                                    <th scope="col">Total</th>
                                     <th scope="col">Saludable</th>
                                 </tr>
                             </thead>
@@ -275,6 +284,7 @@
                                     <td id="p40"></td>
                                     <td id="p41"></td>
                                     <td id="p45"></td>
+                                    <td id="total_manejo"></td>
                                     <td id="saludable_manejo"></td>
                                 </tr>
 
@@ -322,6 +332,7 @@
                                     <th scope="col">Pregunta 37</th>
                                     <th scope="col">Pregunta 44</th>
                                     <th scope="col">Pregunta 48</th>
+                                    <th scope="col">Total</th>
                                     <th scope="col">Saludable</th>
                                 </tr>
                             </thead>
@@ -333,6 +344,7 @@
                                     <td id="p37"></td>
                                     <td id="p44"></td>
                                     <td id="p48"></td>
+                                    <td id="total_autoactualizacion"></td>
                                     <td id="saludable_autoactualizacion"></td>
                                 </tr>
 
@@ -597,6 +609,13 @@
                     document.getElementById("p44").textContent = datos.p44 || "0";
                     document.getElementById("p48").textContent = datos.p48 || "0";
                     document.getElementById("saludable_autoactualizacion").textContent = datos.saludable_autoactualizacion || "0";
+
+                    document.getElementById("total_nutricion").textContent = datos.total_nutricion || "0";
+                    document.getElementById("total_ejercicio").textContent = datos.total_ejercicio || "0";
+                    document.getElementById("total_salud").textContent = datos.total_salud || "0";
+                    document.getElementById("total_soporte").textContent = datos.total_soporte || "0";
+                    document.getElementById("total_manejo").textContent = datos.total_manejo || "0";
+                    document.getElementById("total_autoactualizacion").textContent = datos.total_autoactualizacion || "0";
 
                     document.getElementById("total_general").textContent = datos.total_general || "0";
                     // 1. Obtén el elemento una sola vez y guárdalo en una variable

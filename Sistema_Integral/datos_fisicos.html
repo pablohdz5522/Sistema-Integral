@@ -204,7 +204,8 @@
                             required>
                         <br><br>
 
-                        <select id="actividad1" class="form-select form-select-sm" style="width: 200px; margin-left: 25px;" name="actividad1" required>
+                        <select id="actividad1" class="form-select form-select-sm"
+                            style="width: 200px; margin-left: 25px;" name="actividad1" required>
                             <option value="" selected disable>Elija el nivel de actividad</option>
                             <option value="1.2">Sedentario</option>
                             <option value="1.375">Actividad</option>
@@ -306,7 +307,7 @@
                 <!--Division para el botón de guardar-->
                 <br>
                 <div class="d-flex justify-content-center">
-                    <button class="guardar" title="Guardar datos" onclick="guardarFormulario()">
+                    <button class="guardar" title="Guardar datos">
                         <div class="svg-wrapper-1">
                             <div class="svg-wrapper">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30"
@@ -743,7 +744,7 @@
                 document.getElementById("clasificacionicc1").value = clasificacion1;
                 document.getElementById("icc1").value = icc.toFixed(2);
             } else {
-                document.getElementById("clasificacioncintura1").value = "";
+                document.getElementById("clasificacioncadcin1").value = "";
                 document.getElementById("clasificacionicc1").value = "";
                 document.getElementById("icc1").value = "";
             }
@@ -755,25 +756,25 @@
         document.getElementById("peso1").addEventListener("input", calculargrasa);
         document.getElementById("talla1").addEventListener("input", calculargrasa);
 
-        function calculargrasa(){
+        function calculargrasa() {
             const peso = parseFloat(document.getElementById("peso1").value);
             const talla = parseFloat(document.getElementById("talla1").value);
             const sexo = document.getElementById("sexo1").value;
             let resultado = "";
 
-            if(peso > 0 && talla > 0 && sexo){
-                if(sexo == "MASCULINO"){
+            if (peso > 0 && talla > 0 && sexo) {
+                if (sexo == "MASCULINO") {
                     resultado = (0.407 * peso) + (0.267 * talla) - 19.2;
-                }else if (sexo == "FEMENINO"){
+                } else if (sexo == "FEMENINO") {
                     resultado = (0.252 * peso) + (0.473 * talla) - 48.3
                 }
 
                 document.getElementById("masamagra1").value = resultado.toFixed(2);
-            } else{
-                document.getElementById("masamagra1").value ="";
+            } else {
+                document.getElementById("masamagra1").value = "";
             }
         }
-        
+
     </script>
 
     <script>
@@ -782,31 +783,31 @@
         document.getElementById("talla1").addEventListener("input", calcularmb);
         document.getElementById("edad1").addEventListener("input", calcularmb)
 
-        function calcularmb(){
+        function calcularmb() {
             const peso = parseFloat(document.getElementById("peso1").value);
             const talla = parseFloat(document.getElementById("talla1").value);
             const edad = parseInt(document.getElementById("edad1").value)
             const sexo = document.getElementById("sexo1").value;
             let resultado = "";
 
-            if (peso > 0 && talla > 0 && edad > 0 && sexo){
+            if (peso > 0 && talla > 0 && edad > 0 && sexo) {
 
-                if(sexo=="MASCULINO"){
-                    resultado = (10*peso)+(6.25*talla)-(5*edad)+5;
-                }else if (sexo=="FEMENINO"){
-                    resultado = (10*peso)+(6.25*talla)-(5*edad)-161
+                if (sexo == "MASCULINO") {
+                    resultado = (10 * peso) + (6.25 * talla) - (5 * edad) + 5;
+                } else if (sexo == "FEMENINO") {
+                    resultado = (10 * peso) + (6.25 * talla) - (5 * edad) - 161
                 }
 
                 calcularGet();
-                document.getElementById("mb1").value=resultado.toFixed(2);
-            }else{
-                document.getElementById("mb1").value ="";
+                document.getElementById("mb1").value = resultado.toFixed(2);
+            } else {
+                document.getElementById("mb1").value = "";
             }
         }
     </script>
 
     <script>
-    // Debes llamar a esta función cuando el MB o el nivel de actividad cambien
+        // Debes llamar a esta función cuando el MB o el nivel de actividad cambien
         document.getElementById("mb1").addEventListener("input", calcularGet);
         document.getElementById("actividad1").addEventListener("input", calcularGet); // ¡Añade este!
 
@@ -816,7 +817,7 @@
             const factorActividad = parseFloat(document.getElementById("actividad1").value);
 
             if (!isNaN(kcal) && !isNaN(factorActividad)) {
-                
+
                 // FÓRMULA CORREGIDA: MB * Factor de Actividad
                 const get = kcal * factorActividad;
 
@@ -909,7 +910,7 @@
             const sexo = document.getElementById("sexo1").value;
             let result = "";
 
-            
+
             if (!isNaN(peso) && !isNaN(talla) && !isNaN(edad) && peso > 0 && talla > 0 && edad > 0) {
 
                 if (sexo.toUpperCase() === "MASCULINO") {
@@ -919,7 +920,7 @@
                 }
             }
 
-            
+
             if (typeof result === 'number') {
                 document.getElementById("aguatotal1").value = result.toFixed(2);
                 calcularagua();
@@ -932,8 +933,8 @@
 
     <script>
         document.getElementById("sexo1").addEventListener("input", ideales);
-        
-            function ideales() {
+
+        function ideales() {
             // Usamos .toUpperCase() para que funcione con "MASCULINO", "masculino", etc.
             const sexo = document.getElementById("sexo1").value.toUpperCase();
             let result = "";
@@ -943,7 +944,7 @@
             } else if (sexo === "FEMENINO") {
                 result = "25 - 31%";
             }
-            
+
             document.getElementById("valoridealgrasa1").value = result;
         }
         ideales();
@@ -977,13 +978,13 @@
 
             if (!isNaN(glucosa)) {
                 if (glucosa == 0) {
-                    clasificacion = "Sin resultados"
+                    clasificacion = "Sin resultados";
                 } else if (glucosa < 100) {
-                    clasificacion = "Normal"
+                    clasificacion = "Normal";
                 } else if (glucosa >= 100 && glucosa <= 125) {
-                    clasificacion = "Glucosa Alterada (Pre-diabetes)"
+                    clasificacion = "Glucosa Alterada (Pre-diabetes)";
                 } else {
-                    clasificacion = "DM"
+                    clasificacion = "DM";
                 }
                 document.getElementById("clasificacionglucosa1").value = clasificacion;
             } else {
@@ -1002,13 +1003,13 @@
             if (!isNaN(colesterol)) {
 
                 if (colesterol == 0) {
-                    clasificacion = "Sin resultados"
+                    clasificacion = "Sin resultados";
                 } else if (colesterol < 200) {
-                    clasificacion = "Optimo"
+                    clasificacion = "Optimo";
                 } else if (colesterol >= 200 && colesterol <= 239) {
-                    clasificacion = "Límite Alto"
+                    clasificacion = "Límite Alto";
                 } else {
-                    clasificacion = "Alto"
+                    clasificacion = "Alto";
                 }
                 document.getElementById("clasificacioncolesterol1").value = clasificacion;
             } else {
@@ -1082,6 +1083,79 @@
             }
         });
     </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("formalumnos");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); 
+        
+        const boton = form.querySelector(".guardar");
+        const textoBoton = boton.querySelector("span");
+
+        boton.disabled = true;
+        textoBoton.textContent = "Guardando...";
+
+        const formData = new FormData(form);
+
+        fetch('guardar_datos_fisicos_alumnos.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            console.log('Status:', response.status);
+            console.log('Headers:', response.headers.get('content-type'));
+            
+            // Primero obtener el texto de la respuesta
+            return response.text().then(text => {
+                console.log('Respuesta raw:', text);
+                
+                // Intentar parsear como JSON
+                try {
+                    const data = JSON.parse(text);
+                    return { ok: response.ok, data: data };
+                } catch (e) {
+                    console.error('Error al parsear JSON:', e);
+                    throw new Error('Respuesta no es JSON válido: ' + text.substring(0, 100));
+                }
+            });
+        })
+        .then(result => {
+            if (!result.ok) {
+                throw new Error(result.data.error || 'Error en el servidor');
+            }
+            
+            const data = result.data;
+            if (data.success) {
+                alert(data.success);
+                form.reset();
+                // Limpiar campos readonly también
+                document.getElementById("nombre1").value = "";
+                document.getElementById("apellidos1").value = "";
+                document.getElementById("sexo1").innerHTML = '<option value="" selected disabled></option>';
+                document.getElementById("facultad1").innerHTML = '<option value="" selected disabled></option>';
+                document.getElementById("carrera1").innerHTML = '<option value="" selected disabled></option>';
+            } else if (data.error) {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error completo:', error);
+            alert('Error: ' + error.message);
+        })
+        .finally(() => {
+            boton.disabled = false;
+            textoBoton.textContent = "Guardar";
+        });
+    });
+});
+    </script>
+
+
+</body>
+
+</html>
 
 
 </body>
