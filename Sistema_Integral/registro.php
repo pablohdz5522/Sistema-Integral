@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt_check->store_result();
 
     if ($stmt_check->num_rows > 0) {
-        echo json_encode(['error' => "La matrícula ya existe: $matricula"]);
+        echo json_encode(['error' => "Bienvenido: $matricula"]);
         $stmt_check->close();
         exit;
     }
@@ -90,7 +90,7 @@ $stmt_verificar->close();
         // Responder con redirección segura a menuAlumno.php
         echo json_encode([
             'success' => true,
-            'redirect' => 'menuAlumno.php'
+            'redirect' => 'menuAlum.php'
         ]);
     } else {
         echo json_encode(['error' => 'Error al registrar: ' . $stmt->error]);

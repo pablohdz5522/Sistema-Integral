@@ -22,7 +22,8 @@
         <p>Introduce tus datos de forma correcta</p>
     </div>
 
-    <div class="modal fade" id="modalConsentimiento" tabindex="-1" aria-labelledby="modalConsentimientoLabel" aria-hidden="true">
+    <div class="modal fade" id="modalConsentimiento" tabindex="-1" aria-labelledby="modalConsentimientoLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -30,8 +31,10 @@
                 </div>
                 <div class="modal-body">
                     <p><b>Estimado Alumn@</b></p>
-                    <p>A continuación se te presentan una seria de preguntas relacionadas con tu estilo de vida que pudieran repercutir en tu salud.</p>
-                    <p>La información que proporciones será manejada de manera confidencial y los datos serán utilizados para el diseño e implementación de Intervenciones en la salud de los jóvenes.</p>
+                    <p>A continuación se te presentan una seria de preguntas relacionadas con tu estilo de vida que
+                        pudieran repercutir en tu salud.</p>
+                    <p>La información que proporciones será manejada de manera confidencial y los datos serán utilizados
+                        para el diseño e implementación de Intervenciones en la salud de los jóvenes.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="btnNoConsentimiento">No, gracias</button>
@@ -66,8 +69,8 @@
         <div style="margin-top: 35px;">
             <div class="mb-3 matriculac">
                 <label for="Matricula" class="form-label" style="font-weight: bold;">Matricula</label>
-                <input type="number" class="form-control matriculainput" name="matricula" id="matricula"
-                    placeholder="000000" required />
+                <input type="text" class="form-control matriculainput" name="matricula" id="matricula"
+                    placeholder="000000" required maxlength="6" pattern="\d{6}" inputmode="numeric"/>
             </div>
         </div>
 
@@ -274,22 +277,36 @@
                 modalConsentimiento.hide();
                 modalMatricula.show();
             });
-            
+
             $('#btnNoConsentimiento').click(function () {
                 $('#modalConsentimiento .modal-body').html('<p>Gracias por tu tiempo.</p>');
                 $('#btnSiConsentimiento, #btnNoConsentimiento').prop('disabled', true);
-                setTimeout(function() {
+                setTimeout(function () {
                     window.location.href = 'despedida.html';
                 }, 1500);
             });
 
             $('#verificarMatricula').click(function () {
-                const matricula = $('#matriculaInput').val().trim().toUpperCase();
+                // Quitamos .toUpperCase() porque solo queremos números
+                const matricula = $('#matriculaInput').val().trim();
+
+                // 1. Validación de campo vacío
                 if (!matricula) {
                     $('#matriculaError').text('Por favor, ingresa una matrícula.').show();
                     return;
                 }
 
+                // 2. NUEVA VALIDACIÓN: Exactamente 6 dígitos numéricos
+                const regex = /^\d{6}$/;
+                if (!regex.test(matricula)) {
+                    $('#matriculaError').text('La matrícula debe tener exactamente 6 dígitos numéricos.').show();
+                    return; // Detiene la ejecución si no es válido
+                }
+
+                // Si ambas validaciones pasan, ocultamos el error y continuamos con AJAX
+                $('#matriculaError').hide();
+
+                // 3. Tu código AJAX (se ejecuta solo si la matrícula es válida)
                 $.ajax({
                     url: 'verificar_matricula.php',
                     type: 'POST',
@@ -302,9 +319,7 @@
                             modalMatricula.hide();
                             $('#matriculaError').hide();
                             $('#matricula').val(matricula);
-                            
-                            // Esta línea ahora funcionará correctamente
-                            $('#matricula').trigger('input'); 
+                            $('#matricula').trigger('input');
                         }
                     },
                     error: function (xhr) {
@@ -316,7 +331,7 @@
 
         // Lógica del botón de guardar (se queda igual)
         document.getElementById("enviar").addEventListener("click", function (event) {
-            event.preventDefault(); 
+            event.preventDefault();
             let edadInput = document.getElementById("edad");
             let correoInput = document.getElementById("correo");
 
@@ -330,17 +345,17 @@
                 method: "POST",
                 body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    window.location.href = data.redirect;
-                } else if (data.error) {
-                    alert(data.error);
-                } else {
-                    alert("Ocurrió un error inesperado.");
-                }
-            })
-            .catch(error => console.error("Error:", error));
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = data.redirect;
+                    } else if (data.error) {
+                        alert(data.error);
+                    } else {
+                        alert("Ocurrió un error inesperado.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
         });
     </script>
 

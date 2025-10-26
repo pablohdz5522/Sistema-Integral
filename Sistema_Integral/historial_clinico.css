@@ -1,323 +1,371 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #003366, #ADB0B6, #003366);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  padding: 20px 0;
+}
+
 .salir {
-    display: block;
-    position: relative;
-    width: 56px;
-    height: 56px;
-    margin: 0;
-    overflow: hidden;
-    outline: none;
-    background-color: transparent;
-    cursor: pointer;
-    border: 0;
-  }
-  
-  .salir:before,
-  .salir:after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    inset: 7px;
-  }
-  
-  .salir:before {
-    border: 4px solid #000000;
-    transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
-      transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
-  }
-  
-  .salir:after {
-    border: 4px solid #f81100;
-    transform: scale(1.3);
-    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    opacity: 0;
-  }
-  
-  .salir:hover:before,
-  .salir:focus:before {
-    opacity: 0;
-    transform: scale(0.7);
-    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  
-  .salir:hover:after,
-  .salir:focus:after {
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
-      transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
-  }
-  
-  .salir-box {
-    display: flex;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  .salir-elem {
-    display: block;
-    width: 20px;
-    height: 20px;
-    margin: 22px 18px 0 18px;
-    transform: rotate(180deg);
-    fill: #000000;
-  }
-  
-  .button:hover .salir-box,
-  .salir:focus .salir-box {
-    transition: 0.4s;
-    transform: translateX(-56px);
+  display: block;
+  position: relative;
+  width: 56px;
+  height: 56px;
+  margin: 0;
+  overflow: hidden;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  border: 0;
+}
+
+.salir:before,
+.salir:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  inset: 7px;
+}
+
+.salir:before {
+  border: 4px solid #ffffff;
+  transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
+    transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
+}
+
+.salir:after {
+  border: 4px solid #f81100;
+  transform: scale(1.3);
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  opacity: 0;
+}
+
+.salir:hover:before,
+.salir:focus:before {
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
+    transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.salir:hover:after,
+.salir:focus:after {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
+    transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
+}
+
+.salir-box {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.salir-elem {
+  display: block;
+  width: 20px;
+  height: 20px;
+  margin: 22px 18px 0 18px;
+  transform: rotate(180deg);
+  fill: #ffffff;
+}
+
+.salir:hover .salir-box,
+.salir:focus .salir-box {
+  transition: 0.4s;
+  transform: translateX(-56px);
+}
+
+.titulo {
+  display: inline-block;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  margin: auto;
+}
+
+.fondogenerales {
+  background-color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+}
+
+.seccion-header {
+  background: linear-gradient(135deg, #003366, #004d99);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+}
+
+.instruccion-busqueda {
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #1976d2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.instruccion-busqueda strong {
+  color: #0d47a1;
+}
+
+.icono-info {
+  background-color: #1976d2;
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.datos-principales {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border-left: 4px solid #003366;
+}
+
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0;
+}
+
+.campo-grupo label {
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.campo-grupo input,
+.campo-grupo select {
+  border: 2px solid #dee2e6;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.campo-grupo input:focus,
+.campo-grupo select:focus {
+  border-color: #003366;
+  box-shadow: 0 0 0 0.2rem rgba(0, 51, 102, 0.15);
+  outline: none;
+}
+
+.campo-grupo input[readonly] {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+.fila-campos {
+  display: grid;
+  grid-template-columns: 150px 180px 1fr 1fr;
+  gap: 15px;
+  align-items: end;
+}
+
+.fila-campos-secundarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.seccion-patologias {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #dee2e6;
+  height: 100%;
+}
+
+.titulo-patologia {
+  font-weight: 700;
+  color: #003366;
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #003366;
+}
+
+.patologia-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1.5fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: white;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.patologia-item:hover {
+  background: #f1f5f9;
+  transform: translateX(5px);
+}
+
+.patologia-label {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 14px;
+}
+
+.select-patologia {
+  border: 2px solid #ced4da;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.select-patologia:focus {
+  border-color: #003366;
+  box-shadow: 0 0 0 0.2rem rgba(0, 51, 102, 0.15);
+  outline: none;
+}
+
+.select-patologia:disabled {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+.enfermedad-card {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.enfermedad-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e0;
+}
+
+.textarea-tratamiento {
+  width: 100%;
+  border: 2px solid #ced4da;
+  border-radius: 8px;
+  padding: 12px;
+  resize: vertical;
+  min-height: 100px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.textarea-tratamiento:focus {
+  border-color: #003366;
+  box-shadow: 0 0 0 0.2rem rgba(0, 51, 102, 0.15);
+  outline: none;
+}
+
+.btn-agregar {
+  background: linear-gradient(135deg, #48bb78, #38a169);
+  border: none;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-agregar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(72, 187, 120, 0.4);
+}
+
+.btn-eliminar {
+  background: linear-gradient(135deg, #fc8181, #f56565);
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-eliminar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(252, 129, 129, 0.4);
+}
+
+.btn-guardar {
+  background: linear-gradient(135deg, #003366, #004d99);
+  border: none;
+  padding: 12px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 51, 102, 0.3);
+  transition: all 0.3s ease;
+  color: white;
+}
+
+.btn-guardar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 51, 102, 0.4);
+}
+
+.grid-patologias {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+@media (max-width: 992px) {
+  .fila-campos {
+    grid-template-columns: 1fr 1fr;
   }
 
-
-  .titulo {
-    display: inline-block;
-    text-align: center;
-    font-size: 28px;
-    margin: 0 auto;
-    font-family: 'Inria Sans', sans-serif; 
+  .grid-patologias {
+    grid-template-columns: 1fr;
   }
 
+  .patologia-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
 
-  .containerdentro {
-    border: 3px solid black; /* Borde visible */
-    border-radius: 10px; /* Bordes redondeados */
-    padding: 15px; /* Espaciado interno */
-    background-color: transparent; /* Fondo transparente */
-    margin: 10px auto; /* Centra el contenedor */
-    min-height: 100vh; /* Altura mínima de pantalla */
-    box-sizing: border-box; /* Evita que el padding afecte el tamaño total */
-    width: 100%;
-    max-width: 1200px;
-    overflow-x: auto; /* Habilita el scroll horizontal */
-    white-space: nowrap; /* Evita que los elementos bajen de línea */
+@media (max-width: 576px) {
+  .fila-campos {
+    grid-template-columns: 1fr;
   }
-
-  .scroll-container {
-      display: flex;
-      flex-wrap: nowrap; /* Evita que los elementos se acomoden en varias líneas */
-      justify-content: flex-start; /* Asegura que los elementos comiencen desde la izquierda */
-      gap:0px; /* Espaciado entre elementos */
-      min-width: 990px; /* Asegura que haya espacio para todos los elementos */
-  }
-  
-
-  .label1 {
-    margin-left: 10px;
-    font-family: 'Inria Sans', sans-serif;
-    padding: 3px 10px;
-    background-color: #ddd; /* Color de fondo para diferenciar */
-    border-radius: 4px;
-  }
-
-  .inputs1{
-    border: none; /* Quitamos el borde del input para que parezca parte del cuadro */
-    border-radius: 0px 5px 5px 0px; /* Eliminamos bordes redondeados del input */
-    flex-grow: 0; /* Para que el input tome el resto del espacio */
-    padding: 3px;
-  }
-
-  .select1{
-    margin-left: 10px; /* Quitamos el borde del input para que parezca parte del cuadro */
-    border-radius: 5px; /* Eliminamos bordes redondeados del input */
-    flex-grow: 0; /* Para que el input tome el resto del espacio */
-    padding: 3px;
-    border: none;
-    text-align: center;
-  }
-
-  .separacion {
-    border-right: 1px solid #000000;
-    border-bottom: 1px solid #000000;
-    padding-right: 20px;
-    height: 800px;
-    max-height: 100vh; /* Mantener el alto máximo con un porcentaje de la pantalla */
-    overflow: auto; /* Permite desplazamiento si el contenido es muy grande */
-    word-wrap: break-word; /* Evita que el contenido se desborde */
-    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
-    border-left: 1px solid #000000;
-    
-  }
-
-  .separacion2 {
-      overflow: auto;
-      word-wrap: break-word;
-      box-sizing: border-box;
-      border-bottom: 1px solid #000000;
-      border-right: 1px solid #000000;
-      border-left: 1px solid #000000;
-      overflow: auto; /* Permite desplazamiento si el contenido es muy grande */
-      word-wrap: break-word; /* Evita que el contenido se desborde */
-      box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
-      height: 608px;
-  }
-
-  .row {
-      flex-wrap: nowrap !important; /* Evita que las columnas bajen */
-  }
-
-  .titulogrande {
-    display: inline-block;
-    text-align: center;
-    font-size: 40px;
-    font-family: 'Inria Sans', sans-serif; 
-    
-  }
-
-  .patologias{
-    font-family: 'Inria Sans', sans-serif;
-    font-size: 15px;
-    font-weight: bold;
-  }
-
-
-  /* Asegura que cada select no se estire más de lo necesario */
-  select {
-    max-width: 150px; /* Ajusta según tus necesidades */
-    flex-grow: 0; /* Evita que los selects crezcan más de lo necesario */
-  }
-
-
-  .patologias {
-    margin-right: 10px; /* Espacio entre el label y el select */
-  }
-
-  
-  .select2 {
-    padding: 1px 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc; /* Añadir borde si se desea */
-    font-family: 'Inria Sans', sans-serif;
-    text-align: center;
-    flex-grow: 0; /* Para que no crezcan más de lo necesario */
-    margin-left: 8px;
-  } 
-
-  .cajatexto{
-
-    width: 300px;  /* Ancho fijo */
-    height: 120px; /* Alto fijo */
-    resize: none;  /* Evita que el usuario cambie el tamaño */
-    border-radius: 8px;
-    font-family: 'Inria Sans', sans-serif;
-  }
-
-
-
-  .guardar {
-    font-family: inherit;
-    font-size: 20px;
-    background: #212121;
-    color: white;
-    fill: rgb(155, 153, 153);
-    padding: 0.5em 1em;
-    padding-left: 0.9em;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    border: none;
-    border-radius: 15px;
-    font-weight: 1000;
-  }
-  
-  .guardar span {
-    display: block;
-    margin-left: 0.3em;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .guardar svg {
-    display: block;
-    transform-origin: center center;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .guardar:hover {
-    background: #000;
-  }
-  
-  .guardar:hover .svg-wrapper {
-    transform: scale(1.25);
-    transition: 0.5s linear;
-  }
-  
-  .guardar:hover svg {
-    transform: translateX(1.2em) scale(1.1);
-    fill: #fff;
-  }
-  
-  .guardar:hover span {
-    opacity: 0;
-    transition: 0.5s linear;
-  }
-  
-  .guardar:active {
-    transform: scale(0.95);
-  }
-
-
-
-
-
-  .agregar {
-    position: relative;
-    width: 500px;
-    height: 40px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    border: 1px solid #34974d;
-    background-color: #3aa856;
-    border-radius: 5px;
-  }
-  
-  .agregar, .agregar__icon, .agregar__text {
-    transition: all 0.3s;
-  }
-  
-  .agregar .agregar__text {
-    transform: translateX(150px);
-    color: #fff;
-    font-weight: 600;
-    text-align: center;
-  }
-  
-  .agregar .agregar__icon {
-    position: absolute;
-    transform: translateX(395px);
-    height: 100%;
-    width: 100px;
-    background-color: #34974d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-  }
-  
-  .agregar .svg {
-    width: 30px;
-    stroke: #fff;
-  }
-  
-  .agregar:hover {
-    background: #34974d;
-  }
-  
-  .agregar:hover .agregar__text {
-    color: transparent;
-  }
-  
-  .agregar:hover .agregar__icon {
-    width: 90px;
-    transform: translateX(0);
-  }
-  
-  .agregar:active .agregar__icon {
-    background-color: #2e8644;
-  }
-  
-  .agregar:active {
-    border: 1px solid #2e8644;
-  }
+}

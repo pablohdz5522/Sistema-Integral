@@ -1,16 +1,3 @@
-html, body {
-  height: 100%;
-  overflow: hidden; /* Evita que el contenido se desplace cuando la ventana es pequeña */
-}
-
-body {
-  overflow: auto; /* Activa el desplazamiento solo si el contenido excede el tamaño de la pantalla */
-}
-
-.container { 
-
-  overflow: auto; /* Añade barras de desplazamiento cuando sea necesario */
-}
 
 
 .salir {
@@ -85,312 +72,226 @@ body {
     transition: 0.4s;
     transform: translateX(-56px);
   }
+
+  body {
+            background: linear-gradient(135deg, #003366, #ADB0B6, #003366);
+            margin: 0;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .titulo {
+            display: inline-block;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+            margin: auto;
+            font-family: 'Inria Sans', sans-serif;
+        }
+
+        .fondogenerales {
+            background-color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+        }
+
+        .seccion-header {
+            background: linear-gradient(135deg, #003366, #004d99);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .instruccion-busqueda {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1976d2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instruccion-busqueda strong {
+            color: #0d47a1;
+        }
+
+        .icono-info {
+            background-color: #1976d2;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .datos-principales {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #003366;
+        }
+
+        .campo-grupo {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0;
+        }
+
+        .campo-grupo label {
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 6px;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .campo-grupo input,
+        .campo-grupo select {
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .campo-grupo input:focus,
+        .campo-grupo select:focus {
+            border-color: #003366;
+            box-shadow: 0 0 0 0.2rem rgba(0, 51, 102, 0.15);
+            outline: none;
+        }
+
+        .campo-grupo input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+
+        .fila-campos {
+            display: grid;
+            grid-template-columns: 150px 180px 1fr 1fr;
+            gap: 15px;
+            align-items: end;
+        }
+
+        .fila-campos-secundarios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Secciones de mediciones */
+        .seccion-mediciones {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #dee2e6;
+        }
+
+        .titulo-medicion {
+            font-weight: 700;
+            color: #003366;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #003366;
+        }
+
+        .grupo-medicion {
+            margin-bottom: 18px;
+        }
+
+        .grupo-medicion label {
+            display: block;
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        .grupo-medicion input,
+        .grupo-medicion select {
+            width: 100%;
+            border: 2px solid #ced4da;
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .grupo-medicion input:focus,
+        .grupo-medicion select:focus {
+            border-color: #003366;
+            box-shadow: 0 0 0 0.2rem rgba(0, 51, 102, 0.15);
+            outline: none;
+        }
+
+        .grupo-medicion input[readonly] {
+            background-color: #e9ecef;
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .grid-mediciones {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .grid-mediciones {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .fila-campos {
+                grid-template-columns: 1fr 1fr;
+            }
+            .grid-mediciones {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .fila-campos {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn-guardar {
+            background: linear-gradient(135deg, #003366, #004d99);
+            border: none;
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 51, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-guardar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 51, 102, 0.4);
+        }
+
+
   
-
-.custom-dropdown .dropdown-menu {
-    background-color: #fdfdfd !important; /* Color naranja */
-    min-width: 250px !important; /* Más ancho */
-}
-
-.custom-dropdown .dropdown-item {
-    font-size: 15px !important;
-    padding: 10px 40px !important;
-}
-
-.custom-btn {
-    font-size: 15px !important; /* Aumenta el tamaño del texto */
-    padding: 10px 40px !important; /* Más espacio interno */
-    width: 250px !important; /* Aumenta el ancho */
-    height: 40px !important; /* Aumenta la altura */
-    background-color: #fdfdfd !important; /* Cambia el color de fondo */
-    color: rgb(0, 0, 0) !important; /* Cambia el color del texto */
-    border-radius: 7px !important; /* Bordes redondeados */
-    text-align: left;
-}
-
-
-
-
-.containerdentro{
-  border: 3px solid black; /* Borde visible */
-  border-radius: 10px; /* Bordes redondeados */
-  padding: 15px; /* Espaciado interno */
-  background-color: transparent; /* Fondo transparente */
-  margin: 10px auto; /* Centra el container */
-  min-height: 100vh; /* Asegura que el contenedor siempre tenga al menos el 100% de la altura de la pantalla */
-  box-sizing: border-box; /* Evita que el padding afecte el tamaño total */
-  overflow: hidden; /* Asegura que el contenedor no se desborde */
-  width: 100%;
-  max-width: 1200px;
-  padding: 10px;
-}
-
-.titulo {
-  display: inline-block;
-  text-align: right;
-  font-size: 28px;
-  margin: 0 auto;
-  font-family: 'Inria Sans', sans-serif; 
-}
-
-
-
-.spang {
-  margin-left: 25px;
-  font-family: 'Inria Sans', sans-serif;
-  padding: 6px 12px;
-  background-color: #ddd; /* Color de fondo para diferenciar */
-}
-
-.form-control1 {
-  border: none; /* Quitamos el borde del input para que parezca parte del cuadro */
-  border-radius: 0px 5px 5px 0px; /* Eliminamos bordes redondeados del input */
-  flex-grow: 0; /* Para que el input tome el resto del espacio */
-  
-  padding: 4px;
-}
-
-.form-select1{
-  border: none; /* Quitamos el borde del input para que parezca parte del cuadro */
-  border-radius: 0px 5px 5px 0px; /* Eliminamos bordes redondeados del input */
-  flex-grow: 0; /* Para que el input tome el resto del espacio */
-  font-size: 14px;
-  padding: 6px;
-
-}
-
-.separacion {
-  border-right: 1px solid #000000;
-  padding-right: 20px;
-  border-bottom: 1px solid #000000;
-  border-left: 1px solid #000000;
-  height: 350px;
-  max-height: 78vh; /* Mantener el alto máximo con un porcentaje de la pantalla */
-  overflow: auto; /* Permite desplazamiento si el contenido es muy grande */
-  word-wrap: break-word; /* Evita que el contenido se desborde */
-  box-sizing: border-box; /* Asegura que el padding no afecte el tamaño total */
-}
-
-/* Solo aplica width: 100% cuando la pantalla sea pequeña */
-@media (max-width: 1024px) {
-  .separacion {
-    width: 100%; /* Aplica solo en pantallas pequeñas */
-  }
-  
-}
-
-.abajo{
-  font-family: 'Inria Sans', sans-serif;
-  text-align: center;
-  font-size: 22px; 
-  
-}
-
-.clasificacion1{
-  margin-left: 25px;
-  font-family: 'Inria Sans', sans-serif;
-  padding: 9px 5px;
-  background-color: #ddd; /* Color de fondo para diferenciar */
-  
-}
-.inputclasificacion{
-  border: none; /* Quitamos el borde del input para que parezca parte del cuadro */
-  border-radius: 0px 5px 5px 0px; /* Eliminamos bordes redondeados del input */
-  flex-grow: 0; /* Para que el input tome el resto del espacio */
-  font-size: 14px;
-  padding: 7.5px;
-  font-size: 12px;
-}
-
-
-.guardar {
-  font-family: inherit;
-  font-size: 20px;
-  background: #212121;
-  color: white;
-  fill: rgb(155, 153, 153);
-  padding: 0.5em 1em;
-  padding-left: 0.9em;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  border: none;
-  border-radius: 15px;
-  font-weight: 1000;
-}
-
-.guardar span {
-  display: block;
-  margin-left: 0.3em;
-  transition: all 0.3s ease-in-out;
-}
-
-.guardar svg {
-  display: block;
-  transform-origin: center center;
-  transition: transform 0.3s ease-in-out;
-}
-
-.guardar:hover {
-  background: #000;
-}
-
-.guardar:hover .svg-wrapper {
-  transform: scale(1.25);
-  transition: 0.5s linear;
-}
-
-.guardar:hover svg {
-  transform: translateX(1.2em) scale(1.1);
-  fill: #fff;
-}
-
-.guardar:hover span {
-  opacity: 0;
-  transition: 0.5s linear;
-}
-
-.guardar:active {
-  transform: scale(0.95);
-}
-
-
-.derecho{
-  display: flex;
-  gap: 15px; /* Espacio entre elementos */
-  justify-content: center;
-}
-
-.nombrec{
-  display: flex;
-  gap: 8px;
-  font-family: 'Inria Sans', sans-serif; 
-  margin-top: 20px;
-}
-.inputnombre{
-  width: 200px;
-  font-size: 16px;
-  padding: 1px;
-  border-radius: 5px;
-  border: 1px solid #000;
-}
-
-.matriculac{
-  display: flex;
-  gap: 8px;
-  font-family: 'Inria Sans', sans-serif; 
-  margin-top: 20px;
-}
-.inputmatricula{
-  width: 80px;
-  font-size: 16px;
-  padding: 1px;
-  border-radius: 5px;
-  border: 1px solid #000;
-}
-
-.fechac{
-  display: flex;
-  gap: 8px;
-  font-family: 'Inria Sans', sans-serif; 
-  margin-top: 20px;
-}
-.inputfecha{
-  width: 120px;
-  font-size: 16px;
-  padding: 1px;
-  border-radius: 5px;
-  border: 1px solid #000;
-}
-
-.apellidosc{
-  display: flex;
-  gap: 8px;
-  font-family: 'Inria Sans', sans-serif; 
-  margin-top: 20px;
-}
-
-.inputapellidos{
-  width: 250px;
-  font-size: 16px;
-  padding: 1px;
-  border-radius: 5px;
-  border: 1px solid #000;
-}
-
-.edadc{
-  display: flex;
-  gap: 8px;
-  font-family: 'Inria Sans', sans-serif; 
-  margin-top: 20px;
-}
-
-.inputedad{
-  width: 40px;
-  font-size: 16px;
-  padding: 1px;
-  border-radius: 5px;
-  border: 1px solid #000;
-}
-
-.correoc{
-  display: flex;
-  gap: 8px;
-  font-family: 'Inria Sans', sans-serif; 
-  margin-top: 20px;
-}
-
-.inputcorreo{
-  width: 200px;
-  font-size: 16px;
-  padding: 1px;
-  border-radius: 5px;
-  border: 1px solid #000;
-
-}
-
-.sexoc{
-  display: flex;
-  gap: 8px;
-  font-family: 'Inria Sans', sans-serif; 
-  margin-top: 20px;
-}
-
-.selectsexo{
-  width: 120px;
-
-  font-size: 16px;
-  padding: 1px;
-  border-radius: 5px;
-  border: 1px solid #000;
-}
-
-.facultadc{
-  display: flex;
-  gap: 8px;
-  font-family: 'Inria Sans', sans-serif; 
-  margin-top: 20px;
-}
-
-.selectfacultad{
-  width: 350px;
-  font-size: 16px;
-  padding: 1px;
-  border-radius: 5px;
-  border: 1px solid #000;
-}
-
-.carrerac{
-  display: flex;
-  gap: 8px;
-  font-family: 'Inria Sans', sans-serif; 
-  margin-top: 20px;
-}
-.selectcarrera{
-  width: 320px;
-  font-size: 16px;
-  padding: 1px;
-  border-radius: 5px;
-  border: 1px solid #000;
-  
-}

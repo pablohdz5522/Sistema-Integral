@@ -173,6 +173,11 @@ $conn->close();
       <i class="bi bi-people"></i>
       <h5 class="mt-3">Control Del Sistema</h5>
     </div>
+
+    <div class="menu-card" onclick="location.href='#'" data-aos="fade-up" data-aos-delay="600">
+      <i class="bi bi-cloud-download"></i>
+      <h5 class="mt-3">Descargar datos</h5>
+    </div>
   <?php } ?>
 </main>
 

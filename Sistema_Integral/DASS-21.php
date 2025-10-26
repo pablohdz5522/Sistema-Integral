@@ -31,7 +31,7 @@ $resultado = $stmt_verificar->get_result();
 if ($resultado->num_rows > 0) {
     $stmt_verificar->close();
     $conn->close();
-    header("Location: menuAlumno.php");
+    header("Location: menuAlum.php");
     exit();
 }
 $stmt_verificar->close();
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt_est->close();
 
             $conn->close();
-            header("Location: menuAlumno.php");
+            header("Location: menuAlum.php");
             exit();
         } else {
             $error_message = "Error al guardar los datos del formulario. Por favor, intenta de nuevo.";
