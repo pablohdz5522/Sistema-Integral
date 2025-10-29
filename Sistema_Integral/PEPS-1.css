@@ -1,57 +1,302 @@
+/* Ocultar flechas de input number */
 #matricula::-webkit-outer-spin-button,
 #matricula::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-/* Para Firefox */
 #matricula {
     -moz-appearance: textfield;
 }
 
+/* Estilos del body con nuevo gradiente amigable */
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px 0;
+}
+
+/* Alternativa de fondo más suave en verdes/turquesa */
+body.theme-green {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%) !important;
+}
+
+body.theme-warm {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%) !important;
+}
+
+/* Container principal */
+.container-fluid {
+    max-width: 900px;
+}
+
+/* Título principal */
+h3 {
+    color: #2d3748;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Sección de instrucciones */
+#instrucciones {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+#instrucciones p {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+#instrucciones p.text-center {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* Input de matrícula */
 .mati {
-    border: 1px solid #000;
-    width: 200px;
-    padding: 1px;
+    border: 2px solid #e2e8f0;
+    width: 100%;
+    max-width: 300px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.mati:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Cuadros de preguntas - MEJORADO */
+.cuadro {
+    background: white;
+    border: none;
+    border-left: 4px solid #667eea;
+    padding: 30px 25px;
+    margin: 25px 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    min-height: 120px;
+}
+
+.cuadro:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transform: translateY(-2px);
+}
+
+/* Contenedor de opciones con más espacio */
+.cuadro > div {
+    margin-top: 15px;
+    margin-left: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Labels de preguntas */
+.form-label {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+    display: block;
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+}
+
+/* Radio buttons mejorados */
+.form-check {
+    margin: 10px 0;
+    padding: 0;
+}
+
+.form-check-inline {
+    display: inline-block;
+    align-items: center;
+    margin-right: 15px;
+    margin-bottom: 5px;
+    min-width: 100px;
 }
 
 .colorradio {
-    border: 1px solid #000;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #cbd5e0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-right: 8px;
+    vertical-align: middle;
 }
 
+.colorradio:checked {
+    background-color: #667eea;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.colorradio:hover {
+    border-color: #667eea;
+}
+
+.form-check-label {
+    color: #4a5568;
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1.5;
+    display: inline-block;
+    padding: 5px 10px 5px 0;
+}
+
+/* Botón de envío mejorado */
 .colorboton {
-    color: #ffffff;
-    background: #000;
-    border: 3px solid #620bee;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: 1px solid #000;
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.table {
-    width: 50%;
-    inset-inline-start: center;
-    top: 170px;
-    background: none;
-    position: fixed;
-    font-size: 13px;
-    font-family: 'Lucida Sans';
+.colorboton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
 }
 
-.btn-secondary {
-    position: fixed;
-    inset-inline-end: 30%;
-    background-color: #620bee;
+.colorboton:active {
+    transform: translateY(0);
+}
+
+/* Mensaje de agradecimiento */
+#gracias {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+#gracias h2 {
+    color: #667eea;
+    font-size: 1.5rem;
+    line-height: 1.6;
+}
+
+/* Indicador de progreso (opcional - agregar con JS) */
+.progress-indicator {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.progress-bar-custom {
+    height: 8px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cuadro {
+        padding: 20px 15px;
+        min-height: auto;
+    }
+    
+    .form-check-inline {
+        display: block;
+        margin-bottom: 12px;
+        margin-right: 0;
+    }
+    
+    .form-label {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
+    .colorboton {
+        width: 100%;
+        padding: 12px 30px;
+    }
+}
+
+/* Animación de carga */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .cuadro {
-    border: 2px solid #4CAF50;
-    /* Borde verde */
-    padding: 10px;
-    /* Espaciado interno */
-    margin: 10px;
-    /* Espaciado externo */
-    border-radius: 5px;
-    /* Bordes redondeados */
-    background-color: #f9f9f9;
-    /* Fondo claro */
+    animation: fadeIn 0.5s ease-out;
+}
 
+/* Estado de error (opcional) */
+.cuadro.error {
+    border-left-color: #f56565;
+    animation: shake 0.3s ease-in-out;
+}
 
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Mejora para accesibilidad */
+.form-check-input:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Estilo para tabla (si se usa) */
+.table {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.btn-secondary {
+    background-color: #667eea !important;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #764ba2 !important;
+    transform: translateY(-2px);
 }

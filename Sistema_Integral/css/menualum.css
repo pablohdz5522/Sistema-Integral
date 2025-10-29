@@ -1,36 +1,432 @@
+/* Variables CSS para consistencia */
+:root {
+    --primary-color: #003366;
+    --secondary-color: #ADB0B6;
+    --accent-color: #0066cc;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --card-bg: #ffffff;
+    --card-header-bg: #003366;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    --shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.25);
+    --border-radius: 15px;
+}
+
+/* Reset y estilos base */
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: rgb(221, 240, 212);
+    background: linear-gradient(135deg, #003366, #ADB0B6, #003366) !important;
+    min-height: 100vh;
+    padding: 20px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Contenedor principal mejorado */
+.container-fluid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Tarjeta de datos del alumno */
 .centrado {
-    margin: auto;
+    margin: 0 auto;
+    animation: fadeInUp 0.6s ease-out;
 }
 
-.chico{
-    height: 100px;
+.card {
+    border: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    background: var(--card-bg);
 }
 
-.colorcard {
-    background-color: rgb(221, 222, 171);
+.card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-5px);
 }
 
-.formulario-rect {
-    border: 4px solid #333;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 30px;
-    background-color: #f9f9f9;
+.card-header {
+    background: linear-gradient(135deg, var(--primary-color), #004d99) !important;
+    color: white;
+    padding: 20px;
+    border: none;
 }
-.cerrar{
+
+.card-header h5 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
     text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.card-body {
+    padding: 25px;
+    background: var(--card-bg);
+}
+
+.card-body p {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    color: #333;
+    padding: 10px;
+    border-left: 3px solid var(--accent-color);
+    background: #f8f9fa;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+}
+
+.card-body p:hover {
+    background: #e9ecef;
+    padding-left: 15px;
+}
+
+.card-body p:last-child {
+    margin-bottom: 0;
+}
+
+.card-body strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Estilos para formularios */
+.formulario-rect {
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 30px;
+    margin-bottom: 25px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    transition: all 0.4s ease;
+    animation: scaleIn 0.5s ease-out;
+    animation-fill-mode: both;
+    position: relative;
+    overflow: hidden;
+}
+
+.formulario-rect:nth-child(3) {
+    animation-delay: 0.1s;
+}
+
+.formulario-rect:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.formulario-rect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.formulario-rect:hover::before {
+    width: 10px;
+}
+
+.formulario-rect:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.formulario-rect h3,
+.formulario-rect h4 {
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.formulario-rect h3::before,
+.formulario-rect h4::before {
+    content: '📋';
+    font-size: 1.5rem;
+}
+
+.formulario-rect p {
+    font-size: 1.05rem;
+    color: #555;
     margin-bottom: 20px;
 }
 
-.titulo{
-    background-color: rgb(138, 187, 108);
+/* Formularios completados */
+.formulario-rect.bg-success {
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+    border: 2px solid #1e7e34;
 }
 
-a{
+.formulario-rect.bg-success::before {
+    background: #ffffff;
+}
+
+.formulario-rect.bg-success h3,
+.formulario-rect.bg-success h4 {
+    color: white !important;
+}
+
+.formulario-rect.bg-success h3::before,
+.formulario-rect.bg-success h4::before {
+    content: '✅';
+}
+
+.formulario-rect.bg-success p {
+    color: white;
+    font-weight: 500;
+}
+
+/* Botones mejorados */
+.btn {
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-color), #0052a3);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #0052a3, var(--accent-color));
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #c82333, #dc3545);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #20c997, #28a745);
+}
+
+/* Sección de cerrar sesión */
+.cerrar {
+    text-align: center;
+    margin: 40px 0 30px;
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.cerrar button {
+    width: 200px;
+    font-size: 1.1rem;
+    padding: 14px 30px;
+}
+
+.cerrar a {
     text-decoration: none;
-    color: black;
+    color: white;
+    font-size: 1.05rem;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    display: inline-block;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.cerrar a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* Estilos para modales mejorados */
+.modal-content {
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 25px;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.modal-body {
+    padding: 30px;
+    font-size: 1.05rem;
+}
+
+.modal-footer {
+    padding: 20px 25px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Bordes de modales */
+.border-primary {
+    border-top: 5px solid var(--accent-color) !important;
+}
+
+.border-success {
+    border-top: 5px solid var(--success-color) !important;
+}
+
+.border-danger {
+    border-top: 5px solid var(--danger-color) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 10px 0;
+    }
+
+    .container-fluid {
+        padding: 0 15px;
+    }
+
+    .col-sm-6,
+    .col-sm-5 {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .card-header h5 {
+        font-size: 1.2rem;
+    }
+
+    .card-body p {
+        font-size: 0.95rem;
+        padding: 8px;
+    }
+
+    .formulario-rect {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .formulario-rect h3,
+    .formulario-rect h4 {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        padding: 10px 25px;
+        font-size: 0.9rem;
+    }
+
+    .cerrar button {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-header {
+        padding: 15px;
+    }
+
+    .card-header h5 {
+        font-size: 1.1rem;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-body p {
+        font-size: 0.9rem;
+    }
+
+    .formulario-rect {
+        padding: 15px;
+    }
+
+    .formulario-rect h3::before,
+    .formulario-rect h4::before {
+        font-size: 1.2rem;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+}
+
+/* Efectos adicionales */
+.chico {
+    height: 100px;
+    object-fit: cover;
+}
+
+/* Mejora de accesibilidad */
+a:focus,
+button:focus {
+    outline: 3px solid var(--accent-color);
+    outline-offset: 3px;
+}
+
+/* Indicador de carga suave */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.loading {
+    animation: pulse 1.5s ease-in-out infinite;
 }

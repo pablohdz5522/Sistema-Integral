@@ -303,7 +303,7 @@
                     </div>
 
                     <div class="text-center mt-2">
-                        <button type="submit" class="btn btn-primary btn-guardar"  title="Guardar datos">
+                        <button type="submit" class="btn btn-primary btn-guardar" title="Guardar datos">
                             <span>Guardar Datos</span>
                         </button>
                     </div>
@@ -744,8 +744,10 @@
             let clasificacion = "";
 
             if (!isNaN(glucosa)) {
-                if (glucosa == 0) {
+                if (glucosa <= 0) {
                     clasificacion = "Sin resultados";
+                } else if (glucosa < 70) {
+                    clasificacion = "Bajo"
                 } else if (glucosa < 100) {
                     clasificacion = "Normal";
                 } else if (glucosa >= 100 && glucosa <= 125) {
@@ -769,11 +771,13 @@
 
             if (!isNaN(colesterol)) {
 
-                if (colesterol == 0) {
+                if (colesterol <= 0) {
                     clasificacion = "Sin resultados";
+                } else if (colesterol < 160) {
+                    clasificacion = "Bajo";
                 } else if (colesterol < 200) {
                     clasificacion = "Optimo";
-                } else if (colesterol >= 200 && colesterol <= 239) {
+                } else if (colesterol < 240) {
                     clasificacion = "Límite Alto";
                 } else {
                     clasificacion = "Alto";
@@ -795,16 +799,15 @@
 
             if (!isNaN(trigliceridos)) {
 
-                if (trigliceridos == 0) {
+                if (trigliceridos <= 0) { 
                     clasificacion = "Sin resultados";
                 } else if (trigliceridos < 150) {
                     clasificacion = "Normal";
-                } else if (trigliceridos >= 150 && trigliceridos <= 199) {
-                    clasificacion = "Limite Alto";
-                } else if (trigliceridos >= 200 && trigliceridos <= 499) {
+                } else if (trigliceridos < 200) { 
+                    clasificacion = "Límite Alto";
+                } else if (trigliceridos < 500) { 
                     clasificacion = "Alto";
-
-                } else {
+                } else { // Todo lo demás (>= 500)
                     clasificacion = "Muy Alto";
                 }
                 document.getElementById("clasificaciontrigliceridos1").value = clasificacion;

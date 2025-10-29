@@ -1,263 +1,294 @@
-@media (min-width: 481px) and (max-width: 900px){
-    p{
-        text-align: center;
-    }
-    h3{
-        text-align: center;
-    }
-
-
+/* Variables CSS para consistencia */
+:root {
+    --primary-color: #ff0000;
+    --primary-hover: #cc0000;
+    --border-color: #ddd;
+    --focus-color: #4a90e2;
+    --text-dark: #333;
+    --bg-white: #fff;
+    --shadow: 0 2px 8px rgba(0,0,0,0.1);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-@media (max-width: 480px){
-    p{
-        text-align: center;
+/* Reset y base */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inria Sans', sans-serif;
+    background: linear-gradient(135deg, #003366,#ADB0B6,#003366) !important;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+/* Contenedor principal del formulario */
+.form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow-hover);
+}
+
+/* Títulos */
+.titulos {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 20px;
+    background: var(--bg-white);
+    border-radius: 15px;
+    max-width: 700px;
+    margin: 20px auto 40px;
+    box-shadow: var(--shadow);
+}
+
+.titulos h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.titulos p {
+    font-size: 1.1rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Secciones del formulario */
+.form-section {
+    margin-bottom: 35px;
+    padding-bottom: 25px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+/* Estilos comunes para todos los campos */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.95rem;
+}
+
+/* Inputs generales */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    font-family: 'Inria Sans', sans-serif;
+    background: #fafafa;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    background: var(--bg-white);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    transform: translateY(-1px);
+}
+
+input::placeholder {
+    color: #999;
+}
+
+/* Inputs especiales con anchos limitados */
+.small-input {
+    max-width: 150px;
+}
+
+.medium-input {
+    max-width: 300px;
+}
+
+/* Grid para campos que van juntos */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Botón guardar mejorado */
+.guardar {
+    background: var(--primary-color);
+    color: white;
+    padding: 14px 40px;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.guardar:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.4);
+}
+
+.guardar:active {
+    transform: translateY(0);
+}
+
+.divguardar {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #f0f0f0;
+}
+
+/* Inputs deshabilitados */
+input:disabled {
+    background: #e9ecef;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 25px 20px;
+        border-radius: 15px;
+    }
+    
+    .titulos {
+        padding: 20px 15px;
+    }
+    
+    .titulos h3 {
+        font-size: 1.6rem;
+    }
+    
+    .titulos p {
+        font-size: 1rem;
+    }
+    
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .section-title {
         font-size: 1.1rem;
     }
-    h3{
-        font-size: 1.6rem;
-        text-align: center;
-    }
-
-
-}
-
-
-.titulos{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    font-family: 'Inria Sans', sans-serif; 
     
+    input[type="text"],
+    input[type="email"],
+    input[type="date"],
+    input[type="number"],
+    select {
+        padding: 10px 14px;
+        font-size: 16px;
+    }
+    
+    .guardar {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 16px;
+    }
 }
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.matriculac{
-    display: flex;
-    gap: 8px;
-    font-family: 'Inria Sans', sans-serif; 
-    align-items: center;
-    justify-content: center;
-}
-.matriculainput{
-    width: 100px;
-    text-align: center;
-    font-size: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #000;
-}
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.nombrec{
-    display: flex;
-    gap: 8px;
-    font-family: 'Inria Sans', sans-serif; 
-    align-items: center;
-    justify-content: center;
-}
-.nombreinput{
-    width: 200px;
-    text-align: center;
-    font-size: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #000;
+@media (max-width: 480px) {
+    body {
+        padding: 10px 0;
+    }
+    
+    .form-container {
+        padding: 20px 15px;
+        margin: 10px;
+    }
+    
+    .titulos {
+        margin: 10px 10px 30px;
+    }
+    
+    .titulos h3 {
+        font-size: 1.4rem;
+    }
+    
+    .form-section {
+        margin-bottom: 25px;
+    }
 }
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.apepac{
-    display: flex;
-    gap: 8px;
-    font-family: 'Inria Sans', sans-serif; 
-    align-items: center;
-    justify-content: center;
-}
-.apepainput{
-    width: 200px;
-    text-align: center;
-    font-size: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #000;
+/* Estilos para modales (opcional, mejora visual) */
+.modal-content {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
 }
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.apemac{
-    display: flex;
-    gap: 8px;
-    font-family: 'Inria Sans', sans-serif; 
-    align-items: center;
-    justify-content: center;
-}
-.apemainput{
-    width: 200px;
-    text-align: center;
-    font-size: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #000;
+.modal-header {
+    border-bottom: 2px solid #f0f0f0;
+    padding: 20px 25px;
 }
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.edadc{
-    display: flex;
-    gap: 8px;
-    font-family: 'Inria Sans', sans-serif; 
-    align-items: center;
-    justify-content: center;
-}
-.edadinput{
-    width: 80px;
-    text-align: center;
-    font-size: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #000;
+.modal-body {
+    padding: 25px;
 }
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.sexoc{
-    display: flex;
-    gap: 8px;
-    font-family: 'Inria Sans', sans-serif; 
-    align-items: center;
-    justify-content: center;
-}
-.sexoinput{
-    width: 150px;
-    text-align: center;
-    font-size: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #000;
+.modal-footer {
+    border-top: 2px solid #f0f0f0;
+    padding: 20px 25px;
 }
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.correoc{
-    display: flex;
-    gap: 8px;
-    font-family: 'Inria Sans', sans-serif; 
-    align-items: center;
-    justify-content: center;
-}
-.correoinput{
-    width: 220px;
-    text-align: center;
-    font-size: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #000;
-    font-size: small;
+/* Animación sutil al cargar */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.fechac{
-    display: flex;
-    gap: 8px;
-    font-family: 'Inria Sans', sans-serif; 
-    align-items: center;
-    justify-content: center;
+.form-container,
+.titulos {
+    animation: fadeInUp 0.5s ease-out;
 }
-.fechainput{
-    width: 130px;
-    text-align: center;
-    font-size: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #000;
-    font-size: small;
-}
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.facultadc{
-    display: flex;
-    gap: 8px;
-    font-family: 'Inria Sans', sans-serif; 
-    align-items: center;
-    justify-content: center;
-}
-.facultadinput{
-    width: 300px;
-    text-align: center;
-    font-size: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #000;
-}
-
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.carrerac{
-    display: flex;
-    gap: 8px;
-    font-family: 'Inria Sans', sans-serif; 
-    align-items: center;
-    justify-content: center;
-}
-.carrerainput{
-    width: 300px;
-    text-align: center;
-    font-size: 16px;
-    padding: 1px;
-    border-radius: 5px;
-    border: 1px solid #000;
-}
-
-
-.guardar {
-    background: transparent;
-    position: relative;
-    padding: 5px 15px;
-    display: flex;
-    align-items: center;
-    font-size: 17px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    border: 1px solid rgb(255,0,0);
-    border-radius: 25px;
-    outline: none;
-    overflow: hidden;
-    color: rgb(255,0,0);
-    transition: color 0.3s 0.1s ease-out;
-    text-align: center;
-  }
-  
-  .guardar span {
-    margin: 10px;
-  }
-  
-  .guardar::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    content: '';
-    border-radius: 50%;
-    display: block;
-    width: 20em;
-    height: 20em;
-    left: -5em;
-    text-align: center;
-    transition: box-shadow 0.5s ease-out;
-    z-index: -1;
-  }
-  
-  .guardar:hover {
-    color: #fff;
-    border: 1px solid rgb(255,0,0);
-  }
-  
-  .guardar:hover::before {
-    box-shadow: inset 0 0 0 10em rgb(255, 0, 0);
-  }
-
-  .divguardar{
-    align-items: center;
-    flex-direction: column;
-    display: flex;
-    text-align: center;
-  }
