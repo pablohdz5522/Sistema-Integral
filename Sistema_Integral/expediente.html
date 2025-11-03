@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,569 +9,750 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
-  <style>
 
+  <style>
+    .list-group-item-warning {
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+    }
+
+    #btnEnviarResultados:disabled {
+      cursor: not-allowed;
+    }
+
+    .badge {
+      font-size: 0.9rem;
+      padding: 0.5em 1em;
+    }
   </style>
+
 </head>
+
 <body>
 
-<div class="container-fluid">
-  <div class="row h-100">
+  <div class="container-fluid">
+    <div class="row h-100">
 
-    <!-- Sidebar -->
-    <div class="col-md-2 sidebar d-flex flex-column p-3">
-      <h4 class="text-center">Menú</h4>
-      <a id="linkPerfil" href="#"><i class="bi bi-person-circle me-2"></i> Perfil</a>
-      <a id="linkDatos" href="#"><i class="bi bi-clipboard-data me-2"></i> Datos Físicos</a>
-      <div class="dropdown">
+      <!-- Sidebar -->
+      <div class="col-md-2 sidebar d-flex flex-column p-3">
+        <h4 class="text-center">Menú</h4>
+        <a id="linkPerfil" href="#"><i class="bi bi-person-circle me-2"></i> Perfil</a>
+        <a id="linkDatos" href="#"><i class="bi bi-clipboard-data me-2"></i> Datos Físicos</a>
+        <div class="dropdown">
           <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-heart-pulse me-2"></i> Formularios
+            <i class="bi bi-heart-pulse me-2"></i> Formularios
           </a>
           <ul class="dropdown-menu">
-              <li><a class="dropdown-item" id="linkDass" href="#">DASS-21</a></li>
-              <li><a class="dropdown-item" id="linkEstilo" href="#">Estilo de Vida</a></li>
+            <li><a class="dropdown-item" id="linkDass" href="#">DASS-21</a></li>
+            <li><a class="dropdown-item" id="linkEstilo" href="#">Estilo de Vida</a></li>
           </ul>
-      </div>
-      <a id="linkHistorial" href="#"><i class="bi bi-house-heart-fill me-2"></i> Historial Patológico</a>
-      <a href="ListadoAlumnos.html"><i class="bi bi-box-arrow-left me-2"></i> Salir</a>
-  </div>
-
-    <!-- Main Content -->
-    <div class="col-md-10 p-4">
-      <div class="nav d-flex justify-content-between align-items-center mb-4">
-        <img src="/images/logo_unacar (1).png" alt="logo" class="unacar">
-        <h2>Perfil del Alumno</h2>
-        <button class="btn btn-primary" disabled></button>
-      </div>
-
-       <!-- Datos del alumno -->
-  <div class="card card-custom mb-4">
-    <div class="card-body d-flex">
-      <div class="left-section">
-        <img src="/imagenes/usuario.png" alt="Foto Alumno" class="profile-img mb-3">
-      </div>
-      <div class="right-section">
-        <div class="row g-3">
-          <div class="col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Nombre:</span>
-              <input type="text" class="form-control" id="nombre" name="nombre" disabled>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Edad:</span>
-              <input type="text" class="form-control" id="edad" name="edad" disabled>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Sexo:</span>
-              <input type="text" class="form-control" id="sexo" name="sexo" disabled>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Matrícula:</span>
-              <input type="text" class="form-control" id="matricula" name="matricula" disabled>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Carrera:</span>
-              <input type="text" class="form-control" name="carrera" id="carrera" disabled>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Facultad:</span>
-              <input type="text" class="form-control" name="facultad" id="facultad" disabled>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="input-group">
-              <span class="input-group-text">Correo Electrónico:</span>
-              <input type="email" class="form-control" name="email" id="email" disabled>
-            </div>
-          </div>
         </div>
+        <a id="linkHistorial" href="#"><i class="bi bi-house-heart-fill me-2"></i> Historial Patológico</a>
+        <a href="ListadoAlumnos.html"><i class="bi bi-box-arrow-left me-2"></i> Salir</a>
       </div>
-    </div>
-  </div>
 
-      <!-- Signos vitales / otros datos -->
-      <div class="card card-custom mb-4">
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5>Datos Físicos</h5>
-                <div><h5>Fecha: </h5> <span id="fecha-datos-fisicos"></span></div>
-            </div>
-            
-            
-          
-          <div class="row g-3 mt-3">
-            <div class="col-md-2">
-              <div><i class="bi bi-person-fill-up"></i> Talla: <span id="modal-talla">-</span> cm</div>
-            </div>
-            <div class="col-md-2">
-              <div><i class="bi bi-bar-chart-fill"></i>Peso: <span id="peso">-</span> kg</div>
-            </div>
-            <div class="col-md-2">
-              <div><i class="bi bi-calculator"></i> IMC: <span id="modal-imc">-</span></div>
-            </div>
-            <div class="col-md-3">
-                <div><i class="bi bi-clipboard-data-fill"></i> IMC: <span id= "modal-clasificacion_imc">-</span></div>
-              </div>
-            <div class="col-md-3">
-              <div><i class="bi bi-droplet-fill"></i> Glucosa: <span id="modal-glucosa">-</span> mg/dL</div>
-            </div>
-            <div class="col-md-3"> 
-              <div><i class="bi bi-heart-pulse"></i> Colesterol: <span id="modal-colesterol">-</span> mg/dL</div>
-            </div>
-            <div class="col-md-3"> 
-                <div><i class="bi bi-heart-pulse"></i> Trigliceridos: <span id="modal-trigliceridos">-</span> mg/dL</div>
-              </div>
-            <div class="col-md-3">
-              <div><i class="bi bi-heart"></i> Tension Arterial: <span id="modal-tension_arterial">-</span></div>
-            </div>
-          </div>
+      <!-- Main Content -->
+      <div class="col-md-10 p-4">
+        <div class="nav d-flex justify-content-between align-items-center mb-4">
+          <img src="/images/logo_unacar (1).png" alt="logo" class="unacar">
+          <h2>Perfil del Alumno</h2>
+          <button class="btn btn-primary" disabled></button>
         </div>
-      </div>
 
-      <!-- Formularios si ya estan hechos -->
-      <div class="card card-custom ">
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5>Formularios</h5>
-                <div>
-                <h5>Status: </h5>
+        <!-- Datos del alumno -->
+        <div class="card card-custom mb-4">
+          <div class="card-body d-flex">
+            <div class="left-section">
+              <img src="/imagenes/usuario.png" alt="Foto Alumno" class="profile-img mb-3">
+            </div>
+            <div class="right-section">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text">Nombre:</span>
+                    <input type="text" class="form-control" id="nombre" name="nombre" disabled>
+                  </div>
                 </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text">Edad:</span>
+                    <input type="text" class="form-control" id="edad" name="edad" disabled>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text">Sexo:</span>
+                    <input type="text" class="form-control" id="sexo" name="sexo" disabled>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text">Matrícula:</span>
+                    <input type="text" class="form-control" id="matricula" name="matricula" disabled>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text">Carrera:</span>
+                    <input type="text" class="form-control" name="carrera" id="carrera" disabled>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text">Facultad:</span>
+                    <input type="text" class="form-control" name="facultad" id="facultad" disabled>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text">Correo Electrónico:</span>
+                    <input type="email" class="form-control" name="email" id="email" disabled>
+                  </div>
+                </div>
+              </div>
             </div>
-          
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <span><strong>Estilo de Vida:</strong></span>
-                <!-- Status con rectángulo de color dinámico -->
+          </div>
+        </div>
+
+        <!-- Signos vitales / otros datos -->
+        <div class="card card-custom mb-4">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5>Datos Físicos</h5>
+              <div>
+                <h5>Fecha: </h5> <span id="fecha-datos-fisicos"></span>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-3">
+              <div class="col-md-2">
+                <div><i class="bi bi-person-fill-up"></i> Talla: <span id="modal-talla">-</span> cm</div>
+              </div>
+              <div class="col-md-2">
+                <div><i class="bi bi-bar-chart-fill"></i>Peso: <span id="peso">-</span> kg</div>
+              </div>
+              <div class="col-md-2">
+                <div><i class="bi bi-calculator"></i> IMC: <span id="modal-imc">-</span></div>
+              </div>
+              <div class="col-md-3">
+                <div><i class="bi bi-clipboard-data-fill"></i> IMC: <span id="modal-clasificacion_imc">-</span></div>
+              </div>
+              <div class="col-md-3">
+                <div><i class="bi bi-droplet-fill"></i> Glucosa: <span id="modal-glucosa">-</span> mg/dL</div>
+              </div>
+              <div class="col-md-3">
+                <div><i class="bi bi-heart-pulse"></i> Colesterol: <span id="modal-colesterol">-</span> mg/dL</div>
+              </div>
+              <div class="col-md-3">
+                <div><i class="bi bi-heart-pulse"></i> Trigliceridos: <span id="modal-trigliceridos">-</span> mg/dL
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div><i class="bi bi-heart"></i> Tension Arterial: <span id="modal-tension_arterial">-</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formularios si ya estan hechos -->
+        <div class="card card-custom mb-4">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5>Formularios</h5>
+              <div>
+                <h5>Status: </h5>
+              </div>
+            </div>
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span><strong>Estilo de Vida:</strong></span>
                 <label for="status" class="form-label"></label>
                 <div id="status-apgar" class="mb-3">
-                    <div id="status-rectangle-apgar" class="status-rectangle p-4">
-                        <span id="status-text-apgar" class="text-white">No lo ha realizado</span>
-                    </div>
+                  <div id="status-rectangle-apgar" class="status-rectangle p-4">
+                    <span id="status-text-apgar" class="text-white">No lo ha realizado</span>
+                  </div>
                 </div>
-            </li>
-                
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+              </li>
+
+              <li class="list-group-item d-flex justify-content-between align-items-center">
                 <span><strong>DASS-21:</strong></span>
-                <!-- Status con rectángulo de color dinámico -->
                 <label for="status" class="form-label"></label>
                 <div id="status-sisco" class="mb-3">
-                    <div id="status-rectangle-sisco" class="status-rectangle p-4">
-                        <span id="status-text-sisco" class="text-white">No lo ha realizado</span>
-                    </div>
+                  <div id="status-rectangle-sisco" class="status-rectangle p-4">
+                    <span id="status-text-sisco" class="text-white">No lo ha realizado</span>
+                  </div>
                 </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
 
+        <!-- Enviar Resultados -->
+        <div class="card card-custom mb-4">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5><i class="bi bi-send-fill me-2"></i>Enviar Resultados</h5>
+            </div>
+
+            <div class="alert alert-info" role="alert">
+              <i class="bi bi-info-circle-fill me-2"></i>
+              <strong>Antes de enviar:</strong> Verifica que el alumno haya completado todos los cuestionarios y datos
+              físicos.
+            </div>
+
+            <ul class="list-group list-group-flush mb-3">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="bi bi-clipboard-check me-2"></i>
+                  <strong>Estilo de Vida:</strong>
+                </div>
+                <span id="check-estilo-vida" class="badge bg-secondary">Verificando...</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="bi bi-clipboard-check me-2"></i>
+                  <strong>DASS-21:</strong>
+                </div>
+                <span id="check-dass" class="badge bg-secondary">Verificando...</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <i class="bi bi-clipboard-data me-2"></i>
+                  <strong>Datos Físicos:</strong>
+                </div>
+                <span id="check-datos-fisicos" class="badge bg-secondary">Verificando...</span>
+              </li>
+            </ul>
+
+            <div class="d-grid gap-2">
+              <button id="btnEnviarResultados" class="btn btn-primary btn-lg" disabled>
+                <i class="bi bi-send-fill me-2"></i>
+                <span id="textoBotonEnviar">Verificando datos...</span>
+              </button>
+            </div>
+
+            <div id="mensajeEstado" class="mt-3" style="display: none;"></div>
+          </div>
+        </div>
+
+        <!-- Modal de Confirmación -->
+        <div class="modal fade" id="modalConfirmarEnvio" tabindex="-1" aria-labelledby="modalConfirmarEnvioLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="modalConfirmarEnvioLabel">
+                  <i class="bi bi-send-check-fill me-2"></i>Confirmar Envío de Resultados
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="alert alert-success" role="alert">
+                  <i class="bi bi-check-circle-fill me-2"></i>
+                  <strong>¡Todos los datos están completos!</strong>
+                </div>
+
+                <p><strong>Se enviará el reporte de salud integral a:</strong></p>
+                <div class="card mb-3">
+                  <div class="card-body">
+                    <p class="mb-1"><strong>Alumno:</strong> <span id="confirm-nombre"></span></p>
+                    <p class="mb-1"><strong>Matrícula:</strong> <span id="confirm-matricula"></span></p>
+                    <p class="mb-0"><strong>Correo:</strong> <span id="confirm-email"></span></p>
+                  </div>
+                </div>
+
+                <div class="alert alert-warning" role="alert">
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                  <small><strong>Nota:</strong> Se generará un PDF con todos los datos consolidados y se enviará al
+                    correo del alumno.</small>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmarEnvio">
+                  <i class="bi bi-send-fill me-2"></i>Enviar Ahora
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal de Datos Incompletos -->
+        <div class="modal fade" id="modalDatosIncompletos" tabindex="-1" aria-labelledby="modalDatosIncompletosLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header bg-warning text-dark">
+                <h5 class="modal-title" id="modalDatosIncompletosLabel">
+                  <i class="bi bi-exclamation-triangle-fill me-2"></i>Datos Incompletos
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p><strong>El alumno aún no ha completado:</strong></p>
+                <ul class="list-group list-group-flush" id="listaDatosIncompletos">
+                  <!-- Se llenará dinámicamente -->
+                </ul>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal de Progreso -->
+        <div class="modal fade" id="modalProgreso" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-body text-center p-5">
+                <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                  <span class="visually-hidden">Cargando...</span>
+                </div>
+                <h5>Generando y enviando reporte...</h5>
+                <p class="text-muted">Por favor espera, esto puede tomar unos momentos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal de Éxito -->
+        <div class="modal fade" id="modalExito" tabindex="-1" aria-labelledby="modalExitoLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="modalExitoLabel">
+                  <i class="bi bi-check-circle-fill me-2"></i>¡Enviado Exitosamente!
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p id="mensajeExito"></p>
+                <div id="enlaceDescarga" style="display: none;">
+                  <a id="linkDescargaPDF" href="#" target="_blank" class="btn btn-primary">
+                    <i class="bi bi-download me-2"></i>Descargar PDF
+                  </a>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtener la matrícula desde la URL
-        const params = new URLSearchParams(window.location.search);
-        const matricula = params.get("matricula_alum");
-
-        if (matricula) {
-            // Actualizar el enlace de "Estilo de Vida" con la matrícula
-            const enlacePuntajes = document.getElementById("enlacePuntajes");
-            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-        }
-    });
-    document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const matricula = params.get("matricula_alum");
-
-    if (matricula) {
-        const linkHistorial = document.getElementById("linkHistorial");
-        linkHistorial.href = `HistorialPatologicoAlum.html?matricula_alum=${matricula}`;
-    }
-});
-
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtener la matrícula desde la URL
-        const params = new URLSearchParams(window.location.search);
-        const matricula = params.get("matricula_alum");
-
-        if (matricula) {
-            // Actualizar el enlace de "Estilo de Vida" con la matrícula
-            const enlacePuntajes = document.getElementById("enlacePuntajes");
-            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const matricula = params.get("matricula_alum");
-
-    if (matricula) {
-        const linkPerfil = document.getElementById("linkPerfil");
-        linkPerfil.href = `expediente.html?matricula_alum=${matricula}`;
-    }
-});
-
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtener la matrícula desde la URL
-        const params = new URLSearchParams(window.location.search);
-        const matricula = params.get("matricula_alum");
-
-        if (matricula) {
-            // Actualizar el enlace de "Estilo de Vida" con la matrícula
-            const enlacePuntajes = document.getElementById("enlacePuntajes");
-            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const matricula = params.get("matricula_alum");
-
-    if (matricula) {
-        const linkDatos = document.getElementById("linkDatos");
-        linkDatos.href = `datosfisicosalumnos.html?matricula_alum=${matricula}`;
-    }
-});
-
-</script>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtener la matrícula desde la URL
-        const params = new URLSearchParams(window.location.search);
-        const matricula = params.get("matricula_alum");
-
-        if (matricula) {
-            // Actualizar el enlace de "Estilo de Vida" con la matrícula
-            const enlacePuntajes = document.getElementById("enlacePuntajes");
-            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const matricula = params.get("matricula_alum");
-
-    if (matricula) {
-        const linkDass = document.getElementById("linkDass");
-        linkDass.href = `formulariodass.html?matricula_alum=${matricula}`;
-    }
-});
-
-</script>
-
-<script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener la matrícula desde la URL
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                // Actualizar el enlace de "Estilo de Vida" con la matrícula
-                const enlacePuntajes = document.getElementById("enlacePuntajes");
-                enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                const linkEstilo = document.getElementById("linkEstilo");
-                linkEstilo.href = `formularioestilo.html?matricula_alum=${matricula}`;
-            }
-        });
-
-    </script>
-
-
-
-<script>
-    function cargarHistorialClinico(matricula) {
-        fetch(`historial.php?matricula_alum=${matricula}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert(data.error);
-                    return;
-                }
-
-                // Llenar los campos del historial clínico
-                document.getElementById("sobrepeso").value = data.sobrepeso;
-                document.getElementById("diabetes").value = data.diabetes;
-                document.getElementById("hipertension").value = data.hipertension;
-                document.getElementById("trigliceridos").value = data.trigliceridos;
-                document.getElementById("colesterol").value = data.colesterol;
-                document.getElementById("hepatitis").value = data.hepatitis;
-                document.getElementById("higado").value = data.higado_graso;
-                document.getElementById("cardiopatias").value = data.cardiopatias;
-                document.getElementById("nefropatias").value = data.nefropatias;
-                document.getElementById("estreñimiento").value = data.estreñimiento;
-                document.getElementById("gastritis").value = data.gastritis;
-                document.getElementById("cancer").value = data.cancer;
-                document.getElementById("tienesEnfermedad").value = data.otros;
-                document.getElementById("Tratamiendo").value = data.tratamiento;
-            })
-            .catch(error => console.error("Error al cargar el historial clínico:", error));
-    }
-
-    function cargarPerfil() {
-        const params = new URLSearchParams(window.location.search);
-        const matricula = params.get("matricula_alum");
-
-        if (!matricula) {
-            alert("No se proporcionó una matrícula.");
-            return;
-        }
-
-        fetch(`perfil.php?matricula_alum=${matricula}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    alert(data.error);
-                    return;
-                }
-                // Verificar historial
-                fetch(`historial.php?matricula_alum=${matricula}`)
-                  .then(res => res.json())
-                  .then(historial => {
-                    const historialVacio = !historial || Object.keys(historial).length === 0;
-
-                    // Verificar si hay datos físicos cargados
-                    const tieneDatosFisicos = data.fechas && data.fechas.length > 0;
-
-                    verificarEstadoExpediente(data, historialVacio, tieneDatosFisicos);
-                  });
-
-
-               // document.getElementById("fotoAlumno").src = data.foto;
-                document.getElementById("matricula").value = data.matricula_alum;
-                document.getElementById("nombre").value = data.nombres_alum + " " + data.ape_paterno_alum + " " + data.ape_materno_alum;
-                document.getElementById("sexo").value = data.sexo;
-                document.getElementById("edad").value = data.edad_alum;
-                document.getElementById("facultad").value = data.nombre_facultad;
-                document.getElementById("carrera").value = data.nombre_carrera;
-                document.getElementById("email").value = data.correo_alum;
-
-                // 🟢 Estado del formulario Apgar
-                const statusRectangleApgar = document.getElementById('status-rectangle-apgar');
-                const statusTextApgar = document.getElementById('status-text-apgar');
-                if (data.estilo_vida_realizado) {
-                    statusTextApgar.textContent = 'Ya realizado';
-                    statusRectangleApgar.classList.add('bg-success'); // Color verde
-                } else {
-                    statusTextApgar.textContent = 'No lo ha realizado';
-                    statusRectangleApgar.classList.add('bg-danger'); // Color rojo
-                }
-
-                // 🟢 Estado del formulario Sisco
-                const statusRectangleSisco = document.getElementById('status-rectangle-sisco');
-                const statusTextSisco = document.getElementById('status-text-sisco');
-                if (data.dass_realizado) {
-                    statusTextSisco.textContent = 'Ya realizado';
-                    statusRectangleSisco.classList.add('bg-success');
-                } else {
-                    statusTextSisco.textContent = 'No lo ha realizado';
-                    statusRectangleSisco.classList.add('bg-danger');
-                }
-                })
-                .catch(error => console.error("Error al cargar el perfil:", error));
-                    // Cargar el historial clínico
-                 cargarHistorialClinico(matricula);
-
-                
-        }
-
-        document.addEventListener("DOMContentLoaded", cargarPerfil);
-
-        function cargarDatosFisicosRecientes(matricula) {
-    fetch(`perfil.php?matricula_alum=${matricula}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.fechas && data.fechas.length > 0) {
-                const ultimaFecha = data.fechas[data.fechas.length - 1];
-                document.getElementById("fecha-datos-fisicos").textContent = ultimaFecha;
-
-                fetch(`datos_fisicos_detalle.php?matricula_alum=${matricula}&fecha=${ultimaFecha}`)
-                    .then(response => response.json())
-                    .then(datos => {
-                        document.getElementById("peso").textContent = datos.peso || "-";
-                        document.getElementById("modal-talla").textContent = datos.talla || "-";
-                        document.getElementById("modal-imc").textContent = datos.imc || "-";
-                        document.getElementById("modal-clasificacion_imc").textContent = datos.clasificacion_imc || "-";
-                        document.getElementById("modal-glucosa").textContent = datos.glucosa || "-";
-                        document.getElementById("modal-colesterol").textContent = datos.colesterol || "-";
-                        document.getElementById("modal-trigliceridos").textContent = datos.trigliceridos || "-";
-                        document.getElementById("modal-tension_arterial").textContent = datos.tension_arterial || "-";
-                    })
-                    .catch(error => console.error("Error al cargar los datos físicos:", error));
-            } else {
-                document.getElementById("fecha-datos-fisicos").textContent = "Sin datos";
-            }
-        })
-        .catch(error => console.error("Error al cargar fechas:", error));
-}
-    
-
-    document.addEventListener("DOMContentLoaded", function() {
-        const params = new URLSearchParams(window.location.search);
-        const matricula = params.get("matricula_alum");
-
-        if (matricula) {
-        cargarDatosFisicosRecientes(matricula);
-    }
-    });
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtener botones
-        const btnFormularios = document.querySelector(".btn-formularios");
-        const btnHistorial = document.querySelector(".btn-historial");
-        const btnDatosFisicos = document.querySelector(".btn-datos-fisicos");
-    
-        // Obtener cuadros y título
-        const tituloFormulario = document.getElementById("titulo-formulario");
-        const tituloSeccion = document.getElementById("titulo-seccion");
-        const formularioCuadros = document.getElementById("formulario-cuadros");
-        const historialCuadro = document.getElementById("historial-cuadro");
-        const datosFisicosCuadro = document.getElementById("datos-fisicos-cuadro");
-    
-        // Función para actualizar el título y mostrar contenido
-        function mostrarSeccion(titulo, mostrarFormulario, mostrarHistorial, mostrarDatosFisicos) {
-            // Cambiar el texto del título
-            tituloSeccion.innerText = titulo;
-            // Mostrar el título
-            tituloFormulario.classList.remove("d-none");
-    
-            // Controla la visibilidad de los cuadros
-            formularioCuadros.classList.toggle("d-none", !mostrarFormulario);
-            historialCuadro.classList.toggle("d-none", !mostrarHistorial);
-            datosFisicosCuadro.classList.toggle("d-none", !mostrarDatosFisicos);
-        }
-    
-        // Al cargar la página, ocultamos todas las secciones (excepto el título)
-        formularioCuadros.classList.add("d-none");
-        historialCuadro.classList.add("d-none");
-        datosFisicosCuadro.classList.add("d-none");
-    
-        // Evento para mostrar Formularios
-        btnFormularios.addEventListener("click", function() {
-            mostrarSeccion("Formularios", true, false, false);
-        });
-    
-        // Evento para mostrar Historial Clínico
-        btnHistorial.addEventListener("click", function() {
-            mostrarSeccion("Historial Heredo-Familiar", false, true, false);
-        });
-    
-        // Evento para mostrar Datos Físicos
-        btnDatosFisicos.addEventListener("click", function() {
-            mostrarSeccion("Datos Físicos", false, false, true);
-        });
-    });
-
-
+  <!-- SCRIPT UNIFICADO -->
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
-  const params = new URLSearchParams(window.location.search);
-  const matricula = params.get("matricula_alum");
+      const params = new URLSearchParams(window.location.search);
+      const matricula = params.get("matricula_alum");
 
-  if (!matricula) return;
+      if (!matricula) {
+        alert("No se proporcionó una matrícula.");
+        return;
+      }
 
-  Promise.all([
-    fetch(`perfil.php?matricula_alum=${matricula}`).then(r => r.json()),
-    fetch(`historial.php?matricula_alum=${matricula}`).then(r => r.json())
-  ])
-  .then(([perfil, historial]) => {
-    // ⚙️ Datos físicos ya vienen desde perfil.php
-    const tieneDatosFisicos = perfil.fechas && perfil.fechas.length > 0;
-    const historialVacio = Object.keys(historial).length === 0;
+      // Configurar enlaces del sidebar
+      const linkPerfil = document.getElementById("linkPerfil");
+      const linkDatos = document.getElementById("linkDatos");
+      const linkDass = document.getElementById("linkDass");
+      const linkEstilo = document.getElementById("linkEstilo");
+      const linkHistorial = document.getElementById("linkHistorial");
 
-    // 🧠 Mostrar modal informativo
-    mostrarModalEstado(perfil, tieneDatosFisicos, historialVacio);
-  });
-});
+      if (linkPerfil) linkPerfil.href = `expediente.html?matricula_alum=${matricula}`;
+      if (linkDatos) linkDatos.href = `datosfisicosalumnos.html?matricula_alum=${matricula}`;
+      if (linkDass) linkDass.href = `formulariodass.html?matricula_alum=${matricula}`;
+      if (linkEstilo) linkEstilo.href = `formularioestilo.html?matricula_alum=${matricula}`;
+      if (linkHistorial) linkHistorial.href = `HistorialPatologicoAlum.html?matricula_alum=${matricula}`;
 
-</script>
+      // Variables globales
+      let datosAlumno = {};
+      let estadoCompleto = {
+        estiloVida: false,
+        dass: false,
+        datosFisicos: false
+      };
 
-<!-- Modal de estado de expediente -->
-<div class="modal fade" id="modalEstadoExpediente" tabindex="-1" aria-labelledby="modalEstadoExpedienteLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content border-info">
-      <div class="modal-header bg-info text-white">
-        <h5 class="modal-title" id="modalEstadoExpedienteLabel">Estado del Expediente</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-      <div class="modal-body" id="contenido-estado-expediente">
-        <!-- Este contenido se llena por JS -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-info" data-bs-dismiss="modal">Entendido</button>
-      </div>
-    </div>
-  </div>
-</div>
+      // Cargar perfil del alumno
+      function cargarPerfil() {
+        fetch(`perfil.php?matricula_alum=${matricula}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.error) {
+              alert(data.error);
+              return;
+            }
 
-<script>
-function mostrarModalEstado(perfil, tieneDatosFisicos, historialVacio) {
-  const mensajes = [];
-  let completo = true;
+            datosAlumno = data;
 
-  if (!perfil.estilo_vida_realizado) {
-    mensajes.push("❌ Falta completar el formulario <strong>Estilo de Vida</strong>.");
-    completo = false;
-  } else {
-    mensajes.push("✅ Formulario Estilo de Vida completado.");
-  }
+            // Llenar datos básicos
+            document.getElementById("matricula").value = data.matricula_alum;
+            document.getElementById("nombre").value = `${data.nombres_alum} ${data.ape_paterno_alum} ${data.ape_materno_alum}`;
+            document.getElementById("sexo").value = data.sexo;
+            document.getElementById("edad").value = data.edad_alum;
+            document.getElementById("facultad").value = data.nombre_facultad;
+            document.getElementById("carrera").value = data.nombre_carrera;
+            document.getElementById("email").value = data.correo_alum;
 
-  if (!perfil.dass_realizado) {
-    mensajes.push("❌ Falta completar el cuestionario <strong>DASS-21</strong>.");
-    completo = false;
-  } else {
-    mensajes.push("✅ Cuestionario DASS-21 completado.");
-  }
+            // Estado del formulario Estilo de Vida
+            const statusRectangleApgar = document.getElementById('status-rectangle-apgar');
+            const statusTextApgar = document.getElementById('status-text-apgar');
+            if (statusRectangleApgar && statusTextApgar) {
+              if (data.estilo_vida_realizado) {
+                statusTextApgar.textContent = 'Ya realizado';
+                statusRectangleApgar.classList.remove('bg-danger');
+                statusRectangleApgar.classList.add('bg-success');
+              } else {
+                statusTextApgar.textContent = 'No lo ha realizado';
+                statusRectangleApgar.classList.remove('bg-success');
+                statusRectangleApgar.classList.add('bg-danger');
+              }
+            }
 
-  if (!tieneDatosFisicos) {
-    mensajes.push("❌ No hay datos físicos registrados.");
-    completo = false;
-  } else {
-    mensajes.push("✅ Datos físicos disponibles.");
-  }
+            // Estado del formulario DASS
+            const statusRectangleSisco = document.getElementById('status-rectangle-sisco');
+            const statusTextSisco = document.getElementById('status-text-sisco');
+            if (statusRectangleSisco && statusTextSisco) {
+              if (data.dass_realizado) {
+                statusTextSisco.textContent = 'Ya realizado';
+                statusRectangleSisco.classList.remove('bg-danger');
+                statusRectangleSisco.classList.add('bg-success');
+              } else {
+                statusTextSisco.textContent = 'No lo ha realizado';
+                statusRectangleSisco.classList.remove('bg-success');
+                statusRectangleSisco.classList.add('bg-danger');
+              }
+            }
 
-  if (historialVacio) {
-    mensajes.push("❌ Historial clínico no registrado.");
-    completo = false;
-  } else {
-    mensajes.push("✅ Historial clínico completo.");
-  }
+            // Verificar estado del expediente
+            verificarEstadoDatos();
+          })
+          .catch(error => console.error("Error al cargar el perfil:", error));
+      }
 
-  document.getElementById("contenido-estado-expediente").innerHTML = mensajes.join("<br>");
-  const modal = new bootstrap.Modal(document.getElementById("modalEstadoExpediente"));
-  modal.show();
-}
+      // Cargar datos físicos recientes
+      function cargarDatosFisicosRecientes() {
+        fetch(`perfil.php?matricula_alum=${matricula}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.fechas && data.fechas.length > 0) {
+              const ultimaFecha = data.fechas[data.fechas.length - 1];
+              const fechaElement = document.getElementById("fecha-datos-fisicos");
+              if (fechaElement) {
+                fechaElement.textContent = ultimaFecha;
+              }
 
-</script>
+              fetch(`datos_fisicos_detalle.php?matricula_alum=${matricula}&fecha=${ultimaFecha}`)
+                .then(response => response.json())
+                .then(datos => {
+                  const elementos = {
+                    peso: document.getElementById("peso"),
+                    talla: document.getElementById("modal-talla"),
+                    imc: document.getElementById("modal-imc"),
+                    clasificacion_imc: document.getElementById("modal-clasificacion_imc"),
+                    glucosa: document.getElementById("modal-glucosa"),
+                    colesterol: document.getElementById("modal-colesterol"),
+                    trigliceridos: document.getElementById("modal-trigliceridos"),
+                    tension_arterial: document.getElementById("modal-tension_arterial")
+                  };
 
+                  if (elementos.peso) elementos.peso.textContent = datos.peso || "-";
+                  if (elementos.talla) elementos.talla.textContent = datos.talla || "-";
+                  if (elementos.imc) elementos.imc.textContent = datos.imc || "-";
+                  if (elementos.clasificacion_imc) elementos.clasificacion_imc.textContent = datos.clasificacion_imc || "-";
+                  if (elementos.glucosa) elementos.glucosa.textContent = datos.glucosa || "-";
+                  if (elementos.colesterol) elementos.colesterol.textContent = datos.colesterol || "-";
+                  if (elementos.trigliceridos) elementos.trigliceridos.textContent = datos.trigliceridos || "-";
+                  if (elementos.tension_arterial) elementos.tension_arterial.textContent = datos.tension_arterial || "-";
+                })
+                .catch(error => console.error("Error al cargar los datos físicos:", error));
+            } else {
+              const fechaElement = document.getElementById("fecha-datos-fisicos");
+              if (fechaElement) {
+                fechaElement.textContent = "Sin datos";
+              }
+            }
+          })
+          .catch(error => console.error("Error al cargar fechas:", error));
+      }
 
+      // Función para verificar el estado de los datos
+      function verificarEstadoDatos() {
+        fetch(`perfil.php?matricula_alum=${matricula}`)
+          .then(response => response.json())
+          .then(data => {
+            // Verificar Estilo de Vida
+            const checkEstiloVida = document.getElementById('check-estilo-vida');
+            if (checkEstiloVida) {
+              if (data.estilo_vida_realizado) {
+                checkEstiloVida.textContent = 'Completado';
+                checkEstiloVida.className = 'badge bg-success';
+                estadoCompleto.estiloVida = true;
+              } else {
+                checkEstiloVida.textContent = 'Pendiente';
+                checkEstiloVida.className = 'badge bg-danger';
+                estadoCompleto.estiloVida = false;
+              }
+            }
+
+            // Verificar DASS
+            const checkDass = document.getElementById('check-dass');
+            if (checkDass) {
+              if (data.dass_realizado) {
+                checkDass.textContent = 'Completado';
+                checkDass.className = 'badge bg-success';
+                estadoCompleto.dass = true;
+              } else {
+                checkDass.textContent = 'Pendiente';
+                checkDass.className = 'badge bg-danger';
+                estadoCompleto.dass = false;
+              }
+            }
+
+            // Verificar Datos Físicos
+            const checkDatosFisicos = document.getElementById('check-datos-fisicos');
+            if (checkDatosFisicos) {
+              const tieneDatosFisicos = data.fechas && data.fechas.length > 0;
+              if (tieneDatosFisicos) {
+                checkDatosFisicos.textContent = 'Completado';
+                checkDatosFisicos.className = 'badge bg-success';
+                estadoCompleto.datosFisicos = true;
+              } else {
+                checkDatosFisicos.textContent = 'Pendiente';
+                checkDatosFisicos.className = 'badge bg-danger';
+                estadoCompleto.datosFisicos = false;
+              }
+            }
+
+            // Actualizar estado del botón
+            actualizarBotonEnvio();
+          })
+          .catch(error => {
+            console.error('Error al verificar datos:', error);
+            const textoBoton = document.getElementById('textoBotonEnviar');
+            if (textoBoton) {
+              textoBoton.textContent = 'Error al verificar datos';
+            }
+          });
+      }
+
+      // Función para actualizar el botón de envío
+      function actualizarBotonEnvio() {
+        const btnEnviar = document.getElementById('btnEnviarResultados');
+        const textoBoton = document.getElementById('textoBotonEnviar');
+
+        if (!btnEnviar || !textoBoton) return;
+
+        const todosCompletos = estadoCompleto.estiloVida &&
+          estadoCompleto.dass &&
+          estadoCompleto.datosFisicos;
+
+        if (todosCompletos) {
+          btnEnviar.disabled = false;
+          btnEnviar.className = 'btn btn-success btn-lg';
+          textoBoton.textContent = 'Enviar Resultados por Correo';
+        } else {
+          btnEnviar.disabled = true;
+          btnEnviar.className = 'btn btn-secondary btn-lg';
+          textoBoton.textContent = 'Complete todos los datos para enviar';
+        }
+      }
+
+      // Event listener para el botón de enviar
+      const btnEnviar = document.getElementById('btnEnviarResultados');
+      if (btnEnviar) {
+        btnEnviar.addEventListener('click', function () {
+          if (estadoCompleto.estiloVida && estadoCompleto.dass && estadoCompleto.datosFisicos) {
+            mostrarModalConfirmacion();
+          } else {
+            mostrarModalDatosIncompletos();
+          }
+        });
+      }
+
+      // Mostrar modal de confirmación
+      function mostrarModalConfirmacion() {
+        const confirmNombre = document.getElementById('confirm-nombre');
+        const confirmMatricula = document.getElementById('confirm-matricula');
+        const confirmEmail = document.getElementById('confirm-email');
+
+        if (confirmNombre && confirmMatricula && confirmEmail) {
+          confirmNombre.textContent = `${datosAlumno.nombres_alum} ${datosAlumno.ape_paterno_alum} ${datosAlumno.ape_materno_alum}`;
+          confirmMatricula.textContent = datosAlumno.matricula_alum;
+          confirmEmail.textContent = datosAlumno.correo_alum;
+
+          const modalElement = document.getElementById('modalConfirmarEnvio');
+          if (modalElement) {
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+          }
+        }
+      }
+
+      // Mostrar modal de datos incompletos
+      function mostrarModalDatosIncompletos() {
+        const lista = document.getElementById('listaDatosIncompletos');
+        if (!lista) return;
+
+        lista.innerHTML = '';
+
+        if (!estadoCompleto.estiloVida) {
+          lista.innerHTML += `
+                <li class="list-group-item list-group-item-warning">
+                    <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                    Formulario Estilo de Vida
+                </li>`;
+        }
+
+        if (!estadoCompleto.dass) {
+          lista.innerHTML += `
+                <li class="list-group-item list-group-item-warning">
+                    <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                    Cuestionario DASS-21
+                </li>`;
+        }
+
+        if (!estadoCompleto.datosFisicos) {
+          lista.innerHTML += `
+                <li class="list-group-item list-group-item-warning">
+                    <i class="bi bi-x-circle-fill text-danger me-2"></i>
+                    Datos Físicos
+                </li>`;
+        }
+
+        const modalElement = document.getElementById('modalDatosIncompletos');
+        if (modalElement) {
+          const modal = new bootstrap.Modal(modalElement);
+          modal.show();
+        }
+      }
+
+      // Confirmar y enviar
+      const btnConfirmarEnvio = document.getElementById('btnConfirmarEnvio');
+      if (btnConfirmarEnvio) {
+        btnConfirmarEnvio.addEventListener('click', function () {
+          // Cerrar modal de confirmación
+          const modalConfirmar = document.getElementById('modalConfirmarEnvio');
+          if (modalConfirmar) {
+            const instance = bootstrap.Modal.getInstance(modalConfirmar);
+            if (instance) instance.hide();
+          }
+
+          // Mostrar modal de progreso
+          const modalProgresoElement = document.getElementById('modalProgreso');
+          if (modalProgresoElement) {
+            const modalProgreso = new bootstrap.Modal(modalProgresoElement);
+            modalProgreso.show();
+          }
+
+          // Llamar al endpoint para generar y enviar
+          enviarResultados(matricula);
+        });
+      }
+
+      // Función para enviar resultados
+      function enviarResultados(matricula) {
+        const formData = new FormData();
+        formData.append('matricula', matricula);
+        formData.append('correo1', datosAlumno.correo_alum);
+
+        console.log('Enviando solicitud de generación de reporte...');
+        console.log('Matrícula:', matricula);
+        console.log('Correo:', datosAlumno.correo_alum);
+
+        fetch('generar_y_enviar_reporte.php', {
+          method: 'POST',
+          body: formData
+        })
+          .then(response => {
+            console.log('Respuesta recibida, status:', response.status);
+            return response.json();
+          })
+          .then(data => {
+            console.log('Datos recibidos:', data);
+
+            // Cerrar modal de progreso
+            const modalProgresoElement = document.getElementById('modalProgreso');
+            if (modalProgresoElement) {
+              const modalProgresoInstance = bootstrap.Modal.getInstance(modalProgresoElement);
+              if (modalProgresoInstance) modalProgresoInstance.hide();
+            }
+
+            if (data.success) {
+              mostrarModalExito(data);
+            } else if (data.warning) {
+              let mensaje = data.mensaje || 'Datos incompletos';
+              if (data.cuestionarios_faltantes && data.cuestionarios_faltantes.length > 0) {
+                mensaje += ':\n\n' + data.cuestionarios_faltantes.join('\n');
+              }
+              alert(mensaje);
+            } else {
+              alert('Error: ' + (data.error || 'Error desconocido'));
+            }
+          })
+          .catch(error => {
+            console.error('Error en la petición:', error);
+            
+            const modalProgresoElement = document.getElementById('modalProgreso');
+            if (modalProgresoElement) {
+              const modalProgresoInstance = bootstrap.Modal.getInstance(modalProgresoElement);
+              if (modalProgresoInstance) modalProgresoInstance.hide();
+            }
+            
+            alert('Error al enviar los resultados: ' + error.message);
+          });
+      }
+
+      // Mostrar modal de éxito
+      function mostrarModalExito(data) {
+        let mensaje = 'El reporte de salud integral ha sido generado exitosamente.';
+
+        if (data.correo_enviado) {
+          mensaje += '\n\n✅ El correo se envió exitosamente al alumno.';
+        } else if (data.error_correo) {
+          mensaje += '\n\n⚠️ El PDF se generó correctamente, pero hubo un problema al enviar el correo:\n' + data.error_correo;
+        } else {
+          mensaje += '\n\nEl PDF está disponible para descarga.';
+        }
+
+        const mensajeExito = document.getElementById('mensajeExito');
+        if (mensajeExito) {
+          mensajeExito.textContent = mensaje;
+        }
+
+        // Mostrar enlace de descarga si está disponible
+        if (data.pdf_url) {
+          const enlaceDescarga = document.getElementById('enlaceDescarga');
+          const linkDescargaPDF = document.getElementById('linkDescargaPDF');
+          
+          if (enlaceDescarga && linkDescargaPDF) {
+            enlaceDescarga.style.display = 'block';
+            linkDescargaPDF.href = data.pdf_url;
+          }
+        }
+
+        const modalExitoElement = document.getElementById('modalExito');
+        if (modalExitoElement) {
+          const modal = new bootstrap.Modal(modalExitoElement);
+          modal.show();
+        }
+      }
+
+      // Inicializar
+      cargarPerfil();
+      cargarDatosFisicosRecientes();
+    });
+  </script>
 
 </body>
+
 </html>

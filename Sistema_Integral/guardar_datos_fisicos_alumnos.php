@@ -3,15 +3,14 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
-set_time_limit(60);
+set_time_limit(120);
 ini_set('memory_limit', '256M');
 
 // Definición de Colores
-define('COLOR_PRIMARY', [30, 70, 120]); // Azul Oscuro (Para títulos y énfasis)
-define('COLOR_BACKGROUND', [248, 248, 248]); // Fondo muy claro
-define('COLOR_LABEL_BG', [240, 240, 240]); // Fondo para etiquetas de datos
-define('COLOR_SEPARATOR', [180, 180, 180]); // Gris suave para líneas
-
+define('COLOR_PRIMARY', [30, 70, 120]);
+define('COLOR_BACKGROUND', [248, 248, 248]);
+define('COLOR_LABEL_BG', [240, 240, 240]);
+define('COLOR_SEPARATOR', [180, 180, 180]);
 
 // Función para garantizar que SIEMPRE se envíe JSON
 function enviarJSON($data, $statusCode = 200)
@@ -48,19 +47,30 @@ header('Content-Type: application/json; charset=UTF-8');
 
 function pdf_text($text)
 {
-    // Asegura la codificación para FPDF
     return mb_convert_encoding($text, 'ISO-8859-1', 'UTF-8');
 }
 
+// ✅ Variable para determinar si solo se genera PDF sin guardar en BD
+$solo_generar_pdf = isset($_POST['solo_generar_pdf']) && $_POST['solo_generar_pdf'] === 'true';
 
 // Validar método
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     enviarJSON(['error' => 'Método no permitido'], 405);
 }
 
+// 🔥 DEBUG: Ver qué datos llegan
+error_log("=== DATOS RECIBIDOS ===");
+error_log("Matrícula: " . ($_POST['matricula'] ?? 'NO ENVIADA'));
+error_log("Correo: " . ($_POST['correo1'] ?? 'NO ENVIADO'));
+error_log("Solo generar PDF: " . ($solo_generar_pdf ? 'SÍ' : 'NO'));
+
 // Validar datos requeridos
 if (empty($_POST['matricula'])) {
     enviarJSON(['error' => 'Falta la matrícula'], 400);
+}
+
+if (empty($_POST['correo1'])) {
+    enviarJSON(['error' => 'Falta el correo del destinatario'], 400);
 }
 
 $servername = "pdb1042.awardspace.net";
@@ -71,94 +81,100 @@ $database = "4528622_pisi";
 // =================================================================
 // FUNCIÓN DE LAYOUT: addGridRow Para las tablas.
 // =================================================================
-
 function addGridRow($pdf, $label1, $value1, $label2, $value2, $line_break = true)
 {
-    // Configuración de colores
-    $COLOR_GRID_BG = [240, 240, 240]; // Gris muy claro para el fondo de la etiqueta
+    $COLOR_GRID_BG = [240, 240, 240];
 
-    // Configuración para Columna 1
     $pdf->SetFillColor($COLOR_GRID_BG[0], $COLOR_GRID_BG[1], $COLOR_GRID_BG[2]);
     $pdf->SetFont('Arial', 'B', 9);
     $pdf->Cell(45, 6, pdf_text($label1 . ':'), 'B', 0, 'L', true);
     $pdf->SetFont('Arial', '', 9);
     $pdf->Cell(45, 6, pdf_text($value1), 'B', 0, 'L');
 
-    // Configuración para Columna 2
     if ($label2 || $value2) {
         $pdf->SetFont('Arial', 'B', 9);
-        $pdf->SetX(100); // Mueve a la segunda columna (asumiendo 100mm de inicio)
+        $pdf->SetX(100);
         $pdf->SetFillColor($COLOR_GRID_BG[0], $COLOR_GRID_BG[1], $COLOR_GRID_BG[2]);
         $pdf->Cell(45, 6, pdf_text($label2 . ':'), 'B', 0, 'L', true);
         $pdf->SetFont('Arial', '', 9);
         $pdf->Cell(0, 6, pdf_text($value2), 'B', $line_break ? 1 : 0, 'L');
     } else {
-        // Si no hay segunda columna, simplemente terminamos la línea actual
         $pdf->Ln(6);
     }
 }
 
 try {
-    error_log("=== INICIO GUARDADO - Matrícula: " . $_POST['matricula'] . " ===");
+    
+    if ($solo_generar_pdf) {
+        error_log("=== INICIO GENERACIÓN PDF - Matrícula: " . $_POST['matricula'] . " ===");
+    } else {
+        error_log("=== INICIO GUARDADO - Matrícula: " . $_POST['matricula'] . " ===");
+    }
 
     $conn = new mysqli($servername, $username, $password, $database);
     if ($conn->connect_error) {
         throw new Exception('Conexión fallida: ' . $conn->connect_error);
     }
 
-    // PASO 1: Guardar datos
-    $sql_guardar = "INSERT INTO datos_fisicos_alumnos 
-            (matricula_alum, fecha, cintura, cadera, clasificacion_cintura_cadera, icc, clasificacion_de_icc, peso, talla, imc, clasificacion_imc, ice, mb, actividad1, get1, porcentaje_masa_grasa, valor_ideal_porcentaje_grasa,
-            clasificacion_porcentaje_grasa, masa_magra, agua_total, porcentaje_agua_total, glucosa, clasificacion_glucosa, trigliceridos, clasificacion_trigliceridos, colesterol, clasificacion_colesterol, tension_arterial, clasificacion_tension_arterial) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // SOLO GUARDAR EN BD SI NO ES MODO PDF
+    if (!$solo_generar_pdf) {
+        $sql_guardar = "INSERT INTO datos_fisicos_alumnos 
+                (matricula_alum, fecha, cintura, cadera, clasificacion_cintura_cadera, icc, clasificacion_de_icc, peso, talla, imc, clasificacion_imc, ice, mb, actividad1, get1, porcentaje_masa_grasa, valor_ideal_porcentaje_grasa,
+                clasificacion_porcentaje_grasa, masa_magra, agua_total, porcentaje_agua_total, glucosa, clasificacion_glucosa, trigliceridos, clasificacion_trigliceridos, colesterol, clasificacion_colesterol, tension_arterial, clasificacion_tension_arterial) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    $stmt = $conn->prepare($sql_guardar);
-    if (!$stmt) {
-        throw new Exception('Error al preparar consulta: ' . $conn->error);
+        $stmt = $conn->prepare($sql_guardar);
+        if (!$stmt) {
+            throw new Exception('Error al preparar consulta: ' . $conn->error);
+        }
+
+        $fecha_actual = date("Y-m-d");
+        $stmt->bind_param(
+            "isddsdsdddsddsdssssdddsdsdsss",
+            $_POST["matricula"],
+            $fecha_actual,
+            $_POST["cintura1"],
+            $_POST["cadera1"],
+            $_POST["clasificacioncadcin1"],
+            $_POST["icc1"],
+            $_POST["clasificacionicc1"],
+            $_POST["peso1"],
+            $_POST["talla1"],
+            $_POST["imc1"],
+            $_POST["clasificacionimc1"],
+            $_POST["ice"],
+            $_POST["mb1"],
+            $_POST["actividad1"],
+            $_POST["get1"],
+            $_POST["pormasagrasa1"],
+            $_POST["valoridealgrasa1"],
+            $_POST["clasificaciongrasa1"],
+            $_POST["masamagra1"],
+            $_POST["aguatotal1"],
+            $_POST["porcentajeaguatotal1"],
+            $_POST["glucosa1"],
+            $_POST["clasificacionglucosa1"],
+            $_POST["trigliceridos1"],
+            $_POST["clasificaciontrigliceridos1"],
+            $_POST["colesterol1"],
+            $_POST["clasificacioncolesterol1"],
+            $_POST["tensionarterial1"],
+            $_POST["clasificacionta1"]
+        );
+
+        if (!$stmt->execute()) {
+            throw new Exception('Error al guardar: ' . $stmt->error);
+        }
+        $stmt->close();
+        error_log("Datos guardados en BD exitosamente");
+    } else {
+        error_log("Modo solo PDF: saltando guardado en BD");
     }
-
-    $fecha_actual = date("Y-m-d");
-    $stmt->bind_param(
-        "isddsdsdddsddsdssssdddsdsdsss",
-        $_POST["matricula"],
-        $fecha_actual,
-        $_POST["cintura1"],
-        $_POST["cadera1"],
-        $_POST["clasificacioncadcin1"],
-        $_POST["icc1"],
-        $_POST["clasificacionicc1"],
-        $_POST["peso1"],
-        $_POST["talla1"],
-        $_POST["imc1"],
-        $_POST["clasificacionimc1"],
-        $_POST["ice"],
-        $_POST["mb1"],
-        $_POST["actividad1"],
-        $_POST["get1"],
-        $_POST["pormasagrasa1"],
-        $_POST["valoridealgrasa1"],
-        $_POST["clasificaciongrasa1"],
-        $_POST["masamagra1"],
-        $_POST["aguatotal1"],
-        $_POST["porcentajeaguatotal1"],
-        $_POST["glucosa1"],
-        $_POST["clasificacionglucosa1"],
-        $_POST["trigliceridos1"],
-        $_POST["clasificaciontrigliceridos1"],
-        $_POST["colesterol1"],
-        $_POST["clasificacioncolesterol1"],
-        $_POST["tensionarterial1"],
-        $_POST["clasificacionta1"]
-    );
-
-    if (!$stmt->execute()) {
-        throw new Exception('Error al guardar: ' . $stmt->error);
-    }
-    $stmt->close();
-    error_log("Datos guardados en BD exitosamente");
 
     $matricula = $_POST['matricula'];
     $destinatario_email = $_POST['correo1'];
+
+    error_log("Correo destinatario confirmado: " . $destinatario_email);
 
     // PASO 2: Crear carpeta de PDFs si no existe
     $carpetaPDFs = __DIR__ . '/reportes_salud';
@@ -176,7 +192,6 @@ try {
 
     error_log("Consultando API: " . $url_api);
 
-    // Usar cURL en lugar de file_get_contents para mejor control
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url_api);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -196,15 +211,84 @@ try {
     }
 
     $datos_pdf = json_decode($json_data, true);
+
     if (!$datos_pdf || isset($datos_pdf['error'])) {
         throw new Exception('No se encontraron datos consolidados: ' . ($datos_pdf['error'] ?? 'Respuesta vacía'));
     }
-    error_log("Datos consolidados obtenidos");
+
+    // ✅ VALIDACIÓN: Solo cuando NO es modo PDF (cuando viene de guardar datos físicos)
+    // Cuando es modo PDF, asumimos que ya se validó en generar_y_enviar_reporte.php
+    if (!$solo_generar_pdf) {
+        $datos_faltantes = [];
+
+        // 🔥 VALIDACIÓN MEJORADA DE DASS
+        $tiene_dass = false;
+        
+        if (isset($datos_pdf['puntuacion_depresion']) && $datos_pdf['puntuacion_depresion'] !== null && $datos_pdf['puntuacion_depresion'] !== '') {
+            $tiene_dass = true;
+        }
+        if (isset($datos_pdf['puntuacion_ansiedad']) && $datos_pdf['puntuacion_ansiedad'] !== null && $datos_pdf['puntuacion_ansiedad'] !== '') {
+            $tiene_dass = true;
+        }
+        if (isset($datos_pdf['puntuacion_estres']) && $datos_pdf['puntuacion_estres'] !== null && $datos_pdf['puntuacion_estres'] !== '') {
+            $tiene_dass = true;
+        }
+        
+        if (!$tiene_dass) {
+            if (isset($datos_pdf['total_depresion']) && $datos_pdf['total_depresion'] !== null && $datos_pdf['total_depresion'] !== '') {
+                $tiene_dass = true;
+            }
+            if (isset($datos_pdf['total_ansiedad']) && $datos_pdf['total_ansiedad'] !== null && $datos_pdf['total_ansiedad'] !== '') {
+                $tiene_dass = true;
+            }
+            if (isset($datos_pdf['total_estres']) && $datos_pdf['total_estres'] !== null && $datos_pdf['total_estres'] !== '') {
+                $tiene_dass = true;
+            }
+        }
+        
+        if (!$tiene_dass) {
+            $datos_faltantes[] = 'DASS-21 (Depresión, Ansiedad y Estrés)';
+        }
+
+        // 🔥 VALIDACIÓN MEJORADA DE ESTILO DE VIDA
+        $tiene_estilo_vida = false;
+        
+        if (isset($datos_pdf['total_estilo_vida']) && $datos_pdf['total_estilo_vida'] !== null && $datos_pdf['total_estilo_vida'] !== '') {
+            $tiene_estilo_vida = true;
+        }
+        
+        if (!$tiene_estilo_vida) {
+            if ((isset($datos_pdf['total_nutricion']) && $datos_pdf['total_nutricion'] !== null && $datos_pdf['total_nutricion'] !== '') ||
+                (isset($datos_pdf['total_ejercicio']) && $datos_pdf['total_ejercicio'] !== null && $datos_pdf['total_ejercicio'] !== '') ||
+                (isset($datos_pdf['total_salud']) && $datos_pdf['total_salud'] !== null && $datos_pdf['total_salud'] !== '')) {
+                $tiene_estilo_vida = true;
+            }
+        }
+        
+        if (!$tiene_estilo_vida) {
+            $datos_faltantes[] = 'Estilo de Vida';
+        }
+
+        // Si faltan datos, enviar respuesta especial
+        if (!empty($datos_faltantes)) {
+            error_log("Datos incompletos para matrícula: " . $matricula);
+            $conn->close();
+            enviarJSON([
+                'warning' => true,
+                'mensaje' => 'El alumno aún no ha completado los siguientes cuestionarios',
+                'cuestionarios_faltantes' => $datos_faltantes,
+                'datos_guardados' => true
+            ], 200);
+        }
+    } else {
+        error_log("Modo PDF: Saltando validación de datos completos (ya validado previamente)");
+    }
+
+    error_log("Datos consolidados obtenidos correctamente");
 
     // PASO 4: Generar PDF
     class PDF extends FPDF
     {
-
         private $RUTA_IMAGEN_FONDO;
         private $RUTA_LOGO;
 
@@ -217,7 +301,6 @@ try {
             'Obesidad grado 3 (mórbida)'
         ];
 
-        // REEMPLAZAR (Línea 223)
         public $CAT_DASS = [
             'Normal',
             'Leve',
@@ -227,17 +310,15 @@ try {
         ];
         public $ANCHO_TOTAL_BARRA = 150;
 
-        public $COLOR_TITULO_BG = [34, 49, 63]; // Azul Oscuro 
+        public $COLOR_TITULO_BG = [34, 49, 63];
         public $COLOR_TITULO_TEXT = [255, 255, 255];
-        public $COLOR_SUBTITULO_BG = [220, 220, 220]; // Gris claro (modificado para ser menos oscuro que 200)
-        public $COLOR_SEPARADOR = [150, 150, 150]; // Gris medio
+        public $COLOR_SUBTITULO_BG = [220, 220, 220];
+        public $COLOR_SEPARADOR = [150, 150, 150];
 
-        // Constructor para inicializar las rutas de imágenes
         public function __construct()
         {
             parent::__construct();
 
-            // Construir rutas absolutas del sistema de archivos
             $this->RUTA_IMAGEN_FONDO = $_SERVER['DOCUMENT_ROOT'] . '/imagenes/despedida.png';
             $this->RUTA_LOGO = $_SERVER['DOCUMENT_ROOT'] . '/imagenes/logo_unacar_sf.png';
 
@@ -247,7 +328,6 @@ try {
             error_log("Logo: " . $this->RUTA_LOGO);
         }
 
-        // Método para convertir imágenes a formato válido
         private function convertirAImagenValida($rutaImagen)
         {
             if (!file_exists($rutaImagen)) {
@@ -264,13 +344,11 @@ try {
             $tipo = $imageInfo[2];
             error_log("Tipo de imagen detectado: " . $tipo . " para " . basename($rutaImagen));
 
-            // Si ya es PNG válido, retornar la ruta
             if ($tipo === IMAGETYPE_PNG) {
                 error_log("✓ Imagen PNG válida: " . basename($rutaImagen));
                 return $rutaImagen;
             }
 
-            // Convertir JPEG/JPG a PNG
             if ($tipo === IMAGETYPE_JPEG) {
                 error_log("Convirtiendo JPEG a PNG: " . basename($rutaImagen));
                 $img = imagecreatefromjpeg($rutaImagen);
@@ -285,7 +363,6 @@ try {
                 return $rutaTemporal;
             }
 
-            // Convertir GIF a PNG
             if ($tipo === IMAGETYPE_GIF) {
                 error_log("Convirtiendo GIF a PNG: " . basename($rutaImagen));
                 $img = imagecreatefromgif($rutaImagen);
@@ -304,7 +381,6 @@ try {
             return null;
         }
 
-        // Header del PDF (Con recuadro de color y texto blanco)
         function Header()
         {
             global $datos_pdf;
@@ -312,17 +388,12 @@ try {
             $ancho_pagina = $this->GetPageWidth();
             $alto_pagina = $this->GetPageHeight();
 
-            // DEFINICIÓN DE TAMAÑO Y POSICIÓN PARA CENTRADO
-            $ANCHO_IMAGEN_CENTRO = 150; // 15 cm
-            $ALTO_IMAGEN_CENTRO = 150;  // 15 cm
+            $ANCHO_IMAGEN_CENTRO = 150;
+            $ALTO_IMAGEN_CENTRO = 150;
 
-            // CÁLCULO PARA CENTRAR PARA IMAGEN FONDO
             $x_centro = ($ancho_pagina / 2) - ($ANCHO_IMAGEN_CENTRO / 2);
             $y_centro = ($alto_pagina / 2) - ($ALTO_IMAGEN_CENTRO / 2);
 
-            // =======================================================
-            // DIBUJAR LA IMAGEN DE FONDO (VA PRIMERO)
-            // =======================================================
             $rutaImagenValida = $this->convertirAImagenValida($this->RUTA_IMAGEN_FONDO);
             if ($rutaImagenValida) {
                 try {
@@ -331,20 +402,16 @@ try {
                 } catch (Exception $e) {
                     error_log("ERROR al cargar imagen de fondo: " . $e->getMessage());
                 }
-            } else {
-                error_log("ADVERTENCIA: No se pudo procesar la imagen de fondo");
             }
 
-            // Marco de color para el título
             $this->SetFillColor($this->COLOR_TITULO_BG[0], $this->COLOR_TITULO_BG[1], $this->COLOR_TITULO_BG[2]);
             $this->Rect(0, 0, $this->GetPageWidth(), 20, 'F');
 
-            $ANCHO_LOGO = 15; // Ancho del logo en mm
-            $ALTO_LOGO = 15; // Alto del logo en mm
+            $ANCHO_LOGO = 15;
+            $ALTO_LOGO = 15;
 
-            // CÁLCULO DE POSICIÓN logo
             $x_pos = $ancho_pagina - 10 - $ANCHO_LOGO;
-            $y_pos = 2; // Inicia 2mm desde el borde superior
+            $y_pos = 2;
 
             $rutaLogoValida = $this->convertirAImagenValida($this->RUTA_LOGO);
             if ($rutaLogoValida) {
@@ -354,82 +421,66 @@ try {
                 } catch (Exception $e) {
                     error_log("ERROR al cargar logo: " . $e->getMessage());
                 }
-            } else {
-                error_log("ADVERTENCIA: No se pudo procesar el logo");
             }
 
-            // Título Principal
             $this->SetY(5);
             $this->SetFont('Arial', 'B', 16);
             $this->SetTextColor($this->COLOR_TITULO_TEXT[0], $this->COLOR_TITULO_TEXT[1], $this->COLOR_TITULO_TEXT[2]);
             $this->Cell(0, 7, pdf_text('REPORTE DE SALUD INTEGRAL'), 0, 1, 'C');
 
-            // Subtítulo/Fecha
             $this->SetFont('Arial', '', 10);
             $this->Cell(0, 5, pdf_text('UNACAR - Generado el: ' . $datos_pdf['fecha']), 0, 1, 'C');
 
-            // Resetear color de texto a negro y posición
             $this->SetTextColor(0, 0, 0);
             $this->SetY(25);
         }
 
-        // Footer (MODIFICADO: Leyenda a la izquierda, Página a la derecha)
         function Footer()
         {
             $this->SetY(-15);
             $this->SetFont('Arial', 'I', 8);
 
-            // Ancho total del contenido (210 - 2*10 = 190mm)
             $ancho_contenido = $this->GetPageWidth() - 20;
 
-            // 1. Celda Izquierda (Leyenda) - 70% del ancho
             $this->Cell($ancho_contenido * 0.7, 10, pdf_text('Nota: Estos resultados son un acercamiento para un DX completo debes acudir a tu servicio medico a traves de tu seguro facultativo'), 0, 0, 'L');
-
-            // 2. Celda Derecha (Número de página) - 30% del ancho
             $this->Cell($ancho_contenido * 0.3, 10, pdf_text('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'R');
         }
 
-        // Función de Mapeo de estados a colores (se mantiene)
-        // REEMPLAZAR ESTA FUNCIÓN COMPLETA (Línea 417)
         function getEstadoColor($estado)
         {
             $estado = trim(strtolower($estado));
-            $color = [200, 200, 200]; // Gris (Default)
+            $color = [200, 200, 200];
             $texto_salida = ucwords($estado);
 
             switch ($estado) {
-                // RANGOS BUENOS (Verde)
                 case 'bajo':
-                case 'normal':                  // <-- DASS
-                case 'peso normal':             // <-- IMC
+                case 'normal':
+                case 'peso normal':
                 case 'deseable':
-                case 'leve':                    // <-- DASS
-                case 'moderada':                // <-- DASS
+                case 'leve':
+                case 'moderada':
                 case 'saludable':
-                    $color = [178, 223, 178]; // Verde Oscuro
+                    $color = [178, 223, 178];
                     break;
 
-                // RANGOS DE RIESGO MEDIO/ALTO (Naranja)
-                case 'peso insuficiente':       // <-- IMC (Lo ponemos naranja como advertencia)
-                case 'sobrepeso':               // <-- IMC
+                case 'peso insuficiente':
+                case 'sobrepeso':
                 case 'riesgo moderado':
-                case 'moderado':                // <-- DASS (Este es 'moderado' de DASS, no 'moderada')
+                case 'moderado':
                 case 'límite':
-                case 'severo':                  // <-- DASS
+                case 'severo':
                 case 'riesgo':
-                    $color = [255, 204, 153]; // Naranja vivo
+                    $color = [255, 204, 153];
                     break;
 
-                // RANGOS EXTREMOS (Rojo)
                 case 'obesidad grado 1':
                 case 'obesidad grado 2':
                 case 'obesidad grado 3 (mórbida)':
                 case 'riesgo alto':
                 case 'extrema':
-                case 'extremadamente severo':   // <-- DASS
+                case 'extremadamente severo':
                 case 'no saludable':
-                    $color = [255, 179, 179]; // Rojo Oscuro
-                    // Acortar texto para que quepa en la barra
+                    $color = [255, 179, 179];
                     if ($estado == 'extremadamente severo') {
                         $texto_salida = 'EXTREMO';
                     } else {
@@ -441,8 +492,6 @@ try {
             return [pdf_text($texto_salida), $color];
         }
 
-        // Función para calcular el ancho de la barra (se mantiene)
-        // REEMPLAZAR ESTA FUNCIÓN COMPLETA (Línea 446)
         function calcularAnchoBarra($categorias, $estado_actual)
         {
             $estado_actual = trim(strtolower($estado_actual));
@@ -451,45 +500,34 @@ try {
 
             foreach ($categorias as $i => $cat) {
                 $cat_std = trim(strtolower($cat));
-
-                // Acumula el ancho de esta categoría
                 $ancho_barra += $ancho_unidad;
 
-                // Si la categoría actual (ej. 'peso normal')
-                // coincide con el estado del alumno (ej. 'peso normal'),
-                // retorna el ancho acumulado HASTA este punto.
                 if ($cat_std == $estado_actual) {
                     return $ancho_barra;
                 }
             }
 
-            // Fallback: Si por alguna razón no se encontró
-            // (ej. un estado 'deseable' que no está en la lista),
-            // mapeamos 'deseable' o 'saludable' a la segunda categoría ('Peso normal' o 'Normal')
             if ($estado_actual == 'deseable' || $estado_actual == 'saludable') {
-                return $ancho_unidad * 2; // Asumir la segunda posición
+                return $ancho_unidad * 2;
             }
 
-            // Si no se encontró, devuelve 0 para que la barra no se dibuje
             return 0;
         }
 
-        // Dibujar encabezados de categoría (mejorados)
         function drawCategoryHeaders($categorias, $y)
         {
             $x_inicio = 50;
             $ancho_unidad = $this->ANCHO_TOTAL_BARRA / count($categorias);
             $this->SetY($y);
             $this->SetX($x_inicio);
-            $this->SetFont('Arial', 'B', 5); // Negrita para headers de barra
-            $this->SetFillColor(230, 230, 230); // Fondo gris claro
+            $this->SetFont('Arial', 'B', 5);
+            $this->SetFillColor(230, 230, 230);
             foreach ($categorias as $cat) {
-                $this->Cell($ancho_unidad, 4, pdf_text($cat), 1, 0, 'C', true); // Borde y fondo
+                $this->Cell($ancho_unidad, 4, pdf_text($cat), 1, 0, 'C', true);
             }
             $this->Ln(4);
         }
 
-        // Indicador Progresivo (Ajustado para mejor presentación)
         function addIndicadorProgresivo($label, $valor, $estado, $x, &$y, $categorias)
         {
             list($estado_texto, $color) = $this->getEstadoColor($estado);
@@ -498,48 +536,42 @@ try {
             $alto_barra_rect = 6;
             $y_barra_rect = $y + 1;
 
-            // Etiqueta y Valor
             $this->SetFont('Arial', '', 10);
             $this->SetXY($x, $y);
             $this->Cell(25, $alto_barra_rect, pdf_text($label . ":"), 0, 0, 'L');
             $this->SetFont('Arial', 'B', 10);
             $this->Cell(15, $alto_barra_rect, pdf_text($valor), 0, 0, 'L');
 
-            // Fondo de la barra completo
             $this->SetDrawColor(150, 150, 150);
             $this->SetFillColor(240, 240, 240);
-            $this->Rect($x_inicio_barra, $y_barra_rect, $this->ANCHO_TOTAL_BARRA, $alto_barra_rect, 'FD'); // Dibuja y rellena
+            $this->Rect($x_inicio_barra, $y_barra_rect, $this->ANCHO_TOTAL_BARRA, $alto_barra_rect, 'FD');
 
-            // Barra de progreso (color)
             $this->SetFillColor($color[0], $color[1], $color[2]);
             $this->Rect($x_inicio_barra, $y_barra_rect, $ancho_barra, $alto_barra_rect, 'F');
 
-            // Texto de Estado (dentro de la barra)
-            $this->SetFont('Arial', 'B', 7); // Negrita y pequeña
-            $this->SetTextColor(255, 255, 255); // Texto blanco para visibilidad
+            $this->SetFont('Arial', 'B', 7);
+            $this->SetTextColor(255, 255, 255);
 
             $this->SetXY($x_inicio_barra, $y_barra_rect);
             $this->Cell($ancho_barra - 1, $alto_barra_rect, $estado_texto, 0, 0, 'R');
-            $this->SetTextColor(0, 0, 0); // Resetear color de texto
+            $this->SetTextColor(0, 0, 0);
 
-            $y += $alto_barra_rect + 2; // Incrementar Y de forma más controlada
+            $y += $alto_barra_rect + 2;
         }
 
-        // Tabla Estilo de Vida (mejorada con Total y Semáforo Vertical)
         function addTablaVida($datos)
         {
-
             $x_center = 45;
 
             $ancho_col1 = 60;
             $ancho_col2 = 40;
-            $ancho_col3 = 30; // Para el Estado
-            $ancho_col4 = 30; // Para el Nivel/Semáforo
+            $ancho_col3 = 30;
+            $ancho_col4 = 30;
             $alto_fila = 8;
             $alto_barra = 6;
 
             $this->SetFont('Arial', 'B', 10);
-            $this->SetFillColor(220, 220, 220); // Fondo para encabezados de tabla
+            $this->SetFillColor(220, 220, 220);
 
             $this->SetX($x_center);
 
@@ -556,25 +588,17 @@ try {
                 $y_celda = $this->GetY();
                 $x_inicial = $this->GetX();
 
-                // Alternar color de fondo de fila
                 $this->SetFillColor($fill ? 245 : 255, $fill ? 245 : 255, $fill ? 245 : 255);
 
                 $this->SetX($x_center);
 
-                // Columna 1: Indicador
                 $this->Cell($ancho_col1, $alto_fila, pdf_text($dato['nombre']), 'LRB', 0, 'L', true);
-
-                // Columna 2: Estado (Texto)
                 $this->Cell($ancho_col3, $alto_fila, $estado_texto, 'RB', 0, 'C', true);
-
-                // Columna 3: Nivel (Semáforo)
                 $this->Cell($ancho_col4, $alto_fila, '', 'RB', 1, 'C', true);
 
-                // --- DIBUJAR LA BARRA VERTICAL (Semáforo) ---
                 $x_barra = $x_center + $x_inicial + $ancho_col1 + $ancho_col3 + ($ancho_col4 / 2) - ($alto_barra / 2);
                 $y_barra = $y_celda + ($alto_fila / 2) - ($alto_barra / 2);
 
-                // Dibujar el rectángulo de color
                 $this->SetFillColor($color[0], $color[1], $color[2]);
                 $this->Rect($x_barra, $y_barra, $alto_barra, $alto_barra, 'F');
 
@@ -582,17 +606,14 @@ try {
             }
         }
 
-        // Función para crear un separador de sección (Fondo gris y línea)
         function sectionSeparator($text, $ln_after = 2)
         {
             $this->Ln(3);
             $this->SetFont('Arial', 'B', 12);
 
-            // Fondo y texto para subtítulo
             $this->SetFillColor($this->COLOR_SUBTITULO_BG[0], $this->COLOR_SUBTITULO_BG[1], $this->COLOR_SUBTITULO_BG[2]);
             $this->Cell(0, 7, pdf_text($text), 0, 1, 'L', true);
 
-            // Línea de separación
             $this->SetDrawColor($this->COLOR_SEPARADOR[0], $this->COLOR_SEPARADOR[1], $this->COLOR_SEPARADOR[2]);
             $this->Line(10, $this->GetY(), 200, $this->GetY());
             $this->Ln($ln_after);
@@ -600,21 +621,19 @@ try {
     }
 
     // === CREAR PDF ===
+    error_log("Iniciando creación del PDF...");
     $pdf = new PDF();
-    $pdf->AliasNbPages(); // Para el footer
+    $pdf->AliasNbPages();
     $pdf->SetAutoPageBreak(true, 15);
     $pdf->AddPage();
 
-    // -------------------------------------------------------------
-// SECCIÓN: DATOS DEL ALUMNO (Revertida a diseño addGridRow)
-// -------------------------------------------------------------
+    // SECCIÓN: DATOS DEL ALUMNO
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->SetTextColor(30, 70, 120);
     $pdf->Cell(0, 8, pdf_text('DATOS DEL ALUMNO'), 0, 1, 'L');
 
-    $pdf->SetTextColor(0, 0, 0); // Texto de vuelta a negro
+    $pdf->SetTextColor(0, 0, 0);
 
-    // Uso de la función addGridRow (Etiqueta en fondo gris, Valor simple)
     addGridRow($pdf, 'Nombre Completo', $datos_pdf['nombres_alum'] . ' ' . $datos_pdf['ape_paterno_alum'] . ' ' . $datos_pdf['ape_materno_alum'], '', '');
     addGridRow($pdf, 'Matricula', $datos_pdf['matricula_alum'], '', '');
     addGridRow($pdf, 'Facultad', $datos_pdf['nombre_facultad'], '', '');
@@ -624,9 +643,7 @@ try {
 
     $pdf->Ln(5);
 
-
-    // ----------------------------------------------------------------------
-// === Indicadores de Salud Física (Con separador y mejoras en la barra) ===
+    // === Indicadores de Salud Física ===
     $pdf->sectionSeparator('Indicadores de Salud Física');
 
     $y = $pdf->GetY();
@@ -647,10 +664,9 @@ try {
     addGridRow($pdf, 'Masa grasa', $datos_pdf['porcentaje_masa_grasa'], 'Resultado', $datos_pdf['clasificacion_porcentaje_grasa']);
     addGridRow($pdf, 'Agua total(lt)', $datos_pdf['agua_total'], '', '');
 
-
     $pdf->Ln(5);
-    // ----------------------------------------------------------------------
-// === Perfil Sanguíneo YTA ===
+
+    // === Perfil Sanguíneo YTA ===
     $pdf->sectionSeparator('Perfil Sanguíneo YTA');
 
     addGridRow($pdf, 'Glucosa (mg/dL)', $datos_pdf['glucosa'], 'Resultado', $datos_pdf['clasificacion_glucosa']);
@@ -660,7 +676,7 @@ try {
 
     $pdf->Ln(5);
 
-    // === Perfil Estilo de Vida (Tabla mejorada) ===
+    // === Perfil Estilo de Vida ===
     $pdf->sectionSeparator('Perfil Estilo de Vida');
 
     $datosVida = [
@@ -674,10 +690,7 @@ try {
     $pdf->addTablaVida($datosVida);
     $pdf->Ln(8);
 
-    // ----------------------------------------------------------------------
-// === Perfil DASS (Con sección controlada para evitar páginas vacías) ===
-
-    // Si el bloque no cabe en la página actual, crea una nueva
+    // === Perfil DASS ===
     if ($pdf->GetY() > 200) {
         $pdf->AddPage();
     }
@@ -692,15 +705,12 @@ try {
     $pdf->addIndicadorProgresivo('Estrés', $datos_pdf['puntuacion_estres'], $datos_pdf['severidad_estres'], 10, $y, $pdf->CAT_DASS);
     $pdf->addIndicadorProgresivo('Depresión', $datos_pdf['puntuacion_depresion'], $datos_pdf['severidad_depresion'], 10, $y, $pdf->CAT_DASS);
 
-
-    // GUARDAR PDF EN CARPETA PERMANENTE CON ESTRUCTURA POR MATRÍCULA
+    // GUARDAR PDF EN CARPETA PERMANENTE
     $matricula_sanitizada = preg_replace('/[^a-zA-Z0-9_-]/', '', $matricula);
     $timestamp = date('Y-m-d_H-i-s');
 
-    // Crear carpeta específica para la matrícula dentro de reportes_salud
     $carpetaMatricula = $carpetaPDFs . '/' . $matricula_sanitizada;
 
-    // Verificar si la carpeta existe, si no, crearla
     if (!file_exists($carpetaMatricula)) {
         if (!mkdir($carpetaMatricula, 0755, true)) {
             throw new Exception('No se pudo crear la carpeta para la matrícula: ' . $matricula_sanitizada);
@@ -708,48 +718,47 @@ try {
         error_log("Carpeta creada: " . $carpetaMatricula);
     }
 
-    // Nombre del archivo con timestamp para permitir múltiples versiones
     $nombreArchivo = 'reporte_' . $matricula_sanitizada . '_' . $timestamp . '.pdf';
     $rutaPDF = $carpetaMatricula . '/' . $nombreArchivo;
 
-    // Guardar el PDF
     $pdf->Output('F', $rutaPDF);
 
-    // Verificar que el PDF se creó correctamente
     if (!file_exists($rutaPDF) || filesize($rutaPDF) == 0) {
         throw new Exception('Error al crear el PDF');
     }
-    error_log("PDF creado: " . $rutaPDF . " (" . filesize($rutaPDF) . " bytes)");
+    error_log("PDF creado exitosamente: " . $rutaPDF . " (" . filesize($rutaPDF) . " bytes)");
 
-    // PASO 5: Enviar correo - OPTIMIZADO PARA PUERTO 25
+    // PASO 5: Enviar correo
     $correoEnviado = false;
     $errorCorreo = '';
+
+    error_log("=== INICIANDO ENVÍO DE CORREO ===");
+    error_log("Destinatario: " . $destinatario_email);
+    error_log("Archivo PDF: " . $rutaPDF);
 
     try {
         ob_start();
 
         $mail = new PHPMailer(true);
 
-        // Debug: 0 = producción, 2 = desarrollo
-        $mail->SMTPDebug = 0;
+        // Configuración SMTP con más logging
+        $mail->SMTPDebug = 0; // 🔥 Aumentar a 2 para ver más detalles
         $mail->Debugoutput = function ($str, $level) {
             error_log("PHPMailer [$level]: $str");
         };
 
-        // Configuración básica
         $mail->isSMTP();
         $mail->Host = 'mail.sistema-integral-de-salud-unacar.com.mx';
         $mail->SMTPAuth = true;
         $mail->Username = 'noreply@sistema-integral-de-salud-unacar.com.mx';
         $mail->Password = 'sklike5522';
-        $mail->Port = 25; // PUERTO 25 (el único disponible)
-        $mail->SMTPSecure = ''; // Sin encriptación
-        $mail->SMTPAutoTLS = false; // CRÍTICO: Evita upgrade automático a TLS
+        $mail->Port = 25;
+        $mail->SMTPSecure = '';
+        $mail->SMTPAutoTLS = false;
         $mail->CharSet = 'UTF-8';
         $mail->Encoding = 'base64';
         $mail->Timeout = 60;
 
-        // Opciones SSL permisivas
         $mail->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,
@@ -758,24 +767,23 @@ try {
             )
         );
 
-        error_log("Configurando correo para: $destinatario_email");
+        error_log("Configuración SMTP completada");
 
-        // Configurar remitente y destinatario
         $mail->setFrom('noreply@sistema-integral-de-salud-unacar.com.mx', 'Sistema Integral de Salud UNACAR');
         $mail->addAddress($destinatario_email);
 
-        // Verificar que el PDF existe antes de adjuntar
+        error_log("Remitente y destinatario configurados");
+
         if (!file_exists($rutaPDF)) {
             throw new Exception("El archivo PDF no existe: $rutaPDF");
         }
 
         $mail->addAttachment($rutaPDF, $nombreArchivo);
+        error_log("Adjunto agregado: " . $nombreArchivo);
 
-        // Configurar contenido del correo
         $mail->isHTML(true);
         $mail->Subject = 'Resultados de tu Evaluación de Salud - UNACAR';
 
-        // Cuerpo HTML
         $mail->Body = '
         <!DOCTYPE html>
         <html>
@@ -800,7 +808,7 @@ try {
                     <h2>Estimado(a) estudiante,</h2>
                     <p>Te informamos que tu <strong>Reporte de Salud Integral</strong> ha sido generado exitosamente el día <strong>' . date('d/m/Y') . '</strong>.</p>
                     
-                    <p>📎 Encontrarás adjunto a este correo tu reporte completo en formato PDF.</p>
+                    <p>🔎 Encontrarás adjunto a este correo tu reporte completo en formato PDF.</p>
                     
                     <div class="highlight">
                         <strong>⚠️ Nota importante:</strong> Estos resultados son un acercamiento orientativo. Para un diagnóstico completo y profesional, debes acudir a tu servicio médico a través de tu seguro facultativo.
@@ -826,7 +834,6 @@ try {
         </body>
         </html>';
 
-        // Texto alternativo
         $mail->AltBody = "Estimado(a) estudiante,\n\n"
             . "Tu Reporte de Salud Integral ha sido generado el " . date('d/m/Y') . ".\n\n"
             . "Encontrarás adjunto tu reporte completo en formato PDF.\n\n"
@@ -838,7 +845,7 @@ try {
             . "- Evaluación DASS\n\n"
             . "Saludos,\nEquipo de Salud UNACAR";
 
-        // Intentar enviar
+        error_log("Contenido del correo configurado");
         error_log("Intentando enviar correo...");
 
         if ($mail->send()) {
@@ -862,16 +869,26 @@ try {
     // URL para descargar el PDF
     $urlDescarga = $protocol . "://" . $host . "/reportes_salud/" . $matricula_sanitizada . "/" . $nombreArchivo;
 
-    // Respuesta final
-    if ($correoEnviado) {
-        $mensaje = 'Datos guardados y reporte enviado por correo exitosamente.';
+    // ✅ Respuesta final según el modo
+    if ($solo_generar_pdf) {
+        if ($correoEnviado) {
+            $mensaje = 'Reporte generado y enviado por correo exitosamente.';
+        } else {
+            $mensaje = 'Reporte generado exitosamente. ' . ($errorCorreo ? 'Error al enviar correo: ' . $errorCorreo : 'PDF disponible para descarga.');
+        }
+        error_log("=== FIN GENERACIÓN PDF ===");
     } else {
-        $mensaje = 'Datos guardados. PDF disponible para descarga.';
+        if ($correoEnviado) {
+            $mensaje = 'Datos guardados y reporte enviado por correo exitosamente.';
+        } else {
+            $mensaje = 'Datos guardados exitosamente. ' . ($errorCorreo ? 'Error al enviar correo: ' . $errorCorreo : 'PDF disponible para descarga.');
+        }
+        error_log("=== FIN GUARDADO ===");
     }
 
-    error_log("=== FIN GUARDADO EXITOSO ===");
     enviarJSON([
-        'success' => $mensaje,
+        'success' => true,
+        'mensaje' => $mensaje,
         'pdf_url' => $urlDescarga,
         'pdf_nombre' => $nombreArchivo,
         'correo_enviado' => $correoEnviado,
@@ -879,8 +896,8 @@ try {
     ]);
 
 } catch (Exception $e) {
-    error_log("ERROR: " . $e->getMessage());
-    error_log("Stack: " . $e->getTraceAsString());
+    error_log("ERROR GENERAL: " . $e->getMessage());
+    error_log("Stack trace: " . $e->getTraceAsString());
     if (isset($conn)) {
         $conn->close();
     }

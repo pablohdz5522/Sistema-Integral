@@ -12,6 +12,28 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link rel="stylesheet" href="datos_fisicos.css">
     <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <style>
+        /* Estilos adicionales para el modal */
+        .modal-header.bg-warning {
+            background-color: #ffc107 !important;
+        }
+
+        .modal-header .modal-title i {
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+
+        #listaCuestionariosFaltantes .list-group-item {
+            border-left: 4px solid #ffc107;
+        }
+
+        #listaCuestionariosFaltantes .list-group-item i {
+            color: #dc3545;
+        }
+    </style>
 </head>
 
 <body>
@@ -857,6 +879,7 @@
         });
     </script>
 
+    <!-- REEMPLAZAR EL SCRIPT DE ENVÍO DEL FORMULARIO (el último script en datos_fisicos.html) -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const form = document.getElementById("formalumnos");
@@ -880,11 +903,9 @@
                         console.log('Status:', response.status);
                         console.log('Headers:', response.headers.get('content-type'));
 
-                        // Primero obtener el texto de la respuesta
                         return response.text().then(text => {
                             console.log('Respuesta raw:', text);
 
-                            // Intentar parsear como JSON
                             try {
                                 const data = JSON.parse(text);
                                 return { ok: response.ok, data: data };
@@ -900,15 +921,20 @@
                         }
 
                         const data = result.data;
-                        if (data.success) {
-                            alert(data.success);
+
+                        // Verificar si hay advertencia de cuestionarios faltantes
+                        if (data.warning && data.cuestionarios_faltantes) {
+                            mostrarModalAdvertencia(data.cuestionarios_faltantes);
                             form.reset();
-                            // Limpiar campos readonly también
-                            document.getElementById("nombre1").value = "";
-                            document.getElementById("apellidos1").value = "";
-                            document.getElementById("sexo1").innerHTML = '<option value="" selected disabled></option>';
-                            document.getElementById("facultad1").innerHTML = '<option value="" selected disabled></option>';
-                            document.getElementById("carrera1").innerHTML = '<option value="" selected disabled></option>';
+                            limpiarCamposReadonly();
+                            return;
+                        }
+
+                        // Si todo está bien
+                        if (data.success) {
+                            mostrarMensajeExito(data);
+                            form.reset();
+                            limpiarCamposReadonly();
                         } else if (data.error) {
                             alert('Error: ' + data.error);
                         }
@@ -919,11 +945,83 @@
                     })
                     .finally(() => {
                         boton.disabled = false;
-                        textoBoton.textContent = "Guardar";
+                        textoBoton.textContent = "Guardar Datos";
                     });
             });
+
+            function mostrarModalAdvertencia(cuestionariosFaltantes) {
+                const lista = document.getElementById('listaCuestionariosFaltantes');
+                lista.innerHTML = '';
+
+                cuestionariosFaltantes.forEach(cuestionario => {
+                    const item = document.createElement('li');
+                    item.className = 'list-group-item';
+                    item.innerHTML = `<i class="bi bi-x-circle-fill me-2"></i>${cuestionario}`;
+                    lista.appendChild(item);
+                });
+
+                const modal = new bootstrap.Modal(document.getElementById('modalAdvertencia'));
+                modal.show();
+            }
+
+            function mostrarMensajeExito(data) {
+                let mensaje = data.success;
+
+                //if (data.pdf_url) {
+                  //  mensaje += '\n\nPuede descargar el PDF desde:\n' + data.pdf_url;
+                //}
+
+                if (data.correo_enviado) {
+                    mensaje += '\n\n✅ Correo enviado exitosamente';
+                } else if (data.error_correo) {
+                    mensaje += '\n\n⚠️ No se pudo enviar el correo: ' + data.error_correo;
+                }
+
+                alert(mensaje);
+            }
+
+            function limpiarCamposReadonly() {
+                document.getElementById("nombre1").value = "";
+                document.getElementById("apellidos1").value = "";
+                document.getElementById("sexo1").innerHTML = '<option value="" selected disabled>Seleccionar...</option>';
+                document.getElementById("facultad1").innerHTML = '<option value="" selected disabled>Seleccionar...</option>';
+                document.getElementById("carrera1").innerHTML = '<option value="" selected disabled>Seleccionar...</option>';
+            }
         });
     </script>
+
+    <div class="modal fade" id="modalAdvertencia" tabindex="-1" aria-labelledby="modalAdvertenciaLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title" id="modalAdvertenciaLabel">
+                        <i class="bi bi-exclamation-triangle-fill"></i> Cuestionarios Incompletos
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info" role="alert">
+                        <strong>Datos físicos guardados correctamente</strong>
+                    </div>
+                    <p><strong>Sin embargo, no se puede generar el reporte PDF porque el alumno no ha
+                            completado:</strong></p>
+                    <ul id="listaCuestionariosFaltantes" class="list-group mb-3">
+                        
+                    </ul>
+                    <div class="alert alert-warning" role="alert">
+                        <small>
+                            <strong>Instrucción:</strong> El alumno debe completar todos los cuestionarios para poder
+                            generar su reporte de salud integral.
+                        </small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
