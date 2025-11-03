@@ -178,6 +178,16 @@ $conn->close();
       <i class="bi bi-cloud-download"></i>
       <h5 class="mt-3">Descargar datos</h5>
     </div>
+
+    <div class="menu-card dropdown" data-aos="fade-up" data-aos-delay="400">
+      <i class="bi bi-clipboard2-check"></i>
+      <h5 class="mt-3 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" style="cursor:pointer;">Resultados Generales</h5>
+      <ul class="dropdown-menu text-center">
+        <li><a class="dropdown-item" href="resultadoalumnos.html"><i class="bi bi-mortarboard"></i> Alumnos</a></li>
+        <li hidden><a class="dropdown-item" href="ListadoDocentes.html"><i class="bi bi-person-badge"></i> Docentes</a></li>
+        <li hidden><a class="dropdown-item" href="ListadoEmpleados.html"><i class="bi bi-briefcase"></i> Empleados</a></li>
+      </ul>
+    </div>
   <?php } ?>
 </main>
 

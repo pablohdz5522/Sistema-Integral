@@ -799,13 +799,16 @@
 
             if (!isNaN(trigliceridos)) {
 
-                if (trigliceridos <= 0) { 
+                if (trigliceridos <= 0) {
                     clasificacion = "Sin resultados";
-                } else if (trigliceridos < 150) {
+                } else if (trigliceridos < 50) {
+                    clasificacion = "Bajo";
+                }
+                else if (trigliceridos < 150) {
                     clasificacion = "Normal";
-                } else if (trigliceridos < 200) { 
+                } else if (trigliceridos < 200) {
                     clasificacion = "Límite Alto";
-                } else if (trigliceridos < 500) { 
+                } else if (trigliceridos < 500) {
                     clasificacion = "Alto";
                 } else { // Todo lo demás (>= 500)
                     clasificacion = "Muy Alto";
