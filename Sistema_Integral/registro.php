@@ -15,6 +15,10 @@ if ($conn->connect_error) {
     exit;
 }
 
+
+$conn->set_charset("utf8mb4");
+date_default_timezone_set('America/Mexico_City');
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Limpieza de datos
     $matricula = strtoupper(trim($_POST["matricula"] ?? ''));
@@ -27,9 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fecha     = trim($_POST["fecha"] ?? '');
     $id_carrera  = trim($_POST["carreras"] ?? '');
     $id_facultad = trim($_POST["facultades"] ?? '');
+    $generacion = trim($_POST["generacion"] ?? '');
 
     // Validación básica
-    if (empty($matricula) || empty($nombre) || empty($apepa) || empty($apema) || empty($sexo) || empty($fecha) || empty($id_carrera) || empty($id_facultad)) {
+    if (empty($matricula) || empty($nombre) || empty($apepa) || empty($apema) || empty($sexo) || empty($fecha) || empty($id_carrera) || empty($id_facultad) || empty($generacion)){
         echo json_encode(['error' => 'Todos los campos son obligatorios']);
         exit;
     }
@@ -61,14 +66,14 @@ if ($stmt_verificar->num_rows === 0) {
     exit;
 }
 $stmt_verificar->close();
-
+    $fecha_actual = date('Y-m-d H:i:s');
 
     // Insertar nuevo alumno
-    $sql = "INSERT INTO alumnos (matricula_alum, nombres_alum, ape_paterno_alum, ape_materno_alum, edad_alum, sexo, correo_alum, fe_nacimiento_alum, id_carrera, id_facultad) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO alumnos (matricula_alum, nombres_alum, ape_paterno_alum, ape_materno_alum, edad_alum, sexo, correo_alum, fe_nacimiento_alum, id_carrera, id_facultad, generacion, fecha_ingreso) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssisssii", $matricula, $nombre, $apepa, $apema, $edad, $sexo, $correo, $fecha, $id_carrera, $id_facultad);
+    $stmt->bind_param("ssssisssiiss", $matricula, $nombre, $apepa, $apema, $edad, $sexo, $correo, $fecha, $id_carrera, $id_facultad, $generacion, $fecha_actual);
 
     if ($stmt->execute()) {
         // Guardar toda la info del alumno en la sesión
@@ -82,7 +87,8 @@ $stmt_verificar->close();
             'correo'    => $correo,
             'fecha'     => $fecha,
             'id_carrera' => $id_carrera,
-            'id_facultad' => $id_facultad
+            'id_facultad' => $id_facultad,
+            'generacion' => $generacion
         ];
 
         $_SESSION['bienvenida'] = true;

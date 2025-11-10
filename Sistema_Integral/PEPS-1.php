@@ -472,7 +472,7 @@ $conn->close();
 
                     <div class="mt-3 cuadro">
                         <label for="p6" class="form-label">10. Discutes con personas cercanas tus preocupaciones y
-                            problemas personasles</label>
+                            problemas personales</label>
                         <div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input colorradio" type="radio" name="p10" id="p10_nunca"
