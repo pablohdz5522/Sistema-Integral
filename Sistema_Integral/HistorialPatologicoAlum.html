@@ -3,13 +3,140 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Historial Patologico Alumnado</title>
+  <title>Historial Patológico Alumnado</title>
   <link rel="stylesheet" href="css/expediente.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
   <style>
+    /* Estilos mejorados para los cards de historial */
+    .card-historial {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      box-shadow: var(--sombra-media);
+      background-color: var(--blanco);
+      margin-bottom: 25px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      animation: fadeIn 0.5s ease-out;
+    }
 
+    .card-historial:hover {
+      box-shadow: var(--sombra-profunda);
+      transform: translateY(-2px);
+    }
+
+    .card-header-custom {
+      background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-rey));
+      color: white;
+      padding: 18px 25px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: none;
+    }
+
+    .card-header-success {
+      background: linear-gradient(135deg, #059669, #10b981);
+    }
+
+    .card-header-warning {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    }
+
+    .card-body-historial {
+      padding: 30px;
+    }
+
+    /* Input groups para historial */
+    .historial-item {
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .historial-item:hover {
+      transform: translateX(5px);
+    }
+
+    .form-label-historial {
+      color: var(--gris-oscuro);
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-label-historial i {
+      color: var(--azul-rey);
+      font-size: 1rem;
+    }
+
+    .form-control-historial {
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 14px;
+      background-color: var(--gris-claro);
+      color: var(--gris-oscuro);
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .form-control-historial:focus {
+      border-color: var(--azul-rey);
+      box-shadow: 0 0 0 0.25rem rgba(30, 64, 175, 0.15);
+      outline: none;
+      background-color: white;
+    }
+
+    .form-control-historial:disabled {
+      background-color: var(--gris-claro);
+      opacity: 1;
+    }
+
+    /* Grid mejorado */
+    .historial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    /* Iconos de header */
+    .header-icon {
+      font-size: 1.3rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .historial-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-body-historial {
+        padding: 20px;
+      }
+
+      .card-header-custom {
+        padding: 15px 20px;
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -39,111 +166,175 @@
     <div class="col-md-10 p-4">
       <div class="nav d-flex justify-content-between align-items-center mb-4">
         <img src="/images/logo_unacar (1).png" alt="logo" class="unacar">
-        <h2 class="text-center">Historial Patologicos</h2>  
+        <h2>Historial Patológico</h2>
+        <button class="btn btn-primary" disabled></button>
       </div>
 
-      <div class="card mb-4">
-        <div class="card-header bg-primary text-white">
+      <!-- Información del Alumno -->
+      <div class="card-historial">
+        <div class="card-header-custom">
+          <i class="bi bi-person-badge header-icon"></i>
           Información del Alumno
         </div>
-        <div class="card-body">
-          <div class="row g-3">
-            <div class="col-md-3">
-              <label class="form-label">Matrícula</label>
-              <input type="text" class="form-control" id="matricula" disabled>
+        <div class="card-body-historial">
+          <div class="historial-grid">
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-credit-card-2-front"></i>
+                Matrícula
+              </label>
+              <input type="text" class="form-control-historial" id="matricula" disabled>
             </div>
-            <div class="col-md-3">
-              <label class="form-label">Nombre</label>
-              <input type="text" class="form-control" id="nombre" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-person"></i>
+                Nombre Completo
+              </label>
+              <input type="text" class="form-control-historial" id="nombre" disabled>
             </div>
-            <div class="col-md-2">
-              <label class="form-label">Sexo</label>
-              <input type="text" class="form-control" id="sexo" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-gender-ambiguous"></i>
+                Sexo
+              </label>
+              <input type="text" class="form-control-historial" id="sexo" disabled>
             </div>
-            <div class="col-md-2">
-              <label class="form-label">Edad</label>
-              <input type="text" class="form-control" id="edad" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-calendar3"></i>
+                Edad
+              </label>
+              <input type="text" class="form-control-historial" id="edad" disabled>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="card mb-4">
-        <div class="card-header bg-success text-white">
+      <!-- Historial Patológico Familiar -->
+      <div class="card-historial">
+        <div class="card-header-custom card-header-success">
+          <i class="bi bi-people-fill header-icon"></i>
           Historial Patológico Familiar
         </div>
-        <div class="card-body">
-          <div class="row g-3">
-            <div class="col-md-4">
-              <label class="form-label">Sobrepeso/Obesidad</label>
-              <input type="text" class="form-control" id="sobrepeso" disabled>
+        <div class="card-body-historial">
+          <div class="historial-grid">
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-arrow-up-circle"></i>
+                Sobrepeso/Obesidad
+              </label>
+              <input type="text" class="form-control-historial" id="sobrepeso" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Diabetes Mellitus</label>
-              <input type="text" class="form-control" id="diabetes" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-droplet"></i>
+                Diabetes Mellitus
+              </label>
+              <input type="text" class="form-control-historial" id="diabetes" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Hipertensión Arterial</label>
-              <input type="text" class="form-control" id="hipertension" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-heart-pulse"></i>
+                Hipertensión Arterial
+              </label>
+              <input type="text" class="form-control-historial" id="hipertension" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Triglicéridos Altos</label>
-              <input type="text" class="form-control" id="trigliceridos" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-activity"></i>
+                Triglicéridos Altos
+              </label>
+              <input type="text" class="form-control-historial" id="trigliceridos" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Colesterol Alto</label>
-              <input type="text" class="form-control" id="colesterol" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-graph-up-arrow"></i>
+                Colesterol Alto
+              </label>
+              <input type="text" class="form-control-historial" id="colesterol" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Hepatitis</label>
-              <input type="text" class="form-control" id="hepatitis" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-shield-exclamation"></i>
+                Hepatitis
+              </label>
+              <input type="text" class="form-control-historial" id="hepatitis" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Hígado Graso</label>
-              <input type="text" class="form-control" id="higado" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-file-medical"></i>
+                Hígado Graso
+              </label>
+              <input type="text" class="form-control-historial" id="higado" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Cardiopatías</label>
-              <input type="text" class="form-control" id="cardiopatias" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-heart"></i>
+                Cardiopatías
+              </label>
+              <input type="text" class="form-control-historial" id="cardiopatias" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Nefropatías</label>
-              <input type="text" class="form-control" id="nefropatias" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-prescription2"></i>
+                Nefropatías
+              </label>
+              <input type="text" class="form-control-historial" id="nefropatias" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Estreñimiento</label>
-              <input type="text" class="form-control" id="estreñimiento" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-capsule"></i>
+                Estreñimiento
+              </label>
+              <input type="text" class="form-control-historial" id="estreñimiento" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Gastritis</label>
-              <input type="text" class="form-control" id="gastritis" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-bandaid"></i>
+                Gastritis
+              </label>
+              <input type="text" class="form-control-historial" id="gastritis" disabled>
             </div>
-            <div class="col-md-4">
-              <label class="form-label">Cáncer</label>
-              <input type="text" class="form-control" id="cancer" disabled>
+            <div class="historial-item">
+              <label class="form-label-historial">
+                <i class="bi bi-exclamation-triangle"></i>
+                Cáncer
+              </label>
+              <input type="text" class="form-control-historial" id="cancer" disabled>
             </div>
           </div>
         </div>
       </div>
       
-      <div class="card mb-4">
-        <div class="card-header bg-warning text-dark">
+      <!-- Historial Patológico Personal -->
+      <div class="card-historial">
+        <div class="card-header-custom card-header-warning">
+          <i class="bi bi-person-heart header-icon"></i>
           Historial Patológico Personal
         </div>
-        <div class="card-body">
-          <div class="row g-3">
+        <div class="card-body-historial">
+          <div class="row g-4">
             <div class="col-md-6">
-              <label class="form-label">¿Tienes alguna enfermedad?</label>
-              <input type="text" class="form-control" id="tienesEnfermedad" disabled>
+              <div class="historial-item">
+                <label class="form-label-historial">
+                  <i class="bi bi-clipboard-pulse"></i>
+                  ¿Tienes alguna enfermedad?
+                </label>
+                <input type="text" class="form-control-historial" id="tienesEnfermedad" disabled>
+              </div>
             </div>
             <div class="col-md-6">
-              <label class="form-label">Tratamiento</label>
-              <input type="text" class="form-control" id="Tratamiendo" disabled>
+              <div class="historial-item">
+                <label class="form-label-historial">
+                  <i class="bi bi-capsule-pill"></i>
+                  Tratamiento
+                </label>
+                <input type="text" class="form-control-historial" id="Tratamiendo" disabled>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      
 
     </div>
   </div>
@@ -153,129 +344,31 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // Obtener la matrícula desde la URL
         const params = new URLSearchParams(window.location.search);
         const matricula = params.get("matricula_alum");
 
-        if (matricula) {
-            // Actualizar el enlace de "Estilo de Vida" con la matrícula
-            const enlacePuntajes = document.getElementById("enlacePuntajes");
-            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
+        if (!matricula) {
+            alert("No se proporcionó una matrícula.");
+            return;
         }
-    });
 
-    document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const matricula = params.get("matricula_alum");
-
-    if (matricula) {
+        // Actualizar enlaces del sidebar
         const linkPerfil = document.getElementById("linkPerfil");
-        linkPerfil.href = `expediente.html?matricula_alum=${matricula}`;
-    }
-});
-
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtener la matrícula desde la URL
-        const params = new URLSearchParams(window.location.search);
-        const matricula = params.get("matricula_alum");
-
-        if (matricula) {
-            // Actualizar el enlace de "Estilo de Vida" con la matrícula
-            const enlacePuntajes = document.getElementById("enlacePuntajes");
-            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-        }
-    });
-    document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const matricula = params.get("matricula_alum");
-
-    if (matricula) {
-        const linkHistorial = document.getElementById("linkHistorial");
-        linkHistorial.href = `HistorialPatologicoAlum.html?matricula_alum=${matricula}`;
-    }
-});
-
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtener la matrícula desde la URL
-        const params = new URLSearchParams(window.location.search);
-        const matricula = params.get("matricula_alum");
-
-        if (matricula) {
-            // Actualizar el enlace de "Estilo de Vida" con la matrícula
-            const enlacePuntajes = document.getElementById("enlacePuntajes");
-            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const matricula = params.get("matricula_alum");
-
-    if (matricula) {
         const linkDatos = document.getElementById("linkDatos");
-        linkDatos.href = `datosfisicosalumnos.html?matricula_alum=${matricula}`;
-    }
-});
+        const linkDass = document.getElementById("linkDass");
+        const linkEstilo = document.getElementById("linkEstilo");
+        const linkHistorial = document.getElementById("linkHistorial");
 
-</script>
+        if (linkPerfil) linkPerfil.href = `expediente.html?matricula_alum=${matricula}`;
+        if (linkDatos) linkDatos.href = `datosfisicosalumnos.html?matricula_alum=${matricula}`;
+        if (linkDass) linkDass.href = `formulariodass.html?matricula_alum=${matricula}`;
+        if (linkEstilo) linkEstilo.href = `formularioestilo.html?matricula_alum=${matricula}`;
+        if (linkHistorial) linkHistorial.href = `HistorialPatologicoAlum.html?matricula_alum=${matricula}`;
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtener la matrícula desde la URL
-        const params = new URLSearchParams(window.location.search);
-        const matricula = params.get("matricula_alum");
-
-        if (matricula) {
-            // Actualizar el enlace de "Estilo de Vida" con la matrícula
-            const enlacePuntajes = document.getElementById("enlacePuntajes");
-            enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-        }
+        // Cargar datos
+        cargarPerfil();
     });
 
-    document.addEventListener("DOMContentLoaded", function() {
-    const params = new URLSearchParams(window.location.search);
-    const matricula = params.get("matricula_alum");
-
-    if (matricula) {
-        const linkDass = document.getElementById("linkDass");
-        linkDass.href = `formulariodass.html?matricula_alum=${matricula}`;
-    }
-});
-
-</script>
-
-<script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener la matrícula desde la URL
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                // Actualizar el enlace de "Estilo de Vida" con la matrícula
-                const enlacePuntajes = document.getElementById("enlacePuntajes");
-                enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                const linkEstilo = document.getElementById("linkEstilo");
-                linkEstilo.href = `formularioestilo.html?matricula_alum=${matricula}`;
-            }
-        });
-
-    </script>
-
-<script>
     function cargarHistorialClinico(matricula) {
         fetch(`historial.php?matricula_alum=${matricula}`)
             .then(response => response.json())
@@ -308,11 +401,6 @@
         const params = new URLSearchParams(window.location.search);
         const matricula = params.get("matricula_alum");
 
-        if (!matricula) {
-            alert("No se proporcionó una matrícula.");
-            return;
-        }
-
         fetch(`perfil.php?matricula_alum=${matricula}`)
             .then(response => response.json())
             .then(data => {
@@ -321,132 +409,16 @@
                     return;
                 }
 
-               // document.getElementById("fotoAlumno").src = data.foto;
                 document.getElementById("matricula").value = data.matricula_alum;
-                document.getElementById("nombre").value = data.nombres_alum + " " + data.ape_paterno_alum + " " + data.ape_materno_alum;
+                document.getElementById("nombre").value = `${data.nombres_alum} ${data.ape_paterno_alum} ${data.ape_materno_alum}`;
                 document.getElementById("sexo").value = data.sexo;
                 document.getElementById("edad").value = data.edad_alum;
-                document.getElementById("facultad").value = data.nombre_facultad;
-                document.getElementById("carrera").value = data.nombre_carrera;
-                document.getElementById("email").value = data.correo_alum;
-
-                // 🟢 Estado del formulario Apgar
-                const statusRectangleApgar = document.getElementById('status-rectangle-apgar');
-                const statusTextApgar = document.getElementById('status-text-apgar');
-                if (data.estilo_vida_realizado) {
-                    statusTextApgar.textContent = 'Ya realizado';
-                    statusRectangleApgar.classList.add('bg-success'); // Color verde
-                } else {
-                    statusTextApgar.textContent = 'No lo ha realizado';
-                    statusRectangleApgar.classList.add('bg-danger'); // Color rojo
-                }
-
-                // 🟢 Estado del formulario Sisco
-                const statusRectangleSisco = document.getElementById('status-rectangle-sisco');
-                const statusTextSisco = document.getElementById('status-text-sisco');
-                if (data.sisco_realizado) {
-                    statusTextSisco.textContent = 'Ya realizado';
-                    statusRectangleSisco.classList.add('bg-success');
-                } else {
-                    statusTextSisco.textContent = 'No lo ha realizado';
-                    statusRectangleSisco.classList.add('bg-danger');
-                }
-                })
-                .catch(error => console.error("Error al cargar el perfil:", error));
-                    // Cargar el historial clínico
-                 cargarHistorialClinico(matricula);
-
-                
-        }
-
-        document.addEventListener("DOMContentLoaded", cargarPerfil);
-
-        function cargarDatosFisicosRecientes(matricula) {
-    fetch(`perfil.php?matricula_alum=${matricula}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.fechas && data.fechas.length > 0) {
-                const ultimaFecha = data.fechas[data.fechas.length - 1];
-                document.getElementById("fecha-datos-fisicos").textContent = ultimaFecha;
-
-                fetch(`datos_fisicos_detalle.php?matricula_alum=${matricula}&fecha=${ultimaFecha}`)
-                    .then(response => response.json())
-                    .then(datos => {
-                        document.getElementById("peso").textContent = datos.peso || "-";
-                        document.getElementById("modal-talla").textContent = datos.talla || "-";
-                        document.getElementById("modal-imc").textContent = datos.imc || "-";
-                        document.getElementById("modal-clasificacion_imc").textContent = datos.clasificacion_imc || "-";
-                        document.getElementById("modal-glucosa").textContent = datos.glucosa || "-";
-                        document.getElementById("modal-colesterol").textContent = datos.colesterol || "-";
-                        document.getElementById("modal-trigliceridos").textContent = datos.trigliceridos || "-";
-                        document.getElementById("modal-tension_arterial").textContent = datos.tension_arterial || "-";
-                    })
-                    .catch(error => console.error("Error al cargar los datos físicos:", error));
-            } else {
-                document.getElementById("fecha-datos-fisicos").textContent = "Sin datos";
-            }
-        })
-        .catch(error => console.error("Error al cargar fechas:", error));
-}
-    
-
-    document.addEventListener("DOMContentLoaded", function() {
-        const params = new URLSearchParams(window.location.search);
-        const matricula = params.get("matricula_alum");
-
-        if (matricula) {
-        cargarDatosFisicosRecientes(matricula);
+            })
+            .catch(error => console.error("Error al cargar el perfil:", error));
+        
+        // Cargar el historial clínico
+        cargarHistorialClinico(matricula);
     }
-    });
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Obtener botones
-        const btnFormularios = document.querySelector(".btn-formularios");
-        const btnHistorial = document.querySelector(".btn-historial");
-        const btnDatosFisicos = document.querySelector(".btn-datos-fisicos");
-    
-        // Obtener cuadros y título
-        const tituloFormulario = document.getElementById("titulo-formulario");
-        const tituloSeccion = document.getElementById("titulo-seccion");
-        const formularioCuadros = document.getElementById("formulario-cuadros");
-        const historialCuadro = document.getElementById("historial-cuadro");
-        const datosFisicosCuadro = document.getElementById("datos-fisicos-cuadro");
-    
-        // Función para actualizar el título y mostrar contenido
-        function mostrarSeccion(titulo, mostrarFormulario, mostrarHistorial, mostrarDatosFisicos) {
-            // Cambiar el texto del título
-            tituloSeccion.innerText = titulo;
-            // Mostrar el título
-            tituloFormulario.classList.remove("d-none");
-    
-            // Controla la visibilidad de los cuadros
-            formularioCuadros.classList.toggle("d-none", !mostrarFormulario);
-            historialCuadro.classList.toggle("d-none", !mostrarHistorial);
-            datosFisicosCuadro.classList.toggle("d-none", !mostrarDatosFisicos);
-        }
-    
-        // Al cargar la página, ocultamos todas las secciones (excepto el título)
-        formularioCuadros.classList.add("d-none");
-        historialCuadro.classList.add("d-none");
-        datosFisicosCuadro.classList.add("d-none");
-    
-        // Evento para mostrar Formularios
-        btnFormularios.addEventListener("click", function() {
-            mostrarSeccion("Formularios", true, false, false);
-        });
-    
-        // Evento para mostrar Historial Clínico
-        btnHistorial.addEventListener("click", function() {
-            mostrarSeccion("Historial Heredo-Familiar", false, true, false);
-        });
-    
-        // Evento para mostrar Datos Físicos
-        btnDatosFisicos.addEventListener("click", function() {
-            mostrarSeccion("Datos Físicos", false, false, true);
-        });
-    });
 </script>
 
 </body>

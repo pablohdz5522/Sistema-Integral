@@ -10,7 +10,170 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
     <style>
+        /* Estilos para carpetas de datos físicos */
+        .accordion-item {
+            position: relative;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
 
+        .accordion-button {
+            background: linear-gradient(135deg, #fcd34d, #fbbf24) !important;
+            /* amarillo carpeta */
+            color: #3b3b3b !important;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-align: center;
+            justify-content: center;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 0 !important;
+            transition: all 0.3s ease;
+            clip-path: polygon(0 20px,
+                    70px 20px,
+                    85px 0,
+                    100% 0,
+                    100% 100%,
+                    0 100%);
+            box-shadow:
+                0 -2px 8px rgba(0, 0, 0, 0.2),
+                0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+            color: #2d2d2d !important;
+            transform: translateY(-3px);
+            box-shadow:
+                0 -3px 12px rgba(0, 0, 0, 0.3),
+                0 6px 14px rgba(0, 0, 0, 0.2);
+        }
+
+        .accordion-button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.05);
+        }
+
+        /* Ícono de flecha en color oscuro */
+        .accordion-button::after {
+            filter: brightness(0);
+        }
+
+        /* Cuerpo del acordeón */
+        .accordion-body {
+            background: #fff9e6;
+            /* tono crema para recordar papel */
+            font-size: 1rem;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .accordion-button:focus {
+            box-shadow:
+                0 0 0 0.25rem rgba(30, 64, 175, 0.25),
+                0 -2px 8px rgba(30, 64, 175, 0.3),
+                0 4px 12px rgba(0, 0, 0, 0.15);
+            border-color: transparent;
+        }
+
+        /* Decoración adicional de carpeta */
+        .accordion-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 80px;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+            clip-path: polygon(0 100%, 100% 0, 100% 100%);
+            pointer-events: none;
+        }
+
+        /* Cuerpo de la carpeta */
+        .accordion-collapse {
+            border: 3px solid var(--azul-rey);
+            border-top: none;
+            background: white;
+            box-shadow:
+                inset 0 3px 8px rgba(0, 0, 0, 0.05),
+                0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+
+        .dato-item {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .dato-item:hover {
+            border-color: var(--azul-claro);
+            transform: translateX(5px);
+            box-shadow: var(--sombra-media);
+        }
+
+        .dato-item i {
+            color: var(--azul-rey);
+            font-size: 1.5rem;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .dato-label {
+            font-weight: 600;
+            color: var(--gris-oscuro);
+            margin-right: 8px;
+            min-width: 180px;
+        }
+
+        .dato-value {
+            font-weight: 700;
+            color: var(--azul-oscuro);
+            font-size: 1.05rem;
+        }
+
+        .section-icon {
+            font-size: 1rem;
+            margin-right: 8px;
+        }
+
+        .fecha-badge {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: var(--sombra-suave);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Responsive para datos físicos */
+        @media (max-width: 768px) {
+            .dato-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .dato-label {
+                min-width: auto;
+            }
+
+            .accordion-button {
+                font-size: 0.9rem;
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 
@@ -101,172 +264,261 @@
                     </div>
                 </div>
 
-                <!-- Signos vitales / otros datos -->
+                <!-- Datos Físicos con Acordeón -->
                 <div class="card card-custom mb-4">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="display-6">Datos Físicos</h5>
-                            <div>
-                                <h5><i class="bi bi-calendar2-date-fill"></i>Fecha: </h5> <span
-                                    id="fecha-datos-fisicos"></span>
-                            </div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5>
+                                <i class="bi bi-clipboard-pulse"></i>
+                                Datos Físicos Recientes
+                            </h5>
+                            <span class="fecha-badge">
+                                <i class="bi bi-calendar2-date-fill"></i>
+                                <span id="fecha-datos-fisicos">Cargando...</span>
+                            </span>
                         </div>
 
+                        <!-- Acordeón de Datos Físicos -->
+                        <div class="accordion" id="accordionDatosFisicos">
 
-
-                        <div class="row g-3 mt-3">
-                            <!--cadera cintura-->
-                            <div class="col-md-12">
-                                <h5> Valores de Cintura / Cadera</h5>
-                            </div>
-
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-receipt-cutoff"></i> cintura: <span id="modal-cintura">-</span> cm
-                                </div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-receipt-cutoff"></i> Cadera: <span id="modal-cadera">-</span> cm
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-clipboard-data-fill"></i> Clasificación de Cintura/Cadera: <span
-                                        id="modal-clacin">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-person-fill-up"></i> ICC: <span id="modal-icc">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-person-fill-up"></i> Clasificación de ICC: <span
-                                        id="modal-clasicc">-</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <h5> Valores de Peso y Talla</h5>
-                            </div>
-                            <!--tallas-->
-
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-piggy-bank"></i>Peso: <span id="peso">-</span> kg</div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-person-fill-up"></i> Talla: <span id="modal-talla">-</span> cm
-                                </div>
-                            </div>
-
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-clipboard-data-fill"></i> IMC: <span id="modal-imc">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-person-check-fill"></i> Clasificación IMC: <span
-                                        id="modal-clasificacionimc">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-patch-check"></i> ICE: <span id="modal-ice">-</span>
+                            <!-- Sección 1: Cintura/Cadera -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseCinturaCadera">
+                                        <i class="bi bi-rulers section-icon"></i>
+                                        Valores de Cintura / Cadera
+                                    </button>
+                                </h2>
+                                <div id="collapseCinturaCadera" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionDatosFisicos">
+                                    <div class="accordion-body">
+                                        <div class="dato-item">
+                                            <i class="bi bi-receipt-cutoff"></i>
+                                            <span class="dato-label">Cintura:</span>
+                                            <span class="dato-value" id="modal-cintura">-</span>
+                                            <span class="text-muted">cm</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-receipt-cutoff"></i>
+                                            <span class="dato-label">Cadera:</span>
+                                            <span class="dato-value" id="modal-cadera">-</span>
+                                            <span class="text-muted">cm</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-person-fill-up"></i>
+                                            <span class="dato-label">ICC:</span>
+                                            <span class="dato-value" id="modal-icc">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-clipboard-data-fill"></i>
+                                            <span class="dato-label">Clasificación Cintura/Cadera:</span>
+                                            <span class="dato-value" id="modal-clacin">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-person-check-fill"></i>
+                                            <span class="dato-label">Clasificación de ICC:</span>
+                                            <span class="dato-value" id="modal-clasicc">-</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
-                                <h5> Valores de Porcentaje Masa Grasa</h5>
-                            </div>
-
-                            <!--masa grasa-->
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-exclamation-square"></i> MB(Kcal): <span id="modal-mb">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-activity"></i> Nivel de actividad: <span id="modal-acti">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-person-check-fill"></i> GET: <span id="modal-get">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-exclamation-square"></i> Porcentaje de masa grasa: <span
-                                        id="modal-pormasagrasa">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-2 cuadro">
-                                <div><i class="bi bi-clipboard-check"></i> Valor ideal de % grasa: <span
-                                        id="modal-ideal">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-bar-chart-steps"></i> Clasificación de % grasa: <span
-                                        id="modal-clasificaciongrasa">-</span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <h5> Valores de Porcentaje de Masa Magra y Agua</h5>
-                            </div>
-                            <!--masa magra-->
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-droplet-fill"></i> Masa magra: <span id="modal-masamagra">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-droplet-half"></i> Agua Total(litros): <span
-                                        id="modal-aguatotal">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-water"></i> Porcentaje de agua total: <span
-                                        id="modal-porcentajeagua">-</span>
+                            <!-- Sección 2: Peso y Talla -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapsePesoTalla">
+                                        <i class="bi bi-person-fill-up section-icon"></i>
+                                        Valores de Peso y Talla
+                                    </button>
+                                </h2>
+                                <div id="collapsePesoTalla" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionDatosFisicos">
+                                    <div class="accordion-body">
+                                        <div class="dato-item">
+                                            <i class="bi bi-piggy-bank"></i>
+                                            <span class="dato-label">Peso:</span>
+                                            <span class="dato-value" id="peso">-</span>
+                                            <span class="text-muted">kg</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-person-fill-up"></i>
+                                            <span class="dato-label">Talla:</span>
+                                            <span class="dato-value" id="modal-talla">-</span>
+                                            <span class="text-muted">cm</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-clipboard-data-fill"></i>
+                                            <span class="dato-label">IMC:</span>
+                                            <span class="dato-value" id="modal-imc">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-person-check-fill"></i>
+                                            <span class="dato-label">Clasificación IMC:</span>
+                                            <span class="dato-value" id="modal-clasificacionimc">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-patch-check"></i>
+                                            <span class="dato-label">ICE:</span>
+                                            <span class="dato-value" id="modal-ice">-</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-12">
-                                <h5>Valores de Glucosa y Colesterol</h5>
-                            </div>
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-heart-pulse"></i> Glucosa: <span id="modal-glucosa">-</span>
-                                </div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-droplet-half"></i> Clasificacion de Glucosa: <span
-                                        id="modal-clasificacionglucosa">-</span>
+                            <!-- Sección 3: Masa Grasa -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseMasaGrasa">
+                                        <i class="bi bi-activity section-icon"></i>
+                                        Valores de Porcentaje Masa Grasa
+                                    </button>
+                                </h2>
+                                <div id="collapseMasaGrasa" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionDatosFisicos">
+                                    <div class="accordion-body">
+                                        <div class="dato-item">
+                                            <i class="bi bi-exclamation-square"></i>
+                                            <span class="dato-label">MB (Kcal):</span>
+                                            <span class="dato-value" id="modal-mb">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-activity"></i>
+                                            <span class="dato-label">Nivel de actividad:</span>
+                                            <span class="dato-value" id="modal-acti">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-person-check-fill"></i>
+                                            <span class="dato-label">GET:</span>
+                                            <span class="dato-value" id="modal-get">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-exclamation-square"></i>
+                                            <span class="dato-label">Porcentaje de masa grasa:</span>
+                                            <span class="dato-value" id="modal-pormasagrasa">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-clipboard-check"></i>
+                                            <span class="dato-label">Valor ideal de % grasa:</span>
+                                            <span class="dato-value" id="modal-ideal">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-bar-chart-steps"></i>
+                                            <span class="dato-label">Clasificación de % grasa:</span>
+                                            <span class="dato-value" id="modal-clasificaciongrasa">-</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-clipboard-data"></i> Colesterol: <span
-                                        id="modal-colesterol">-</span>
+                            <!-- Sección 4: Masa Magra y Agua -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseMasaMagra">
+                                        <i class="bi bi-droplet-fill section-icon"></i>
+                                        Valores de Masa Magra y Agua
+                                    </button>
+                                </h2>
+                                <div id="collapseMasaMagra" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionDatosFisicos">
+                                    <div class="accordion-body">
+                                        <div class="dato-item">
+                                            <i class="bi bi-droplet-fill"></i>
+                                            <span class="dato-label">Masa magra:</span>
+                                            <span class="dato-value" id="modal-masamagra">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-droplet-half"></i>
+                                            <span class="dato-label">Agua Total (litros):</span>
+                                            <span class="dato-value" id="modal-aguatotal">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-water"></i>
+                                            <span class="dato-label">Porcentaje de agua total:</span>
+                                            <span class="dato-value" id="modal-porcentajeagua">-</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-clipboard2-heart-fill"></i> Clasificacion de Colesterol: <span
-                                        id="modal-clasificacioncolesterol">-</span>
+                            <!-- Sección 5: Glucosa y Colesterol -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseGlucosaCol">
+                                        <i class="bi bi-heart-pulse section-icon"></i>
+                                        Valores de Glucosa y Colesterol
+                                    </button>
+                                </h2>
+                                <div id="collapseGlucosaCol" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionDatosFisicos">
+                                    <div class="accordion-body">
+                                        <div class="dato-item">
+                                            <i class="bi bi-heart-pulse"></i>
+                                            <span class="dato-label">Glucosa:</span>
+                                            <span class="dato-value" id="modal-glucosa">-</span>
+                                            <span class="text-muted">mg/dL</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-droplet-half"></i>
+                                            <span class="dato-label">Clasificación de Glucosa:</span>
+                                            <span class="dato-value" id="modal-clasificacionglucosa">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-clipboard-data"></i>
+                                            <span class="dato-label">Colesterol:</span>
+                                            <span class="dato-value" id="modal-colesterol">-</span>
+                                            <span class="text-muted">mg/dL</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-clipboard2-heart-fill"></i>
+                                            <span class="dato-label">Clasificación de Colesterol:</span>
+                                            <span class="dato-value" id="modal-clasificacioncolesterol">-</span>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-                                <h5> Valores de Triglicéridos y Tensión Arterial</h5>
                             </div>
 
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-clipboard-pulse"></i> Trigliceridos: <span
-                                        id="modal-trigliceridos">-</span></div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-clipboard2-heart-fill"></i> Clasificacion de Trigliceridos: <span
-                                        id="modal-clasificaciontrigli">-</span>
+                            <!-- Sección 6: Triglicéridos y Tensión Arterial -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTrigliceridos">
+                                        <i class="bi bi-clipboard-pulse section-icon"></i>
+                                        Valores de Triglicéridos y Tensión Arterial
+                                    </button>
+                                </h2>
+                                <div id="collapseTrigliceridos" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionDatosFisicos">
+                                    <div class="accordion-body">
+                                        <div class="dato-item">
+                                            <i class="bi bi-clipboard-pulse"></i>
+                                            <span class="dato-label">Triglicéridos:</span>
+                                            <span class="dato-value" id="modal-trigliceridos">-</span>
+                                            <span class="text-muted">mg/dL</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-clipboard2-heart-fill"></i>
+                                            <span class="dato-label">Clasificación de Triglicéridos:</span>
+                                            <span class="dato-value" id="modal-clasificaciontrigli">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-heart-pulse"></i>
+                                            <span class="dato-label">Tensión Arterial:</span>
+                                            <span class="dato-value" id="modal-tensionarterial">-</span>
+                                        </div>
+                                        <div class="dato-item">
+                                            <i class="bi bi-person-hearts"></i>
+                                            <span class="dato-label">Clasificación de T.A:</span>
+                                            <span class="dato-value" id="modal-clasificacionta">-</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-3 cuadro">
-                                <div><i class="bi bi-heart-pulse"></i> Tension Arterial: <span
-                                        id="modal-tensionarterial">-</span></div>
-                            </div>
-                            <div class="col-md-4 cuadro">
-                                <div><i class="bi bi-person-hearts"></i> Clasificación de T.A: <span
-                                        id="modal-clasificacionta">-</span></div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -279,133 +531,6 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Obtener la matrícula desde la URL
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                // Actualizar el enlace de "Estilo de Vida" con la matrícula
-                const enlacePuntajes = document.getElementById("enlacePuntajes");
-                enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-            }
-        });
-        document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                const linkHistorial = document.getElementById("linkHistorial");
-                linkHistorial.href = `HistorialPatologicoAlum.html?matricula_alum=${matricula}`;
-            }
-        });
-
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener la matrícula desde la URL
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                // Actualizar el enlace de "Estilo de Vida" con la matrícula
-                const enlacePuntajes = document.getElementById("enlacePuntajes");
-                enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                const linkPerfil = document.getElementById("linkPerfil");
-                linkPerfil.href = `expediente.html?matricula_alum=${matricula}`;
-            }
-        });
-
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener la matrícula desde la URL
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                // Actualizar el enlace de "Estilo de Vida" con la matrícula
-                const enlacePuntajes = document.getElementById("enlacePuntajes");
-                enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                const linkDatos = document.getElementById("linkDatos");
-                linkDatos.href = `datosfisicosalumnos.html?matricula_alum=${matricula}`;
-            }
-        });
-
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener la matrícula desde la URL
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                // Actualizar el enlace de "Estilo de Vida" con la matrícula
-                const enlacePuntajes = document.getElementById("enlacePuntajes");
-                enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                const linkDass = document.getElementById("linkDass");
-                linkDass.href = `formulariodass.html?matricula_alum=${matricula}`;
-            }
-        });
-
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener la matrícula desde la URL
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                // Actualizar el enlace de "Estilo de Vida" con la matrícula
-                const enlacePuntajes = document.getElementById("enlacePuntajes");
-                enlacePuntajes.href = `puntajes.html?matricula=${matricula}`;
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                const linkEstilo = document.getElementById("linkEstilo");
-                linkEstilo.href = `formularioestilo.html?matricula_alum=${matricula}`;
-            }
-        });
-
-    </script>
-
-
-
-    <script>
-
-        function cargarPerfil() {
             const params = new URLSearchParams(window.location.search);
             const matricula = params.get("matricula_alum");
 
@@ -414,6 +539,26 @@
                 return;
             }
 
+            // Actualizar enlaces del sidebar
+            const linkPerfil = document.getElementById("linkPerfil");
+            const linkDass = document.getElementById("linkDass");
+            const linkEstilo = document.getElementById("linkEstilo");
+            const linkHistorial = document.getElementById("linkHistorial");
+
+            if (linkPerfil) linkPerfil.href = `expediente.html?matricula_alum=${matricula}`;
+            if (linkDass) linkDass.href = `formulariodass.html?matricula_alum=${matricula}`;
+            if (linkEstilo) linkEstilo.href = `formularioestilo.html?matricula_alum=${matricula}`;
+            if (linkHistorial) linkHistorial.href = `HistorialPatologicoAlum.html?matricula_alum=${matricula}`;
+
+            // Cargar perfil del alumno
+            cargarPerfil();
+            cargarDatosFisicosRecientes(matricula);
+        });
+
+        function cargarPerfil() {
+            const params = new URLSearchParams(window.location.search);
+            const matricula = params.get("matricula_alum");
+
             fetch(`perfil.php?matricula_alum=${matricula}`)
                 .then(response => response.json())
                 .then(data => {
@@ -421,33 +566,17 @@
                         alert(data.error);
                         return;
                     }
-                    // Verificar historial
-                    fetch(`historial.php?matricula_alum=${matricula}`)
-                        .then(res => res.json())
-                        .then(historial => {
-                            const historialVacio = !historial || Object.keys(historial).length === 0;
 
-                            // Verificar si hay datos físicos cargados
-                            const tieneDatosFisicos = data.fechas && data.fechas.length > 0;
-
-                            verificarEstadoExpediente(data, historialVacio, tieneDatosFisicos);
-                        });
-
-
-                    // document.getElementById("fotoAlumno").src = data.foto;
                     document.getElementById("matricula").value = data.matricula_alum;
-                    document.getElementById("nombre").value = data.nombres_alum + " " + data.ape_paterno_alum + " " + data.ape_materno_alum;
+                    document.getElementById("nombre").value = `${data.nombres_alum} ${data.ape_paterno_alum} ${data.ape_materno_alum}`;
                     document.getElementById("sexo").value = data.sexo;
                     document.getElementById("edad").value = data.edad_alum;
                     document.getElementById("facultad").value = data.nombre_facultad;
                     document.getElementById("carrera").value = data.nombre_carrera;
                     document.getElementById("email").value = data.correo_alum;
-
                 })
                 .catch(error => console.error("Error al cargar el perfil:", error));
         }
-
-        document.addEventListener("DOMContentLoaded", cargarPerfil);
 
         function cargarDatosFisicosRecientes(matricula) {
             fetch(`perfil.php?matricula_alum=${matricula}`)
@@ -460,29 +589,40 @@
                         fetch(`datos_fisicos_detalle.php?matricula_alum=${matricula}&fecha=${ultimaFecha}`)
                             .then(response => response.json())
                             .then(datos => {
+                                // Cintura/Cadera
                                 document.getElementById("modal-cintura").textContent = datos.cintura || "-";
                                 document.getElementById("modal-cadera").textContent = datos.cadera || "-";
                                 document.getElementById("modal-clacin").textContent = datos.clasificacion_cintura_cadera || "-";
                                 document.getElementById("modal-icc").textContent = datos.icc || "-";
                                 document.getElementById("modal-clasicc").textContent = datos.clasificacion_de_icc || "-";
+
+                                // Peso y Talla
                                 document.getElementById("peso").textContent = datos.peso || "-";
                                 document.getElementById("modal-talla").textContent = datos.talla || "-";
                                 document.getElementById("modal-imc").textContent = datos.imc || "-";
                                 document.getElementById("modal-clasificacionimc").textContent = datos.clasificacion_imc || "-";
                                 document.getElementById("modal-ice").textContent = datos.ice || "-";
+
+                                // Masa Grasa
                                 document.getElementById("modal-mb").textContent = datos.mb || "-";
                                 document.getElementById("modal-acti").textContent = datos.actividad1 || "-";
                                 document.getElementById("modal-get").textContent = datos.get1 || "-";
                                 document.getElementById("modal-pormasagrasa").textContent = datos.porcentaje_masa_grasa || "-";
                                 document.getElementById("modal-ideal").textContent = datos.valor_ideal_porcentaje_grasa || "-";
                                 document.getElementById("modal-clasificaciongrasa").textContent = datos.clasificacion_porcentaje_grasa || "-";
+
+                                // Masa Magra y Agua
                                 document.getElementById("modal-masamagra").textContent = datos.masa_magra || "-";
                                 document.getElementById("modal-aguatotal").textContent = datos.agua_total || "-";
                                 document.getElementById("modal-porcentajeagua").textContent = datos.porcentaje_agua_total || "-";
+
+                                // Glucosa y Colesterol
                                 document.getElementById("modal-glucosa").textContent = datos.glucosa || "-";
                                 document.getElementById("modal-clasificacionglucosa").textContent = datos.clasificacion_glucosa || "-";
                                 document.getElementById("modal-colesterol").textContent = datos.colesterol || "-";
                                 document.getElementById("modal-clasificacioncolesterol").textContent = datos.clasificacion_colesterol || "-";
+
+                                // Triglicéridos y Tensión Arterial
                                 document.getElementById("modal-trigliceridos").textContent = datos.trigliceridos || "-";
                                 document.getElementById("modal-clasificaciontrigli").textContent = datos.clasificacion_trigliceridos || "-";
                                 document.getElementById("modal-tensionarterial").textContent = datos.tension_arterial || "-";
@@ -495,110 +635,7 @@
                 })
                 .catch(error => console.error("Error al cargar fechas:", error));
         }
-
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (matricula) {
-                cargarDatosFisicosRecientes(matricula);
-            }
-        });
     </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener botones
-            const btnFormularios = document.querySelector(".btn-formularios");
-            const btnHistorial = document.querySelector(".btn-historial");
-            const btnDatosFisicos = document.querySelector(".btn-datos-fisicos");
-
-            // Obtener cuadros y título
-            const tituloFormulario = document.getElementById("titulo-formulario");
-            const tituloSeccion = document.getElementById("titulo-seccion");
-            const formularioCuadros = document.getElementById("formulario-cuadros");
-            const historialCuadro = document.getElementById("historial-cuadro");
-            const datosFisicosCuadro = document.getElementById("datos-fisicos-cuadro");
-
-            // Función para actualizar el título y mostrar contenido
-            function mostrarSeccion(titulo, mostrarFormulario, mostrarHistorial, mostrarDatosFisicos) {
-                // Cambiar el texto del título
-                tituloSeccion.innerText = titulo;
-                // Mostrar el título
-                tituloFormulario.classList.remove("d-none");
-
-                // Controla la visibilidad de los cuadros
-                formularioCuadros.classList.toggle("d-none", !mostrarFormulario);
-                historialCuadro.classList.toggle("d-none", !mostrarHistorial);
-                datosFisicosCuadro.classList.toggle("d-none", !mostrarDatosFisicos);
-            }
-
-            // Al cargar la página, ocultamos todas las secciones (excepto el título)
-            formularioCuadros.classList.add("d-none");
-            historialCuadro.classList.add("d-none");
-            datosFisicosCuadro.classList.add("d-none");
-
-            // Evento para mostrar Formularios
-            btnFormularios.addEventListener("click", function () {
-                mostrarSeccion("Formularios", true, false, false);
-            });
-
-            // Evento para mostrar Historial Clínico
-            btnHistorial.addEventListener("click", function () {
-                mostrarSeccion("Historial Heredo-Familiar", false, true, false);
-            });
-
-            // Evento para mostrar Datos Físicos
-            btnDatosFisicos.addEventListener("click", function () {
-                mostrarSeccion("Datos Físicos", false, false, true);
-            });
-        });
-
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const params = new URLSearchParams(window.location.search);
-            const matricula = params.get("matricula_alum");
-
-            if (!matricula) return;
-
-            Promise.all([
-                fetch(`perfil.php?matricula_alum=${matricula}`).then(r => r.json()),
-                fetch(`historial.php?matricula_alum=${matricula}`).then(r => r.json())
-            ])
-                .then(([perfil, historial]) => {
-                    // ⚙️ Datos físicos ya vienen desde perfil.php
-                    const tieneDatosFisicos = perfil.fechas && perfil.fechas.length > 0;
-                    const historialVacio = Object.keys(historial).length === 0;
-
-                    // 🧠 Mostrar modal informativo
-                    mostrarModalEstado(perfil, tieneDatosFisicos, historialVacio);
-                });
-        });
-
-    </script>
-
-    <!-- Modal de estado de expediente -->
-    <div class="modal fade" id="modalEstadoExpediente" tabindex="-1" aria-labelledby="modalEstadoExpedienteLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-info">
-                <div class="modal-header bg-info text-white">
-                    <h5 class="modal-title" id="modalEstadoExpedienteLabel">Estado del Expediente</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body" id="contenido-estado-expediente">
-                    <!-- Este contenido se llena por JS -->
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-info" data-bs-dismiss="modal">Entendido</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 
 </body>
 

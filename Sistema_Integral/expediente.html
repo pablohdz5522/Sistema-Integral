@@ -11,18 +11,85 @@
   <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
 
   <style>
-    .list-group-item-warning {
-      background-color: #fff3cd;
-      border-left: 4px solid #ffc107;
+    /* Estilos mejorados para datos físicos */
+    .datos-fisicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
     }
 
-    #btnEnviarResultados:disabled {
-      cursor: not-allowed;
+    .dato-fisico-item {
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(59, 130, 246, 0.05));
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 15px;
+      transition: all 0.3s ease;
+      text-align: center;
+      box-shadow: var(--sombra-suave);
     }
 
-    .badge {
+    .dato-fisico-item:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--sombra-media);
+      border-color: var(--azul-claro);
+    }
+
+    .dato-fisico-icon {
+      font-size: 2rem;
+      color: var(--azul-rey);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .dato-fisico-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gris-medio);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .dato-fisico-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--azul-oscuro);
+      margin-bottom: 3px;
+    }
+
+    .dato-fisico-unit {
+      font-size: 0.85rem;
+      color: var(--gris-medio);
+      font-weight: 500;
+    }
+
+    .fecha-badge-fisicos {
+      background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-rey));
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
       font-size: 0.9rem;
-      padding: 0.5em 1em;
+      box-shadow: var(--sombra-suave);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .datos-fisicos-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+      }
+
+      .dato-fisico-item {
+        padding: 12px;
+      }
+
+      .dato-fisico-value {
+        font-size: 1.2rem;
+      }
     }
   </style>
 
@@ -114,77 +181,67 @@
           </div>
         </div>
 
-        <!-- Signos vitales / otros datos -->
+        <!-- Datos Físicos Mejorados -->
         <div class="card card-custom mb-4">
           <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-              <h5>Datos Físicos</h5>
-              <div>
-                <h5>Fecha: </h5> <span id="fecha-datos-fisicos"></span>
-              </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5><i class="bi bi-clipboard-pulse"></i> Datos Físicos Recientes</h5>
+              <span class="fecha-badge-fisicos">
+                <i class="bi bi-calendar2-date-fill"></i>
+                <span id="fecha-datos-fisicos">Sin datos</span>
+              </span>
             </div>
 
-            <div class="row g-3 mt-3">
-              <div class="col-md-2">
-                <div><i class="bi bi-person-fill-up"></i> Talla: <span id="modal-talla">-</span> cm</div>
+            <div class="datos-fisicos-grid">
+              <div class="dato-fisico-item">
+                <i class="bi bi-person-fill-up dato-fisico-icon"></i>
+                <div class="dato-fisico-label">Talla</div>
+                <div class="dato-fisico-value"><span id="modal-talla">-</span></div>
+                <div class="dato-fisico-unit">cm</div>
               </div>
-              <div class="col-md-2">
-                <div><i class="bi bi-bar-chart-fill"></i>Peso: <span id="peso">-</span> kg</div>
+
+              <div class="dato-fisico-item">
+                <i class="bi bi-bar-chart-fill dato-fisico-icon"></i>
+                <div class="dato-fisico-label">Peso</div>
+                <div class="dato-fisico-value"><span id="peso">-</span></div>
+                <div class="dato-fisico-unit">kg</div>
               </div>
-              <div class="col-md-2">
-                <div><i class="bi bi-calculator"></i> IMC: <span id="modal-imc">-</span></div>
+
+              <div class="dato-fisico-item">
+                <i class="bi bi-calculator dato-fisico-icon"></i>
+                <div class="dato-fisico-label">IMC</div>
+                <div class="dato-fisico-value"><span id="modal-imc">-</span></div>
+                <div class="dato-fisico-unit"><span id="modal-clasificacion_imc">-</span></div>
               </div>
-              <div class="col-md-3">
-                <div><i class="bi bi-clipboard-data-fill"></i> IMC: <span id="modal-clasificacion_imc">-</span></div>
+
+              <div class="dato-fisico-item">
+                <i class="bi bi-droplet-fill dato-fisico-icon"></i>
+                <div class="dato-fisico-label">Glucosa</div>
+                <div class="dato-fisico-value"><span id="modal-glucosa">-</span></div>
+                <div class="dato-fisico-unit">mg/dL</div>
               </div>
-              <div class="col-md-3">
-                <div><i class="bi bi-droplet-fill"></i> Glucosa: <span id="modal-glucosa">-</span> mg/dL</div>
+
+              <div class="dato-fisico-item">
+                <i class="bi bi-heart-pulse dato-fisico-icon"></i>
+                <div class="dato-fisico-label">Colesterol</div>
+                <div class="dato-fisico-value"><span id="modal-colesterol">-</span></div>
+                <div class="dato-fisico-unit">mg/dL</div>
               </div>
-              <div class="col-md-3">
-                <div><i class="bi bi-heart-pulse"></i> Colesterol: <span id="modal-colesterol">-</span> mg/dL</div>
+
+              <div class="dato-fisico-item">
+                <i class="bi bi-activity dato-fisico-icon"></i>
+                <div class="dato-fisico-label">Triglicéridos</div>
+                <div class="dato-fisico-value"><span id="modal-trigliceridos">-</span></div>
+                <div class="dato-fisico-unit">mg/dL</div>
               </div>
-              <div class="col-md-3">
-                <div><i class="bi bi-heart-pulse"></i> Trigliceridos: <span id="modal-trigliceridos">-</span> mg/dL
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div><i class="bi bi-heart"></i> Tension Arterial: <span id="modal-tension_arterial">-</span></div>
+
+              <div class="dato-fisico-item">
+                <i class="bi bi-heart dato-fisico-icon"></i>
+                <div class="dato-fisico-label">Tensión Arterial</div>
+                <div class="dato-fisico-value"><span id="modal-tension_arterial">-</span></div>
+                <div class="dato-fisico-unit">mmHg</div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Formularios si ya estan hechos -->
-        <div class="card card-custom mb-4">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-              <h5>Formularios</h5>
-              <div>
-                <h5>Status: </h5>
-              </div>
-            </div>
-
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>Estilo de Vida:</strong></span>
-                <label for="status" class="form-label"></label>
-                <div id="status-apgar" class="mb-3">
-                  <div id="status-rectangle-apgar" class="status-rectangle p-4">
-                    <span id="status-text-apgar" class="text-white">No lo ha realizado</span>
-                  </div>
-                </div>
-              </li>
-
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span><strong>DASS-21:</strong></span>
-                <label for="status" class="form-label"></label>
-                <div id="status-sisco" class="mb-3">
-                  <div id="status-rectangle-sisco" class="status-rectangle p-4">
-                    <span id="status-text-sisco" class="text-white">No lo ha realizado</span>
-                  </div>
-                </div>
-              </li>
-            </ul>
           </div>
         </div>
 
@@ -192,42 +249,42 @@
         <div class="card card-custom mb-4">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-center mb-3">
-              <h5><i class="bi bi-send-fill me-2"></i>Enviar Resultados</h5>
+              <h5 style="font-size: 1.4rem;"><i class="bi bi-send-fill me-2"></i>Enviar Resultados al Alumno</h5>
             </div>
 
-            <div class="alert alert-info" role="alert">
+            <div class="alert alert-info" role="alert" style="font-size: 1rem;">
               <i class="bi bi-info-circle-fill me-2"></i>
               <strong>Antes de enviar:</strong> Verifica que el alumno haya completado todos los cuestionarios y datos
               físicos.
             </div>
 
             <ul class="list-group list-group-flush mb-3">
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <i class="bi bi-clipboard-check me-2"></i>
+              <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 18px 15px;">
+                <div style="font-size: 1.05rem;">
+                  <i class="bi bi-clipboard-check me-2" style="font-size: 1.2rem;"></i>
                   <strong>Estilo de Vida:</strong>
                 </div>
-                <span id="check-estilo-vida" class="badge bg-secondary">Verificando...</span>
+                <span id="check-estilo-vida" class="badge bg-secondary" style="font-size: 0.95rem; padding: 10px 18px;">Verificando...</span>
               </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <i class="bi bi-clipboard-check me-2"></i>
+              <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 18px 15px;">
+                <div style="font-size: 1.05rem;">
+                  <i class="bi bi-clipboard-check me-2" style="font-size: 1.2rem;"></i>
                   <strong>DASS-21:</strong>
                 </div>
-                <span id="check-dass" class="badge bg-secondary">Verificando...</span>
+                <span id="check-dass" class="badge bg-secondary" style="font-size: 0.95rem; padding: 10px 18px;">Verificando...</span>
               </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <i class="bi bi-clipboard-data me-2"></i>
+              <li class="list-group-item d-flex justify-content-between align-items-center" style="padding: 18px 15px;">
+                <div style="font-size: 1.05rem;">
+                  <i class="bi bi-clipboard-data me-2" style="font-size: 1.2rem;"></i>
                   <strong>Datos Físicos:</strong>
                 </div>
-                <span id="check-datos-fisicos" class="badge bg-secondary">Verificando...</span>
+                <span id="check-datos-fisicos" class="badge bg-secondary" style="font-size: 0.95rem; padding: 10px 18px;">Verificando...</span>
               </li>
             </ul>
 
             <div class="d-grid gap-2">
-              <button id="btnEnviarResultados" class="btn btn-primary btn-lg" disabled>
-                <i class="bi bi-send-fill me-2"></i>
+              <button id="btnEnviarResultados" class="btn btn-primary btn-lg" disabled style="font-size: 1.15rem; padding: 16px 32px;">
+                <i class="bi bi-send-fill me-2" style="font-size: 1.3rem;"></i>
                 <span id="textoBotonEnviar">Verificando datos...</span>
               </button>
             </div>
@@ -402,36 +459,6 @@
             document.getElementById("facultad").value = data.nombre_facultad;
             document.getElementById("carrera").value = data.nombre_carrera;
             document.getElementById("email").value = data.correo_alum;
-
-            // Estado del formulario Estilo de Vida
-            const statusRectangleApgar = document.getElementById('status-rectangle-apgar');
-            const statusTextApgar = document.getElementById('status-text-apgar');
-            if (statusRectangleApgar && statusTextApgar) {
-              if (data.estilo_vida_realizado) {
-                statusTextApgar.textContent = 'Ya realizado';
-                statusRectangleApgar.classList.remove('bg-danger');
-                statusRectangleApgar.classList.add('bg-success');
-              } else {
-                statusTextApgar.textContent = 'No lo ha realizado';
-                statusRectangleApgar.classList.remove('bg-success');
-                statusRectangleApgar.classList.add('bg-danger');
-              }
-            }
-
-            // Estado del formulario DASS
-            const statusRectangleSisco = document.getElementById('status-rectangle-sisco');
-            const statusTextSisco = document.getElementById('status-text-sisco');
-            if (statusRectangleSisco && statusTextSisco) {
-              if (data.dass_realizado) {
-                statusTextSisco.textContent = 'Ya realizado';
-                statusRectangleSisco.classList.remove('bg-danger');
-                statusRectangleSisco.classList.add('bg-success');
-              } else {
-                statusTextSisco.textContent = 'No lo ha realizado';
-                statusRectangleSisco.classList.remove('bg-success');
-                statusRectangleSisco.classList.add('bg-danger');
-              }
-            }
 
             // Verificar estado del expediente
             verificarEstadoDatos();

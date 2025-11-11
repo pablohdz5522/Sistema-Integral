@@ -1,16 +1,21 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* PASO 1: Se agregaron todas las variables de datos_fisicos.css */
+:root {
+  --azul-rey: #1e40af;
+  --azul-oscuro: #1e3a8a;
+  --azul-claro: #3b82f6;
+  --acento: #f59e0b;
+  --gris-oscuro: #1f2937;
+  --gris-medio: #6b7280;
+  --gris-claro: #f3f4f6;
+  --blanco: #FFFFFF;
+  --sombra-suave: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --sombra-media: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --sombra-profunda: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
-body {
-  background: linear-gradient(135deg, #003366, #ADB0B6, #003366);
-  min-height: 100vh;
-  font-family: 'Inter', sans-serif;
-  padding: 20px 0;
-}
-
+/* ------------------------------------------------ */
+/* --- ESTILOS DEL BOTÓN SALIR ACTUALIZADOS --- */
+/* ------------------------------------------------ */
 .salir {
   display: block;
   position: relative;
@@ -33,13 +38,15 @@ body {
 }
 
 .salir:before {
-  border: 4px solid #ffffff;
+  /* CAMBIO: Color de borde para fondo claro */
+  border: 4px solid var(--gris-oscuro);
   transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
     transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
 }
 
 .salir:after {
-  border: 4px solid #f81100;
+  /* CAMBIO: Estandarizado al mismo rojo */
+  border: 4px solid #dc2626;
   transform: scale(1.3);
   transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
     transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -75,7 +82,8 @@ body {
   height: 20px;
   margin: 22px 18px 0 18px;
   transform: rotate(180deg);
-  fill: #ffffff;
+  /* CAMBIO: Color de ícono para fondo claro */
+  fill: var(--gris-oscuro);
 }
 
 .salir:hover .salir-box,
@@ -84,23 +92,54 @@ body {
   transform: translateX(-56px);
 }
 
+/* ------------------------------------------------ */
+/* --- ESTILOS DE PÁGINA ACTUALIZADOS --- */
+/* ------------------------------------------------ */
+
+/* PASO 2: Se reemplazó el fondo por el de datos_fisicos */
+body {
+  background: 
+    linear-gradient(
+      180deg, 
+      rgba(30, 64, 175, 0.15), 
+      transparent 50%
+    ),
+    linear-gradient(180deg, #dee2e6 0%, #ced4da 100%);
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  color: var(--gris-oscuro);
+  letter-spacing: -0.01em;
+  padding: 20px 0;
+}
+
 .titulo {
   display: inline-block;
   text-align: center;
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 2.25rem; /* Ajustado para jerarquía */
+  font-weight: 700;   /* Más parecido a los h1 de menu.css */
   margin: auto;
+  font-family: 'Inria Sans', sans-serif;
+  /* CAMBIO: Color oscuro para fondo claro */
+  color: var(--gris-oscuro);
+  letter-spacing: -0.02em;
 }
 
+/* PASO 3: Se unificó el estilo de la tarjeta principal */
 .fondogenerales {
-  background-color: #ffffff;
-  border: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border-radius: 12px;
+  background-color: var(--blanco);
+  border: 1px solid #e5e7eb;
+  box-shadow: var(--sombra-media);
+  border-radius: 16px; /* Bordes más redondeados */
 }
 
+/* PASO 4: Se usaron variables para los encabezados */
 .seccion-header {
-  background: linear-gradient(135deg, #003366, #004d99);
+  background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-rey));
   color: white;
   padding: 12px 20px;
   border-radius: 8px;
@@ -110,23 +149,24 @@ body {
   text-align: center;
 }
 
+/* PASO 5: Se reemplazó el cuadro de instrucción azul por el amarillo */
 .instruccion-busqueda {
-  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  background: #fffbeb;
   padding: 12px 20px;
   border-radius: 8px;
   margin-bottom: 20px;
-  border-left: 4px solid #1976d2;
+  border-left: 4px solid var(--acento);
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
 .instruccion-busqueda strong {
-  color: #0d47a1;
+  color: #b45309;
 }
 
 .icono-info {
-  background-color: #1976d2;
+  background-color: var(--acento);
   color: white;
   border-radius: 50%;
   width: 24px;
@@ -139,12 +179,13 @@ body {
   flex-shrink: 0;
 }
 
+/* PASO 6: Se usaron variables para los campos de datos */
 .datos-principales {
-  background-color: #f8f9fa;
+  background-color: var(--gris-claro);
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
-  border-left: 4px solid #003366;
+  border-left: 4px solid var(--azul-rey);
 }
 
 .campo-grupo {
@@ -155,31 +196,33 @@ body {
 
 .campo-grupo label {
   font-weight: 600;
-  color: #003366;
+  color: var(--gris-medio); /* Color de texto más suave */
   margin-bottom: 6px;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
+/* Estilo de input unificado */
 .campo-grupo input,
 .campo-grupo select {
-  border: 2px solid #dee2e6;
-  border-radius: 6px;
+  border: 1px solid #ced4da; /* Borde más sutil */
+  border-radius: 8px; /* Bordes más redondeados */
   padding: 10px 12px;
   font-size: 15px;
   transition: all 0.3s ease;
 }
 
+/* Foco de input unificado */
 .campo-grupo input:focus,
 .campo-grupo select:focus {
-  border-color: #003366;
-  box-shadow: 0 0 0 0.2rem rgba(0, 51, 102, 0.15);
+  border-color: var(--azul-rey);
+  box-shadow: 0 0 0 0.2rem rgba(30, 64, 175, 0.15); 
   outline: none;
 }
 
 .campo-grupo input[readonly] {
-  background-color: #e9ecef;
+  background-color: var(--gris-claro);
   cursor: not-allowed;
 }
 
@@ -197,23 +240,31 @@ body {
   margin-bottom: 30px;
 }
 
+/* ------------------------------------------------ */
+/* --- ESTILOS DE PATOLOGÍAS RE-TEMATIZADOS --- */
+/* ------------------------------------------------ */
+
 .seccion-patologias {
-  background-color: #f8f9fa;
+  /* CAMBIO: Estilo de tarjeta sutil, como .seccion-mediciones */
+  background-color: var(--blanco);
   padding: 25px;
-  border-radius: 10px;
+  border-radius: 12px;
   margin-bottom: 20px;
-  border: 2px solid #dee2e6;
+  border: 1px solid #e5e7eb;
+  box-shadow: var(--sombra-suave);
   height: 100%;
 }
 
 .titulo-patologia {
   font-weight: 700;
-  color: #003366;
+  /* CAMBIO: Color con variable */
+  color: var(--azul-rey);
   font-size: 18px;
   text-align: center;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 3px solid #003366;
+  /* CAMBIO: Color con variable */
+  border-bottom: 3px solid var(--azul-rey);
 }
 
 .patologia-item {
@@ -223,44 +274,46 @@ body {
   align-items: center;
   padding: 12px;
   margin-bottom: 10px;
-  background: white;
+  background: var(--blanco); /* CAMBIO: Variable */
   border-radius: 8px;
   transition: all 0.3s ease;
 }
 
 .patologia-item:hover {
-  background: #f1f5f9;
+  background: var(--gris-claro); /* CAMBIO: Variable */
   transform: translateX(5px);
 }
 
 .patologia-label {
   font-weight: 600;
-  color: #2d3748;
+  color: var(--gris-oscuro); /* CAMBIO: Variable */
   font-size: 14px;
 }
 
+/* Estilo unificado para select */
 .select-patologia {
-  border: 2px solid #ced4da;
-  border-radius: 6px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
   padding: 8px 10px;
   font-size: 14px;
   transition: all 0.3s ease;
 }
 
+/* Foco unificado para select */
 .select-patologia:focus {
-  border-color: #003366;
-  box-shadow: 0 0 0 0.2rem rgba(0, 51, 102, 0.15);
+  border-color: var(--azul-rey);
+  box-shadow: 0 0 0 0.2rem rgba(30, 64, 175, 0.15);
   outline: none;
 }
 
 .select-patologia:disabled {
-  background-color: #e9ecef;
+  background-color: var(--gris-claro);
   cursor: not-allowed;
 }
 
 .enfermedad-card {
-  background: white;
-  border: 2px solid #e2e8f0;
+  background: var(--blanco);
+  border: 1px solid #e5e7eb; /* CAMBIO: Borde más sutil */
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 15px;
@@ -268,13 +321,14 @@ body {
 }
 
 .enfermedad-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--sombra-media); /* CAMBIO: Variable */
   border-color: #cbd5e0;
 }
 
+/* Estilo unificado para textarea */
 .textarea-tratamiento {
   width: 100%;
-  border: 2px solid #ced4da;
+  border: 1px solid #ced4da;
   border-radius: 8px;
   padding: 12px;
   resize: vertical;
@@ -283,12 +337,14 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Foco unificado para textarea */
 .textarea-tratamiento:focus {
-  border-color: #003366;
-  box-shadow: 0 0 0 0.2rem rgba(0, 51, 102, 0.15);
+  border-color: var(--azul-rey);
+  box-shadow: 0 0 0 0.2rem rgba(30, 64, 175, 0.15);
   outline: none;
 }
 
+/* Estilos de botones de acción (Agregar/Eliminar) se mantienen */
 .btn-agregar {
   background: linear-gradient(135deg, #48bb78, #38a169);
   border: none;
@@ -325,22 +381,28 @@ body {
   box-shadow: 0 4px 12px rgba(252, 129, 129, 0.4);
 }
 
+/* PASO 7: Se reemplazó el botón Guardar por el de datos_fisicos */
 .btn-guardar {
-  background: linear-gradient(135deg, #003366, #004d99);
+  background: linear-gradient(135deg, var(--azul-rey), var(--azul-claro));
   border: none;
   padding: 12px 40px;
   font-size: 16px;
   font-weight: 600;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 51, 102, 0.3);
+  box-shadow: var(--sombra-suave);
   transition: all 0.3s ease;
-  color: white;
+  color: var(--blanco);
 }
 
 .btn-guardar:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 51, 102, 0.4);
+  box-shadow: var(--sombra-media);
+  background: linear-gradient(135deg, var(--azul-oscuro), var(--azul-rey));
 }
+
+/* ------------------------------------------------ */
+/* --- REGLAS RESPONSIVAS (SIN CAMBIOS) --- */
+/* ------------------------------------------------ */
 
 .grid-patologias {
   display: grid;

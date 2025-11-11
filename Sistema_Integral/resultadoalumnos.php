@@ -7,6 +7,9 @@ if ($conn->connect_error) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
+// Establecer charset
+$conn->set_charset("utf8");
+
 // Obtener filtros desde JavaScript
 $filtroFacultad = isset($_GET['facultad']) ? (int)$_GET['facultad'] : "";
 $filtroSexo = isset($_GET['sexo']) ? $_GET['sexo'] : "";
@@ -26,42 +29,84 @@ $sql = "SELECT a.matricula_alum, a.nombres_alum, a.ape_paterno_alum, a.ape_mater
         WHERE 1=1";
 
 // Aplicar filtros dinámicamente
+$filtros = "";
+
 if (!empty($filtroFacultad)) {
-    $sql .= " AND a.id_facultad = $filtroFacultad";
+    $filtros .= " AND a.id_facultad = " . intval($filtroFacultad);
 }
 
 if (!empty($filtroSexo)) {
-    $sql .= " AND a.sexo = '$filtroSexo'";
+    $filtroSexo = $conn->real_escape_string($filtroSexo);
+    $filtros .= " AND a.sexo = '$filtroSexo'";
 }
 
 if (!empty($filtroTexto)) {
-    $sql .= " AND (a.matricula_alum LIKE '%$filtroTexto%' OR a.nombres_alum LIKE '%$filtroTexto%')";
+    $filtroTexto = $conn->real_escape_string($filtroTexto);
+    $filtros .= " AND (a.matricula_alum LIKE '%$filtroTexto%' 
+                  OR a.nombres_alum LIKE '%$filtroTexto%' 
+                  OR a.ape_paterno_alum LIKE '%$filtroTexto%' 
+                  OR a.ape_materno_alum LIKE '%$filtroTexto%')";
 }
+
+$sql .= $filtros;
+
+// Ordenar por matrícula
+$sql .= " ORDER BY a.matricula_alum ASC";
 
 // Paginación
 $sql .= " LIMIT $limite OFFSET $offset";
 
 // Ejecutar la consulta
 $result = $conn->query($sql);
-$contador = $offset + 1;
 
 // Generar filas de la tabla
-if ($result->num_rows > 0) { 
+if ($result && $result->num_rows > 0) { 
     while ($row = $result->fetch_assoc()) {
-        $nombreCompleto = $row['nombres_alum'] . " " . $row['ape_paterno_alum'] . " " . $row['ape_materno_alum'];
+        $nombreCompleto = htmlspecialchars($row['nombres_alum'] . " " . $row['ape_paterno_alum'] . " " . $row['ape_materno_alum']);
+        $matricula = htmlspecialchars($row['matricula_alum']);
+        $facultad = htmlspecialchars($row['nombre_facultad']);
+        $sexo = htmlspecialchars($row['sexo']);
         
-        // Verificar si tiene formularios respondidos
-        $iconoDass = $row['tiene_dass'] > 0 ? '<span class="text-success fw-bold">✓</span>' : '<span class="text-danger fw-bold">✗</span>';
-        $iconoEstiloVida = $row['tiene_estilo_vida'] > 0 ? '<span class="text-success fw-bold">✓</span>' : '<span class="text-danger fw-bold">✗</span>';
-        $iconoDatosFisicos = $row['tiene_datos_fisicos'] > 0 ? '<span class="text-success fw-bold">✓</span>' : '<span class="text-danger fw-bold">✗</span>';
+        // Crear badges para los formularios completados
+        if ($row['tiene_dass'] > 0) {
+            $iconoDass = '<span class="badge-evaluacion completado" title="Completado">
+                            <i class="bi bi-check-circle-fill"></i>
+                          </span>';
+        } else {
+            $iconoDass = '<span class="badge-evaluacion pendiente" title="Pendiente">
+                            <i class="bi bi-x-circle-fill"></i>
+                          </span>';
+        }
         
-        // Verificar si existe el PDF de resultado (buscar el más reciente)
-        $carpetaMatricula = "reportes_salud/" . $row['matricula_alum'];
-        $rutaPdfUltimo = $carpetaMatricula . "/reporte_" . $row['matricula_alum'] . "_ultimo.pdf";
+        if ($row['tiene_estilo_vida'] > 0) {
+            $iconoEstiloVida = '<span class="badge-evaluacion completado" title="Completado">
+                                  <i class="bi bi-check-circle-fill"></i>
+                                </span>';
+        } else {
+            $iconoEstiloVida = '<span class="badge-evaluacion pendiente" title="Pendiente">
+                                  <i class="bi bi-x-circle-fill"></i>
+                                </span>';
+        }
+        
+        if ($row['tiene_datos_fisicos'] > 0) {
+            $iconoDatosFisicos = '<span class="badge-evaluacion completado" title="Completado">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                  </span>';
+        } else {
+            $iconoDatosFisicos = '<span class="badge-evaluacion pendiente" title="Pendiente">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                  </span>';
+        }
+        
+        // Verificar si existe el PDF de resultado
+        $carpetaMatricula = "reportes_salud/" . $matricula;
+        $rutaPdfUltimo = $carpetaMatricula . "/reporte_" . $matricula . "_ultimo.pdf";
         
         if (file_exists($rutaPdfUltimo)) {
             // Si existe el PDF "último"
-            $botonResultado = "<a href='$rutaPdfUltimo' class='btn btn-sm btn-primary' target='_blank'><i class='bi bi-file-pdf'></i></a>";
+            $botonResultado = "<a href='$rutaPdfUltimo' class='btn-resultado' target='_blank' title='Ver reporte PDF'>
+                                <i class='bi bi-file-earmark-pdf-fill'></i> Ver PDF
+                               </a>";
         } elseif (is_dir($carpetaMatricula)) {
             // Si no existe "último", buscar el más reciente por fecha
             $archivos = glob($carpetaMatricula . "/reporte_*.pdf");
@@ -71,28 +116,40 @@ if ($result->num_rows > 0) {
                     return filemtime($b) - filemtime($a);
                 });
                 $rutaPdfReciente = $archivos[0];
-                $botonResultado = "<a href='$rutaPdfReciente' class='btn btn-sm btn-primary' target='_blank'><i class='bi bi-file-pdf'></i></a>";
+                $botonResultado = "<a href='$rutaPdfReciente' class='btn-resultado' target='_blank' title='Ver reporte PDF'>
+                                    <i class='bi bi-file-earmark-pdf-fill'></i> Ver PDF
+                                   </a>";
             } else {
-                $botonResultado = '<span class="text-muted">Sin resultado</span>';
+                $botonResultado = '<span class="sin-resultado">
+                                    <i class="bi bi-file-earmark-x"></i> Sin resultado
+                                   </span>';
             }
         } else {
-            $botonResultado = '<span class="text-muted">Sin resultado</span>';
+            $botonResultado = '<span class="sin-resultado">
+                                <i class="bi bi-file-earmark-x"></i> Sin resultado
+                               </span>';
         }
         
         echo "<tr>";
-        echo "<td>{$row['matricula_alum']}</td>";
+        echo "<td><strong>{$matricula}</strong></td>";
         echo "<td>{$nombreCompleto}</td>";
-        echo "<td>{$row['nombre_facultad']}</td>";
-        echo "<td>{$row['sexo']}</td>";
-        echo "<td>$iconoDass</td>";
-        echo "<td>$iconoEstiloVida</td>";
-        echo "<td>$iconoDatosFisicos</td>";
-        echo "<td>$botonResultado</td>";
+        echo "<td>{$facultad}</td>";
+        echo "<td>{$sexo}</td>";
+        echo "<td>{$iconoDass}</td>";
+        echo "<td>{$iconoEstiloVida}</td>";
+        echo "<td>{$iconoDatosFisicos}</td>";
+        echo "<td>{$botonResultado}</td>";
         echo "</tr>";
-        $contador++;
     }
 } else {
-    echo "<tr><td colspan='8'>NO HAY ALUMNOS REGISTRADOS</td></tr>";
+    echo "<tr>
+            <td colspan='8' class='text-center py-4'>
+                <div class='empty-state'>
+                    <i class='bi bi-inbox'></i>
+                    <p>No se encontraron alumnos con los criterios de búsqueda</p>
+                </div>
+            </td>
+          </tr>";
 }
 
 // Cerrar conexión
