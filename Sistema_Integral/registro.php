@@ -15,7 +15,6 @@ if ($conn->connect_error) {
     exit;
 }
 
-
 $conn->set_charset("utf8mb4");
 date_default_timezone_set('America/Mexico_City');
 
@@ -54,26 +53,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt_check->close();
 
     // Verificar que la carrera pertenece a la facultad seleccionada
-$sql_verificar_carrera = "SELECT 1 FROM carrera WHERE id_carrera = ? AND id_facultad = ?";
-$stmt_verificar = $conn->prepare($sql_verificar_carrera);
-$stmt_verificar->bind_param("ii", $id_carrera, $id_facultad);
-$stmt_verificar->execute();
-$stmt_verificar->store_result();
+    $sql_verificar_carrera = "SELECT 1 FROM carrera WHERE id_carrera = ? AND id_facultad = ?";
+    $stmt_verificar = $conn->prepare($sql_verificar_carrera);
+    $stmt_verificar->bind_param("ii", $id_carrera, $id_facultad);
+    $stmt_verificar->execute();
+    $stmt_verificar->store_result();
 
-if ($stmt_verificar->num_rows === 0) {
-    echo json_encode(['error' => 'La carrera no pertenece a la facultad seleccionada.']);
+    if ($stmt_verificar->num_rows === 0) {
+        echo json_encode(['error' => 'La carrera no pertenece a la facultad seleccionada.']);
+        $stmt_verificar->close();
+        exit;
+    }
     $stmt_verificar->close();
-    exit;
-}
-$stmt_verificar->close();
+
+    // GENERAR LA CONTRASEÑA CON BCRYPT
+    // Formato: "Salud" + fecha de nacimiento (AAAA-MM-DD)
+    $passwordPlana = "Salud" . substr($fecha, 0, 10);
+    $passwordHash = password_hash($passwordPlana, PASSWORD_BCRYPT);
+
     $fecha_actual = date('Y-m-d H:i:s');
 
-    // Insertar nuevo alumno
-    $sql = "INSERT INTO alumnos (matricula_alum, nombres_alum, ape_paterno_alum, ape_materno_alum, edad_alum, sexo, correo_alum, fe_nacimiento_alum, id_carrera, id_facultad, generacion, fecha_ingreso) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    // Insertar nuevo alumno CON PASSWORD
+    $sql = "INSERT INTO alumnos (matricula_alum, nombres_alum, ape_paterno_alum, ape_materno_alum, edad_alum, sexo, correo_alum, fe_nacimiento_alum, id_carrera, id_facultad, generacion, fecha_ingreso, password) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssisssiiss", $matricula, $nombre, $apepa, $apema, $edad, $sexo, $correo, $fecha, $id_carrera, $id_facultad, $generacion, $fecha_actual);
+    $stmt->bind_param("ssssisssiisss", $matricula, $nombre, $apepa, $apema, $edad, $sexo, $correo, $fecha, $id_carrera, $id_facultad, $generacion, $fecha_actual, $passwordHash);
 
     if ($stmt->execute()) {
         // Guardar toda la info del alumno en la sesión

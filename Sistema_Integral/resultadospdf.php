@@ -37,7 +37,7 @@ try {
         f.nombre_facultad,
         c.nombre_carrera,
         df.fecha, df.imc, df.peso, df.talla, df.clasificacion_imc, df.icc, df.clasificacion_de_icc, df.masa_magra, df.ice, df.porcentaje_masa_grasa,
-        df.clasificacion_porcentaje_grasa, df.porcentaje_agua_total, df.agua_total, df.glucosa, df.clasificacion_glucosa, df.colesterol,
+        df.clasificacion_porcentaje_grasa, df.get1, df.porcentaje_agua_total, df.agua_total, df.glucosa, df.clasificacion_glucosa, df.colesterol,
         df.clasificacion_colesterol, df.trigliceridos, df.clasificacion_trigliceridos,
         df.tension_arterial, df.clasificacion_tension_arterial,
         ev.total AS total_estilo_vida, ev.estado_saludable AS estado_estilo_vida,

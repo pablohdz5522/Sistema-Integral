@@ -35,7 +35,7 @@ elseif ($tipo == "anios") {
             ORDER BY anio DESC";
 }
 
-// --- DATOS DE EJERCICIO CON FILTROS ---
+// --- DATOS DE EJERCICIO CON FILTROS (OPTIMIZADO) ---
 elseif ($tipo == "ejercicio_datos") {
     $where = [];
     $params = [];
@@ -67,27 +67,16 @@ elseif ($tipo == "ejercicio_datos") {
     
     $whereClause = count($where) > 0 ? "WHERE " . implode(" AND ", $where) : "";
     
+    // OPTIMIZACIÓN CLAVE: Solo 2 JOINs necesarios, eliminamos carrera y facultad
     $sql = "SELECT 
-                ej.id_ejercicio,
-                ej.id_cuestionario,
-                ej.total_ejercicio,
                 ej.saludable_ejercicio,
-                e.matricula_alum,
-                e.fecha,
-                a.nombres_alum,
-                a.ape_paterno_alum,
-                a.ape_materno_alum,
-                a.sexo,
-                YEAR(a.fe_nacimiento_alum) as anio_nacimiento,
-                c.nombre_carrera,
-                f.nombre_facultad
+                COUNT(*) as cantidad
             FROM ejercicio ej
             INNER JOIN estilo_de_vida e ON ej.id_cuestionario = e.id_cuestionario
             INNER JOIN alumnos a ON e.matricula_alum = a.matricula_alum
-            INNER JOIN carrera c ON a.id_carrera = c.id_carrera
-            INNER JOIN facultad f ON a.id_facultad = f.id_facultad
             $whereClause
-            ORDER BY e.fecha DESC";
+            GROUP BY ej.saludable_ejercicio
+            ORDER BY ej.saludable_ejercicio DESC";
     
     if (count($params) > 0) {
         $stmt = $conn->prepare($sql);

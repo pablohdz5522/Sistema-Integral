@@ -35,7 +35,7 @@ elseif ($tipo == "anios") {
             ORDER BY anio DESC";
 }
 
-// --- DATOS DE SOPORTE INTERPERSONAL CON FILTROS ---
+// --- DATOS DE SOPORTE INTERPERSONAL CON FILTROS (OPTIMIZADO) ---
 elseif ($tipo == "soporte_datos") {
     $where = [];
     $params = [];
@@ -67,27 +67,16 @@ elseif ($tipo == "soporte_datos") {
     
     $whereClause = count($where) > 0 ? "WHERE " . implode(" AND ", $where) : "";
     
+    // OPTIMIZACIÓN: Solo traer datos agregados para la gráfica
     $sql = "SELECT 
-                si.id_soporte_interpersonal,
-                si.id_cuestionario,
-                si.total_soporte,
                 si.saludable_soporte,
-                e.matricula_alum,
-                e.fecha,
-                a.nombres_alum,
-                a.ape_paterno_alum,
-                a.ape_materno_alum,
-                a.sexo,
-                YEAR(a.fe_nacimiento_alum) as anio_nacimiento,
-                c.nombre_carrera,
-                f.nombre_facultad
+                COUNT(*) as cantidad
             FROM soporte_interpersonal si
             INNER JOIN estilo_de_vida e ON si.id_cuestionario = e.id_cuestionario
             INNER JOIN alumnos a ON e.matricula_alum = a.matricula_alum
-            INNER JOIN carrera c ON a.id_carrera = c.id_carrera
-            INNER JOIN facultad f ON a.id_facultad = f.id_facultad
             $whereClause
-            ORDER BY e.fecha DESC";
+            GROUP BY si.saludable_soporte
+            ORDER BY si.saludable_soporte";
     
     if (count($params) > 0) {
         $stmt = $conn->prepare($sql);
@@ -102,7 +91,7 @@ elseif ($tipo == "soporte_datos") {
     }
 }
 
-// --- COMPARACIÓN ENTRE FACULTADES (SOPORTE) ---
+// --- COMPARACIÓN ENTRE FACULTADES (OPTIMIZADO) ---
 elseif ($tipo == "comparar_facultades_soporte") {
     $where = [];
     $params = [];

@@ -104,7 +104,7 @@ function addGridRow($pdf, $label1, $value1, $label2, $value2, $line_break = true
 }
 
 try {
-    
+
     if ($solo_generar_pdf) {
         error_log("=== INICIO GENERACIÓN PDF - Matrícula: " . $_POST['matricula'] . " ===");
     } else {
@@ -119,9 +119,9 @@ try {
     // SOLO GUARDAR EN BD SI NO ES MODO PDF
     if (!$solo_generar_pdf) {
         $sql_guardar = "INSERT INTO datos_fisicos_alumnos 
-                (matricula_alum, fecha, cintura, cadera, clasificacion_cintura_cadera, icc, clasificacion_de_icc, peso, talla, imc, clasificacion_imc, ice, mb, actividad1, get1, porcentaje_masa_grasa, valor_ideal_porcentaje_grasa,
+                (matricula_alum, fecha, cintura, cadera, clasificacion_cintura_cadera, icc,  clasificacion_de_icc, peso, talla, imc, clasificacion_imc, ice, clasificacionice, mb, actividad1, get1, porcentaje_masa_grasa, valor_ideal_porcentaje_grasa,
                 clasificacion_porcentaje_grasa, masa_magra, agua_total, porcentaje_agua_total, glucosa, clasificacion_glucosa, trigliceridos, clasificacion_trigliceridos, colesterol, clasificacion_colesterol, tension_arterial, clasificacion_tension_arterial) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $conn->prepare($sql_guardar);
         if (!$stmt) {
@@ -130,7 +130,8 @@ try {
 
         $fecha_actual = date("Y-m-d");
         $stmt->bind_param(
-            "isddsdsdddsddsdssssdddsdsdsss",
+            "isddsdsdddsdsdsddssddddsdsdsss",
+
             $_POST["matricula"],
             $fecha_actual,
             $_POST["cintura1"],
@@ -143,6 +144,7 @@ try {
             $_POST["imc1"],
             $_POST["clasificacionimc1"],
             $_POST["ice"],
+            $_POST["clasificacionice"],
             $_POST["mb1"],
             $_POST["actividad1"],
             $_POST["get1"],
@@ -216,14 +218,13 @@ try {
         throw new Exception('No se encontraron datos consolidados: ' . ($datos_pdf['error'] ?? 'Respuesta vacía'));
     }
 
-    // ✅ VALIDACIÓN: Solo cuando NO es modo PDF (cuando viene de guardar datos físicos)
-    // Cuando es modo PDF, asumimos que ya se validó en generar_y_enviar_reporte.php
+    // ✅ VALIDACIÓN: Solo cuando NO es modo PDF
     if (!$solo_generar_pdf) {
         $datos_faltantes = [];
 
         // 🔥 VALIDACIÓN MEJORADA DE DASS
         $tiene_dass = false;
-        
+
         if (isset($datos_pdf['puntuacion_depresion']) && $datos_pdf['puntuacion_depresion'] !== null && $datos_pdf['puntuacion_depresion'] !== '') {
             $tiene_dass = true;
         }
@@ -233,7 +234,7 @@ try {
         if (isset($datos_pdf['puntuacion_estres']) && $datos_pdf['puntuacion_estres'] !== null && $datos_pdf['puntuacion_estres'] !== '') {
             $tiene_dass = true;
         }
-        
+
         if (!$tiene_dass) {
             if (isset($datos_pdf['total_depresion']) && $datos_pdf['total_depresion'] !== null && $datos_pdf['total_depresion'] !== '') {
                 $tiene_dass = true;
@@ -245,26 +246,28 @@ try {
                 $tiene_dass = true;
             }
         }
-        
+
         if (!$tiene_dass) {
             $datos_faltantes[] = 'DASS-21 (Depresión, Ansiedad y Estrés)';
         }
 
         // 🔥 VALIDACIÓN MEJORADA DE ESTILO DE VIDA
         $tiene_estilo_vida = false;
-        
+
         if (isset($datos_pdf['total_estilo_vida']) && $datos_pdf['total_estilo_vida'] !== null && $datos_pdf['total_estilo_vida'] !== '') {
             $tiene_estilo_vida = true;
         }
-        
+
         if (!$tiene_estilo_vida) {
-            if ((isset($datos_pdf['total_nutricion']) && $datos_pdf['total_nutricion'] !== null && $datos_pdf['total_nutricion'] !== '') ||
+            if (
+                (isset($datos_pdf['total_nutricion']) && $datos_pdf['total_nutricion'] !== null && $datos_pdf['total_nutricion'] !== '') ||
                 (isset($datos_pdf['total_ejercicio']) && $datos_pdf['total_ejercicio'] !== null && $datos_pdf['total_ejercicio'] !== '') ||
-                (isset($datos_pdf['total_salud']) && $datos_pdf['total_salud'] !== null && $datos_pdf['total_salud'] !== '')) {
+                (isset($datos_pdf['total_salud']) && $datos_pdf['total_salud'] !== null && $datos_pdf['total_salud'] !== '')
+            ) {
                 $tiene_estilo_vida = true;
             }
         }
-        
+
         if (!$tiene_estilo_vida) {
             $datos_faltantes[] = 'Estilo de Vida';
         }
@@ -281,7 +284,7 @@ try {
             ], 200);
         }
     } else {
-        error_log("Modo PDF: Saltando validación de datos completos (ya validado previamente)");
+        error_log("Modo PDF: Saltando validación de datos completos");
     }
 
     error_log("Datos consolidados obtenidos correctamente");
@@ -618,6 +621,831 @@ try {
             $this->Line(10, $this->GetY(), 200, $this->GetY());
             $this->Ln($ln_after);
         }
+
+        // ========== INICIO SISTEMA DE RECOMENDACIONES ==========
+
+        function getRecomendaciones($indicador, $valor, $clasificacion)
+        {
+            $recomendaciones = [];
+
+            switch ($indicador) {
+                case 'IMC':
+                    $recomendaciones = $this->getRecomendacionesIMC($clasificacion);
+                    break;
+                case 'GLUCOSA':
+                    $recomendaciones = $this->getRecomendacionesGlucosa($valor, $clasificacion);
+                    break;
+                case 'COLESTEROL':
+                    $recomendaciones = $this->getRecomendacionesColesterol($valor, $clasificacion);
+                    break;
+                case 'TRIGLICERIDOS':
+                    $recomendaciones = $this->getRecomendacionesTrigliceridos($valor, $clasificacion);
+                    break;
+                case 'TENSION':
+                    $recomendaciones = $this->getRecomendacionesTension($clasificacion);
+                    break;
+                case 'DASS_ANSIEDAD':
+                    $recomendaciones = $this->getRecomendacionesAnsiedad($clasificacion);
+                    break;
+                case 'DASS_ESTRES':
+                    $recomendaciones = $this->getRecomendacionesEstres($clasificacion);
+                    break;
+                case 'DASS_DEPRESION':
+                    $recomendaciones = $this->getRecomendacionesDepresion($clasificacion);
+                    break;
+            }
+
+            return $recomendaciones;
+        }
+
+        private function getRecomendacionesIMC($clasificacion)
+        {
+            $clasificacion = trim(strtolower($clasificacion));
+
+            switch ($clasificacion) {
+                case 'peso insuficiente':
+                    return [
+                        'nutricion' => [
+                            'Si tienes un peso inferior al recomendado, es importante incluir alimentos nutritivos y energeticos en tus comidas, como proteinas, cereales integrales y grasas saludables, para fortalecer tu cuerpo de manera progresiva.',
+                            'Incorporar frutas, verduras, frutos secos y semillas no solo aporta nutrientes esenciales, sino que tambien ayuda a que tu alimentacion sea mas equilibrada y variada.',
+                            'Consultar a un nutriologo puede ser muy util para establecer un plan de alimentacion adaptado a tus necesidades y habitos.'
+                        ],
+                        'ejercicio' => [
+                            'Realizar ejercicios de fuerza ligera unas cuantas veces por semana ayuda a ganar masa muscular de manera gradual, favoreciendo tu fuerza y resistencia.',
+                            'Es fundamental respetar los periodos de descanso entre entrenamientos, ya que el cuerpo necesita recuperarse para crecer y mantenerse saludable.'
+                        ],
+                        'medico' => [
+                            'Si notas cambios importantes en tu energia o apetito, consulta con un medico para descartar posibles causas subyacentes.'
+                        ]
+                    ];
+
+                case 'peso normal':
+                    return [
+                        'nutricion' => [
+                            'Tu peso esta en un buen rango, pero mantener una alimentacion equilibrada con frutas, verduras, proteinas y cereales integrales es importante para tu bienestar.',
+                            'Beber suficiente agua durante el dia ayuda a mantener la concentracion y el buen funcionamiento del cuerpo.',
+                            'Un nutriologo puede ofrecerte recomendaciones personalizadas para optimizar tu alimentacion sin necesidad de cambios drasticos.'
+                        ],
+                        'ejercicio' => [
+                            'Continuar con actividad fisica regular contribuye a mantener un buen estado fisico y mental.',
+                            'Probar diferentes tipos de ejercicios o deportes puede hacer que tu rutina sea mas entretenida y motivadora.',
+                            'Incluir estiramientos o ejercicios de flexibilidad ayuda a prevenir molestias musculares y mejorar tu movilidad.'
+                        ],
+                        'habitos' => [
+                            'Seguir con tus habitos saludables es la clave para mantener tu bienestar a largo plazo.',
+                            'Realizar chequeos medicos ocasionales permite detectar a tiempo cualquier cambio en tu salud.'
+                        ]
+                    ];
+
+                case 'sobrepeso':
+                    return [
+                        'nutricion' => [
+                            'Reducir las porciones y comer con atencion ayuda a sentirte mas ligero y mejorar la digestion.',
+                            'Evitar bebidas azucaradas y preferir agua o infusiones naturales contribuye a mantener estables los niveles de energia y glucosa.',
+                            'Incluir mas verduras y proteinas magras como pollo, pescado o legumbres ayuda a equilibrar tu alimentacion.',
+                            'Un nutriologo puede ensenarte a planificar tus comidas de manera practica y adaptada a tu estilo de vida.'
+                        ],
+                        'ejercicio' => [
+                            'Comenzar con caminatas diarias y aumentar progresivamente la duracion e intensidad mejora tu resistencia y bienestar.',
+                            'Elegir actividades que disfrutes hace que las rutinas sea mas facil de mantener.'
+                        ],
+                        'habitos' => [
+                            'Dormir adecuadamente favorece la regulacion hormonal y el equilibrio energetico.',
+                            'Prestar atencion a las senales de saciedad ayuda a comer solo lo necesario y a evitar excesos.',
+                            'Planificar tus comidas y horarios contribuye a mantener un estilo de vida mas organizado y saludable.',
+                            'Es mejor contar con el apoyo de amigos o familiares puede motivarte y hacer que el proceso sea mas llevadero o alguien a quien le tengas cofianza.'
+                        ],
+                        'medico' => [
+                            'Consultar a un nutriologo y a un medico permite disenar un plan personalizado que mejore tu salud sin comprometer tu bienestar general.',
+                            'Controlar periodicamente la presion arterial y los niveles de glucosa es recomendable para prevenir complicaciones dile a tu especialista(medico) para mas informacion al respecto.'
+                        ]
+                    ];
+
+                case 'obesidad grado 1':
+                case 'obesidad grado 2':
+                case 'obesidad grado 3 (mórbida)':
+                case 'obesidad grado 3 (morbida)':
+                    return [
+                        'nutricion' => [
+                            'Realizar cambios progresivos en la alimentacion, como reducir azucares y grasas poco saludables, e incrementar frutas, verduras y proteinas magras, mejora tu bienestar general.',
+                            'Comer porciones mas pequenas varias veces al dia ayuda a mantener la energia.',
+                            'Un nutriologo puede elaborar un plan alimenticio adaptado a tus preferencias y necesidades, facilitando la implementacion de los cambios.'
+                        ],
+                        'ejercicio' => [
+                            'Moverte diariamente, aunque sea poco, tiene beneficios significativos; caminar, nadar o andar en bicicleta son buenas opciones para empezar.',
+                            'Antes de ejercicios mas intensos, consulta a un profesional de la salud para asegurarte de que sean adecuados.'
+                        ],
+                        'medico' => [
+                            'Realizar chequeos medicos completos permite conocer tu estado de salud y detectar posibles factores de riesgo.',
+                            'El seguimiento profesional asegura que las recomendaciones sean seguras y efectivas.'
+                        ],
+                        'psicologico' => [
+                            'Contar con apoyo psicologico facilita el cambio de habitos y mejora la motivacion.',
+                            'Un psicologo puede ayudarte a mantener la constancia y encontrar formas positivas de cuidarte.'
+                        ]
+                    ];
+
+                default:
+                    return [];
+            }
+        }
+
+        private function getRecomendacionesGlucosa($valor, $clasificacion)
+        {
+            $clasificacion = trim(strtolower($clasificacion));
+
+            if ($clasificacion == 'normal' || $clasificacion == 'deseable') {
+                return [
+                    'nutricion' => [
+                        'Tus niveles de glucosa son adecuados, por lo que mantener una alimentacion balanceada y variada es suficiente para conservar un buen estado de salud.',
+                        'Priorizar carbohidratos complejos y alimentos ricos en fibra ayuda a estabilizar la energia durante el dia.',
+                        'Reducir el consumo de dulces y postres contribuye a mantener niveles saludables.'
+                    ],
+                    'habitos' => [
+                        'Continuar con un estilo de vida activo y saludable permite conservar los niveles de glucosa dentro del rango deseable.',
+                        'Controlar periodicamente tus niveles de glucosa es una forma de prevenir complicaciones a largo plazo.'
+                    ]
+                ];
+            } elseif ($clasificacion == 'limite' || $clasificacion == 'riesgo' || $clasificacion == 'riesgo moderado') {
+                return [
+                    'nutricion' => [
+                        'Reducir el consumo de azucares anadidos y bebidas azucaradas ayuda a mantener estables los niveles de glucosa.',
+                        'Consumir alimentos con bajo indice glucemico y aumentar la fibra soluble puede mejorar el control glucemico.',
+                        'Controlar las porciones de carbohidratos en cada comida favorece un equilibrio saludable.'
+                    ],
+                    'ejercicio' => [
+                        'Realizar ejercicio aerobico regularmente contribuye a mejorar la sensibilidad a la insulina y el bienestar general.',
+                        'Caminar o mantenerte activo en sesiones  despues de las comidas ayuda a regular los niveles de glucosa y a sentirte mejor y con mas energia.',
+                        'Perder peso de manera moderada puede impactar positivamente en tus niveles glucemicos pero no te sobreexigas ya que hacer todo de golpe puede danarte en ves de ayudarte.'
+                    ],
+                    'medico' => [
+                        'Consultar con un medico permite recibir orientacion especifica y, si es necesario, estudios complementarios para evaluar tu condicion.',
+                        'Un seguimiento mas frecuente con el especialista puede ser necesario para mantener el control.'
+                    ]
+                ];
+            } else {
+                return [
+                    'medico' => [
+                        'Es importante acudir a un especialista cuanto antes, ya que los niveles elevados de glucosa pueden requerir evaluacion y tratamiento profesional.',
+                        'Es recomendable que hagas  estudios adicionales para descartar complicaciones solo como medida de prevencion solamente.',
+                        'El seguimiento medico regular es fundamental para un manejo seguro de tu salud .'
+                    ],
+                    'nutricion' => [
+                        'Un nutriologo especializado puede ayudarte a aprender a manejar tu alimentacion de manera adecuada.',
+                        'El control de carbohidratos y la orientacion profesional son esenciales para prevenir complicaciones.'
+                    ],
+                    'monitoreo' => [
+                        'El monitoreo constante de los niveles de glucosa puede ser necesario hasta estabilizar la condicion contar un especialista esperto en el area puede darte una mejor orientacion.'
+                    ]
+                ];
+            }
+        }
+
+        private function getRecomendacionesColesterol($valor, $clasificacion)
+        {
+            $clasificacion = trim(strtolower($clasificacion));
+
+            if ($clasificacion == 'normal' || $clasificacion == 'deseable') {
+                return [
+                    'nutricion' => [
+                        'Mantener habitos alimenticios equilibrados ayuda a conservar el colesterol dentro de rangos saludables.',
+                        'Incluir pescado graso, nueces y semillas aporta grasas saludables beneficiosas para el corazon.',
+                        'Evitar alimentos ultraprocesados contribuye a un perfil lipidico favorable es decir te ayuda a ingerir nutrientes que son esenciales .'
+                    ],
+                    'habitos' => [
+                        'El seguimiento periodico y la actividad fisica regular ayudan a mantener un corazon saludable.',
+                        'Realizar chequeos medicos preventivos permite detectar cambios a tiempo .'
+                    ]
+                ];
+            } elseif ($clasificacion == 'limite' || $clasificacion == 'riesgo moderado') {
+                return [
+                    'nutricion' => [
+                        'Reducir grasas saturadas y trans mejora tu salud cardiovascular el cual ayuda a tu cuerpo para sentirte mejor .',
+                        'Aumentar el consumo de fibra, aceite de oliva, aguacate y frutos secos ayuda a controlar los niveles de colesterol.',
+                        'Un plan de alimentacion equilibrado puede prevenir complicaciones a largo plazo.'
+                    ],
+                    'ejercicio' => [
+                        'El ejercicio aerobico regular, como caminar, trotar o nadar, ayuda a controlar el colesterol y mejorar la salud cardiovascular y ayuda a quemar grasas acudir a un experto en el area puede darte mas orientacion.'
+                    ],
+                    'medico' => [
+                        'Consultar con un medico para evaluar la salud cardiovascular y monitorear los niveles de colesterol es recomendable.',
+                        'Se pueden necesitar controles periodicos adicionales segun la evolucion de tus niveles.'
+                    ]
+                ];
+            } else {
+                return [
+                    'medico' => [
+                        'Es esencial acudir a un especialista cardiovascular para evaluar tu situacion.',
+                        'Se pueden requerir estudios detallados y tratamientos especificos.'
+                    ],
+                    'nutricion' => [
+                        'Seguir un plan alimenticio especializado y supervisado por un profesional es fundamental para reducir riesgos.'
+                    ],
+                    'ejercicio' => [
+                        'La actividad fisica supervisada ayuda a mejorar el perfil lipidico y el bienestar general.'
+                    ]
+                ];
+            }
+        }
+
+        private function getRecomendacionesTrigliceridos($valor, $clasificacion)
+        {
+            $clasificacion = trim(strtolower($clasificacion));
+
+            if ($clasificacion == 'normal' || $clasificacion == 'deseable') {
+                return [
+                    'nutricion' => [
+                        'Mantener habitos alimenticios equilibrados ayuda a mantener  dentro de los  valores saludables.',
+                        'Moderar el consumo de alcohol y azucares simples contribuye a mantener un buen perfil lipidico.'
+                    ]
+                ];
+            } elseif ($clasificacion == 'limite' || $clasificacion == 'riesgo moderado') {
+                return [
+                    'nutricion' => [
+                        'Reducir azucares anadidos y carbohidratos refinados es clave para mantener tu cuerpo saludable.',
+                        'Aumentar el consumo de pescado graso y preferir frutas enteras sobre jugos favorece el equilibrio nutricional.'
+                    ],
+                    'ejercicio' => [
+                        'Mantener actividad fisica regular y moderada ayuda a mejorar  la salud general.'
+                    ],
+                    'medico' => [
+                        'Consultar con un medico y realizar controles periodicos es recomendable para prevenir complicaciones.'
+                    ]
+                ];
+            } else {
+                return [
+                    'medico' => [
+                        'Acudir a un especialista es esencial para evaluar y tratar los trigliceridos altos de manera segura.'
+                    ],
+                    'nutricion' => [
+                        'Seguir un plan nutricional supervisado por profesionales es fundamental.'
+                    ]
+                ];
+            }
+        }
+
+        private function getRecomendacionesTension($clasificacion)
+        {
+            $clasificacion = trim(strtolower($clasificacion));
+
+            if ($clasificacion == 'normal' || $clasificacion == 'deseable') {
+                return [
+                    'habitos' => [
+                        'Mantener habitos saludables, como alimentacion equilibrada y actividad fisica regular, ayuda a conservar la presion arterial dentro de valores normales.',
+                        'Monitorear la presion de forma periodica permite detectar cambios a tiempo.'
+                    ]
+                ];
+            } elseif ($clasificacion == 'limite' || $clasificacion == 'riesgo moderado') {
+                return [
+                    'nutricion' => [
+                        'Reducir el consumo de sal y evitar alimentos procesados favorece el control de la presion arterial.',
+                        'Consumir frutas y verduras ricas en potasio ayuda a mantener un equilibrio saludable.'
+                    ],
+                    'ejercicio' => [
+                        'El ejercicio aerobico moderado, como caminar o nadar, contribuye a regular la presion arterial.',
+                        'Practicas como yoga o estiramientos ayudan a manejar el estres, que impacta en la presion.'
+                    ],
+                    'habitos' => [
+                        'Dormir bien y gestionar el estres son habitos fundamentales para mantener la presion arterial estable.'
+                    ],
+                    'medico' => [
+                        'Consultar con un medico y realizar controles periodicos ayuda a prevenir complicaciones.'
+                    ]
+                ];
+            } else {
+                return [
+                    'medico' => [
+                        'Es importante buscar atencion medica especializada de inmediato.',
+                        'El seguimiento profesional asegura un manejo seguro de la presion arterial.'
+                    ],
+                    'nutricion' => [
+                        'Seguir un plan alimenticio supervisado puede ser necesario para reducir riesgos.'
+                    ],
+                    'monitoreo' => [
+                        'El monitoreo frecuente y las visitas regulares al medico son fundamentales.'
+                    ]
+                ];
+            }
+        }
+
+        private function getRecomendacionesAnsiedad($severidad)
+        {
+            $severidad = trim(strtolower($severidad));
+
+            switch ($severidad) {
+                case 'normal':
+                    return [
+                        'habitos' => [
+                            'Mantener tecnicas de relajacion, rutinas de sueno regulares y actividades recreativas ayuda a prevenir ansiedad.'
+                        ]
+                    ];
+
+                case 'leve':
+                    return [
+                        'tecnicas' => [
+                            'Practicar respiracion profunda, meditacion guiada y ejercicio regular contribuye a reducir la ansiedad leve.'
+                        ],
+                        'habitos' => [
+                            'Reducir estimulantes, mantener horarios de sueno constantes y limitar exposicion a situaciones estresantes favorece la tranquilidad.'
+                        ]
+                    ];
+
+                case 'moderado':
+                    return [
+                        'psicologico' => [
+                            'Consultar con un psicologo puede ofrecer herramientas efectivas para manejar la ansiedad moderada.'
+                        ],
+                        'tecnicas' => [
+                            'Expresar emociones por escrito y tecnicas de conexion con el presente ayudan a controlar la ansiedad.'
+                        ],
+                        'social' => [
+                            'Mantener relaciones sociales y grupos de apoyo proporciona contencion y bienestar emocional.'
+                        ]
+                    ];
+
+                case 'severo':
+                case 'extremadamente severo':
+                case 'extremo':
+                    return [
+                        'medico' => [
+                            'Buscar apoyo profesional especializado es crucial en casos de ansiedad severa.',
+                            'Existen tratamientos efectivos que pueden mejorar significativamente la calidad de vida.'
+                        ],
+                        'crisis' => [
+                            'En situaciones de crisis, buscar ayuda inmediata es vital. No enfrentes la situacion solo.'
+                        ],
+                        'inmediato' => [
+                            'Evitar decisiones importantes y buscar apoyo de personas de confianza es recomendable.'
+                        ]
+                    ];
+
+                default:
+                    return [];
+            }
+        }
+
+        private function getRecomendacionesEstres($severidad)
+        {
+            $severidad = trim(strtolower($severidad));
+
+            switch ($severidad) {
+                case 'normal':
+                    return [
+                        'habitos' => [
+                            'Mantener un equilibrio entre actividades, descanso adecuado y tiempo de ocio ayuda a prevenir estres.'
+                        ]
+                    ];
+
+                case 'leve':
+                    return [
+                        'organizacion' => [
+                            'Organizar el tiempo, dividir tareas grandes y establecer prioridades realistas ayuda a reducir el estres leve.'
+                        ],
+                        'tecnicas' => [
+                            'Practicar respiracion, descansos regulares y ejercicio fisico contribuye al manejo del estres.'
+                        ]
+                    ];
+
+                case 'moderado':
+                    return [
+                        'psicologico' => [
+                            'Consultar con un psicologo permite adquirir herramientas utiles para manejar estres moderado.'
+                        ],
+                        'organizacion' => [
+                            'Reevaluar la carga de actividades, compartir responsabilidades y planificar descansos ayuda a manejar el estres.'
+                        ],
+                        'autocuidado' => [
+                            'Priorizar sueno adecuado, alimentacion equilibrada y ejercicio regular es fundamental para el bienestar.'
+                        ]
+                    ];
+
+                case 'severo':
+                case 'extremadamente severo':
+                case 'extremo':
+                    return [
+                        'medico' => [
+                            'Buscar apoyo profesional especializado es necesario, ya que el estres cronico puede afectar la salud general.'
+                        ],
+                        'inmediato' => [
+                            'Ajustar la carga de actividades, comunicar la situacion y tomar descansos temporales son acciones prioritarias.'
+                        ],
+                        'apoyo' => [
+                            'Buscar redes de apoyo y mantener comunicacion con personas cercanas contribuye al manejo del estres severo.'
+                        ]
+                    ];
+
+                default:
+                    return [];
+            }
+        }
+
+        private function getRecomendacionesDepresion($severidad)
+        {
+            $severidad = trim(strtolower($severidad));
+
+            switch ($severidad) {
+                case 'normal':
+                    return [
+                        'habitos' => [
+                            'Mantener rutinas saludables, relaciones sociales positivas y actividades que disfrutes ayuda a prevenir sintomas depresivos.'
+                        ]
+                    ];
+
+                case 'leve':
+                    return [
+                        'activacion' => [
+                            'Establecer rutinas diarias, planificar actividades agradables y exponerte a luz natural mejora el estado de animo.'
+                        ],
+                        'social' => [
+                            'Mantener contacto con personas cercanas y evitar aislamiento favorece el bienestar emocional.'
+                        ],
+                        'ejercicio' => [
+                            'Realizar ejercicio fisico regular, preferentemente al aire libre, aporta beneficios documentados para el animo.'
+                        ]
+                    ];
+
+                case 'moderado':
+                    return [
+                        'psicologico' => [
+                            'Consultar con un psicologo y buscar apoyo temprano facilita la recuperacion en casos de depresion moderada.'
+                        ],
+                        'activacion' => [
+                            'Mantener rutinas basicas y establecer metas pequenas ayuda a recuperar motivacion y control.'
+                        ],
+                        'social' => [
+                            'Participar en grupos de apoyo y comunicar tu situacion ofrece contencion emocional.'
+                        ],
+                        'autocuidado' => [
+                            'Priorizar sueno adecuado, alimentacion nutritiva y limitar redes sociales negativas contribuye al bienestar.'
+                        ]
+                    ];
+
+                case 'severo':
+                case 'extremadamente severo':
+                case 'extremo':
+                    return [
+                        'medico' => [
+                            'Buscar atencion profesional especializada es fundamental, ya que existen tratamientos efectivos disponibles.',
+                            'El seguimiento cercano permite intervenir rapidamente ante cualquier complicacion.'
+                        ],
+                        'psicologico' => [
+                            'La terapia psicologica intensiva y el apoyo emocional constante son recomendables para manejar la depresion severa.'
+                        ],
+                        'social' => [
+                            'Mantener comunicacion frecuente con personas de confianza ayuda a reducir el aislamiento y brindar contencion.'
+                        ],
+                        'inmediato' => [
+                            'Si surgen ideas de autolesion o riesgo, acudir a un servicio de emergencia de inmediato es prioritario.'
+                        ]
+                    ];
+
+                default:
+                    return [];
+            }
+        }
+
+        function addSeccionRecomendaciones($datos_pdf)
+        {
+            $this->AddPage();
+            $this->sectionSeparator('RECOMENDACIONES PERSONALIZADAS');
+
+            $this->SetFont('Arial', 'I', 9);
+            $this->SetTextColor(100, 100, 100);
+            $this->MultiCell(0, 5, pdf_text('Las siguientes recomendaciones estan basadas en tus resultados individuales. Recuerda que son orientativas y no sustituyen la consulta medica profesional.'), 0, 'L');
+            $this->Ln(3);
+            $this->SetTextColor(0, 0, 0);
+
+            // Recomendaciones IMC
+            if (!empty($datos_pdf['clasificacion_imc'])) {
+                $recomendaciones_imc = $this->getRecomendaciones('IMC', $datos_pdf['imc'], $datos_pdf['clasificacion_imc']);
+                if (!empty($recomendaciones_imc)) {
+                    $this->addBloqueRecomendaciones(
+                        'Indice de Masa Corporal (IMC: ' . $datos_pdf['imc'] . ')',
+                        $datos_pdf['clasificacion_imc'],
+                        $recomendaciones_imc
+                    );
+                }
+            }
+
+            // Recomendaciones Glucosa
+            if (!empty($datos_pdf['clasificacion_glucosa'])) {
+                $recomendaciones_glucosa = $this->getRecomendaciones('GLUCOSA', $datos_pdf['glucosa'], $datos_pdf['clasificacion_glucosa']);
+                if (!empty($recomendaciones_glucosa)) {
+                    $this->addBloqueRecomendaciones(
+                        'Glucosa (' . $datos_pdf['glucosa'] . ' mg/dL)',
+                        $datos_pdf['clasificacion_glucosa'],
+                        $recomendaciones_glucosa
+                    );
+                }
+            }
+
+            // Recomendaciones Colesterol
+            if (!empty($datos_pdf['clasificacion_colesterol'])) {
+                $recomendaciones_colesterol = $this->getRecomendaciones('COLESTEROL', $datos_pdf['colesterol'], $datos_pdf['clasificacion_colesterol']);
+                if (!empty($recomendaciones_colesterol)) {
+                    $this->addBloqueRecomendaciones(
+                        'Colesterol (' . $datos_pdf['colesterol'] . ' mg/dL)',
+                        $datos_pdf['clasificacion_colesterol'],
+                        $recomendaciones_colesterol
+                    );
+                }
+            }
+
+            // Recomendaciones Triglicéridos
+            if (!empty($datos_pdf['clasificacion_trigliceridos'])) {
+                $recomendaciones_trigliceridos = $this->getRecomendaciones('TRIGLICERIDOS', $datos_pdf['trigliceridos'], $datos_pdf['clasificacion_trigliceridos']);
+                if (!empty($recomendaciones_trigliceridos)) {
+                    $this->addBloqueRecomendaciones(
+                        'Trigliceridos (' . $datos_pdf['trigliceridos'] . ' mg/dL)',
+                        $datos_pdf['clasificacion_trigliceridos'],
+                        $recomendaciones_trigliceridos
+                    );
+                }
+            }
+
+            // Recomendaciones Tensión Arterial
+            if (!empty($datos_pdf['clasificacion_tension_arterial'])) {
+                $recomendaciones_tension = $this->getRecomendaciones('TENSION', null, $datos_pdf['clasificacion_tension_arterial']);
+                if (!empty($recomendaciones_tension)) {
+                    $this->addBloqueRecomendaciones(
+                        'Tension Arterial (' . $datos_pdf['tension_arterial'] . ' mmHg)',
+                        $datos_pdf['clasificacion_tension_arterial'],
+                        $recomendaciones_tension
+                    );
+                }
+            }
+
+            // Recomendaciones DASS - Ansiedad
+            if (!empty($datos_pdf['severidad_ansiedad'])) {
+                $recomendaciones_ansiedad = $this->getRecomendaciones('DASS_ANSIEDAD', null, $datos_pdf['severidad_ansiedad']);
+                if (!empty($recomendaciones_ansiedad)) {
+                    $this->addBloqueRecomendaciones(
+                        'Ansiedad (Puntuacion: ' . $datos_pdf['puntuacion_ansiedad'] . ')',
+                        $datos_pdf['severidad_ansiedad'],
+                        $recomendaciones_ansiedad
+                    );
+                }
+            }
+
+            // Recomendaciones DASS - Estrés
+            if (!empty($datos_pdf['severidad_estres'])) {
+                $recomendaciones_estres = $this->getRecomendaciones('DASS_ESTRES', null, $datos_pdf['severidad_estres']);
+                if (!empty($recomendaciones_estres)) {
+                    $this->addBloqueRecomendaciones(
+                        'Estres (Puntuacion: ' . $datos_pdf['puntuacion_estres'] . ')',
+                        $datos_pdf['severidad_estres'],
+                        $recomendaciones_estres
+                    );
+                }
+            }
+        }
+
+        private function addBloqueRecomendaciones($titulo, $estado, $recomendaciones)
+        {
+            // Calcular espacio mínimo necesario
+            $espacio_minimo = 35;
+
+            if ($this->GetY() > (297 - 15 - $espacio_minimo)) {
+                $this->AddPage();
+            }
+
+            $this->Ln(3);
+
+            // === DISEÑO PROFESIONAL LIMPIO ===
+            $x_inicial = 15;
+            $ancho_caja = 180;
+            $y_box_inicio = $this->GetY();
+
+            list($estado_texto, $color) = $this->getEstadoColor($estado);
+
+            // === HEADER CON TÍTULO Y ESTADO ===
+            // Fondo del header
+            $this->SetFillColor($color[0], $color[1], $color[2]);
+            $this->Rect($x_inicial, $y_box_inicio, $ancho_caja, 9, 'F');
+
+            // Título blanco sobre fondo de color
+            $this->SetXY($x_inicial + 4, $y_box_inicio + 2);
+            $this->SetFont('Arial', 'B', 11);
+            $this->SetTextColor(255, 255, 255);
+            $this->Cell(140, 5, pdf_text($titulo), 0, 0, 'L');
+
+            // Estado en badge blanco
+            $this->SetFont('Arial', 'B', 9);
+            $ancho_estado = $this->GetStringWidth($estado_texto) + 10;
+            $x_estado = $x_inicial + $ancho_caja - $ancho_estado - 4;
+
+            $this->SetFillColor(255, 255, 255);
+            $this->RoundedRect($x_estado, $y_box_inicio + 2, $ancho_estado, 5, 1.5, 'F');
+
+            $this->SetTextColor($color[0], $color[1], $color[2]);
+            $this->SetXY($x_estado, $y_box_inicio + 2);
+            $this->Cell($ancho_estado, 5, $estado_texto, 0, 0, 'C');
+
+            // Posicionar después del header
+            $this->SetY($y_box_inicio + 9);
+            $y_contenido_inicio = $this->GetY();
+
+            // Dibujar fondo suave del contenido
+            $this->SetFillColor(250, 250, 250);
+            $altura_estimada = 10;
+            foreach ($recomendaciones as $items) {
+                $altura_estimada += 7 + (count($items) * 5);
+            }
+            $this->Rect($x_inicial, $y_contenido_inicio, $ancho_caja, min($altura_estimada, 200), 'F');
+
+            $this->SetTextColor(0, 0, 0);
+
+            // === CONTENIDO ===
+            foreach ($recomendaciones as $categoria => $items) {
+                // Calcular espacio necesario para esta categoría
+                $espacio_categoria = 7 + (count($items) * 5.5);
+
+                if ($this->GetY() + $espacio_categoria > (297 - 15)) {
+                    // Cerrar caja actual
+                    $altura_usada = $this->GetY() - $y_contenido_inicio;
+                    $this->SetDrawColor(200, 200, 200);
+                    $this->SetLineWidth(0.4);
+                    $this->Rect($x_inicial, $y_box_inicio, $ancho_caja, $altura_usada + 9, 'D');
+
+                    // Nueva página
+                    $this->AddPage();
+                    $y_box_inicio = $this->GetY();
+                    $y_contenido_inicio = $y_box_inicio;
+
+                    // Nuevo fondo
+                    $this->SetFillColor(250, 250, 250);
+                    $this->Rect($x_inicial, $y_contenido_inicio, $ancho_caja, 150, 'F');
+                }
+
+                $this->Ln(2);
+
+                // === TÍTULO DE CATEGORÍA (LIMPIO, SIN ICONOS) ===
+                $this->SetX($x_inicial + 4);
+                $this->SetFont('Arial', 'B', 10);
+
+                // Color según categoría
+                switch ($categoria) {
+                    case 'nutricion':
+                        $this->SetTextColor(46, 125, 50);
+                        $nombre_cat = 'Nutricion';
+                        break;
+                    case 'ejercicio':
+                        $this->SetTextColor(3, 169, 244);
+                        $nombre_cat = 'Actividad Fisica';
+                        break;
+                    case 'medico':
+                        $this->SetTextColor(211, 47, 47);
+                        $nombre_cat = 'Atencion Medica';
+                        break;
+                    case 'psicologico':
+                        $this->SetTextColor(123, 31, 162);
+                        $nombre_cat = 'Salud Mental';
+                        break;
+                    case 'habitos':
+                        $this->SetTextColor(255, 143, 0);
+                        $nombre_cat = 'Habitos Saludables';
+                        break;
+                    case 'crisis':
+                        $this->SetTextColor(198, 40, 40);
+                        $nombre_cat = 'URGENTE';
+                        break;
+                    case 'social':
+                        $this->SetTextColor(0, 150, 136);
+                        $nombre_cat = 'Apoyo Social';
+                        break;
+                    case 'inmediato':
+                        $this->SetTextColor(255, 87, 34);
+                        $nombre_cat = 'Accion Inmediata';
+                        break;
+                    case 'organizacion':
+                        $this->SetTextColor(96, 125, 139);
+                        $nombre_cat = 'Organizacion';
+                        break;
+                    case 'autocuidado':
+                        $this->SetTextColor(156, 39, 176);
+                        $nombre_cat = 'Autocuidado';
+                        break;
+                    case 'activacion':
+                        $this->SetTextColor(255, 152, 0);
+                        $nombre_cat = 'Activacion';
+                        break;
+                    case 'tecnicas':
+                        $this->SetTextColor(63, 81, 181);
+                        $nombre_cat = 'Tecnicas';
+                        break;
+                    case 'monitoreo':
+                        $this->SetTextColor(121, 85, 72);
+                        $nombre_cat = 'Monitoreo';
+                        break;
+                    case 'academico':
+                        $this->SetTextColor(25, 118, 210);
+                        $nombre_cat = 'Academico';
+                        break;
+                    case 'apoyo':
+                        $this->SetTextColor(0, 137, 123);
+                        $nombre_cat = 'Apoyo';
+                        break;
+                    default:
+                        $this->SetTextColor(30, 70, 120);
+                        $nombre_cat = ucfirst($categoria);
+                }
+
+                $this->Cell(0, 6, pdf_text($nombre_cat), 0, 1, 'L');
+
+                // === ITEMS (SIN NUMERACIÓN, SOLO VIÑETAS SIMPLES) ===
+                $this->SetFont('Arial', '', 9);
+                $this->SetTextColor(60, 60, 60);
+
+                foreach ($items as $item) {
+                    if ($this->GetY() > 275) {
+                        // Cerrar y nueva página
+                        $altura_usada = $this->GetY() - $y_contenido_inicio;
+                        $this->SetDrawColor(200, 200, 200);
+                        $this->Rect($x_inicial, $y_box_inicio, $ancho_caja, $altura_usada + 9, 'D');
+
+                        $this->AddPage();
+                        $y_box_inicio = $this->GetY();
+                        $y_contenido_inicio = $y_box_inicio;
+
+                        $this->SetFillColor(250, 250, 250);
+                        $this->Rect($x_inicial, $y_contenido_inicio, $ancho_caja, 150, 'F');
+                    }
+
+                    $this->SetX($x_inicial + 8);
+
+                    // Viñeta simple y texto
+                    $y_actual_item = $this->GetY();
+
+                    // Dibujar viñeta (punto cuadrado pequeño)
+                    $this->SetFillColor(100, 100, 100);
+                    $this->Rect($x_inicial + 9, $y_actual_item + 1.5, 1.5, 1.5, 'F');
+
+                    // Texto del item
+                    $this->SetX($x_inicial + 12);
+                    $this->MultiCell($ancho_caja - 16, 4.5, pdf_text($item), 0, 'L');
+                }
+
+                $this->Ln(1.5);
+            }
+
+            // Cerrar caja final
+            $altura_total = $this->GetY() - $y_box_inicio;
+            $this->SetDrawColor(200, 200, 200);
+            $this->SetLineWidth(0.4);
+            $this->Rect($x_inicial, $y_box_inicio, $ancho_caja, $altura_total, 'D');
+
+            $this->Ln(4);
+        }
+
+        private function RoundedRect($x, $y, $w, $h, $r, $style = '')
+        {
+            $k = $this->k;
+            $hp = $this->h;
+
+            if ($style == 'F')
+                $op = 'f';
+            elseif ($style == 'FD' || $style == 'DF')
+                $op = 'B';
+            else
+                $op = 'S';
+
+            $MyArc = 4 / 3 * (sqrt(2) - 1);
+
+            $this->_out(sprintf('%.2F %.2F m', ($x + $r) * $k, ($hp - $y) * $k));
+            $xc = $x + $w - $r;
+            $yc = $y + $r;
+            $this->_out(sprintf('%.2F %.2F l', $xc * $k, ($hp - $y) * $k));
+            $this->_Arc($xc + $r * $MyArc, $yc - $r, $xc + $r, $yc - $r * $MyArc, $xc + $r, $yc);
+            $xc = $x + $w - $r;
+            $yc = $y + $h - $r;
+            $this->_out(sprintf('%.2F %.2F l', ($x + $w) * $k, ($hp - $yc) * $k));
+            $this->_Arc($xc + $r, $yc + $r * $MyArc, $xc + $r * $MyArc, $yc + $r, $xc, $yc + $r);
+            $xc = $x + $r;
+            $yc = $y + $h - $r;
+            $this->_out(sprintf('%.2F %.2F l', $xc * $k, ($hp - ($y + $h)) * $k));
+            $this->_Arc($xc - $r * $MyArc, $yc + $r, $xc - $r, $yc + $r * $MyArc, $xc - $r, $yc);
+            $xc = $x + $r;
+            $yc = $y + $r;
+            $this->_out(sprintf('%.2F %.2F l', ($x) * $k, ($hp - $yc) * $k));
+            $this->_Arc($xc - $r, $yc - $r * $MyArc, $xc - $r * $MyArc, $yc - $r, $xc, $yc - $r);
+            $this->_out($op);
+        }
+
+        private function _Arc($x1, $y1, $x2, $y2, $x3, $y3)
+        {
+            $h = $this->h;
+            $this->_out(sprintf(
+                '%.2F %.2F %.2F %.2F %.2F %.2F c ',
+                $x1 * $this->k,
+                ($h - $y1) * $this->k,
+                $x2 * $this->k,
+                ($h - $y2) * $this->k,
+                $x3 * $this->k,
+                ($h - $y3) * $this->k
+            ));
+        }
+        // ========== FIN SISTEMA DE RECOMENDACIONES ==========
+        // ========== FIN SISTEMA DE RECOMENDACIONES ==========
     }
 
     // === CREAR PDF ===
@@ -656,18 +1484,19 @@ try {
     $y = $pdf->GetY();
     $y += 6;
     $pdf->Ln(5);
-    addGridRow($pdf, 'Peso', $datos_pdf['peso'], '', '');
-    addGridRow($pdf, 'Talla', $datos_pdf['talla'], '', '');
-    addGridRow($pdf, 'ICC', $datos_pdf['icc'], 'Resultado', $datos_pdf['clasificacion_de_icc']);
-    addGridRow($pdf, 'ICE', $datos_pdf['ice'], '', '');
-    addGridRow($pdf, 'Masa Muscular', $datos_pdf['masa_magra'], '', '');
-    addGridRow($pdf, 'Masa grasa', $datos_pdf['porcentaje_masa_grasa'], 'Resultado', $datos_pdf['clasificacion_porcentaje_grasa']);
-    addGridRow($pdf, 'Agua total(lt)', $datos_pdf['agua_total'], '', '');
+    addGridRow($pdf, 'Peso (kg)', $datos_pdf['peso'], '', '');
+    addGridRow($pdf, 'Talla (cm)', $datos_pdf['talla'], '', '');
+    addGridRow($pdf, 'ICC (Cintura-Cadera)', $datos_pdf['icc'], 'Resultado', $datos_pdf['clasificacion_de_icc']);
+    addGridRow($pdf, 'ICE (Cintura-Estatura)', $datos_pdf['ice'], '', '');
+    addGridRow($pdf, 'Masa Muscular (kg)', $datos_pdf['masa_magra'], '', '');
+    addGridRow($pdf, 'Masa grasa (%)', $datos_pdf['porcentaje_masa_grasa'], 'Resultado', $datos_pdf['clasificacion_porcentaje_grasa']);
+    addGridRow($pdf, 'Agua total (Litros)', $datos_pdf['agua_total'], '', '');
+    addGridRow($pdf, 'Gasto Energético Total (kcal)', $datos_pdf['get1'], '', '');
 
     $pdf->Ln(5);
 
     // === Perfil Sanguíneo YTA ===
-    $pdf->sectionSeparator('Perfil Sanguíneo YTA');
+    $pdf->sectionSeparator('Perfil Sanguíneo y Tensión Arterial');
 
     addGridRow($pdf, 'Glucosa (mg/dL)', $datos_pdf['glucosa'], 'Resultado', $datos_pdf['clasificacion_glucosa']);
     addGridRow($pdf, 'Colesterol (mg/dL)', $datos_pdf['colesterol'], 'Resultado', $datos_pdf['clasificacion_colesterol']);
@@ -691,7 +1520,7 @@ try {
     $pdf->Ln(8);
 
     // === Perfil DASS ===
-    if ($pdf->GetY() > 200) {
+    if ($pdf->GetY() > 30) {
         $pdf->AddPage();
     }
 
@@ -704,6 +1533,11 @@ try {
     $pdf->addIndicadorProgresivo('Ansiedad', $datos_pdf['puntuacion_ansiedad'], $datos_pdf['severidad_ansiedad'], 10, $y, $pdf->CAT_DASS);
     $pdf->addIndicadorProgresivo('Estrés', $datos_pdf['puntuacion_estres'], $datos_pdf['severidad_estres'], 10, $y, $pdf->CAT_DASS);
     $pdf->addIndicadorProgresivo('Depresión', $datos_pdf['puntuacion_depresion'], $datos_pdf['severidad_depresion'], 10, $y, $pdf->CAT_DASS);
+
+
+    // ========== AGREGAR SECCION DE RECOMENDACIONES ==========
+    $pdf->addSeccionRecomendaciones($datos_pdf);
+    // ========== FIN SECCION DE RECOMENDACIONES ==========
 
     // GUARDAR PDF EN CARPETA PERMANENTE
     $matricula_sanitizada = preg_replace('/[^a-zA-Z0-9_-]/', '', $matricula);

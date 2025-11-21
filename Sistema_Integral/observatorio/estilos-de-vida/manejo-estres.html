@@ -18,7 +18,7 @@
             margin: 20px 0;
         }
     </style>
-</head> 
+</head>
 
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -39,16 +39,19 @@
                         <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/ejercicio.html">Ejercicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/autoactualizacion.html">Autoactualización</a>
+                        <a class="nav-link ms-3 my-1"
+                            href="/observatorio/estilos-de-vida/autoactualizacion.html">Autoactualización</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1 active" href="/observatorio/estilos-de-vida/manejo-estres.html">Manejo de Estrés</a>
+                        <a class="nav-link ms-3 my-1 active"
+                            href="/observatorio/estilos-de-vida/manejo-estres.html">Manejo de Estrés</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/salud.html">Salud</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/soporte-interpersonal.html">Soporte Interpersonal</a>
+                        <a class="nav-link ms-3 my-1"
+                            href="/observatorio/estilos-de-vida/soporte-interpersonal.html">Soporte Interpersonal</a>
                     </li>
                 </ul>
             </div>
@@ -157,7 +160,8 @@
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="card-title mb-0">Distribución por Estado Saludable de <strong>Manejo de Estrés</strong></h5>
+                                    <h5 class="card-title mb-0">Distribución por Estado Saludable de <strong>Manejo de
+                                            Estrés</strong></h5>
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn btn-sm btn-outline-primary active"
                                             id="btnBarras">
@@ -219,11 +223,11 @@
         let currentChartType = 'bar';
         let currentData = null;
 
-        // VARIABLE PARA CONTROLAR QUÉ TEMA MOSTRAMOS
-        // CAMBIA ESTO PARA MOSTRAR OTROS DATOS (ej. "ejercicio_datos")
+        // Variable para debounce
+        let debounceTimer = null;
+
         const TEMA_ACTUAL = "manejoestres_datos";
-        // COLUMNA DE ESTADO SALUDABLE CORRESPONDIENTE
-        const COLUMNA_ESTADO = "saludable_manejo"; 
+        const COLUMNA_ESTADO = "saludable_manejo";
 
         document.addEventListener("DOMContentLoaded", function () {
 
@@ -285,9 +289,7 @@
                 }
             }
 
-            // FUNCIÓN PARA OBTENER VALORES DE FILTROS (desktop o mobile)
             function obtenerValoresFiltros() {
-                // Si estamos en mobile, usar los selectores mobile, sino desktop
                 const isMobile = window.innerWidth < 768;
 
                 return {
@@ -298,37 +300,55 @@
                 };
             }
 
-            // --- ¡FUNCIÓN MODIFICADA! ---
+            // OPTIMIZACIÓN: Función con debounce para evitar múltiples llamadas
+            function cargarDatosDelDashboardConDebounce() {
+                if (debounceTimer) {
+                    clearTimeout(debounceTimer);
+                }
+
+                debounceTimer = setTimeout(() => {
+                    cargarDatosDelDashboard();
+                }, 300);
+            }
+
             function cargarDatosDelDashboard() {
+                // Mostrar loading
+                const chartCard = document.querySelector('.chart-container').parentElement;
+                const loadingDiv = document.createElement('div');
+                loadingDiv.className = 'loading-overlay';
+                loadingDiv.innerHTML = '<div class="spinner"></div>';
+                chartCard.style.position = 'relative';
+                chartCard.appendChild(loadingDiv);
+
                 const filtros = obtenerValoresFiltros();
 
                 let params = new URLSearchParams();
-
-                // ¡CAMBIO 1: Usa la variable TEMA_ACTUAL!
-                params.append("tipo", "manejoestres_datos");
+                params.append("tipo", TEMA_ACTUAL);
 
                 if (filtros.facultad) params.append("facultad", filtros.facultad);
                 if (filtros.carrera) params.append("carrera", filtros.carrera);
                 if (filtros.sexo) params.append("sexo", filtros.sexo);
                 if (filtros.anio) params.append("anio", filtros.anio);
 
-                console.log("Parámetros enviados:", params.toString()); // Para debug
+                console.log("Parámetros enviados:", params.toString());
 
                 fetch(`obtener-datos-manejo.php?${params.toString()}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log("Datos recibidos:", data); // Para debug
+                        console.log("Datos recibidos:", data);
                         currentData = data;
                         mostrarDatos(data);
                     })
-                    .catch(error => console.error("Error:", error));
+                    .catch(error => console.error("Error:", error))
+                    .finally(() => {
+                        loadingDiv.remove();
+                    });
             }
 
             // ========================================
-            // MOSTRAR DATOS EN GRÁFICA
+            // MOSTRAR DATOS EN GRÁFICA (OPTIMIZADO)
             // ========================================
 
-            // --- ¡FUNCIÓN MODIFICADA! ---
             function mostrarDatos(data) {
                 if (!data || data.length === 0) {
                     actualizarEstadisticas(0, 0, 0);
@@ -336,20 +356,38 @@
                     return;
                 }
 
-                // Función auxiliar para normalizar texto
-                function normalizar(texto) {
-                    return (texto || '')
-                        .toLowerCase()
-                        .trim()
-                        .normalize("NFD")
-                        .replace(/[\u0300-\u036f]/g, "");
+                // OPTIMIZACIÓN: Detectar si los datos vienen pre-agregados del servidor
+                if (data[0] && data[0].cantidad !== undefined) {
+                    // Los datos vienen con COUNT del servidor
+                    let total = 0;
+                    let cantidadSaludable = 0;
+                    let cantidadNoSaludable = 0;
+                    let estadosData = {};
+
+                    data.forEach(item => {
+                        const cantidad = parseInt(item.cantidad);
+                        total += cantidad;
+
+                        const estado = item.saludable_manejo || 'Sin definir';
+                        estadosData[estado] = cantidad;
+
+                        // Calcular saludables y no saludables
+                        const estadoNorm = normalizar(estado);
+                        if (estadoNorm === 'saludable') {
+                            cantidadSaludable += cantidad;
+                        } else if (estadoNorm.startsWith('no') || estadoNorm === 'no saludable') {
+                            cantidadNoSaludable += cantidad;
+                        }
+                    });
+
+                    actualizarEstadisticas(total, cantidadSaludable, cantidadNoSaludable);
+                    actualizarGrafica(estadosData);
+                    return;
                 }
 
-                // Calcular estadísticas
+                // Fallback: Procesar datos individualmente (código original)
                 let total = data.length;
 
-                // Separar por "Saludable" y "No saludable"
-                // ¡CAMBIO 2: Usa la variable COLUMNA_ESTADO!
                 let saludables = data.filter(item => {
                     let estado = normalizar(item[COLUMNA_ESTADO]);
                     return estado === 'saludable';
@@ -362,15 +400,21 @@
 
                 actualizarEstadisticas(total, saludables.length, noSaludables.length);
 
-                // Procesar datos para gráfica (conteo por estado saludable)
                 let estadosData = {};
                 data.forEach(item => {
-                    // ¡CAMBIO 3: Usa la variable COLUMNA_ESTADO!
                     let estado = item[COLUMNA_ESTADO] || 'Sin definir';
                     estadosData[estado] = (estadosData[estado] || 0) + 1;
                 });
 
                 actualizarGrafica(estadosData);
+            }
+
+            function normalizar(texto) {
+                return (texto || '')
+                    .toLowerCase()
+                    .trim()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "");
             }
 
             function actualizarEstadisticas(total, cantidadSaludable, cantidadNoSaludable) {
@@ -384,32 +428,30 @@
 
                 const ctx = document.getElementById('mainChart').getContext('2d');
 
-                // Función para normalizar el texto del estado
                 function normalizarEstado(estado) {
                     return (estado || '').toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 }
 
-                // Asignar colores según las etiquetas
                 const labels = Object.keys(chartData);
                 const colores = labels.map(label => {
                     let estadoNormalizado = normalizarEstado(label);
                     if (estadoNormalizado === 'saludable') {
-                        return 'rgba(75, 192, 192, 0.8)'; // Verde
+                        return 'rgba(75, 192, 192, 0.8)';
                     } else if (estadoNormalizado === 'no saludable' || estadoNormalizado.startsWith('no')) {
-                        return 'rgba(255, 99, 132, 0.8)'; // Rojo
+                        return 'rgba(255, 99, 132, 0.8)';
                     } else {
-                        return 'rgba(201, 203, 207, 0.8)'; // Gris
+                        return 'rgba(201, 203, 207, 0.8)';
                     }
                 });
 
                 const bordes = labels.map(label => {
                     let estadoNormalizado = normalizarEstado(label);
                     if (estadoNormalizado === 'saludable') {
-                        return 'rgba(75, 192, 192, 1)'; // Verde
+                        return 'rgba(75, 192, 192, 1)';
                     } else if (estadoNormalizado === 'no saludable' || estadoNormalizado.startsWith('no')) {
-                        return 'rgba(255, 99, 132, 1)'; // Rojo
+                        return 'rgba(255, 99, 132, 1)';
                     } else {
-                        return 'rgba(201, 203, 207, 1)'; // Gris
+                        return 'rgba(201, 203, 207, 1)';
                     }
                 });
 
@@ -472,7 +514,6 @@
             // EVENT LISTENERS - DESKTOP
             // ========================================
 
-            // --- ¡Actualizado para llamar a la nueva función! ---
             document.getElementById("facultad")?.addEventListener("change", function () {
                 cargarCarreras(this.value, "carrera");
                 cargarDatosDelDashboard();
@@ -486,7 +527,6 @@
             // EVENT LISTENERS - MOBILE
             // ========================================
 
-            // --- ¡Actualizado para llamar a la nueva función! ---
             document.getElementById("facultad-mobile")?.addEventListener("change", function () {
                 cargarCarreras(this.value, "carrera-mobile");
                 cargarDatosDelDashboard();

@@ -35,7 +35,7 @@ elseif ($tipo == "anios") {
             ORDER BY anio DESC";
 }
 
-// --- DATOS DE AUTOACTUALIZACIÓN CON FILTROS ---
+// --- DATOS DE AUTOACTUALIZACION CON FILTROS (OPTIMIZADO) ---
 elseif ($tipo == "autoactualizacion_datos") {
     $where = [];
     $params = [];
@@ -67,27 +67,16 @@ elseif ($tipo == "autoactualizacion_datos") {
     
     $whereClause = count($where) > 0 ? "WHERE " . implode(" AND ", $where) : "";
     
+    // OPTIMIZACIÓN CLAVE: Solo 2 JOINs necesarios, eliminamos carrera y facultad
     $sql = "SELECT 
-                au.id_actualizacion,
-                au.id_cuestionario,
-                au.total_autoactualizacion,
                 au.saludable_autoactualizacion,
-                e.matricula_alum,
-                e.fecha,
-                a.nombres_alum,
-                a.ape_paterno_alum,
-                a.ape_materno_alum,
-                a.sexo,
-                YEAR(a.fe_nacimiento_alum) as anio_nacimiento,
-                c.nombre_carrera,
-                f.nombre_facultad
+                COUNT(*) as cantidad
             FROM autoactualizacion au
             INNER JOIN estilo_de_vida e ON au.id_cuestionario = e.id_cuestionario
             INNER JOIN alumnos a ON e.matricula_alum = a.matricula_alum
-            INNER JOIN carrera c ON a.id_carrera = c.id_carrera
-            INNER JOIN facultad f ON a.id_facultad = f.id_facultad
             $whereClause
-            ORDER BY e.fecha DESC";
+            GROUP BY au.saludable_autoactualizacion
+            ORDER BY au.saludable_autoactualizacion DESC";
     
     if (count($params) > 0) {
         $stmt = $conn->prepare($sql);
@@ -102,7 +91,7 @@ elseif ($tipo == "autoactualizacion_datos") {
     }
 }
 
-// --- COMPARACIÓN ENTRE FACULTADES (AUTOACTUALIZACIÓN) ---
+// --- COMPARACIÓN ENTRE FACULTADES (AUTOACTUALIZACION) ---
 elseif ($tipo == "comparar_facultades_autoactualizacion") {
     $where = [];
     $params = [];

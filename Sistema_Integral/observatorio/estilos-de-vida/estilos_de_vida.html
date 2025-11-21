@@ -39,16 +39,19 @@
                         <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/ejercicio.html">Ejercicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/autoactualizacion.html">Autoactualización</a>
+                        <a class="nav-link ms-3 my-1"
+                            href="/observatorio/estilos-de-vida/autoactualizacion.html">Autoactualización</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/manejo-estres.html">Manejo de Estrés</a>
+                        <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/manejo-estres.html">Manejo de
+                            Estrés</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/salud.html">Salud</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/soporte-interpersonal.html">Soporte Interpersonal</a>
+                        <a class="nav-link ms-3 my-1"
+                            href="/observatorio/estilos-de-vida/soporte-interpersonal.html">Soporte Interpersonal</a>
                     </li>
                 </ul>
             </div>
@@ -159,7 +162,8 @@
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5 class="card-title mb-0">Distribución por Estado Saludable</h5>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-sm btn-outline-primary active" id="btnBarras">
+                                        <button type="button" class="btn btn-sm btn-outline-primary active"
+                                            id="btnBarras">
                                             📊 Barras
                                         </button>
                                         <button type="button" class="btn btn-sm btn-outline-primary" id="btnPastel">
@@ -194,9 +198,9 @@
                                         <h6 class="text-muted">Cantidad No Saludables</h6>
                                         <h3 id="cantidadNoSaludable" class="text-danger">0</h3>
                                     </div>
-                                    
+
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -220,9 +224,141 @@
 
         document.addEventListener("DOMContentLoaded", function () {
 
+            // Agrega este código en el <script> de estilos_de_vida.html
+            // Justo después de document.addEventListener("DOMContentLoaded", function () {
+
             // ========================================
-            // FUNCIONES DE CARGA
+            // MODAL DE BIENVENIDA
             // ========================================
+            function mostrarModalBienvenida() {
+                const modalHTML = `
+        <div class="modal fade" id="welcomeModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">
+                            <i class="bi bi-heart-pulse-fill"></i> ¿Qué son los Estilos de Vida Saludables?
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="lead">El cuestionario de Estilos de Vida evalúa 6 dimensiones fundamentales para el bienestar integral:</p>
+                        
+                        <div class="row mt-4 g-3">
+                            <!-- Nutrición -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card border-success h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-success">
+                                            <i class="bi bi-apple"></i> 🥗 Nutrición
+                                        </h6>
+                                        <p class="small mb-2">Evalúa los hábitos alimenticios, consumo de alimentos saludables, hidratación y patrones de alimentación balanceada.</p>
+                                        <span class="badge bg-success-subtle text-success">Alimentación Saludable</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Ejercicio -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card border-info h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-info">
+                                            <i class="bi bi-bicycle"></i> 🏃 Ejercicio
+                                        </h6>
+                                        <p class="small mb-2">Mide la frecuencia, intensidad y tipo de actividad física realizada, incluyendo ejercicio cardiovascular y de fuerza.</p>
+                                        <span class="badge bg-info-subtle text-info">Actividad Física</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Autoactualizacion -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card border-warning h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-warning">
+                                            <i class="bi bi-star"></i> 🌟 Autoactualizacion
+                                        </h6>
+                                        <p class="small mb-2">Evalúa el desarrollo personal, búsqueda de metas, superación personal y satisfacción con los logros alcanzados.</p>
+                                        <span class="badge bg-warning-subtle text-warning">Crecimiento Personal</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Manejo de Estrés -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card border-danger h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-danger">
+                                            <i class="bi bi-emoji-smile"></i> 😰 Manejo de Estrés
+                                        </h6>
+                                        <p class="small mb-2">Mide las estrategias de afrontamiento, técnicas de relajación y capacidad para manejar situaciones estresantes.</p>
+                                        <span class="badge bg-danger-subtle text-danger">Control Emocional</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Salud -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card border-primary h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-primary">
+                                            <i class="bi bi-heart"></i> 💊 Salud
+                                        </h6>
+                                        <p class="small mb-2">Evalúa comportamientos relacionados con chequeos médicos, higiene personal, sueño y prevención de enfermedades.</p>
+                                        <span class="badge bg-primary-subtle text-primary">Cuidado de la Salud</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Soporte Interpersonal -->
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card border-secondary h-100">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-secondary">
+                                            <i class="bi bi-people"></i> 🤝 Soporte Interpersonal
+                                        </h6>
+                                        <p class="small mb-2">Mide la calidad de las relaciones sociales, apoyo familiar y comunitario, y capacidad para establecer vínculos.</p>
+                                        <span class="badge bg-secondary-subtle text-secondary">Red de Apoyo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info mt-4 mb-0">
+                            <h6 class="alert-heading">
+                                <i class="bi bi-graph-up"></i> Clasificación de Resultados
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="mb-1"><strong class="text-success">✓ Saludable:</strong> Prácticas positivas y hábitos saludables consolidados</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="mb-0"><strong class="text-danger">✗ No Saludable:</strong> Áreas de oportunidad y mejora en los hábitos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                            <i class="bi bi-check-circle"></i> ¡Entendido!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+                // Insertar el modal en el body
+                document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+                // Mostrar el modal
+                const welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+                welcomeModal.show();
+            }
+
+            // Llamar la función al cargar la página
+            // Agrega esta línea al inicio de tu DOMContentLoaded
+            mostrarModalBienvenida();
 
             function cargarFacultades(selectId) {
                 fetch("obtener-datos.php?tipo=facultad")
@@ -282,7 +418,7 @@
             function obtenerValoresFiltros() {
                 // Si estamos en mobile, usar los selectores mobile, sino desktop
                 const isMobile = window.innerWidth < 768;
-                
+
                 return {
                     facultad: document.getElementById(isMobile ? "facultad-mobile" : "facultad")?.value || "",
                     carrera: document.getElementById(isMobile ? "carrera-mobile" : "carrera")?.value || "",

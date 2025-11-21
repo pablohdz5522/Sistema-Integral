@@ -39,16 +39,19 @@
                         <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/ejercicio.html">Ejercicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/autoactualizacion.html">Autoactualización</a>
+                        <a class="nav-link ms-3 my-1"
+                            href="/observatorio/estilos-de-vida/autoactualizacion.html">Autoactualización</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/manejo-estres.html">Manejo de Estrés</a>
+                        <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/manejo-estres.html">Manejo de
+                            Estrés</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link ms-3 my-1" href="/observatorio/estilos-de-vida/salud.html">Salud</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1 active" href="/observatorio/estilos-de-vida/soporte-interpersonal.html">Soporte Interpersonal</a>
+                        <a class="nav-link ms-3 my-1 active"
+                            href="/observatorio/estilos-de-vida/soporte-interpersonal.html">Soporte Interpersonal</a>
                     </li>
                 </ul>
             </div>
@@ -157,7 +160,8 @@
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="card-title mb-0">Distribución por Estado Saludable de <strong>Soporte Interpersonal</strong></h5>
+                                    <h5 class="card-title mb-0">Distribución por Estado Saludable de <strong>Soporte
+                                            Interpersonal</strong></h5>
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn btn-sm btn-outline-primary active"
                                             id="btnBarras">
@@ -223,7 +227,7 @@
         // CAMBIA ESTO PARA MOSTRAR OTROS DATOS (ej. "ejercicio_datos")
         const TEMA_ACTUAL = "soporte_datos";
         // COLUMNA DE ESTADO SALUDABLE CORRESPONDIENTE
-        const COLUMNA_ESTADO = "saludable_soporte"; 
+        const COLUMNA_ESTADO = "saludable_soporte";
 
         document.addEventListener("DOMContentLoaded", function () {
 
@@ -336,40 +340,32 @@
                     return;
                 }
 
-                // Función auxiliar para normalizar texto
-                function normalizar(texto) {
-                    return (texto || '')
-                        .toLowerCase()
-                        .trim()
+                // Los datos ya vienen agregados desde PHP
+                let total = 0;
+                let cantidadSaludable = 0;
+                let cantidadNoSaludable = 0;
+                let estadosData = {};
+
+                data.forEach(item => {
+                    let estado = item.saludable_soporte || 'Sin definir';
+                    let cantidad = parseInt(item.cantidad) || 0;
+
+                    estadosData[estado] = cantidad;
+                    total += cantidad;
+
+                    // Normalizar para contar saludables vs no saludables
+                    let estadoNorm = estado.toLowerCase().trim()
                         .normalize("NFD")
                         .replace(/[\u0300-\u036f]/g, "");
-                }
 
-                // Calcular estadísticas
-                let total = data.length;
-
-                // Separar por "Saludable" y "No saludable"
-                // ¡CAMBIO 2: Usa la variable COLUMNA_ESTADO!
-                let saludables = data.filter(item => {
-                    let estado = normalizar(item[COLUMNA_ESTADO]);
-                    return estado === 'saludable';
+                    if (estadoNorm === 'saludable') {
+                        cantidadSaludable += cantidad;
+                    } else if (estadoNorm.includes('no') || estadoNorm === 'no saludable') {
+                        cantidadNoSaludable += cantidad;
+                    }
                 });
 
-                let noSaludables = data.filter(item => {
-                    let estado = normalizar(item[COLUMNA_ESTADO]);
-                    return estado.startsWith('no') || estado === 'no saludable';
-                });
-
-                actualizarEstadisticas(total, saludables.length, noSaludables.length);
-
-                // Procesar datos para gráfica (conteo por estado saludable)
-                let estadosData = {};
-                data.forEach(item => {
-                    // ¡CAMBIO 3: Usa la variable COLUMNA_ESTADO!
-                    let estado = item[COLUMNA_ESTADO] || 'Sin definir';
-                    estadosData[estado] = (estadosData[estado] || 0) + 1;
-                });
-
+                actualizarEstadisticas(total, cantidadSaludable, cantidadNoSaludable);
                 actualizarGrafica(estadosData);
             }
 

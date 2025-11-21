@@ -216,289 +216,317 @@
 
     <script>
         let mainChart = null;
-        let currentChartType = 'bar';
-        let currentData = null;
+let currentChartType = 'bar';
+let currentData = null;
 
-        // VARIABLE PARA CONTROLAR QUÉ TEMA MOSTRAMOS
-        // CAMBIA ESTO PARA MOSTRAR OTROS DATOS (ej. "ejercicio_datos")
-        const TEMA_ACTUAL = "nutricion_datos";
-        // COLUMNA DE ESTADO SALUDABLE CORRESPONDIENTE
-        const COLUMNA_ESTADO = "saludable"; // Para nutricion es "saludable", para estilo_de_vida es "estado_saludable"
+// Variable para debounce
+let debounceTimer = null;
 
-        document.addEventListener("DOMContentLoaded", function () {
+const TEMA_ACTUAL = "nutricion_datos";
+const COLUMNA_ESTADO = "saludable";
 
-            // ========================================
-            // FUNCIONES DE CARGA
-            // ========================================
+document.addEventListener("DOMContentLoaded", function () {
 
-            function cargarFacultades(selectId) {
-                fetch("obtener-datos-nutricion.php?tipo=facultad")
-                    .then(response => response.json())
-                    .then(data => {
-                        let select = document.getElementById(selectId);
-                        if (!select) return;
+    // ========================================
+    // FUNCIONES DE CARGA
+    // ========================================
 
-                        select.innerHTML = '<option value="" selected disabled>Selecciona</option><option value="">Ninguno</option>';
-
-                        data.forEach(facultad => {
-                            let option = document.createElement("option");
-                            option.value = facultad.id_facultad;
-                            option.textContent = facultad.nombre_facultad;
-                            select.appendChild(option);
-                        });
-                    })
-                    .catch(error => console.error("Error:", error));
-            }
-
-            function cargarCarreras(facultadID, selectCarreraId) {
-                let selectCarrera = document.getElementById(selectCarreraId);
-                if (!selectCarrera) return;
-
-                selectCarrera.innerHTML = '<option value="" selected disabled>Selecciona</option><option value="">Ninguno</option>';
-
-                if (!facultadID) return;
-
-                fetch(`obtener-datos-nutricion.php?tipo=carrera&idfacultad=${facultadID}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        data.forEach(carrera => {
-                            let option = document.createElement("option");
-                            option.value = carrera.id_carrera;
-                            option.textContent = carrera.nombre_carrera;
-                            selectCarrera.appendChild(option);
-                        });
-                    })
-                    .catch(error => console.error("Error:", error));
-            }
-
-            function cargarAnios(selectId) {
+    function cargarFacultades(selectId) {
+        fetch("obtener-datos-nutricion.php?tipo=facultad")
+            .then(response => response.json())
+            .then(data => {
                 let select = document.getElementById(selectId);
                 if (!select) return;
 
                 select.innerHTML = '<option value="" selected disabled>Selecciona</option><option value="">Ninguno</option>';
 
-                for (let año = 2025; año >= 1980; año--) {
+                data.forEach(facultad => {
                     let option = document.createElement("option");
-                    option.value = año;
-                    option.textContent = año;
+                    option.value = facultad.id_facultad;
+                    option.textContent = facultad.nombre_facultad;
                     select.appendChild(option);
-                }
-            }
-
-            // FUNCIÓN PARA OBTENER VALORES DE FILTROS (desktop o mobile)
-            function obtenerValoresFiltros() {
-                // Si estamos en mobile, usar los selectores mobile, sino desktop
-                const isMobile = window.innerWidth < 768;
-
-                return {
-                    facultad: document.getElementById(isMobile ? "facultad-mobile" : "facultad")?.value || "",
-                    carrera: document.getElementById(isMobile ? "carrera-mobile" : "carrera")?.value || "",
-                    sexo: document.getElementById(isMobile ? "sexo-mobile" : "sexo")?.value || "",
-                    anio: document.getElementById(isMobile ? "nacimiento-mobile" : "nacimiento")?.value || ""
-                };
-            }
-
-            // --- ¡FUNCIÓN MODIFICADA! ---
-            function cargarDatosDelDashboard() {
-                const filtros = obtenerValoresFiltros();
-
-                let params = new URLSearchParams();
-
-                // ¡CAMBIO 1: Usa la variable TEMA_ACTUAL!
-                params.append("tipo", "nutricion_datos");
-
-                if (filtros.facultad) params.append("facultad", filtros.facultad);
-                if (filtros.carrera) params.append("carrera", filtros.carrera);
-                if (filtros.sexo) params.append("sexo", filtros.sexo);
-                if (filtros.anio) params.append("anio", filtros.anio);
-
-                console.log("Parámetros enviados:", params.toString()); // Para debug
-
-                fetch(`obtener-datos-nutricion.php?${params.toString()}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log("Datos recibidos:", data); // Para debug
-                        currentData = data;
-                        mostrarDatos(data);
-                    })
-                    .catch(error => console.error("Error:", error));
-            }
-
-            // ========================================
-            // MOSTRAR DATOS EN GRÁFICA
-            // ========================================
-
-            // --- ¡FUNCIÓN MODIFICADA! ---
-            function mostrarDatos(data) {
-                if (!data || data.length === 0) {
-                    actualizarEstadisticas(0, 0, 0);
-                    actualizarGrafica({});
-                    return;
-                }
-
-                // Función auxiliar para normalizar texto
-                function normalizar(texto) {
-                    return (texto || '')
-                        .toLowerCase()
-                        .trim()
-                        .normalize("NFD")
-                        .replace(/[\u0300-\u036f]/g, "");
-                }
-
-                // Calcular estadísticas
-                let total = data.length;
-
-                // Separar por "Saludable" y "No saludable"
-                // ¡CAMBIO 2: Usa la variable COLUMNA_ESTADO!
-                let saludables = data.filter(item => {
-                    let estado = normalizar(item[COLUMNA_ESTADO]);
-                    return estado === 'saludable';
                 });
+            })
+            .catch(error => console.error("Error:", error));
+    }
 
-                let noSaludables = data.filter(item => {
-                    let estado = normalizar(item[COLUMNA_ESTADO]);
-                    return estado.startsWith('no') || estado === 'no saludable';
+    function cargarCarreras(facultadID, selectCarreraId) {
+        let selectCarrera = document.getElementById(selectCarreraId);
+        if (!selectCarrera) return;
+
+        selectCarrera.innerHTML = '<option value="" selected disabled>Selecciona</option><option value="">Ninguno</option>';
+
+        if (!facultadID) return;
+
+        fetch(`obtener-datos-nutricion.php?tipo=carrera&idfacultad=${facultadID}`)
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(carrera => {
+                    let option = document.createElement("option");
+                    option.value = carrera.id_carrera;
+                    option.textContent = carrera.nombre_carrera;
+                    selectCarrera.appendChild(option);
                 });
+            })
+            .catch(error => console.error("Error:", error));
+    }
 
-                actualizarEstadisticas(total, saludables.length, noSaludables.length);
+    function cargarAnios(selectId) {
+        let select = document.getElementById(selectId);
+        if (!select) return;
 
-                // Procesar datos para gráfica (conteo por estado saludable)
-                let estadosData = {};
-                data.forEach(item => {
-                    // ¡CAMBIO 3: Usa la variable COLUMNA_ESTADO!
-                    let estado = item[COLUMNA_ESTADO] || 'Sin definir';
-                    estadosData[estado] = (estadosData[estado] || 0) + 1;
-                });
+        select.innerHTML = '<option value="" selected disabled>Selecciona</option><option value="">Ninguno</option>';
 
-                actualizarGrafica(estadosData);
-            }
+        for (let año = 2025; año >= 1980; año--) {
+            let option = document.createElement("option");
+            option.value = año;
+            option.textContent = año;
+            select.appendChild(option);
+        }
+    }
 
-            function actualizarEstadisticas(total, cantidadSaludable, cantidadNoSaludable) {
-                document.getElementById('totalRegistros').textContent = total;
-                document.getElementById('cantidadSaludable').textContent = cantidadSaludable;
-                document.getElementById('cantidadNoSaludable').textContent = cantidadNoSaludable;
-            }
+    function obtenerValoresFiltros() {
+        const isMobile = window.innerWidth < 768;
 
-            function actualizarGrafica(chartData) {
-                if (mainChart) mainChart.destroy();
+        return {
+            facultad: document.getElementById(isMobile ? "facultad-mobile" : "facultad")?.value || "",
+            carrera: document.getElementById(isMobile ? "carrera-mobile" : "carrera")?.value || "",
+            sexo: document.getElementById(isMobile ? "sexo-mobile" : "sexo")?.value || "",
+            anio: document.getElementById(isMobile ? "nacimiento-mobile" : "nacimiento")?.value || ""
+        };
+    }
 
-                const ctx = document.getElementById('mainChart').getContext('2d');
-
-                // Función para normalizar el texto del estado
-                function normalizarEstado(estado) {
-                    return (estado || '').toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                }
-
-                // Asignar colores según las etiquetas
-                const labels = Object.keys(chartData);
-                const colores = labels.map(label => {
-                    let estadoNormalizado = normalizarEstado(label);
-                    if (estadoNormalizado === 'saludable') {
-                        return 'rgba(75, 192, 192, 0.8)'; // Verde
-                    } else if (estadoNormalizado === 'no saludable' || estadoNormalizado.startsWith('no')) {
-                        return 'rgba(255, 99, 132, 0.8)'; // Rojo
-                    } else {
-                        return 'rgba(201, 203, 207, 0.8)'; // Gris
-                    }
-                });
-
-                const bordes = labels.map(label => {
-                    let estadoNormalizado = normalizarEstado(label);
-                    if (estadoNormalizado === 'saludable') {
-                        return 'rgba(75, 192, 192, 1)'; // Verde
-                    } else if (estadoNormalizado === 'no saludable' || estadoNormalizado.startsWith('no')) {
-                        return 'rgba(255, 99, 132, 1)'; // Rojo
-                    } else {
-                        return 'rgba(201, 203, 207, 1)'; // Gris
-                    }
-                });
-
-                mainChart = new Chart(ctx, {
-                    type: currentChartType,
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Cantidad',
-                            data: Object.values(chartData),
-                            backgroundColor: colores,
-                            borderColor: bordes,
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: currentChartType === 'pie',
-                                position: 'bottom'
-                            }
-                        },
-                        scales: currentChartType === 'bar' ? {
-                            y: { beginAtZero: true }
-                        } : {}
-                    }
-                });
-            }
-
-            // ========================================
-            // CAMBIO DE TIPO DE GRÁFICA
-            // ========================================
-
-            document.getElementById('btnBarras').addEventListener('click', function () {
-                currentChartType = 'bar';
-                this.classList.add('active');
-                document.getElementById('btnPastel').classList.remove('active');
-                if (currentData) mostrarDatos(currentData);
-            });
-
-            document.getElementById('btnPastel').addEventListener('click', function () {
-                currentChartType = 'pie';
-                this.classList.add('active');
-                document.getElementById('btnBarras').classList.remove('active');
-                if (currentData) mostrarDatos(currentData);
-            });
-
-            // ========================================
-            // INICIALIZACIÓN
-            // ========================================
-
-            cargarFacultades("facultad");
-            cargarFacultades("facultad-mobile");
-            cargarAnios("nacimiento");
-            cargarAnios("nacimiento-mobile");
-
-            // ========================================
-            // EVENT LISTENERS - DESKTOP
-            // ========================================
-
-            // --- ¡Actualizado para llamar a la nueva función! ---
-            document.getElementById("facultad")?.addEventListener("change", function () {
-                cargarCarreras(this.value, "carrera");
-                cargarDatosDelDashboard();
-            });
-
-            document.getElementById("carrera")?.addEventListener("change", cargarDatosDelDashboard);
-            document.getElementById("sexo")?.addEventListener("change", cargarDatosDelDashboard);
-            document.getElementById("nacimiento")?.addEventListener("change", cargarDatosDelDashboard);
-
-            // ========================================
-            // EVENT LISTENERS - MOBILE
-            // ========================================
-
-            // --- ¡Actualizado para llamar a la nueva función! ---
-            document.getElementById("facultad-mobile")?.addEventListener("change", function () {
-                cargarCarreras(this.value, "carrera-mobile");
-                cargarDatosDelDashboard();
-            });
-
-            document.getElementById("carrera-mobile")?.addEventListener("change", cargarDatosDelDashboard);
-            document.getElementById("sexo-mobile")?.addEventListener("change", cargarDatosDelDashboard);
-            document.getElementById("nacimiento-mobile")?.addEventListener("change", cargarDatosDelDashboard);
-
-            // Cargar datos iniciales
+    // OPTIMIZACIÓN: Función con debounce para evitar múltiples llamadas
+    function cargarDatosDelDashboardConDebounce() {
+        // Cancelar el timer anterior si existe
+        if (debounceTimer) {
+            clearTimeout(debounceTimer);
+        }
+        
+        // Establecer un nuevo timer de 300ms
+        debounceTimer = setTimeout(() => {
             cargarDatosDelDashboard();
+        }, 300);
+    }
+
+    function cargarDatosDelDashboard() {
+        const filtros = obtenerValoresFiltros();
+
+        let params = new URLSearchParams();
+        params.append("tipo", "nutricion_datos");
+
+        if (filtros.facultad) params.append("facultad", filtros.facultad);
+        if (filtros.carrera) params.append("carrera", filtros.carrera);
+        if (filtros.sexo) params.append("sexo", filtros.sexo);
+        if (filtros.anio) params.append("anio", filtros.anio);
+
+        console.log("Parámetros enviados:", params.toString());
+
+        fetch(`obtener-datos-nutricion.php?${params.toString()}`)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Datos recibidos:", data);
+                currentData = data;
+                mostrarDatos(data);
+            })
+            .catch(error => console.error("Error:", error));
+    }
+
+    // ========================================
+    // MOSTRAR DATOS EN GRÁFICA (OPTIMIZADO)
+    // ========================================
+
+    function mostrarDatos(data) {
+        if (!data || data.length === 0) {
+            actualizarEstadisticas(0, 0, 0);
+            actualizarGrafica({});
+            return;
+        }
+
+        // OPTIMIZACIÓN: Si los datos ya vienen agregados del servidor
+        // (con COUNT en la consulta SQL), usarlos directamente
+        if (data[0] && data[0].cantidad !== undefined) {
+            // Los datos vienen pre-procesados del servidor
+            let total = 0;
+            let cantidadSaludable = 0;
+            let cantidadNoSaludable = 0;
+            let estadosData = {};
+
+            data.forEach(item => {
+                const cantidad = parseInt(item.cantidad);
+                total += cantidad;
+                
+                const estado = item.saludable || 'Sin definir';
+                estadosData[estado] = cantidad;
+
+                // Calcular saludables y no saludables
+                const estadoNorm = normalizar(estado);
+                if (estadoNorm === 'saludable') {
+                    cantidadSaludable += cantidad;
+                } else if (estadoNorm.startsWith('no') || estadoNorm === 'no saludable') {
+                    cantidadNoSaludable += cantidad;
+                }
+            });
+
+            actualizarEstadisticas(total, cantidadSaludable, cantidadNoSaludable);
+            actualizarGrafica(estadosData);
+            return;
+        }
+
+        // Si no vienen pre-procesados, procesarlos en el cliente (código original)
+        let total = data.length;
+
+        let saludables = data.filter(item => {
+            let estado = normalizar(item[COLUMNA_ESTADO]);
+            return estado === 'saludable';
         });
+
+        let noSaludables = data.filter(item => {
+            let estado = normalizar(item[COLUMNA_ESTADO]);
+            return estado.startsWith('no') || estado === 'no saludable';
+        });
+
+        actualizarEstadisticas(total, saludables.length, noSaludables.length);
+
+        let estadosData = {};
+        data.forEach(item => {
+            let estado = item[COLUMNA_ESTADO] || 'Sin definir';
+            estadosData[estado] = (estadosData[estado] || 0) + 1;
+        });
+
+        actualizarGrafica(estadosData);
+    }
+
+    function normalizar(texto) {
+        return (texto || '')
+            .toLowerCase()
+            .trim()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function actualizarEstadisticas(total, cantidadSaludable, cantidadNoSaludable) {
+        document.getElementById('totalRegistros').textContent = total;
+        document.getElementById('cantidadSaludable').textContent = cantidadSaludable;
+        document.getElementById('cantidadNoSaludable').textContent = cantidadNoSaludable;
+    }
+
+    function actualizarGrafica(chartData) {
+        if (mainChart) mainChart.destroy();
+
+        const ctx = document.getElementById('mainChart').getContext('2d');
+
+        function normalizarEstado(estado) {
+            return (estado || '').toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        }
+
+        const labels = Object.keys(chartData);
+        const colores = labels.map(label => {
+            let estadoNormalizado = normalizarEstado(label);
+            if (estadoNormalizado === 'saludable') {
+                return 'rgba(75, 192, 192, 0.8)';
+            } else if (estadoNormalizado === 'no saludable' || estadoNormalizado.startsWith('no')) {
+                return 'rgba(255, 99, 132, 0.8)';
+            } else {
+                return 'rgba(201, 203, 207, 0.8)';
+            }
+        });
+
+        const bordes = labels.map(label => {
+            let estadoNormalizado = normalizarEstado(label);
+            if (estadoNormalizado === 'saludable') {
+                return 'rgba(75, 192, 192, 1)';
+            } else if (estadoNormalizado === 'no saludable' || estadoNormalizado.startsWith('no')) {
+                return 'rgba(255, 99, 132, 1)';
+            } else {
+                return 'rgba(201, 203, 207, 1)';
+            }
+        });
+
+        mainChart = new Chart(ctx, {
+            type: currentChartType,
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Cantidad',
+                    data: Object.values(chartData),
+                    backgroundColor: colores,
+                    borderColor: bordes,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: currentChartType === 'pie',
+                        position: 'bottom'
+                    }
+                },
+                scales: currentChartType === 'bar' ? {
+                    y: { beginAtZero: true }
+                } : {}
+            }
+        });
+    }
+
+    // ========================================
+    // CAMBIO DE TIPO DE GRÁFICA
+    // ========================================
+
+    document.getElementById('btnBarras').addEventListener('click', function () {
+        currentChartType = 'bar';
+        this.classList.add('active');
+        document.getElementById('btnPastel').classList.remove('active');
+        if (currentData) mostrarDatos(currentData);
+    });
+
+    document.getElementById('btnPastel').addEventListener('click', function () {
+        currentChartType = 'pie';
+        this.classList.add('active');
+        document.getElementById('btnBarras').classList.remove('active');
+        if (currentData) mostrarDatos(currentData);
+    });
+
+    // ========================================
+    // INICIALIZACIÓN
+    // ========================================
+
+    cargarFacultades("facultad");
+    cargarFacultades("facultad-mobile");
+    cargarAnios("nacimiento");
+    cargarAnios("nacimiento-mobile");
+
+    // ========================================
+    // EVENT LISTENERS - DESKTOP
+    // ========================================
+
+    document.getElementById("facultad")?.addEventListener("change", function () {
+        cargarCarreras(this.value, "carrera");
+        cargarDatosDelDashboard();
+    });
+
+    document.getElementById("carrera")?.addEventListener("change", cargarDatosDelDashboard);
+    document.getElementById("sexo")?.addEventListener("change", cargarDatosDelDashboard);
+    document.getElementById("nacimiento")?.addEventListener("change", cargarDatosDelDashboard);
+
+    // ========================================
+    // EVENT LISTENERS - MOBILE
+    // ========================================
+
+    document.getElementById("facultad-mobile")?.addEventListener("change", function () {
+        cargarCarreras(this.value, "carrera-mobile");
+        cargarDatosDelDashboard();
+    });
+
+    document.getElementById("carrera-mobile")?.addEventListener("change", cargarDatosDelDashboard);
+    document.getElementById("sexo-mobile")?.addEventListener("change", cargarDatosDelDashboard);
+    document.getElementById("nacimiento-mobile")?.addEventListener("change", cargarDatosDelDashboard);
+
+    // Cargar datos iniciales
+    cargarDatosDelDashboard();
+});
     </script>
 
 </body>

@@ -35,7 +35,7 @@ elseif ($tipo == "anios") {
             ORDER BY anio DESC";
 }
 
-// --- DATOS DE SALUD CON FILTROS ---
+// --- DATOS DE SALUD CON FILTROS (OPTIMIZADO) ---
 elseif ($tipo == "salud_datos") {
     $where = [];
     $params = [];
@@ -67,27 +67,17 @@ elseif ($tipo == "salud_datos") {
     
     $whereClause = count($where) > 0 ? "WHERE " . implode(" AND ", $where) : "";
     
+    // OPTIMIZACIÓN 1: Solo seleccionar columnas necesarias para las gráficas
+    // OPTIMIZACIÓN 2: Usar STRAIGHT_JOIN si MySQL elige mal el orden de joins
     $sql = "SELECT 
-                s.id_salud,
-                s.id_cuestionario,
-                s.total_salud,
                 s.saludable_salud,
-                e.matricula_alum,
-                e.fecha,
-                a.nombres_alum,
-                a.ape_paterno_alum,
-                a.ape_materno_alum,
-                a.sexo,
-                YEAR(a.fe_nacimiento_alum) as anio_nacimiento,
-                c.nombre_carrera,
-                f.nombre_facultad
+                COUNT(*) as cantidad
             FROM salud s
             INNER JOIN estilo_de_vida e ON s.id_cuestionario = e.id_cuestionario
             INNER JOIN alumnos a ON e.matricula_alum = a.matricula_alum
-            INNER JOIN carrera c ON a.id_carrera = c.id_carrera
-            INNER JOIN facultad f ON a.id_facultad = f.id_facultad
             $whereClause
-            ORDER BY e.fecha DESC";
+            GROUP BY s.saludable_salud
+            ORDER BY s.saludable_salud";
     
     if (count($params) > 0) {
         $stmt = $conn->prepare($sql);
@@ -102,7 +92,7 @@ elseif ($tipo == "salud_datos") {
     }
 }
 
-// --- COMPARACIÓN ENTRE FACULTADES (SALUD) ---
+// --- COMPARACIÓN ENTRE FACULTADES (OPTIMIZADO) ---
 elseif ($tipo == "comparar_facultades_salud") {
     $where = [];
     $params = [];
@@ -122,6 +112,7 @@ elseif ($tipo == "comparar_facultades_salud") {
     
     $whereClause = count($where) > 0 ? "WHERE " . implode(" AND ", $where) : "";
     
+    // OPTIMIZACIÓN: Solo traer lo necesario, evitar JOIN innecesario con carrera
     $sql = "SELECT 
                 f.nombre_facultad,
                 s.saludable_salud,

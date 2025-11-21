@@ -35,13 +35,12 @@ elseif ($tipo == "anios") {
             ORDER BY anio DESC";
 }
 
-// --- DATOS DE NUTRICION CON FILTROS ---
+// --- DATOS DE NUTRICION CON FILTROS (OPTIMIZADO) ---
 elseif ($tipo == "nutricion_datos") {
     $where = [];
     $params = [];
     $types = "";
     
-    // La lógica de filtros es IDÉNTICA porque filtra sobre la tabla 'alumnos' (a)
     if (!empty($_GET["facultad"])) {
         $where[] = "a.id_facultad = ?";
         $params[] = intval($_GET["facultad"]);
@@ -68,31 +67,17 @@ elseif ($tipo == "nutricion_datos") {
     
     $whereClause = count($where) > 0 ? "WHERE " . implode(" AND ", $where) : "";
     
-    // --- AQUÍ ESTÁ EL CAMBIO PRINCIPAL (LA CONSULTA) ---
+    // OPTIMIZACIÓN CLAVE: Solo COUNT y GROUP BY, sin JOINs innecesarios
     $sql = "SELECT 
-                n.id_nutricion,
-                n.id_cuestionario,
-                n.total_nutricion,
-                n.saludable,  -- Columna de la tabla nutricion
-                e.matricula_alum,
-                e.fecha,
-                a.nombres_alum,
-                a.ape_paterno_alum,
-                a.ape_materno_alum,
-                a.edad_alum,
-                a.sexo,
-                YEAR(a.fe_nacimiento_alum) as anio_nacimiento,
-                c.nombre_carrera,
-                f.nombre_facultad
+                n.saludable,
+                COUNT(*) as cantidad
             FROM nutricion n
             INNER JOIN estilo_de_vida e ON n.id_cuestionario = e.id_cuestionario
             INNER JOIN alumnos a ON e.matricula_alum = a.matricula_alum
-            INNER JOIN carrera c ON a.id_carrera = c.id_carrera
-            INNER JOIN facultad f ON a.id_facultad = f.id_facultad
             $whereClause
-            ORDER BY e.fecha DESC";
+            GROUP BY n.saludable
+            ORDER BY n.saludable DESC";
     
-    // La lógica de ejecución de la consulta es IDÉNTICA
     if (count($params) > 0) {
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
@@ -113,7 +98,6 @@ elseif ($tipo == "comparar_facultades_nutricion") {
     $params = [];
     $types = "";
     
-    // Lógica de filtros idéntica
     if (!empty($_GET["sexo"])) {
         $where[] = "a.sexo = ?";
         $params[] = $_GET["sexo"];
@@ -128,20 +112,18 @@ elseif ($tipo == "comparar_facultades_nutricion") {
     
     $whereClause = count($where) > 0 ? "WHERE " . implode(" AND ", $where) : "";
     
-    // --- AQUÍ ESTÁ EL CAMBIO PRINCIPAL (LA CONSULTA) ---
     $sql = "SELECT 
                 f.nombre_facultad,
-                n.saludable,  -- Usamos n.saludable
+                n.saludable,
                 COUNT(*) as cantidad
             FROM nutricion n
             INNER JOIN estilo_de_vida e ON n.id_cuestionario = e.id_cuestionario
             INNER JOIN alumnos a ON e.matricula_alum = a.matricula_alum
             INNER JOIN facultad f ON a.id_facultad = f.id_facultad
             $whereClause
-            GROUP BY f.nombre_facultad, n.saludable  -- Agrupamos por n.saludable
+            GROUP BY f.nombre_facultad, n.saludable
             ORDER BY f.nombre_facultad, n.saludable";
     
-    // La lógica de ejecución de la consulta es IDÉNTICA
     if (count($params) > 0) {
         $stmt = $conn->prepare($sql);
         if (!$stmt) {

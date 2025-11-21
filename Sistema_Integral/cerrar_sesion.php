@@ -2,6 +2,7 @@
 session_start();
 date_default_timezone_set('America/Mexico_City');
 // Registrar hora de salida si hay ingreso
+require_once 'session_security.php';
 if (isset($_SESSION['registro_ingreso'])) {
     $registroId = $_SESSION['registro_ingreso'];
 

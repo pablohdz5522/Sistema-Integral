@@ -152,7 +152,11 @@ $conn->close();
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalLogout">
                 🚪 Cerrar Sesión
             </button>
+            <div class="mt-2">
+            <a href="/alumnos/login-alumno.html" class="btn btn-info">¡Logueate para ver tus resultados!</a>
+            </div>
         </div>
+        
     </div>
 
     <!-- Modal: Formularios Completados -->
