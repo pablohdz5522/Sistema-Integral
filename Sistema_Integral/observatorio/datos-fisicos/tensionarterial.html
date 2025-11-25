@@ -23,9 +23,10 @@
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/observatorio/datos-fisicos/imc.html">
-                <img src="imagenes/EDUCANDO VF SLOGAN (IDENTIDAD)_ NEGRO.png" alt="" width="50px" id="imagen">
+            <a class="navbar-brand" href="/observatorio/observatorio.html">
+                <img src="imagenes/logo_unacar (1).png" alt="" width="160px">
             </a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -33,30 +34,40 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/datos-fisicos/imc.html">IMC</a>
+                        <a class="nav-link ms-1 my-1 " href="/observatorio/datos-fisicos/imc.html">Índice de Masa
+                            Corporal</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1 active" href="/observatorio/datos-fisicos/tensionarterial.html">Tensión Arterial</a>
+                        <a class="nav-link ms-1 my-1" href="/observatorio/datos-fisicos/clasificacionice.html">Índice
+                            Cintura Estatura</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/datos-fisicos/glucosa.html">Glucosa</a>
+                        <a class="nav-link ms-1 my-1"
+                            href="/observatorio/datos-fisicos/clasificacioncad-cin.html">Índice Cadera Cintura</a>
+
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/datos-fisicos/colesterol.html">Colesterol</a>
+                        <a class="nav-link ms-1 my-1" href="/observatorio/datos-fisicos/colesterol.html">Colesterol</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/datos-fisicos/trigliceridos.html">Trigliceridos</a>
+                        <a class="nav-link ms-1 my-1"
+                            href="/observatorio/datos-fisicos/trigliceridos.html">Trigliceridos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/datos-fisicos/clasificacioncad-cin.html">Índice Cadera Cintura</a>
+                        <a class="nav-link ms-1 my-1" href="/observatorio/datos-fisicos/glucosa.html">Glucosa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link ms-3 my-1" href="/observatorio/datos-fisicos/clasificacionice.html">Índice Cadera Estatura</a>
+                        <a class="nav-link ms-1 my-1 active"
+                            href="/observatorio/datos-fisicos/tensionarterial.html">Tensión
+                            Arterial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link ms-1 my-1" href="/observatorio/observatorio.html">Salir</a>
                     </li>
                 </ul>
             </div>
-            <a class="navbar-brand" href="/observatorio/observatorio.html">
-                <img src="imagenes/logo_unacar (1).png" alt="" width="160px">
+            <a class="navbar-brand" href="/observatorio/datos-fisicos/imc.html">
+                <img src="imagenes/EDUCANDO VF SLOGAN (IDENTIDAD)_ NEGRO.png" alt="" width="50px" id="imagen">
             </a>
         </div>
     </nav>
@@ -107,7 +118,7 @@
             </div>
 
             <div class="col-12 col-md-8 col-lg-9 offset-md-4 offset-lg-3 text-center mt-2 px-3">
-                <h1 class="display-6 display-md-5">Gráficas de Tensión Arterial</h1>
+                <h1 class="display-6 display-md-5">Gráfica de Clasificación de Tensión Arterial</h1>
 
                 <!-- FILTROS MOBILE -->
                 <div class="d-md-none mt-4">
@@ -163,7 +174,8 @@
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5 class="card-title mb-0">Clasificaciones de Tensión Arterial</h5>
                                     <div class="btn-group" role="group">
-                                        <button type="button" class="btn btn-sm btn-outline-primary active" id="btnBarras">
+                                        <button type="button" class="btn btn-sm btn-outline-primary active"
+                                            id="btnBarras">
                                             📊 Barras
                                         </button>
                                         <button type="button" class="btn btn-sm btn-outline-primary" id="btnPastel">
@@ -242,11 +254,9 @@
 
             // FUNCIONES DE CARGA
             function cargarFacultades(selectId) {
-                
                 fetch("obtener-datos-tension.php?tipo=facultad")
                     .then(response => response.json())
                     .then(data => {
-                        
                         let select = document.getElementById(selectId);
                         if (!select) return;
 
@@ -259,11 +269,10 @@
                             select.appendChild(option);
                         });
                     })
-                    .catch(error => console.error("❌ Error:", error));
+                    .catch(error => console.error("Error:", error));
             }
 
             function cargarCarreras(facultadID, selectCarreraId) {
-                
                 let selectCarrera = document.getElementById(selectCarreraId);
                 if (!selectCarrera) return;
 
@@ -274,7 +283,6 @@
                 fetch(`obtener-datos-tension.php?tipo=carrera&idfacultad=${facultadID}`)
                     .then(response => response.json())
                     .then(data => {
-                        
                         data.forEach(carrera => {
                             let option = document.createElement("option");
                             option.value = carrera.id_carrera;
@@ -282,18 +290,16 @@
                             selectCarrera.appendChild(option);
                         });
                     })
-                    .catch(error => console.error("❌ Error:", error));
+                    .catch(error => console.error("Error:", error));
             }
 
             function cargarSeveridades(selectId) {
-                
                 let select = document.getElementById(selectId);
                 if (!select) return;
 
                 fetch("obtener-datos-tension.php?tipo=severidad")
                     .then(response => response.json())
                     .then(data => {
-                        
                         data.forEach(item => {
                             let option = document.createElement("option");
                             option.value = item.clasificacion_tension_arterial;
@@ -301,7 +307,7 @@
                             select.appendChild(option);
                         });
                     })
-                    .catch(error => console.error("❌ Error:", error));
+                    .catch(error => console.error("Error:", error));
             }
 
             function obtenerValoresFiltros() {
@@ -316,7 +322,6 @@
             }
 
             function cargarDatosDelDashboard() {
-                
                 const filtros = obtenerValoresFiltros();
 
                 let params = new URLSearchParams();
@@ -327,8 +332,6 @@
                 if (filtros.sexo) params.append("sexo", filtros.sexo);
                 if (filtros.severidad) params.append("severidad", filtros.severidad);
 
-                
-
                 fetch(`obtener-datos-tension.php?${params.toString()}`)
                     .then(response => response.json())
                     .then(data => {
@@ -336,14 +339,12 @@
                         currentData = data;
                         mostrarDatos(data);
                     })
-                    .catch(error => console.error("❌ Error:", error));
+                    .catch(error => console.error("Error:", error));
             }
 
             // MOSTRAR DATOS
             function mostrarDatos(data) {
-                
                 if (!data || data.length === 0) {
-                    
                     actualizarEstadisticas({});
                     actualizarGrafica({});
                     return;
@@ -354,19 +355,18 @@
                     estadosData[item.clasificacion_tension_arterial] = parseInt(item.cantidad);
                 });
 
-                
                 actualizarEstadisticas(estadosData);
                 actualizarGrafica(estadosData);
             }
 
             function actualizarEstadisticas(chartData) {
                 const total = Object.values(chartData).reduce((sum, val) => sum + val, 0);
-                
+
                 const calcularPorcentaje = (valor) => {
                     if (total === 0) return '0.0%';
                     return ((valor / total) * 100).toFixed(1) + '%';
                 };
-                
+
                 document.getElementById('totalRegistros').textContent = total;
                 document.getElementById('hipotension').textContent = calcularPorcentaje(chartData['Hipotensión'] || 0);
                 document.getElementById('normal').textContent = calcularPorcentaje(chartData['Normal'] || 0);
@@ -380,8 +380,11 @@
                 if (mainChart) mainChart.destroy();
 
                 const ctx = document.getElementById('mainChart').getContext('2d');
+                const total = Object.values(chartData).reduce((sum, val) => sum + val, 0);
 
                 const labels = Object.keys(chartData);
+                const valores = Object.values(chartData);
+
                 const colores = labels.map(label => {
                     if (label === 'Hipotensión') return '#17a2b8';
                     if (label === 'Normal') return '#28a745';
@@ -398,7 +401,7 @@
                         labels: labels,
                         datasets: [{
                             label: 'Cantidad',
-                            data: Object.values(chartData),
+                            data: valores,
                             backgroundColor: colores,
                             borderColor: colores,
                             borderWidth: 2
@@ -411,12 +414,75 @@
                             legend: {
                                 display: currentChartType === 'pie',
                                 position: 'right'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const value = context.parsed.y || context.parsed;
+                                        const porcentaje = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                                        return `${context.label}: ${value} (${porcentaje}%)`;
+                                    }
+                                }
                             }
                         },
                         scales: currentChartType === 'bar' ? {
-                            y: { beginAtZero: true }
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function (value) {
+                                        return value;
+                                    }
+                                }
+                            }
                         } : {}
-                    }
+                    },
+                    plugins: currentChartType === 'bar' ? [{
+                        afterDatasetsDraw: function (chart) {
+                            const ctx = chart.ctx;
+                            chart.data.datasets.forEach((dataset, i) => {
+                                const meta = chart.getDatasetMeta(i);
+                                meta.data.forEach((bar, index) => {
+                                    const data = dataset.data[index];
+                                    const porcentaje = total > 0 ? ((data / total) * 100).toFixed(1) : 0;
+
+                                    ctx.fillStyle = '#fff';
+                                    ctx.font = 'bold 12px Arial';
+                                    ctx.textAlign = 'center';
+                                    ctx.textBaseline = 'middle';
+
+                                    const x = bar.x;
+                                    const y = bar.y + 20;
+
+                                    ctx.fillText(`${data}`, x, y - 10);
+                                    ctx.fillText(`(${porcentaje}%)`, x, y + 10);
+                                });
+                            });
+                        }
+                    }] : [{
+                        afterDatasetsDraw: function (chart) {
+                            const ctx = chart.ctx;
+                            chart.data.datasets.forEach((dataset, i) => {
+                                const meta = chart.getDatasetMeta(i);
+                                meta.data.forEach((slice, index) => {
+                                    const data = dataset.data[index];
+                                    const porcentaje = total > 0 ? ((data / total) * 100).toFixed(1) : 0;
+
+                                    const angle = (slice.startAngle + slice.endAngle) / 2;
+                                    const radius = (slice.innerRadius + slice.outerRadius) / 2;
+                                    const x = slice.x + Math.cos(angle) * radius * 0.7;
+                                    const y = slice.y + Math.sin(angle) * radius * 0.7;
+
+                                    ctx.fillStyle = '#fff';
+                                    ctx.font = 'bold 12px Arial';
+                                    ctx.textAlign = 'center';
+                                    ctx.textBaseline = 'middle';
+
+                                    ctx.fillText(`${data}`, x, y - 8);
+                                    ctx.fillText(`(${porcentaje}%)`, x, y + 8);
+                                });
+                            });
+                        }
+                    }]
                 });
             }
 
@@ -462,7 +528,6 @@
             document.getElementById("severidad-mobile")?.addEventListener("change", cargarDatosDelDashboard);
 
             // Cargar datos iniciales
-            
             cargarDatosDelDashboard();
         });
     </script>

@@ -666,58 +666,58 @@ try {
                 case 'peso insuficiente':
                     return [
                         'nutricion' => [
-                            'Si tienes un peso inferior al recomendado, es importante incluir alimentos nutritivos y energeticos en tus comidas, como proteinas, cereales integrales y grasas saludables, para fortalecer tu cuerpo de manera progresiva.',
-                            'Incorporar frutas, verduras, frutos secos y semillas no solo aporta nutrientes esenciales, sino que tambien ayuda a que tu alimentacion sea mas equilibrada y variada.',
-                            'Consultar a un nutriologo puede ser muy util para establecer un plan de alimentacion adaptado a tus necesidades y habitos.'
+                            'Si tienes un peso inferior al recomendado, es importante incluir alimentos nutritivos y energéticos en tus comidas, como proteínas, cereales integrales y grasas saludables, para fortalecer tu cuerpo de manera progresiva.',
+                            'Incorporar frutas, verduras, frutos secos y semillas no solo aporta nutrientes esenciales, sino que también ayuda a que tu alimentación sea más equilibrada y variada.',
+                            'Consultar a un nutriólogo puede ser muy útil para establecer un plan de alimentación adaptado a tus necesidades y hábitos.'
                         ],
                         'ejercicio' => [
                             'Realizar ejercicios de fuerza ligera unas cuantas veces por semana ayuda a ganar masa muscular de manera gradual, favoreciendo tu fuerza y resistencia.',
                             'Es fundamental respetar los periodos de descanso entre entrenamientos, ya que el cuerpo necesita recuperarse para crecer y mantenerse saludable.'
                         ],
                         'medico' => [
-                            'Si notas cambios importantes en tu energia o apetito, consulta con un medico para descartar posibles causas subyacentes.'
+                            'Si notas cambios importantes en tu energía o apetito, consulta con un médico para descartar posibles causas subyacentes.'
                         ]
                     ];
 
                 case 'peso normal':
                     return [
                         'nutricion' => [
-                            'Tu peso esta en un buen rango, pero mantener una alimentacion equilibrada con frutas, verduras, proteinas y cereales integrales es importante para tu bienestar.',
-                            'Beber suficiente agua durante el dia ayuda a mantener la concentracion y el buen funcionamiento del cuerpo.',
-                            'Un nutriologo puede ofrecerte recomendaciones personalizadas para optimizar tu alimentacion sin necesidad de cambios drasticos.'
+                            'Tu peso está en un buen rango, pero mantener una alimentación equilibrada con frutas, verduras, proteínas y cereales integrales es importante para tu bienestar.',
+                            'Beber suficiente agua durante el día ayuda a mantener la concentración y el buen funcionamiento del cuerpo.',
+                            'Un nutriólogo puede ofrecerte recomendaciones personalizadas para optimizar tu alimentación sin necesidad de cambios drásticos.'
                         ],
                         'ejercicio' => [
-                            'Continuar con actividad fisica regular contribuye a mantener un buen estado fisico y mental.',
-                            'Probar diferentes tipos de ejercicios o deportes puede hacer que tu rutina sea mas entretenida y motivadora.',
+                            'Continuar con actividad física regular contribuye a mantener un buen estado físico y mental.',
+                            'Probar diferentes tipos de ejercicios o deportes puede hacer que tu rutina sea más entretenida y motivadora.',
                             'Incluir estiramientos o ejercicios de flexibilidad ayuda a prevenir molestias musculares y mejorar tu movilidad.'
                         ],
                         'habitos' => [
-                            'Seguir con tus habitos saludables es la clave para mantener tu bienestar a largo plazo.',
-                            'Realizar chequeos medicos ocasionales permite detectar a tiempo cualquier cambio en tu salud.'
+                            'Seguir con tus hábitos saludables es la clave para mantener tu bienestar a largo plazo.',
+                            'Realizar chequeos médicos ocasionales permite detectar a tiempo cualquier cambio en tu salud.'
                         ]
                     ];
 
                 case 'sobrepeso':
                     return [
                         'nutricion' => [
-                            'Reducir las porciones y comer con atencion ayuda a sentirte mas ligero y mejorar la digestion.',
-                            'Evitar bebidas azucaradas y preferir agua o infusiones naturales contribuye a mantener estables los niveles de energia y glucosa.',
-                            'Incluir mas verduras y proteinas magras como pollo, pescado o legumbres ayuda a equilibrar tu alimentacion.',
-                            'Un nutriologo puede ensenarte a planificar tus comidas de manera practica y adaptada a tu estilo de vida.'
+                            'Reducir las porciones y comer con atención ayuda a sentirte más ligero y mejorar la digestión.',
+                            'Evitar bebidas azucaradas y preferir agua o infusiones naturales contribuye a mantener estables los niveles de energía y glucosa.',
+                            'Incluir más verduras y proteínas magras como pollo, pescado o legumbres ayuda a equilibrar tu alimentación.',
+                            'Un nutriólogo puede enseñarte a planificar tus comidas de manera práctica y adaptada a tu estilo de vida.'
                         ],
                         'ejercicio' => [
-                            'Comenzar con caminatas diarias y aumentar progresivamente la duracion e intensidad mejora tu resistencia y bienestar.',
-                            'Elegir actividades que disfrutes hace que las rutinas sea mas facil de mantener.'
+                            'Comenzar con caminatas diarias y aumentar progresivamente la duración e intensidad mejora tu resistencia y bienestar.',
+                            'Elegir actividades que disfrutes hace que las rutinas sean más fáciles de mantener.'
                         ],
                         'habitos' => [
-                            'Dormir adecuadamente favorece la regulacion hormonal y el equilibrio energetico.',
-                            'Prestar atencion a las senales de saciedad ayuda a comer solo lo necesario y a evitar excesos.',
-                            'Planificar tus comidas y horarios contribuye a mantener un estilo de vida mas organizado y saludable.',
-                            'Es mejor contar con el apoyo de amigos o familiares puede motivarte y hacer que el proceso sea mas llevadero o alguien a quien le tengas cofianza.'
+                            'Dormir adecuadamente favorece la regulación hormonal y el equilibrio energético.',
+                            'Prestar atención a las señales de saciedad ayuda a comer solo lo necesario y a evitar excesos.',
+                            'Planificar tus comidas y horarios contribuye a mantener un estilo de vida más organizado y saludable.',
+                            'Contar con el apoyo de amigos, familiares o alguien de confianza puede motivarte y hacer que el proceso sea más llevadero.'
                         ],
                         'medico' => [
-                            'Consultar a un nutriologo y a un medico permite disenar un plan personalizado que mejore tu salud sin comprometer tu bienestar general.',
-                            'Controlar periodicamente la presion arterial y los niveles de glucosa es recomendable para prevenir complicaciones dile a tu especialista(medico) para mas informacion al respecto.'
+                            'Consultar a un nutriólogo y a un médico permite diseñar un plan personalizado que mejore tu salud sin comprometer tu bienestar general.',
+                            'Controlar periódicamente la presión arterial y los niveles de glucosa es recomendable para prevenir complicaciones; consulta a tu médico para más información al respecto.'
                         ]
                     ];
 
@@ -727,21 +727,21 @@ try {
                 case 'obesidad grado 3 (morbida)':
                     return [
                         'nutricion' => [
-                            'Realizar cambios progresivos en la alimentacion, como reducir azucares y grasas poco saludables, e incrementar frutas, verduras y proteinas magras, mejora tu bienestar general.',
-                            'Comer porciones mas pequenas varias veces al dia ayuda a mantener la energia.',
-                            'Un nutriologo puede elaborar un plan alimenticio adaptado a tus preferencias y necesidades, facilitando la implementacion de los cambios.'
+                            'Realizar cambios progresivos en la alimentación, como reducir azúcares y grasas poco saludables, e incrementar frutas, verduras y proteínas magras, mejora tu bienestar general.',
+                            'Comer porciones más pequeñas varias veces al día ayuda a mantener la energía.',
+                            'Un nutriólogo puede elaborar un plan alimenticio adaptado a tus preferencias y necesidades, facilitando la implementación de los cambios.'
                         ],
                         'ejercicio' => [
                             'Moverte diariamente, aunque sea poco, tiene beneficios significativos; caminar, nadar o andar en bicicleta son buenas opciones para empezar.',
-                            'Antes de ejercicios mas intensos, consulta a un profesional de la salud para asegurarte de que sean adecuados.'
+                            'Antes de ejercicios más intensos, consulta a un profesional de la salud para asegurarte de que sean adecuados.'
                         ],
                         'medico' => [
-                            'Realizar chequeos medicos completos permite conocer tu estado de salud y detectar posibles factores de riesgo.',
+                            'Realizar chequeos médicos completos permite conocer tu estado de salud y detectar posibles factores de riesgo.',
                             'El seguimiento profesional asegura que las recomendaciones sean seguras y efectivas.'
                         ],
                         'psicologico' => [
-                            'Contar con apoyo psicologico facilita el cambio de habitos y mejora la motivacion.',
-                            'Un psicologo puede ayudarte a mantener la constancia y encontrar formas positivas de cuidarte.'
+                            'Contar con apoyo psicológico facilita el cambio de hábitos y mejora la motivación.',
+                            'Un psicólogo puede ayudarte a mantener la constancia y encontrar formas positivas de cuidarte.'
                         ]
                     ];
 
@@ -757,45 +757,45 @@ try {
             if ($clasificacion == 'normal' || $clasificacion == 'deseable') {
                 return [
                     'nutricion' => [
-                        'Tus niveles de glucosa son adecuados, por lo que mantener una alimentacion balanceada y variada es suficiente para conservar un buen estado de salud.',
-                        'Priorizar carbohidratos complejos y alimentos ricos en fibra ayuda a estabilizar la energia durante el dia.',
+                        'Tus niveles de glucosa son adecuados, por lo que mantener una alimentación balanceada y variada es suficiente para conservar un buen estado de salud.',
+                        'Priorizar carbohidratos complejos y alimentos ricos en fibra ayuda a estabilizar la energía durante el día.',
                         'Reducir el consumo de dulces y postres contribuye a mantener niveles saludables.'
                     ],
                     'habitos' => [
                         'Continuar con un estilo de vida activo y saludable permite conservar los niveles de glucosa dentro del rango deseable.',
-                        'Controlar periodicamente tus niveles de glucosa es una forma de prevenir complicaciones a largo plazo.'
+                        'Controlar periódicamente tus niveles de glucosa es una forma de prevenir complicaciones a largo plazo.'
                     ]
                 ];
             } elseif ($clasificacion == 'limite' || $clasificacion == 'riesgo' || $clasificacion == 'riesgo moderado') {
                 return [
                     'nutricion' => [
-                        'Reducir el consumo de azucares anadidos y bebidas azucaradas ayuda a mantener estables los niveles de glucosa.',
-                        'Consumir alimentos con bajo indice glucemico y aumentar la fibra soluble puede mejorar el control glucemico.',
+                        'Reducir el consumo de azúcares añadidos y bebidas azucaradas ayuda a mantener estables los niveles de glucosa.',
+                        'Consumir alimentos con bajo índice glucémico y aumentar la fibra soluble puede mejorar el control glucémico.',
                         'Controlar las porciones de carbohidratos en cada comida favorece un equilibrio saludable.'
                     ],
                     'ejercicio' => [
-                        'Realizar ejercicio aerobico regularmente contribuye a mejorar la sensibilidad a la insulina y el bienestar general.',
-                        'Caminar o mantenerte activo en sesiones  despues de las comidas ayuda a regular los niveles de glucosa y a sentirte mejor y con mas energia.',
-                        'Perder peso de manera moderada puede impactar positivamente en tus niveles glucemicos pero no te sobreexigas ya que hacer todo de golpe puede danarte en ves de ayudarte.'
+                        'Realizar ejercicio aeróbico regularmente contribuye a mejorar la sensibilidad a la insulina y el bienestar general.',
+                        'Caminar o mantenerte activo después de las comidas ayuda a regular los niveles de glucosa y a sentirte mejor y con más energía.',
+                        'Perder peso de manera moderada puede impactar positivamente en tus niveles glucémicos, pero no te sobreexijas, ya que hacer todo de golpe puede dañarte en vez de ayudarte.'
                     ],
                     'medico' => [
-                        'Consultar con un medico permite recibir orientacion especifica y, si es necesario, estudios complementarios para evaluar tu condicion.',
-                        'Un seguimiento mas frecuente con el especialista puede ser necesario para mantener el control.'
+                        'Consultar con un médico permite recibir orientación específica y, si es necesario, estudios complementarios para evaluar tu condición.',
+                        'Un seguimiento más frecuente con el especialista puede ser necesario para mantener el control.'
                     ]
                 ];
             } else {
                 return [
                     'medico' => [
-                        'Es importante acudir a un especialista cuanto antes, ya que los niveles elevados de glucosa pueden requerir evaluacion y tratamiento profesional.',
-                        'Es recomendable que hagas  estudios adicionales para descartar complicaciones solo como medida de prevencion solamente.',
-                        'El seguimiento medico regular es fundamental para un manejo seguro de tu salud .'
+                        'Es importante acudir a un especialista cuanto antes, ya que los niveles elevados de glucosa pueden requerir evaluación y tratamiento profesional.',
+                        'Es recomendable que hagas estudios adicionales para descartar complicaciones, solo como medida de prevención.',
+                        'El seguimiento médico regular es fundamental para un manejo seguro de tu salud.'
                     ],
                     'nutricion' => [
-                        'Un nutriologo especializado puede ayudarte a aprender a manejar tu alimentacion de manera adecuada.',
-                        'El control de carbohidratos y la orientacion profesional son esenciales para prevenir complicaciones.'
+                        'Un nutriólogo especializado puede ayudarte a aprender a manejar tu alimentación de manera adecuada.',
+                        'El control de carbohidratos y la orientación profesional son esenciales para prevenir complicaciones.'
                     ],
                     'monitoreo' => [
-                        'El monitoreo constante de los niveles de glucosa puede ser necesario hasta estabilizar la condicion contar un especialista esperto en el area puede darte una mejor orientacion.'
+                        'El monitoreo constante de los niveles de glucosa puede ser necesario hasta estabilizar la condición; contar con un especialista experto en el área puede darte una mejor orientación.'
                     ]
                 ];
             }
@@ -808,41 +808,41 @@ try {
             if ($clasificacion == 'normal' || $clasificacion == 'deseable') {
                 return [
                     'nutricion' => [
-                        'Mantener habitos alimenticios equilibrados ayuda a conservar el colesterol dentro de rangos saludables.',
-                        'Incluir pescado graso, nueces y semillas aporta grasas saludables beneficiosas para el corazon.',
-                        'Evitar alimentos ultraprocesados contribuye a un perfil lipidico favorable es decir te ayuda a ingerir nutrientes que son esenciales .'
+                        'Mantener hábitos alimenticios equilibrados ayuda a conservar el colesterol dentro de rangos saludables.',
+                        'Incluir pescado graso, nueces y semillas aporta grasas saludables beneficiosas para el corazón.',
+                        'Evitar alimentos ultraprocesados contribuye a un perfil lipídico favorable; es decir, te ayuda a ingerir nutrientes que son esenciales.'
                     ],
                     'habitos' => [
-                        'El seguimiento periodico y la actividad fisica regular ayudan a mantener un corazon saludable.',
-                        'Realizar chequeos medicos preventivos permite detectar cambios a tiempo .'
+                        'El seguimiento periódico y la actividad física regular ayudan a mantener un corazón saludable.',
+                        'Realizar chequeos médicos preventivos permite detectar cambios a tiempo.'
                     ]
                 ];
             } elseif ($clasificacion == 'limite' || $clasificacion == 'riesgo moderado') {
                 return [
                     'nutricion' => [
-                        'Reducir grasas saturadas y trans mejora tu salud cardiovascular el cual ayuda a tu cuerpo para sentirte mejor .',
+                        'Reducir grasas saturadas y trans mejora tu salud cardiovascular, lo cual ayuda a tu cuerpo a sentirse mejor.',
                         'Aumentar el consumo de fibra, aceite de oliva, aguacate y frutos secos ayuda a controlar los niveles de colesterol.',
-                        'Un plan de alimentacion equilibrado puede prevenir complicaciones a largo plazo.'
+                        'Un plan de alimentación equilibrado puede prevenir complicaciones a largo plazo.'
                     ],
                     'ejercicio' => [
-                        'El ejercicio aerobico regular, como caminar, trotar o nadar, ayuda a controlar el colesterol y mejorar la salud cardiovascular y ayuda a quemar grasas acudir a un experto en el area puede darte mas orientacion.'
+                        'El ejercicio aeróbico regular, como caminar, trotar o nadar, ayuda a controlar el colesterol, mejorar la salud cardiovascular y quemar grasas; acudir a un experto en el área puede darte más orientación.'
                     ],
                     'medico' => [
-                        'Consultar con un medico para evaluar la salud cardiovascular y monitorear los niveles de colesterol es recomendable.',
-                        'Se pueden necesitar controles periodicos adicionales segun la evolucion de tus niveles.'
+                        'Consultar con un médico para evaluar la salud cardiovascular y monitorear los niveles de colesterol es recomendable.',
+                        'Se pueden necesitar controles periódicos adicionales según la evolución de tus niveles.'
                     ]
                 ];
             } else {
                 return [
                     'medico' => [
-                        'Es esencial acudir a un especialista cardiovascular para evaluar tu situacion.',
-                        'Se pueden requerir estudios detallados y tratamientos especificos.'
+                        'Es esencial acudir a un especialista cardiovascular para evaluar tu situación.',
+                        'Se pueden requerir estudios detallados y tratamientos específicos.'
                     ],
                     'nutricion' => [
                         'Seguir un plan alimenticio especializado y supervisado por un profesional es fundamental para reducir riesgos.'
                     ],
                     'ejercicio' => [
-                        'La actividad fisica supervisada ayuda a mejorar el perfil lipidico y el bienestar general.'
+                        'La actividad física supervisada ayuda a mejorar el perfil lipídico y el bienestar general.'
                     ]
                 ];
             }
@@ -855,27 +855,27 @@ try {
             if ($clasificacion == 'normal' || $clasificacion == 'deseable') {
                 return [
                     'nutricion' => [
-                        'Mantener habitos alimenticios equilibrados ayuda a mantener  dentro de los  valores saludables.',
-                        'Moderar el consumo de alcohol y azucares simples contribuye a mantener un buen perfil lipidico.'
+                        'Mantener hábitos alimenticios equilibrados ayuda a mantener los niveles dentro de los valores saludables.',
+                        'Moderar el consumo de alcohol y azúcares simples contribuye a mantener un buen perfil lipídico.'
                     ]
                 ];
             } elseif ($clasificacion == 'limite' || $clasificacion == 'riesgo moderado') {
                 return [
                     'nutricion' => [
-                        'Reducir azucares anadidos y carbohidratos refinados es clave para mantener tu cuerpo saludable.',
+                        'Reducir azúcares añadidos y carbohidratos refinados es clave para mantener tu cuerpo saludable.',
                         'Aumentar el consumo de pescado graso y preferir frutas enteras sobre jugos favorece el equilibrio nutricional.'
                     ],
                     'ejercicio' => [
-                        'Mantener actividad fisica regular y moderada ayuda a mejorar  la salud general.'
+                        'Mantener actividad física regular y moderada ayuda a mejorar la salud general.'
                     ],
                     'medico' => [
-                        'Consultar con un medico y realizar controles periodicos es recomendable para prevenir complicaciones.'
+                        'Consultar con un médico y realizar controles periódicos es recomendable para prevenir complicaciones.'
                     ]
                 ];
             } else {
                 return [
                     'medico' => [
-                        'Acudir a un especialista es esencial para evaluar y tratar los trigliceridos altos de manera segura.'
+                        'Acudir a un especialista es esencial para evaluar y tratar los triglicéridos altos de manera segura.'
                     ],
                     'nutricion' => [
                         'Seguir un plan nutricional supervisado por profesionales es fundamental.'
@@ -891,38 +891,38 @@ try {
             if ($clasificacion == 'normal' || $clasificacion == 'deseable') {
                 return [
                     'habitos' => [
-                        'Mantener habitos saludables, como alimentacion equilibrada y actividad fisica regular, ayuda a conservar la presion arterial dentro de valores normales.',
-                        'Monitorear la presion de forma periodica permite detectar cambios a tiempo.'
+                        'Mantener hábitos saludables, como alimentación equilibrada y actividad física regular, ayuda a conservar la presión arterial dentro de valores normales.',
+                        'Monitorear la presión de forma periódica permite detectar cambios a tiempo.'
                     ]
                 ];
             } elseif ($clasificacion == 'limite' || $clasificacion == 'riesgo moderado') {
                 return [
                     'nutricion' => [
-                        'Reducir el consumo de sal y evitar alimentos procesados favorece el control de la presion arterial.',
+                        'Reducir el consumo de sal y evitar alimentos procesados favorece el control de la presión arterial.',
                         'Consumir frutas y verduras ricas en potasio ayuda a mantener un equilibrio saludable.'
                     ],
                     'ejercicio' => [
-                        'El ejercicio aerobico moderado, como caminar o nadar, contribuye a regular la presion arterial.',
-                        'Practicas como yoga o estiramientos ayudan a manejar el estres, que impacta en la presion.'
+                        'El ejercicio aeróbico moderado, como caminar o nadar, contribuye a regular la presión arterial.',
+                        'Prácticas como yoga o estiramientos ayudan a manejar el estrés, que impacta en la presión.'
                     ],
                     'habitos' => [
-                        'Dormir bien y gestionar el estres son habitos fundamentales para mantener la presion arterial estable.'
+                        'Dormir bien y gestionar el estrés son hábitos fundamentales para mantener la presión arterial estable.'
                     ],
                     'medico' => [
-                        'Consultar con un medico y realizar controles periodicos ayuda a prevenir complicaciones.'
+                        'Consultar con un médico y realizar controles periódicos ayuda a prevenir complicaciones.'
                     ]
                 ];
             } else {
                 return [
                     'medico' => [
-                        'Es importante buscar atencion medica especializada de inmediato.',
-                        'El seguimiento profesional asegura un manejo seguro de la presion arterial.'
+                        'Es importante buscar atención médica especializada de inmediato.',
+                        'El seguimiento profesional asegura un manejo seguro de la presión arterial.'
                     ],
                     'nutricion' => [
                         'Seguir un plan alimenticio supervisado puede ser necesario para reducir riesgos.'
                     ],
                     'monitoreo' => [
-                        'El monitoreo frecuente y las visitas regulares al medico son fundamentales.'
+                        'El monitoreo frecuente y las visitas regulares al médico son fundamentales.'
                     ]
                 ];
             }
@@ -936,30 +936,30 @@ try {
                 case 'normal':
                     return [
                         'habitos' => [
-                            'Mantener tecnicas de relajacion, rutinas de sueno regulares y actividades recreativas ayuda a prevenir ansiedad.'
+                            'Mantener técnicas de relajación, rutinas de sueño regulares y actividades recreativas ayuda a prevenir la ansiedad.'
                         ]
                     ];
 
                 case 'leve':
                     return [
                         'tecnicas' => [
-                            'Practicar respiracion profunda, meditacion guiada y ejercicio regular contribuye a reducir la ansiedad leve.'
+                            'Practicar respiración profunda, meditación guiada y ejercicio regular contribuye a reducir la ansiedad leve.'
                         ],
                         'habitos' => [
-                            'Reducir estimulantes, mantener horarios de sueno constantes y limitar exposicion a situaciones estresantes favorece la tranquilidad.'
+                            'Reducir estimulantes, mantener horarios de sueño constantes y limitar la exposición a situaciones estresantes favorece la tranquilidad.'
                         ]
                     ];
 
                 case 'moderado':
                     return [
                         'psicologico' => [
-                            'Consultar con un psicologo puede ofrecer herramientas efectivas para manejar la ansiedad moderada.'
+                            'Consultar con un psicólogo puede ofrecer herramientas efectivas para manejar la ansiedad moderada.'
                         ],
                         'tecnicas' => [
-                            'Expresar emociones por escrito y tecnicas de conexion con el presente ayudan a controlar la ansiedad.'
+                            'Expresar emociones por escrito y técnicas de conexión con el presente ayudan a controlar la ansiedad.'
                         ],
                         'social' => [
-                            'Mantener relaciones sociales y grupos de apoyo proporciona contencion y bienestar emocional.'
+                            'Mantener relaciones sociales y grupos de apoyo proporciona contención y bienestar emocional.'
                         ]
                     ];
 
@@ -972,7 +972,7 @@ try {
                             'Existen tratamientos efectivos que pueden mejorar significativamente la calidad de vida.'
                         ],
                         'crisis' => [
-                            'En situaciones de crisis, buscar ayuda inmediata es vital. No enfrentes la situacion solo.'
+                            'En situaciones de crisis, buscar ayuda inmediata es vital. No enfrentes la situación solo.'
                         ],
                         'inmediato' => [
                             'Evitar decisiones importantes y buscar apoyo de personas de confianza es recomendable.'
@@ -992,30 +992,30 @@ try {
                 case 'normal':
                     return [
                         'habitos' => [
-                            'Mantener un equilibrio entre actividades, descanso adecuado y tiempo de ocio ayuda a prevenir estres.'
+                            'Mantener un equilibrio entre actividades, descanso adecuado y tiempo de ocio ayuda a prevenir el estrés.'
                         ]
                     ];
 
                 case 'leve':
                     return [
                         'organizacion' => [
-                            'Organizar el tiempo, dividir tareas grandes y establecer prioridades realistas ayuda a reducir el estres leve.'
+                            'Organizar el tiempo, dividir tareas grandes y establecer prioridades realistas ayuda a reducir el estrés leve.'
                         ],
                         'tecnicas' => [
-                            'Practicar respiracion, descansos regulares y ejercicio fisico contribuye al manejo del estres.'
+                            'Practicar respiración, descansos regulares y ejercicio físico contribuye al manejo del estrés.'
                         ]
                     ];
 
                 case 'moderado':
                     return [
                         'psicologico' => [
-                            'Consultar con un psicologo permite adquirir herramientas utiles para manejar estres moderado.'
+                            'Consultar con un psicólogo permite adquirir herramientas útiles para manejar el estrés moderado.'
                         ],
                         'organizacion' => [
-                            'Reevaluar la carga de actividades, compartir responsabilidades y planificar descansos ayuda a manejar el estres.'
+                            'Reevaluar la carga de actividades, compartir responsabilidades y planificar descansos ayuda a manejar el estrés.'
                         ],
                         'autocuidado' => [
-                            'Priorizar sueno adecuado, alimentacion equilibrada y ejercicio regular es fundamental para el bienestar.'
+                            'Priorizar sueño adecuado, alimentación equilibrada y ejercicio regular es fundamental para el bienestar.'
                         ]
                     ];
 
@@ -1024,13 +1024,13 @@ try {
                 case 'extremo':
                     return [
                         'medico' => [
-                            'Buscar apoyo profesional especializado es necesario, ya que el estres cronico puede afectar la salud general.'
+                            'Buscar apoyo profesional especializado es necesario, ya que el estrés crónico puede afectar la salud general.'
                         ],
                         'inmediato' => [
-                            'Ajustar la carga de actividades, comunicar la situacion y tomar descansos temporales son acciones prioritarias.'
+                            'Ajustar la carga de actividades, comunicar la situación y tomar descansos temporales son acciones prioritarias.'
                         ],
                         'apoyo' => [
-                            'Buscar redes de apoyo y mantener comunicacion con personas cercanas contribuye al manejo del estres severo.'
+                            'Buscar redes de apoyo y mantener comunicación con personas cercanas contribuye al manejo del estrés severo.'
                         ]
                     ];
 
@@ -1047,36 +1047,36 @@ try {
                 case 'normal':
                     return [
                         'habitos' => [
-                            'Mantener rutinas saludables, relaciones sociales positivas y actividades que disfrutes ayuda a prevenir sintomas depresivos.'
+                            'Mantener rutinas saludables, relaciones sociales positivas y actividades que disfrutes ayuda a prevenir síntomas depresivos.'
                         ]
                     ];
 
                 case 'leve':
                     return [
                         'activacion' => [
-                            'Establecer rutinas diarias, planificar actividades agradables y exponerte a luz natural mejora el estado de animo.'
+                            'Establecer rutinas diarias, planificar actividades agradables y exponerte a luz natural mejora el estado de ánimo.'
                         ],
                         'social' => [
-                            'Mantener contacto con personas cercanas y evitar aislamiento favorece el bienestar emocional.'
+                            'Mantener contacto con personas cercanas y evitar el aislamiento favorece el bienestar emocional.'
                         ],
                         'ejercicio' => [
-                            'Realizar ejercicio fisico regular, preferentemente al aire libre, aporta beneficios documentados para el animo.'
+                            'Realizar ejercicio físico regular, preferentemente al aire libre, aporta beneficios documentados para el ánimo.'
                         ]
                     ];
 
                 case 'moderado':
                     return [
                         'psicologico' => [
-                            'Consultar con un psicologo y buscar apoyo temprano facilita la recuperacion en casos de depresion moderada.'
+                            'Consultar con un psicólogo y buscar apoyo temprano facilita la recuperación en casos de depresión moderada.'
                         ],
                         'activacion' => [
-                            'Mantener rutinas basicas y establecer metas pequenas ayuda a recuperar motivacion y control.'
+                            'Mantener rutinas básicas y establecer metas pequeñas ayuda a recuperar motivación y control.'
                         ],
                         'social' => [
-                            'Participar en grupos de apoyo y comunicar tu situacion ofrece contencion emocional.'
+                            'Participar en grupos de apoyo y comunicar tu situación ofrece contención emocional.'
                         ],
                         'autocuidado' => [
-                            'Priorizar sueno adecuado, alimentacion nutritiva y limitar redes sociales negativas contribuye al bienestar.'
+                            'Priorizar sueño adecuado, alimentación nutritiva y limitar redes sociales negativas contribuye al bienestar.'
                         ]
                     ];
 
@@ -1085,17 +1085,17 @@ try {
                 case 'extremo':
                     return [
                         'medico' => [
-                            'Buscar atencion profesional especializada es fundamental, ya que existen tratamientos efectivos disponibles.',
-                            'El seguimiento cercano permite intervenir rapidamente ante cualquier complicacion.'
+                            'Buscar atención profesional especializada es fundamental, ya que existen tratamientos efectivos disponibles.',
+                            'El seguimiento cercano permite intervenir rápidamente ante cualquier complicación.'
                         ],
                         'psicologico' => [
-                            'La terapia psicologica intensiva y el apoyo emocional constante son recomendables para manejar la depresion severa.'
+                            'La terapia psicológica intensiva y el apoyo emocional constante son recomendables para manejar la depresión severa.'
                         ],
                         'social' => [
-                            'Mantener comunicacion frecuente con personas de confianza ayuda a reducir el aislamiento y brindar contencion.'
+                            'Mantener comunicación frecuente con personas de confianza ayuda a reducir el aislamiento y brindar contención.'
                         ],
                         'inmediato' => [
-                            'Si surgen ideas de autolesion o riesgo, acudir a un servicio de emergencia de inmediato es prioritario.'
+                            'Si surgen ideas de autolesión o riesgo, acudir a un servicio de emergencia de inmediato es prioritario.'
                         ]
                     ];
 
@@ -1111,7 +1111,7 @@ try {
 
             $this->SetFont('Arial', 'I', 9);
             $this->SetTextColor(100, 100, 100);
-            $this->MultiCell(0, 5, pdf_text('Las siguientes recomendaciones estan basadas en tus resultados individuales. Recuerda que son orientativas y no sustituyen la consulta medica profesional.'), 0, 'L');
+            $this->MultiCell(0, 5, pdf_text('Las siguientes recomendaciones están basadas en tus resultados individuales. Recuerda que son orientativas y no sustituyen la consulta médica profesional.'), 0, 'L');
             $this->Ln(3);
             $this->SetTextColor(0, 0, 0);
 
@@ -1120,7 +1120,7 @@ try {
                 $recomendaciones_imc = $this->getRecomendaciones('IMC', $datos_pdf['imc'], $datos_pdf['clasificacion_imc']);
                 if (!empty($recomendaciones_imc)) {
                     $this->addBloqueRecomendaciones(
-                        'Indice de Masa Corporal (IMC: ' . $datos_pdf['imc'] . ')',
+                        'Índice de Masa Corporal (IMC: ' . $datos_pdf['imc'] . ')',
                         $datos_pdf['clasificacion_imc'],
                         $recomendaciones_imc
                     );
@@ -1156,7 +1156,7 @@ try {
                 $recomendaciones_trigliceridos = $this->getRecomendaciones('TRIGLICERIDOS', $datos_pdf['trigliceridos'], $datos_pdf['clasificacion_trigliceridos']);
                 if (!empty($recomendaciones_trigliceridos)) {
                     $this->addBloqueRecomendaciones(
-                        'Trigliceridos (' . $datos_pdf['trigliceridos'] . ' mg/dL)',
+                        'Triglicéridos (' . $datos_pdf['trigliceridos'] . ' mg/dL)',
                         $datos_pdf['clasificacion_trigliceridos'],
                         $recomendaciones_trigliceridos
                     );
@@ -1180,7 +1180,7 @@ try {
                 $recomendaciones_ansiedad = $this->getRecomendaciones('DASS_ANSIEDAD', null, $datos_pdf['severidad_ansiedad']);
                 if (!empty($recomendaciones_ansiedad)) {
                     $this->addBloqueRecomendaciones(
-                        'Ansiedad (Puntuacion: ' . $datos_pdf['puntuacion_ansiedad'] . ')',
+                        'Ansiedad ' . $datos_pdf['puntuacion_ansiedad'],
                         $datos_pdf['severidad_ansiedad'],
                         $recomendaciones_ansiedad
                     );
@@ -1192,7 +1192,7 @@ try {
                 $recomendaciones_estres = $this->getRecomendaciones('DASS_ESTRES', null, $datos_pdf['severidad_estres']);
                 if (!empty($recomendaciones_estres)) {
                     $this->addBloqueRecomendaciones(
-                        'Estres (Puntuacion: ' . $datos_pdf['puntuacion_estres'] . ')',
+                        'Estres ' . $datos_pdf['puntuacion_estres'],
                         $datos_pdf['severidad_estres'],
                         $recomendaciones_estres
                     );
@@ -1287,15 +1287,15 @@ try {
                 switch ($categoria) {
                     case 'nutricion':
                         $this->SetTextColor(46, 125, 50);
-                        $nombre_cat = 'Nutricion';
+                        $nombre_cat = 'Nutrición';
                         break;
                     case 'ejercicio':
                         $this->SetTextColor(3, 169, 244);
-                        $nombre_cat = 'Actividad Fisica';
+                        $nombre_cat = 'Actividad Física';
                         break;
                     case 'medico':
                         $this->SetTextColor(211, 47, 47);
-                        $nombre_cat = 'Atencion Medica';
+                        $nombre_cat = 'Atención Médica';
                         break;
                     case 'psicologico':
                         $this->SetTextColor(123, 31, 162);
@@ -1303,7 +1303,7 @@ try {
                         break;
                     case 'habitos':
                         $this->SetTextColor(255, 143, 0);
-                        $nombre_cat = 'Habitos Saludables';
+                        $nombre_cat = 'Hábitos Saludables';
                         break;
                     case 'crisis':
                         $this->SetTextColor(198, 40, 40);
@@ -1315,11 +1315,11 @@ try {
                         break;
                     case 'inmediato':
                         $this->SetTextColor(255, 87, 34);
-                        $nombre_cat = 'Accion Inmediata';
+                        $nombre_cat = 'Acción Inmediata';
                         break;
                     case 'organizacion':
                         $this->SetTextColor(96, 125, 139);
-                        $nombre_cat = 'Organizacion';
+                        $nombre_cat = 'Organización';
                         break;
                     case 'autocuidado':
                         $this->SetTextColor(156, 39, 176);
@@ -1327,11 +1327,11 @@ try {
                         break;
                     case 'activacion':
                         $this->SetTextColor(255, 152, 0);
-                        $nombre_cat = 'Activacion';
+                        $nombre_cat = 'Activación';
                         break;
                     case 'tecnicas':
                         $this->SetTextColor(63, 81, 181);
-                        $nombre_cat = 'Tecnicas';
+                        $nombre_cat = 'Técnicas';
                         break;
                     case 'monitoreo':
                         $this->SetTextColor(121, 85, 72);
@@ -1339,7 +1339,7 @@ try {
                         break;
                     case 'academico':
                         $this->SetTextColor(25, 118, 210);
-                        $nombre_cat = 'Academico';
+                        $nombre_cat = 'Académico';
                         break;
                     case 'apoyo':
                         $this->SetTextColor(0, 137, 123);
@@ -1575,8 +1575,8 @@ try {
 
         $mail = new PHPMailer(true);
 
-        // Configuración SMTP con más logging
-        $mail->SMTPDebug = 0; // 🔥 Aumentar a 2 para ver más detalles
+
+        $mail->SMTPDebug = 0;
         $mail->Debugoutput = function ($str, $level) {
             error_log("PHPMailer [$level]: $str");
         };
@@ -1630,25 +1630,38 @@ try {
                 .content { background-color: white; padding: 30px; border-radius: 0 0 8px 8px; }
                 .button { display: inline-block; padding: 12px 24px; background-color: #1e4678; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
                 .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
-                .highlight { background-color: #fff3cd; padding: 10px; border-left: 4px solid #ffc107; margin: 15px 0; }
+                /* Estilo para la nota médica (Amarillo) */
+                .highlight { background-color: #fff3cd; padding: 15px; border-left: 4px solid #ffc107; margin: 20px 0; font-size: 14px; }
+                /* Estilo para la alerta de datos falsos (Rojo suave) */
+                .pilot-alert { background-color: #f8d7da; color: #721c24; padding: 15px; border-left: 4px solid #dc3545; margin: 20px 0; font-size: 14px; }
+                .pilot-tag { background-color: #ffc107; color: #333; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; text-transform: uppercase; display: inline-block; margin-top: 5px; }
             </style>
         </head>
         <body>
             <div class="container">
                 <div class="header">
                     <h1>🏥 Sistema Integral de Salud UNACAR</h1>
+                    <div class="pilot-tag">⚠️ Prueba Piloto</div>
                 </div>
                 <div class="content">
                     <h2>Estimado(a) estudiante,</h2>
-                    <p>Te informamos que tu <strong>Reporte de Salud Integral</strong> ha sido generado exitosamente el día <strong>' . date('d/m/Y') . '</strong>.</p>
                     
-                    <p>🔎 Encontrarás adjunto a este correo tu reporte completo en formato PDF.</p>
+                    <p>Estás recibiendo este correo porque tu usuario forma parte de la fase de <strong>Prueba Piloto</strong> del sistema.</p>
+
+                    <div class="pilot-alert">
+                        <strong>🚧 AVISO IMPORTANTE DE PRUEBA:</strong><br>
+                        Ten en cuenta que, debido a la naturaleza de esta prueba piloto, <strong>algunos datos, métricas o resultados mostrados en el reporte adjunto podrían ser ficticios, simulados o generados automáticamente</strong> para verificar el funcionamiento técnico del sistema. Por favor, no los tomes como valores clínicos reales.
+                    </div>
+
+                    <p>Te informamos que tu <strong>Reporte de Salud Integral (Simulado)</strong> ha sido generado exitosamente el día <strong>' . date('d/m/Y') . '</strong>.</p>
+                    
+                    <p>🔎 Encontrarás adjunto a este correo el documento PDF correspondiente.</p>
                     
                     <div class="highlight">
-                        <strong>⚠️ Nota importante:</strong> Estos resultados son un acercamiento orientativo. Para un diagnóstico completo y profesional, debes acudir a tu servicio médico a través de tu seguro facultativo.
+                        <strong>👨‍⚕️ Nota Informativa:</strong> Recuerda siempre que este sistema es una herramienta de apoyo. Para un diagnóstico completo y profesional, debes acudir presencialmente a tu servicio médico a través del seguro facultativo.
                     </div>
                     
-                    <p>Tu reporte incluye:</p>
+                    <p>El reporte de prueba incluye:</p>
                     <ul>
                         <li>✓ Indicadores de Salud Física (IMC, ICC, ICE)</li>
                         <li>✓ Perfil Sanguíneo y Tensión Arterial</li>
@@ -1656,12 +1669,12 @@ try {
                         <li>✓ Evaluación DASS (Ansiedad, Estrés, Depresión)</li>
                     </ul>
                     
-                    <p>Si tienes alguna pregunta o inquietud sobre tus resultados, no dudes en contactar con el departamento de salud universitaria.</p>
+                    <p>Agradecemos tu participación en esta etapa de pruebas.</p>
                     
-                    <p>Cuida tu salud,<br><strong>Equipo de Salud UNACAR</strong></p>
+                    <p>Atentamente,<br><strong>Equipo de Desarrollo - Salud UNACAR</strong></p>
                 </div>
                 <div class="footer">
-                    <p>📧 Este correo fue generado automáticamente, por favor no responder.</p>
+                    <p>📧 Este correo fue generado automáticamente por el sistema de pruebas.</p>
                     <p>&copy; ' . date('Y') . ' UNACAR - Universidad Autónoma del Carmen</p>
                 </div>
             </div>
@@ -1669,15 +1682,12 @@ try {
         </html>';
 
         $mail->AltBody = "Estimado(a) estudiante,\n\n"
-            . "Tu Reporte de Salud Integral ha sido generado el " . date('d/m/Y') . ".\n\n"
+            . "*** AVISO DE PRUEBA PILOTO ***\n\n"
+            . "IMPORTANTE: Este reporte contiene DATOS SIMULADOS O FICTICIOS generados con fines de prueba técnica. No deben ser considerados como resultados clínicos reales.\n\n"
+            . "Tu Reporte de Salud Integral (Simulado) ha sido generado el " . date('d/m/Y') . ".\n\n"
             . "Encontrarás adjunto tu reporte completo en formato PDF.\n\n"
-            . "NOTA IMPORTANTE: Estos resultados son un acercamiento. Para un diagnóstico completo, acude a tu servicio médico.\n\n"
-            . "Tu reporte incluye:\n"
-            . "- Indicadores de Salud Física\n"
-            . "- Perfil Sanguíneo y TA\n"
-            . "- Perfil de Estilo de Vida\n"
-            . "- Evaluación DASS\n\n"
-            . "Saludos,\nEquipo de Salud UNACAR";
+            . "Recuerda que para un diagnóstico real debes acudir a tu servicio médico.\n\n"
+            . "Saludos,\nEquipo de Desarrollo - Salud UNACAR";
 
         error_log("Contenido del correo configurado");
         error_log("Intentando enviar correo...");
@@ -1700,10 +1710,10 @@ try {
 
     $conn->close();
 
-    // URL para descargar el PDF
+    
     $urlDescarga = $protocol . "://" . $host . "/reportes_salud/" . $matricula_sanitizada . "/" . $nombreArchivo;
 
-    // ✅ Respuesta final según el modo
+    
     if ($solo_generar_pdf) {
         if ($correoEnviado) {
             $mensaje = 'Reporte generado y enviado por correo exitosamente.';

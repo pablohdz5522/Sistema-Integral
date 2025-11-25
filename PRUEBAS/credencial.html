@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credencial</title>
+    <style>
+        :root {
+            --unacar-blue: #002855;
+            --unacar-gold: #c4a006;
+            --placeholder-gray: #ccc;
+        }
+
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* --- CONTENEDOR PRINCIPAL (CR80 Vertical) --- */
+        .credencial-container {
+            width: 54mm;
+            height: 85.6mm;
+            background-color: white;
+            border-radius: 3mm;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            /* Padding interno de seguridad para que nada toque el borde de corte */
+            padding: 2mm; 
+            box-sizing: border-box; /* Importante para que el padding no aumente el tamaño total */
+        }
+
+        /* --- CAPA DE FONDO CURVO (Z-index bajo) --- */
+        .background-curve-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Al fondo */
+        }
+        
+        /* La curva azul principal */
+        .background-curve-layer::before {
+            content: '';
+            position: absolute;
+            top: -5%;
+            left: -45%; /* Ajustado para que no invada tanto */
+            width: 70%;
+            height: 110%;
+            background-color: var(--unacar-blue);
+            border-top-right-radius: 40%;
+            border-bottom-right-radius: 50%;
+            transform: rotate(-2deg);
+        }
+        
+
+        .background-curve-layer::after {
+            content: '';
+            position: absolute;
+            top: -5%;
+            left: -42%;
+            width: 68%;
+            height: 110%;
+            background-color: var(--unacar-gold);
+            border-top-right-radius: 40%;
+            border-bottom-right-radius: 50%;
+            transform: rotate(-2deg);
+            z-index: -1;
+        }
+
+
+        .content-layer {
+            position: relative;
+            z-index: 10; 
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        /* HEADER */
+        .header {
+            height: 12mm;
+            display: flex;
+            align-items: center;
+            padding-left: 12mm; 
+        }
+
+       
+        .logo-skeleton {
+            width: 9mm;
+            height: 9mm;
+            background-color: var(--placeholder-gray);
+            border-radius: 50%;
+            border: 2px solid white;
+            margin-right: 2mm;
+        }
+        
+        .header-text-skeleton {
+            
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .text-bar { height: 3px; background-color: white; width: 25mm; }
+        .text-bar.title { height: 4px; width: 15mm; background-color: var(--unacar-gold); }
+
+
+        
+        .main-body {
+            flex: 1;
+            display: flex;
+            position: relative; 
+            padding-top: 5mm;
+        }
+
+        /* Columna Central (Foto y Datos) */
+        .center-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* CORRECCIÓN CLAVE: Margen izquierdo grande para salir de la zona de la curva azul */
+            margin-left: 18mm; 
+            /* Margen derecho para no chocar con el texto vertical */
+            margin-right: 8mm; 
+            width: 25mm; /* Ancho fijo para controlar el espacio */
+        }
+
+        /* Placeholder FOTO */
+        .photo-skeleton {
+            width: 24mm;
+            height: 30mm;
+            background-color: var(--placeholder-gray);
+            border: 1px solid #aaa;
+            margin-bottom: 4mm;
+        }
+
+        /* Placeholder NOMBRE */
+        .name-skeleton {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+        .name-bar { height: 4px; background-color: var(--unacar-blue); width: 90%; }
+
+
+        /* Texto Vertical Lateral */
+        .vertical-text {
+            position: absolute;
+            right: 0mm; /* Pegado al borde derecho del área segura */
+            top: 5mm;
+            bottom: 2mm;
+            width: 6mm;
+            writing-mode: vertical-rl;
+            text-orientation: sideways;
+            text-align: center;
+            font-size: 7pt;
+            font-weight: bold;
+            color: var(--unacar-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            /* Fondo blanco sutil para garantizar legibilidad si toca algo */
+            background-color: rgba(255,255,255,0.8); 
+        }
+
+        /* FOOTER */
+        .footer {
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 2mm;
+            position: relative;
+        }
+
+        .expiry-text {
+            font-size: 7pt;
+            color: var(--unacar-blue);
+            font-weight: bold;
+            margin-bottom: 2mm;
+            margin-left: -2mm; /* Centrado visual */
+        }
+
+        /* Placeholder ID PILL (Matrícula) */
+        .id-pill-skeleton {
+            width: 30mm;
+            height: 6mm;
+            background-color: var(--unacar-blue);
+            border-radius: 10mm;
+            margin-left: -3mm; /* Centrado visual */
+            color: #eee;
+            text-align: center;
+            margin-top: 1mm;
+        }
+
+        /* Placeholder QR (Esquina inferior derecha) */
+        .qr-skeleton {
+            position: absolute;
+            bottom: 0mm; /* Pegado al fondo del área segura */
+            right: 0mm;  /* Pegado a la derecha del área segura */
+            width: 10mm;
+            height: 10mm;
+            background-color: var(--placeholder-gray);
+            border: 1px solid var(--unacar-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 6pt;
+            font-weight: bold;
+            color: var(--unacar-blue);
+        }
+
+        /* --- AJUSTES IMPRESIÓN --- */
+        @media print {
+            body { background: none; display: block; margin: 20px; }
+            .credencial-container {
+                box-shadow: none;
+                border: 1px solid #eee; /* Guía de corte sutil */
+                page-break-inside: avoid;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="credencial-container">
+        
+        <div class="background-curve-layer"></div>
+
+        <div class="content-layer">
+            
+            <div class="header">
+                <div class=""><img src="/Sistema_Integral/imagenes/logo.png" alt="" style="width: 90%;"></div>
+                <div class="">
+                    <div class=""></div> <div class=""></div> </div>
+            </div>
+
+            <div class="main-body">
+                
+                <div class="center-column">
+                    <div class="photo-skeleton"></div>
+                    
+                    <div class="name-skeleton">
+                        <div class="">Pablo Hernández Gándara</div>
+                    </div>
+                </div>
+
+                <div class="vertical-text">
+                    LICENCIATURA EN INGENIERIA EN SISTEMAS COMPUTACIONALES
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="expiry-text">EXPIRA: DD/MM/AAAA</div>
+                <div class="id-pill-skeleton">191263</div>
+
+                <div class="qr-skeleton">QR AREA</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

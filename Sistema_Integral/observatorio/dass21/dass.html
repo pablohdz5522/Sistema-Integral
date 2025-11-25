@@ -23,8 +23,9 @@
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/observatorio/dass21/dass.html">
-                <img src="imagenes/EDUCANDO VF SLOGAN (IDENTIDAD)_ NEGRO.png" alt="" width="50px" id="imagen">
+
+            <a class="navbar-brand" href="">
+                <img src="imagenes/logo_unacar (1).png" alt="" width="160px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,10 +42,13 @@
                     <li class="nav-item">
                         <a class="nav-link ms-3 my-1" href="#">Estrés</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link ms-3 my-1" href="/observatorio/observatorio.html">Salir</a>
+                    </li>
 
             </div>
-            <a class="navbar-brand" href="/observatorio/observatorio.html">
-                <img src="imagenes/logo_unacar (1).png" alt="" width="160px">
+            <a class="navbar-brand" href="/observatorio/dass21/dass.html">
+                <img src="imagenes/EDUCANDO VF SLOGAN (IDENTIDAD)_ NEGRO.png" alt="" width="50px" id="imagen">
             </a>
         </div>
     </nav>
@@ -313,13 +317,13 @@
         crossorigin="anonymous"></script>
 
     <script>
-        // CONFIGURACIÓN GLOBAL
         const API_BASE_URL = 'dass.php';
 
         let currentChart = null;
         let currentView = 'ansiedad';
         let chartType = 'bar';
         let isInitialized = false;
+        let currentDataGlobal = null; // Para mantener los datos actuales
 
         // INICIALIZACIÓN AL CARGAR LA PÁGINA
         document.addEventListener('DOMContentLoaded', async function () {
@@ -330,10 +334,7 @@
                 await initializeFilters();
                 setupEventListeners();
 
-                // Marcar como inicializado
                 isInitialized = true;
-
-                // Ahora sí cargar los datos
                 await loadData();
 
                 console.log('Aplicación inicializada correctamente');
@@ -429,19 +430,16 @@
             console.log('Inicializando filtros...');
 
             try {
-                // Cargar facultades
                 const facultades = await fetchData('?endpoint=facultades');
                 console.log('Facultades cargadas:', facultades);
                 populateSelect('facultad', facultades, 'id_facultad', 'nombre_facultad');
                 populateSelect('facultad-mobile', facultades, 'id_facultad', 'nombre_facultad');
 
-                // Cargar años de nacimiento únicos
                 const years = await fetchData('?endpoint=years-nacimiento');
                 console.log('Años cargados:', years);
                 populateSelect('nacimiento', years, 'fe_nacimiento_alum', 'fe_nacimiento_alum');
                 populateSelect('nacimiento-mobile', years, 'fe_nacimiento_alum', 'fe_nacimiento_alum');
 
-                // Cargar severidades
                 const severidades = ['Normal', 'Leve', 'Moderado', 'Severo', 'Extremadamente Severo'];
                 severidades.forEach(sev => {
                     ['severidad', 'severidad-mobile'].forEach(selectId => {
@@ -483,31 +481,36 @@
         function setupEventListeners() {
             console.log('Configurando event listeners...');
 
-            // Navegación entre vistas
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', function (e) {
-                    e.preventDefault();
                     const text = this.textContent.trim().toLowerCase();
 
-                    if (text.includes('ansiedad')) {
-                        switchView('ansiedad');
-                    } else if (text.includes('depresión') || text.includes('depresion')) {
-                        switchView('depresion');
-                    } else if (text.includes('estrés') || text.includes('estres')) {
-                        switchView('estres');
+                    // Solo prevenir si es un enlace interno (ansiedad, depresión, estrés)
+                    if (text.includes('ansiedad') || text.includes('depresión') ||
+                        text.includes('depresion') || text.includes('estrés') ||
+                        text.includes('estres')) {
+
+                        e.preventDefault(); // Solo prevenir para enlaces internos
+
+                        if (text.includes('ansiedad')) {
+                            switchView('ansiedad');
+                        } else if (text.includes('depresión') || text.includes('depresion')) {
+                            switchView('depresion');
+                        } else if (text.includes('estrés') || text.includes('estres')) {
+                            switchView('estres');
+                        }
                     }
+                    // Si no coincide (como "Observatorio"), deja que navegue normalmente
                 });
             });
 
-            // Cambio de tipo de gráfica
             const btnBarras = document.getElementById('btnBarras');
             const btnPastel = document.getElementById('btnPastel');
 
             if (btnBarras) btnBarras.addEventListener('click', () => changeChartType('bar'));
             if (btnPastel) btnPastel.addEventListener('click', () => changeChartType('pie'));
 
-            // Filtros desktop
             ['facultad', 'carrera', 'sexo', 'nacimiento', 'severidad'].forEach(id => {
                 const element = document.getElementById(id);
                 if (element) {
@@ -515,7 +518,6 @@
                 }
             });
 
-            // Filtros mobile
             ['facultad-mobile', 'carrera-mobile', 'sexo-mobile', 'nacimiento-mobile', 'severidad-mobile'].forEach(id => {
                 const element = document.getElementById(id);
                 if (element) {
@@ -523,7 +525,6 @@
                 }
             });
 
-            // Sincronizar filtros desktop/mobile
             const facultadDesktop = document.getElementById('facultad');
             const facultadMobile = document.getElementById('facultad-mobile');
 
@@ -586,7 +587,6 @@
             console.log('Cambiando a vista:', view);
             currentView = view;
 
-            // Actualizar navegación activa
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
                 const text = link.textContent.trim().toLowerCase();
@@ -595,7 +595,6 @@
                 }
             });
 
-            // Actualizar título
             const titles = {
                 'ansiedad': 'Alumnos Con Ansiedad',
                 'depresion': 'Alumnos Con Depresión',
@@ -607,7 +606,6 @@
                 cardTitle.textContent = titles[view];
             }
 
-            // Mostrar/ocultar secciones de estadísticas
             const estadisticasSections = document.querySelectorAll('.row.mt-4.mb-3');
             estadisticasSections.forEach((section, index) => {
                 if (index === 0 && view === 'ansiedad') {
@@ -631,14 +629,16 @@
             console.log('Cambiando tipo de gráfica a:', type);
             chartType = type;
 
-            // Actualizar botones activos
             const btnBarras = document.getElementById('btnBarras');
             const btnPastel = document.getElementById('btnPastel');
 
             if (btnBarras) btnBarras.classList.toggle('active', type === 'bar');
             if (btnPastel) btnPastel.classList.toggle('active', type === 'pie');
 
-            loadData();
+            // Redibujar con los datos actuales
+            if (currentDataGlobal) {
+                updateChart(currentDataGlobal);
+            }
         }
 
         // ============================================
@@ -658,6 +658,7 @@
                 const data = await fetchData(`?endpoint=dass-stats&view=${currentView}&${new URLSearchParams(filters)}`);
                 console.log('Datos recibidos:', data);
 
+                currentDataGlobal = data; // Guardar datos
                 updateChart(data);
                 updateStats(data);
             } catch (error) {
@@ -683,7 +684,7 @@
         }
 
         // ============================================
-        // ACTUALIZACIÓN DE GRÁFICA
+        // ACTUALIZACIÓN DE GRÁFICA CON PORCENTAJES
         // ============================================
         function updateChart(data) {
             console.log('Actualizando gráfica...');
@@ -701,6 +702,7 @@
 
             const severidades = ['Normal', 'Leve', 'Moderado', 'Severo', 'Extremadamente Severo'];
             const conteos = severidades.map(sev => data.conteos[sev] || 0);
+            const total = data.total || 0;
 
             const colors = ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#991B1B'];
 
@@ -728,7 +730,6 @@
                             callbacks: {
                                 label: function (context) {
                                     const valor = context.parsed.y !== undefined ? context.parsed.y : context.parsed;
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
                                     const porcentaje = total > 0 ? ((valor / total) * 100).toFixed(1) : 0;
                                     return `${context.label}: ${valor} (${porcentaje}%)`;
                                 }
@@ -743,14 +744,61 @@
                             }
                         }
                     } : {}
-                }
+                },
+                plugins: chartType === 'bar' ? [{
+                    afterDatasetsDraw: function (chart) {
+                        const ctx = chart.ctx;
+                        chart.data.datasets.forEach((dataset, i) => {
+                            const meta = chart.getDatasetMeta(i);
+                            meta.data.forEach((bar, index) => {
+                                const data = dataset.data[index];
+                                const porcentaje = total > 0 ? ((data / total) * 100).toFixed(1) : 0;
+
+                                ctx.fillStyle = '#fff';
+                                ctx.font = 'bold 12px Arial';
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'middle';
+
+                                const x = bar.x;
+                                const y = bar.y + 20;
+
+                                ctx.fillText(`${data}`, x, y - 10);
+                                ctx.fillText(`(${porcentaje}%)`, x, y + 10);
+                            });
+                        });
+                    }
+                }] : [{
+                    afterDatasetsDraw: function (chart) {
+                        const ctx = chart.ctx;
+                        chart.data.datasets.forEach((dataset, i) => {
+                            const meta = chart.getDatasetMeta(i);
+                            meta.data.forEach((slice, index) => {
+                                const data = dataset.data[index];
+                                const porcentaje = total > 0 ? ((data / total) * 100).toFixed(1) : 0;
+
+                                const angle = (slice.startAngle + slice.endAngle) / 2;
+                                const radius = (slice.innerRadius + slice.outerRadius) / 2;
+                                const x = slice.x + Math.cos(angle) * radius * 0.7;
+                                const y = slice.y + Math.sin(angle) * radius * 0.7;
+
+                                ctx.fillStyle = '#fff';
+                                ctx.font = 'bold 12px Arial';
+                                ctx.textAlign = 'center';
+                                ctx.textBaseline = 'middle';
+
+                                ctx.fillText(`${data}`, x, y - 8);
+                                ctx.fillText(`(${porcentaje}%)`, x, y + 8);
+                            });
+                        });
+                    }
+                }]
             });
 
             console.log('Gráfica creada exitosamente');
         }
 
         // ============================================
-        // ACTUALIZACIÓN DE ESTADÍSTICAS
+        // ACTUALIZACIÓN DE ESTADÍSTICAS CON PORCENTAJES
         // ============================================
         function updateStats(data) {
             console.log('Actualizando estadísticas...');

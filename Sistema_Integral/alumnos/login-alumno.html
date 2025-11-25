@@ -6,264 +6,7 @@
     <title>Portal Alumnos - Iniciar Sesión</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
-    <style>
-        :root {
-            --primary-color: #2563eb; /* Azul corporativo/académico */
-            --primary-hover: #1d4ed8;
-            --text-dark: #1e293b;
-            --text-gray: #64748b;
-            --bg-input: #f8fafc;
-            --border-input: #e2e8f0;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            height: 100vh;
-            display: flex;
-            background-color: #fff;
-            overflow: hidden; /* Evita scroll innecesario */
-        }
-
-        /* === SECCIÓN IZQUIERDA: IMAGEN === */
-        .brand-section {
-            flex: 1;
-            background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=1000&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 60px;
-            color: white;
-        }
-
-        /* Capa oscura sobre la imagen para que el texto se lea bien */
-        .brand-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(30, 41, 59, 0.3), rgba(15, 23, 42, 0.9));
-        }
-
-        .brand-content {
-            position: relative;
-            z-index: 2;
-            max-width: 450px;
-        }
-
-        .brand-content h2 {
-            font-size: 32px;
-            margin-bottom: 15px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .brand-content p {
-            font-size: 16px;
-            opacity: 0.85;
-            font-weight: 300;
-            line-height: 1.6;
-        }
-
-        /* === SECCIÓN DERECHA: FORMULARIO === */
-        .login-section {
-            width: 100%;
-            max-width: 550px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 0 60px;
-            background: white;
-            overflow-y: auto;
-        }
-
-        .login-header {
-            margin-bottom: 40px;
-        }
-
-        .login-header h1 {
-            font-size: 28px;
-            color: var(--text-dark);
-            font-weight: 700;
-            margin-bottom: 8px;
-            letter-spacing: -0.5px;
-        }
-
-        .login-header p {
-            color: var(--text-gray);
-            font-size: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 24px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 14px 16px;
-            background-color: var(--bg-input);
-            border: 1px solid var(--border-input);
-            border-radius: 8px;
-            font-size: 15px;
-            color: var(--text-dark);
-            transition: all 0.2s ease;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            background-color: #fff;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #94a3b8;
-            font-size: 16px;
-            transition: color 0.2s;
-        }
-
-        .toggle-password:hover {
-            color: var(--text-dark);
-        }
-
-        .password-hint {
-            font-size: 12px;
-            color: var(--text-gray);
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .password-hint::before {
-            content: 'ℹ';
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            background: #e2e8f0;
-            color: #64748b;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 14px;
-            font-size: 10px;
-            font-weight: bold;
-        }
-
-        .btn-login {
-            width: 100%;
-            padding: 16px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            margin-top: 10px;
-        }
-
-        .btn-login:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .btn-login:disabled {
-            background-color: #94a3b8;
-            cursor: not-allowed;
-        }
-
-        .help-text {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-            color: var(--text-gray);
-        }
-
-        .help-text a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .help-text a:hover {
-            text-decoration: underline;
-        }
-
-        /* Alertas */
-        .alert {
-            padding: 14px;
-            border-radius: 8px;
-            margin-bottom: 24px;
-            font-size: 14px;
-            display: none;
-            display: flex; /* Para alinear icono y texto si agregas iconos */
-            align-items: center;
-        }
-
-        .alert-error {
-            background-color: #fef2f2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-
-        .alert-success {
-            background-color: #f0fdf4;
-            color: #166534;
-            border: 1px solid #bbf7d0;
-        }
-
-        /* Animación Shake sutil */
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-        .shake { animation: shake 0.3s ease-in-out; }
-
-        /* Responsive: En móviles se apila verticalmente */
-        @media (max-width: 900px) {
-            body { flex-direction: column; height: auto; min-height: 100vh; }
-            .brand-section { display: none; /* Ocultar imagen en móvil para ahorrar espacio o cambiar a height fijo */ }
-            .login-section { padding: 40px 20px; max-width: 100%; flex: 1; }
-            
-            /* Si prefieres mostrar una barra de imagen arriba en móvil, descomenta esto: */
-            /*
-            .brand-section { display: flex; flex: 0 0 150px; padding: 20px; }
-            .brand-content h2 { font-size: 20px; }
-            .brand-content p { display: none; }
-            */
-        }
-    </style>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
 
@@ -313,7 +56,7 @@
                     </button>
                 </div>
                 <div class="password-hint">
-                    Formato: Salud + fecha de nacimiento (AAAA/MM/DD)
+                    Formato: Salud + fecha de nacimiento (AAAA-MM-DD) (Ejem:Salud0000-01-01)
                 </div>
             </div>
 
@@ -329,12 +72,12 @@
 
     <script>
         function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const icon = document.getElementById('eye-icon');
+            var passwordInput = document.getElementById('password');
+            var icon = document.getElementById('eye-icon');
             
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
-                icon.textContent = '🙈'; // Ojo tachado o cerrado
+                icon.textContent = '🙈';
             } else {
                 passwordInput.type = 'password';
                 icon.textContent = '👁️';
@@ -342,20 +85,20 @@
         }
 
         function mostrarAlerta(mensaje, tipo) {
-            const alerta = document.getElementById('alerta');
-            alerta.className = `alert alert-${tipo}`;
+            var alerta = document.getElementById('alerta');
+            alerta.className = 'alert alert-' + tipo;
             alerta.textContent = mensaje;
             alerta.style.display = 'block';
             
-            // Solo hacemos shake en errores
             if (tipo === 'error') {
-                const btn = document.querySelector('.btn-login');
+                var btn = document.querySelector('.btn-login');
                 btn.classList.add('shake');
-                setTimeout(() => btn.classList.remove('shake'), 300);
+                setTimeout(function() {
+                    btn.classList.remove('shake');
+                }, 300);
             }
 
-            // Ocultar automáticamente después de 5s
-            setTimeout(() => {
+            setTimeout(function() {
                 alerta.style.display = 'none';
             }, 5000);
         }
@@ -363,15 +106,14 @@
         document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const btn = document.getElementById('submitBtn');
-            const originalBtnText = btn.innerText;
+            var btn = document.getElementById('submitBtn');
+            var originalBtnText = btn.innerText;
             
-            // Estado de carga
             btn.disabled = true;
             btn.innerText = "Verificando...";
             
-            const matricula = document.getElementById('matricula').value.trim();
-            const password = document.getElementById('password').value.trim();
+            var matricula = document.getElementById('matricula').value.trim();
+            var password = document.getElementById('password').value.trim();
             
             if (!matricula || !password) {
                 mostrarAlerta('Por favor completa todos los campos', 'error');
@@ -380,22 +122,43 @@
                 return;
             }
 
-            const formData = new FormData();
+            var formData = new FormData();
             formData.append('matricula', matricula);
             formData.append('password', password);
 
             try {
-                const response = await fetch('/alumnos/alumnos-login.php', {
+                console.log('Intentando conectar a: /alumnos/alumnos-login.php');
+                
+                var response = await fetch('/alumnos/alumnos-login.php', {
                     method: 'POST',
                     body: formData
                 });
 
-                const data = await response.json();
+                console.log('Status de respuesta:', response.status);
+                console.log('Headers:', response.headers);
+                
+                // Intentar obtener el texto primero para ver qué está devolviendo
+                var textoRespuesta = await response.text();
+                console.log('Respuesta como texto:', textoRespuesta);
+                
+                // Intentar parsear como JSON
+                var data;
+                try {
+                    data = JSON.parse(textoRespuesta);
+                } catch (parseError) {
+                    console.error('Error al parsear JSON:', parseError);
+                    mostrarAlerta('Error del servidor. Respuesta no válida. Revisa la consola (F12)', 'error');
+                    btn.disabled = false;
+                    btn.innerText = originalBtnText;
+                    return;
+                }
+
+                console.log('Datos parseados:', data);
 
                 if (data.success) {
                     mostrarAlerta('Acceso correcto. Redirigiendo...', 'success');
-                    setTimeout(() => {
-                        window.location.href = data.redirect;
+                    setTimeout(function() {
+                        window.location.href = "/alumnos/inicio.html";
                     }, 1000);
                 } else if (data.error) {
                     mostrarAlerta(data.error, 'error');
@@ -403,14 +166,13 @@
                     btn.innerText = originalBtnText;
                 }
             } catch (error) {
-                console.error('Error:', error);
-                mostrarAlerta('Error de conexión con el servidor.', 'error');
+                console.error('Error completo:', error);
+                mostrarAlerta('Error de conexión con el servidor. Detalles en consola (F12)', 'error');
                 btn.disabled = false;
                 btn.innerText = originalBtnText;
             }
         });
 
-        // Convertir matrícula a mayúsculas
         document.getElementById('matricula').addEventListener('input', function(e) {
             e.target.value = e.target.value.toUpperCase();
         });

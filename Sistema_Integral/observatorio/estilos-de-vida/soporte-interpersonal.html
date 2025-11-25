@@ -23,8 +23,9 @@
 <body>
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="estilos_de_vida.html">
-                <img src="imagenes estilo/EDUCANDO VF SLOGAN (IDENTIDAD)_ NEGRO.png" alt="" width="50px" id="imagen">
+            
+            <a class="navbar-brand" href="/observatorio/observatorio.html">
+                <img src="imagenes estilo/logo_unacar (1).png" alt="" width="160px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,10 +54,13 @@
                         <a class="nav-link ms-3 my-1 active"
                             href="/observatorio/estilos-de-vida/soporte-interpersonal.html">Soporte Interpersonal</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link ms-1 my-1" href="/observatorio/observatorio.html">Salir</a>
+                    </li>
                 </ul>
             </div>
-            <a class="navbar-brand" href="/observatorio/observatorio.html">
-                <img src="imagenes estilo/logo_unacar (1).png" alt="" width="160px">
+            <a class="navbar-brand" href="estilos_de_vida.html">
+                <img src="imagenes estilo/EDUCANDO VF SLOGAN (IDENTIDAD)_ NEGRO.png" alt="" width="50px" id="imagen">
             </a>
         </div>
     </nav>
@@ -219,21 +223,15 @@
         crossorigin="anonymous"></script>
 
     <script>
+
         let mainChart = null;
         let currentChartType = 'bar';
         let currentData = null;
 
-        // VARIABLE PARA CONTROLAR QUÉ TEMA MOSTRAMOS
-        // CAMBIA ESTO PARA MOSTRAR OTROS DATOS (ej. "ejercicio_datos")
         const TEMA_ACTUAL = "soporte_datos";
-        // COLUMNA DE ESTADO SALUDABLE CORRESPONDIENTE
         const COLUMNA_ESTADO = "saludable_soporte";
 
         document.addEventListener("DOMContentLoaded", function () {
-
-            // ========================================
-            // FUNCIONES DE CARGA
-            // ========================================
 
             function cargarFacultades(selectId) {
                 fetch("obtener-datos-soporte.php?tipo=facultad")
@@ -289,9 +287,7 @@
                 }
             }
 
-            // FUNCIÓN PARA OBTENER VALORES DE FILTROS (desktop o mobile)
             function obtenerValoresFiltros() {
-                // Si estamos en mobile, usar los selectores mobile, sino desktop
                 const isMobile = window.innerWidth < 768;
 
                 return {
@@ -302,13 +298,10 @@
                 };
             }
 
-            // --- ¡FUNCIÓN MODIFICADA! ---
             function cargarDatosDelDashboard() {
                 const filtros = obtenerValoresFiltros();
 
                 let params = new URLSearchParams();
-
-                // ¡CAMBIO 1: Usa la variable TEMA_ACTUAL!
                 params.append("tipo", "soporte_datos");
 
                 if (filtros.facultad) params.append("facultad", filtros.facultad);
@@ -316,23 +309,18 @@
                 if (filtros.sexo) params.append("sexo", filtros.sexo);
                 if (filtros.anio) params.append("anio", filtros.anio);
 
-                console.log("Parámetros enviados:", params.toString()); // Para debug
+                console.log("Parámetros enviados:", params.toString());
 
                 fetch(`obtener-datos-soporte.php?${params.toString()}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log("Datos recibidos:", data); // Para debug
+                        console.log("Datos recibidos:", data);
                         currentData = data;
                         mostrarDatos(data);
                     })
                     .catch(error => console.error("Error:", error));
             }
 
-            // ========================================
-            // MOSTRAR DATOS EN GRÁFICA
-            // ========================================
-
-            // --- ¡FUNCIÓN MODIFICADA! ---
             function mostrarDatos(data) {
                 if (!data || data.length === 0) {
                     actualizarEstadisticas(0, 0, 0);
@@ -340,7 +328,6 @@
                     return;
                 }
 
-                // Los datos ya vienen agregados desde PHP
                 let total = 0;
                 let cantidadSaludable = 0;
                 let cantidadNoSaludable = 0;
@@ -353,7 +340,6 @@
                     estadosData[estado] = cantidad;
                     total += cantidad;
 
-                    // Normalizar para contar saludables vs no saludables
                     let estadoNorm = estado.toLowerCase().trim()
                         .normalize("NFD")
                         .replace(/[\u0300-\u036f]/g, "");
@@ -366,46 +352,50 @@
                 });
 
                 actualizarEstadisticas(total, cantidadSaludable, cantidadNoSaludable);
-                actualizarGrafica(estadosData);
+                actualizarGrafica(estadosData, total);
             }
 
             function actualizarEstadisticas(total, cantidadSaludable, cantidadNoSaludable) {
                 document.getElementById('totalRegistros').textContent = total;
-                document.getElementById('cantidadSaludable').textContent = cantidadSaludable;
-                document.getElementById('cantidadNoSaludable').textContent = cantidadNoSaludable;
+
+                const porcentajeSaludable = total > 0 ? ((cantidadSaludable / total) * 100).toFixed(1) : 0;
+                const porcentajeNoSaludable = total > 0 ? ((cantidadNoSaludable / total) * 100).toFixed(1) : 0;
+
+                document.getElementById('cantidadSaludable').textContent = porcentajeSaludable + '%';
+                document.getElementById('cantidadNoSaludable').textContent = porcentajeNoSaludable + '%';
             }
 
-            function actualizarGrafica(chartData) {
+            function actualizarGrafica(chartData, total) {
                 if (mainChart) mainChart.destroy();
 
                 const ctx = document.getElementById('mainChart').getContext('2d');
 
-                // Función para normalizar el texto del estado
                 function normalizarEstado(estado) {
                     return (estado || '').toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
                 }
 
-                // Asignar colores según las etiquetas
                 const labels = Object.keys(chartData);
+                const valores = Object.values(chartData);
+
                 const colores = labels.map(label => {
                     let estadoNormalizado = normalizarEstado(label);
                     if (estadoNormalizado === 'saludable') {
-                        return 'rgba(75, 192, 192, 0.8)'; // Verde
+                        return 'rgba(75, 192, 192, 0.8)';
                     } else if (estadoNormalizado === 'no saludable' || estadoNormalizado.startsWith('no')) {
-                        return 'rgba(255, 99, 132, 0.8)'; // Rojo
+                        return 'rgba(255, 99, 132, 0.8)';
                     } else {
-                        return 'rgba(201, 203, 207, 0.8)'; // Gris
+                        return 'rgba(201, 203, 207, 0.8)';
                     }
                 });
 
                 const bordes = labels.map(label => {
                     let estadoNormalizado = normalizarEstado(label);
                     if (estadoNormalizado === 'saludable') {
-                        return 'rgba(75, 192, 192, 1)'; // Verde
+                        return 'rgba(75, 192, 192, 1)';
                     } else if (estadoNormalizado === 'no saludable' || estadoNormalizado.startsWith('no')) {
-                        return 'rgba(255, 99, 132, 1)'; // Rojo
+                        return 'rgba(255, 99, 132, 1)';
                     } else {
-                        return 'rgba(201, 203, 207, 1)'; // Gris
+                        return 'rgba(201, 203, 207, 1)';
                     }
                 });
 
@@ -415,7 +405,7 @@
                         labels: labels,
                         datasets: [{
                             label: 'Cantidad',
-                            data: Object.values(chartData),
+                            data: valores,
                             backgroundColor: colores,
                             borderColor: bordes,
                             borderWidth: 2
@@ -428,18 +418,77 @@
                             legend: {
                                 display: currentChartType === 'pie',
                                 position: 'bottom'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (context) {
+                                        const value = context.parsed.y || context.parsed;
+                                        const porcentaje = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
+                                        return `${context.label}: ${value} (${porcentaje}%)`;
+                                    }
+                                }
                             }
                         },
                         scales: currentChartType === 'bar' ? {
-                            y: { beginAtZero: true }
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function (value) {
+                                        return value;
+                                    }
+                                }
+                            }
                         } : {}
-                    }
+                    },
+                    plugins: currentChartType === 'bar' ? [{
+                        afterDatasetsDraw: function (chart) {
+                            const ctx = chart.ctx;
+                            chart.data.datasets.forEach((dataset, i) => {
+                                const meta = chart.getDatasetMeta(i);
+                                meta.data.forEach((bar, index) => {
+                                    const data = dataset.data[index];
+                                    const porcentaje = total > 0 ? ((data / total) * 100).toFixed(1) : 0;
+
+                                    ctx.fillStyle = '#fff';
+                                    ctx.font = 'bold 12px Arial';
+                                    ctx.textAlign = 'center';
+                                    ctx.textBaseline = 'middle';
+
+                                    const x = bar.x;
+                                    const y = bar.y + 20;
+
+                                    ctx.fillText(`${data}`, x, y - 10);
+                                    ctx.fillText(`(${porcentaje}%)`, x, y + 10);
+                                });
+                            });
+                        }
+                    }] : [{
+                        afterDatasetsDraw: function (chart) {
+                            const ctx = chart.ctx;
+                            chart.data.datasets.forEach((dataset, i) => {
+                                const meta = chart.getDatasetMeta(i);
+                                meta.data.forEach((slice, index) => {
+                                    const data = dataset.data[index];
+                                    const porcentaje = total > 0 ? ((data / total) * 100).toFixed(1) : 0;
+
+                                    const angle = (slice.startAngle + slice.endAngle) / 2;
+                                    const radius = (slice.innerRadius + slice.outerRadius) / 2;
+                                    const x = slice.x + Math.cos(angle) * radius * 0.7;
+                                    const y = slice.y + Math.sin(angle) * radius * 0.7;
+
+                                    ctx.fillStyle = '#fff';
+                                    ctx.font = 'bold 12px Arial';
+                                    ctx.textAlign = 'center';
+                                    ctx.textBaseline = 'middle';
+
+                                    ctx.fillText(`${data}`, x, y - 8);
+                                    ctx.fillText(`(${porcentaje}%)`, x, y + 8);
+                                });
+                            });
+                        }
+                    }]
                 });
             }
-
-            // ========================================
-            // CAMBIO DE TIPO DE GRÁFICA
-            // ========================================
 
             document.getElementById('btnBarras').addEventListener('click', function () {
                 currentChartType = 'bar';
@@ -455,20 +504,11 @@
                 if (currentData) mostrarDatos(currentData);
             });
 
-            // ========================================
-            // INICIALIZACIÓN
-            // ========================================
-
             cargarFacultades("facultad");
             cargarFacultades("facultad-mobile");
             cargarAnios("nacimiento");
             cargarAnios("nacimiento-mobile");
 
-            // ========================================
-            // EVENT LISTENERS - DESKTOP
-            // ========================================
-
-            // --- ¡Actualizado para llamar a la nueva función! ---
             document.getElementById("facultad")?.addEventListener("change", function () {
                 cargarCarreras(this.value, "carrera");
                 cargarDatosDelDashboard();
@@ -478,11 +518,6 @@
             document.getElementById("sexo")?.addEventListener("change", cargarDatosDelDashboard);
             document.getElementById("nacimiento")?.addEventListener("change", cargarDatosDelDashboard);
 
-            // ========================================
-            // EVENT LISTENERS - MOBILE
-            // ========================================
-
-            // --- ¡Actualizado para llamar a la nueva función! ---
             document.getElementById("facultad-mobile")?.addEventListener("change", function () {
                 cargarCarreras(this.value, "carrera-mobile");
                 cargarDatosDelDashboard();
@@ -492,7 +527,6 @@
             document.getElementById("sexo-mobile")?.addEventListener("change", cargarDatosDelDashboard);
             document.getElementById("nacimiento-mobile")?.addEventListener("change", cargarDatosDelDashboard);
 
-            // Cargar datos iniciales
             cargarDatosDelDashboard();
         });
     </script>

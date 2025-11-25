@@ -979,6 +979,7 @@
                             mostrarModalAdvertencia(data.cuestionarios_faltantes);
                             form.reset();
                             limpiarCamposReadonly();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
                             return;
                         }
 
@@ -987,6 +988,7 @@
                             mostrarMensajeExito(data);
                             form.reset();
                             limpiarCamposReadonly();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
                         } else if (data.error) {
                             alert('Error: ' + data.error);
                         }

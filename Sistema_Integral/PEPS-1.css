@@ -1,302 +1,214 @@
-/* Ocultar flechas de input number */
-#matricula::-webkit-outer-spin-button,
-#matricula::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+/* =========================================
+   BASE: Estilos heredados de registro.css
+   ========================================= */
+:root {
+    --primary: #003da5;      /* Azul Institucional */
+    --primary-dark: #002a70;
+    --secondary: #ffd100;    /* Amarillo acento */
+    --text-main: #1f2937;
+    --text-light: #6b7280;
+    --bg-page: #f3f4f6;
+    --white: #ffffff;
+    --border: #e5e7eb;
+    --focus-ring: rgba(0, 61, 165, 0.15);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-#matricula {
-    -moz-appearance: textfield;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* Estilos del body con nuevo gradiente amigable */
 body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-page);
+    background-image: linear-gradient(to bottom, var(--primary) 0%, var(--primary) 300px, var(--bg-page) 300px);
+    background-repeat: no-repeat;
+    color: var(--text-main);
     min-height: 100vh;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding: 20px 0;
+    padding: 2rem 1rem;
+    line-height: 1.5;
 }
 
-/* Alternativa de fondo más suave en verdes/turquesa */
-body.theme-green {
-    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%) !important;
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--white);
+    padding-top: 1rem;
 }
+.header h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.header p { font-size: 1rem; color: rgba(255, 255, 255, 0.9); font-weight: 300; }
 
-body.theme-warm {
-    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%) !important;
-}
-
-/* Container principal */
-.container-fluid {
+/* Contenedor Tarjeta */
+.form-container {
     max-width: 900px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Título principal */
-h3 {
-    color: #2d3748;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    padding: 20px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+.form-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 6px;
+    background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
 }
 
-/* Sección de instrucciones */
-#instrucciones {
-    background: white;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
+/* Secciones */
+.form-section {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2rem;
 }
-
-#instrucciones p {
-    color: #4a5568;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-#instrucciones p.text-center {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 1.1rem;
+.section-title {
+    font-size: 1.25rem;
+    color: var(--primary);
     font-weight: 600;
-}
-
-/* Input de matrícula */
-.mati {
-    border: 2px solid #e2e8f0;
-    width: 100%;
-    max-width: 300px;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
-
-.mati:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-/* Cuadros de preguntas - MEJORADO */
-.cuadro {
-    background: white;
-    border: none;
-    border-left: 4px solid #667eea;
-    padding: 30px 25px;
-    margin: 25px 0;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-    min-height: 120px;
-}
-
-.cuadro:hover {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    transform: translateY(-2px);
-}
-
-/* Contenedor de opciones con más espacio */
-.cuadro > div {
-    margin-top: 15px;
-    margin-left: 20px;
+    margin-bottom: 1rem;
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-/* Labels de preguntas */
-.form-label {
-    color: #2d3748;
-    font-weight: 600;
-    font-size: 1.05rem;
-    margin-bottom: 20px;
-    display: block;
-    line-height: 1.8;
-    letter-spacing: 0.3px;
-}
-
-/* Radio buttons mejorados */
-.form-check {
-    margin: 10px 0;
-    padding: 0;
-}
-
-.form-check-inline {
-    display: inline-block;
     align-items: center;
-    margin-right: 15px;
-    margin-bottom: 5px;
-    min-width: 100px;
+}
+.section-title::before {
+    content: ''; display: inline-block; width: 4px; height: 24px;
+    background-color: var(--secondary); margin-right: 12px; border-radius: 2px;
 }
 
-.colorradio {
-    width: 22px;
-    height: 22px;
-    border: 2px solid #cbd5e0;
-    cursor: pointer;
+/* Instrucciones */
+.instructions-box {
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--primary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   ESTILOS ESPECÍFICOS PARA PREGUNTAS (FIX FINAL)
+   ========================================= */
+
+.questions-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .questions-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.question-card {
+    background-color: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem; /* Aumenté un poco el padding interno */
     transition: all 0.2s ease;
-    margin-right: 8px;
-    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.colorradio:checked {
-    background-color: #667eea;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+.question-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(0, 61, 165, 0.08);
 }
 
-.colorradio:hover {
-    border-color: #667eea;
+.question-label {
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    display: block;
+    color: var(--primary-dark);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Opciones de respuesta */
+.options-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: auto;
+    padding-left: 0.25rem; /* Pequeño margen interno de seguridad */
+}
+
+/* Contenedor de cada opción (Radio + Label) */
+.form-check {
+    display: flex; 
+    align-items: center; 
+    margin: 0;
+    padding-left: 0 !important; /* FORZAMOS QUE NO TENGA PADDING IZQUIERDO DE BOOTSTRAP */
+    min-height: auto;
+}
+
+/* El círculo del radio button */
+.form-check-input {
+    float: none !important; /* Anular float de Bootstrap */
+    margin-left: 0 !important; /* CORRECCIÓN CLAVE: Eliminar margen negativo */
+    margin-right: 12px !important; /* Espacio derecho asegurado */
+    margin-top: 0;
+    
+    width: 20px; 
+    height: 20px; 
+    min-width: 20px; /* Evita que se aplaste */
+    
+    border: 2px solid #d1d5db; 
+    cursor: pointer;
+    background-color: #fff;
+    
+    /* Resetear estilos nativos */
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    
+    position: relative;
+}
+
+/* Estilo cuando está seleccionado */
+.form-check-input:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+    background-size: 60%; 
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.form-check-input:focus {
+    box-shadow: 0 0 0 4px var(--focus-ring);
+    border-color: var(--primary);
 }
 
 .form-check-label {
-    color: #4a5568;
-    font-size: 1rem;
     cursor: pointer;
-    user-select: none;
-    line-height: 1.5;
-    display: inline-block;
-    padding: 5px 10px 5px 0;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    line-height: 1.3;
 }
 
-/* Botón de envío mejorado */
-.colorboton {
+/* Botón Enviar */
+.submit-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.btn-submit {
+    background-color: var(--primary);
     color: white;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    border: 1px solid #000;
-    padding: 14px 40px;
-    font-size: 1.1rem;
     font-weight: 600;
+    padding: 1rem 3rem;
     border-radius: 50px;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.colorboton:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-}
-
-.colorboton:active {
-    transform: translateY(0);
-}
-
-/* Mensaje de agradecimiento */
-#gracias {
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-#gracias h2 {
-    color: #667eea;
-    font-size: 1.5rem;
-    line-height: 1.6;
-}
-
-/* Indicador de progreso (opcional - agregar con JS) */
-.progress-indicator {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.progress-bar-custom {
-    height: 8px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    border-radius: 10px;
-    transition: width 0.3s ease;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .cuadro {
-        padding: 20px 15px;
-        min-height: auto;
-    }
-    
-    .form-check-inline {
-        display: block;
-        margin-bottom: 12px;
-        margin-right: 0;
-    }
-    
-    .form-label {
-        font-size: 0.95rem;
-        line-height: 1.6;
-    }
-    
-    h3 {
-        font-size: 1.3rem;
-    }
-    
-    .colorboton {
-        width: 100%;
-        padding: 12px 30px;
-    }
-}
-
-/* Animación de carga */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.cuadro {
-    animation: fadeIn 0.5s ease-out;
-}
-
-/* Estado de error (opcional) */
-.cuadro.error {
-    border-left-color: #f56565;
-    animation: shake 0.3s ease-in-out;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-}
-
-/* Mejora para accesibilidad */
-.form-check-input:focus {
-    outline: 2px solid #667eea;
-    outline-offset: 2px;
-}
-
-/* Estilo para tabla (si se usa) */
-.table {
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.btn-secondary {
-    background-color: #667eea !important;
     border: none;
-    border-radius: 8px;
-    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    box-shadow: 0 4px 10px rgba(0, 61, 165, 0.3);
 }
 
-.btn-secondary:hover {
-    background-color: #764ba2 !important;
+.btn-submit:hover {
+    background-color: var(--primary-dark);
     transform: translateY(-2px);
 }

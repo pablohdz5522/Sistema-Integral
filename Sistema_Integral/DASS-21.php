@@ -39,6 +39,7 @@ $stmt_verificar->close();
 $error_message = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // ... (Tu lógica de procesamiento POST se mantiene idéntica aquí) ...
     $required_fields = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9', 'p10', 'p11', 'p12', 'p13', 'p14', 'p15', 'p16', 'p17', 'p18', 'p19', 'p20', 'p21'];
     $all_valid = true;
     foreach ($required_fields as $field) {
@@ -95,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     (($total_estres <= 16) ? 'Severo' : 'Extremadamente Severo')));
 
         $total_general = $total_depresion + $total_ansiedad + $total_estres;
+        
         // Insertar en tabla principal
         $sql_cuestionario = "INSERT INTO dass (matricula_alum, total_depresion, total_ansiedad, total_estres, total_general) VALUES (?, ?, ?, ?, ?)";
         $stmt_cuestionario = $conn->prepare($sql_cuestionario);
@@ -132,625 +134,183 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: menuAlum.php");
             exit();
         } else {
-            $error_message = "Error al guardar los datos del formulario. Por favor, intenta de nuevo.";
+            $error_message = "Error al guardar los datos del formulario.";
         }
     }
 }
 $conn->close();
+
+// Función auxiliar para renderizar opciones de forma limpia
+function renderOpcionesDASS($idPregunta) {
+    echo '
+    <div class="options-group">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="'.$idPregunta.'" id="'.$idPregunta.'_0" value="0" required>
+            <label class="form-check-label" for="'.$idPregunta.'_0">No me ha ocurrido</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="'.$idPregunta.'" id="'.$idPregunta.'_1" value="1">
+            <label class="form-check-label" for="'.$idPregunta.'_1">Me ha ocurrido un poco</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="'.$idPregunta.'" id="'.$idPregunta.'_2" value="2">
+            <label class="form-check-label" for="'.$idPregunta.'_2">Me ha ocurrido bastante</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="'.$idPregunta.'" id="'.$idPregunta.'_3" value="3">
+            <label class="form-check-label" for="'.$idPregunta.'_3">Me ha ocurrido mucho</label>
+        </div>
+    </div>';
+}
 ?>
-
-
 
 <!doctype html>
 <html lang="es">
-
 <head>
-    <title>DASS</title>
-    <!-- Required meta tags -->
+    <title>Cuestionario DASS-21</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="PEPS-1.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="/ico/logo_pequeno.ico">
 </head>
 
-<body
-    style="background: linear-gradient(278deg, rgba(23, 19, 235, 0.50) 13.7%, rgba(255, 255, 255, 0.25) 13.7%), linear-gradient(263deg, rgba(71, 15, 255, 0.00) 87.02%, rgba(71, 15, 255, 0.50) 87.03%), linear-gradient(277deg, rgba(255, 242, 0, 0.00) 89.31%, #FFF600 89.63%), linear-gradient(87deg, #FFF 88.1%, #FDEE18 88.48%); margin: 0;height: 100%; min-height: 100vh;">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-7 col-md-8 col-sm-10 col-12">
-
-                <div class="text-center" style="margin-top: 35px;">
-                    <h3>Cuestionario DASS</h3>
-                </div>
-                <div class="mt-4" style="display: block;" id="instrucciones">
-                    <p style="font-weight: bolder;">Instrucciones:</p>
-                    <p style="margin-top: -15px; font-weight: bolder;">Por favor lea las siguientes afirmaciones y
-                        indica lo que le ha ocurrido a usted esta afirmacion *durante la semana pasada*.</p>
-                    <p style="margin-top: -15px; font-weight: bolder;">La escala de calificación se encuentra en el
-                        boton.</p>
-                </div>
-
-                <br>
-                <form action="DASS-21.php" method="post" style="display: block;" id="formulario">
-
-                    <div class="mt-2 cuadro">
-                        <label for="p1" class="form-label">1. Me ha costado mucho descargar la tensión...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p1" id="p1_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p1_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p1" id="p1_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p1_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p1" id="p1_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p1_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p1" id="p1_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p1_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="mt-3 cuadro">
-                        <label for="p2" class="form-label">2. Me di cuenta que tenía la boca seca...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p2" id="p2_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p2_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p2" id="p2_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p2_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p2" id="p2_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p2_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p2" id="p2_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p2_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p3" class="form-label">3. No podía sentir ningún sentimiento positivo...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p3" id="p3_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p3_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p3" id="p3_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p3_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p3" id="p3_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p3_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p3" id="p3_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p3_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p4" class="form-label">4. Se me hizo difícil respirar...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p4" id="p4_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p4_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p4" id="p4_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p4_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p4" id="p4_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p4_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p4" id="p4_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p4_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p5" class="form-label">5. Se me hizo difícil tomar la iniciativa para hacer
-                            cosas...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p5" id="p5_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p5_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p5" id="p5_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p5_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p5" id="p5_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p5_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p5" id="p5_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p5_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">6. Reaccioné exageradamente en ciertas situaciones...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p6" id="p6_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p6_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p6" id="p6_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p6_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p6" id="p6_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p6_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p6" id="p6_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p6_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">7. Sentí que mis manos temblaban...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p7" id="p7_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p7_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p7" id="p7_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p7_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p7" id="p7_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p7_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p7" id="p7_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p7_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">8. He sentido que estaba gastando una gran cantidad de
-                            energía...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p8" id="p8_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p8_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p8" id="p8_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p8_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p8" id="p8_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p8_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p8" id="p8_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p8_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">9. Estaba preocupado por situaciones en las cuales podía
-                            tener pánico o en las que podría
-                            hacer el ridículo...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p9" id="p9_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p9_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p9" id="p9_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p9_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p9" id="p9_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p9_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p9" id="p9_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p9_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">10. He sentido que no había nada que me ilusionara...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p10" id="p10_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p10_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p10" id="p10_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p10_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p10" id="p10_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p10_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p10" id="p10_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p10_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">11. Me he sentido inquieto...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p11" id="p11_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p11_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p11" id="p11_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p11_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p11" id="p11_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p11_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p11" id="p11_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p11_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">12. Se me hizo difícil relajarme...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p12" id="p12_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p12_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p12" id="p12_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p12_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p12" id="p12_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p12_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p12" id="p12_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p12_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">13. Me sentí triste y deprimido...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p13" id="p13_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p13_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p13" id="p13_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p13_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p13" id="p13_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p13_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p13" id="p13_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p13_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">14. No toleré nada que no me permitiera continuar con lo que
-                            estaba haciendo...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p14" id="p14_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p14_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p14" id="p14_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p14_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p14" id="p14_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p14_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p14" id="p14_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p14_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">15. Sentí que estaba al punto de pánico...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p15" id="p15_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p15_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p15" id="p15_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p15_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p15" id="p15_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p15_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p15" id="p15_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p15_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">16. No me pude entusiasmar por nada...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p16" id="p16_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p16_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p16" id="p16_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p16_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p16" id="p16_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p16_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p16" id="p16_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p16_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">17. Sentí que valía muy poco como persona...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p17" id="p17_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p17_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p17" id="p17_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p17_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p17" id="p17_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p17_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p17" id="p17_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p17_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">18. He tendido a sentirme enfadado con facilidad...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p18" id="p18_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p18_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p18" id="p18_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p18_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p18" id="p18_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p18_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p18" id="p18_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p18_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">19. Sentí los latidos de mi corazón a pesar de no haber hecho
-                            ningún esfuerzo físico...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p19" id="p19_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p19_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p19" id="p19_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p19_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p19" id="p19_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p19_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p19" id="p19_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p19_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">20. Tuve miedo sin razón...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p20" id="p20_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p20_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p20" id="p20_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p20_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p20" id="p20_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p20_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p20" id="p20_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p20_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-3 cuadro">
-                        <label for="p6" class="form-label">21. Sentí que la vida no tenía ningún sentido...</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p21" id="p21_nunca"
-                                    value="0" required>
-                                <label class="form-check-label" for="p21_nunca">No me ha ocurrido</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p21" id="p21_aveces"
-                                    value="1" required>
-                                <label class="form-check-label" for="p21_aveces">Me ha ocurrido un poco</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p21" id="p21_frecuente"
-                                    value="2" required>
-                                <label class="form-check-label" for="p21_frecuente">Me ha ocurrido bastante</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input colorradio" type="radio" name="p21" id="p21_rutina"
-                                    value="3" required>
-                                <label class="form-check-label" for="p21_rutina">Me ha ocurrido mucho</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="text-center" style="margin-bottom: 40px;" id="enviarResultados">
-                        <button class="btn btn-outline-primary colorboton" type="submit">Enviar Resultados</button>
-                    </div>
-
-
-                    <div class="text-center" id="gracias" style="display: none;">
-                        <h2>Muchas gracias por presentar el cuestionario, por favor dirígete con el encargado del
-                            proyecto para saber que más hacer</h2>
-                    </div>
-
-                </form>
-            </div>
-        </div>
+<body>
+    <div class="header">
+        <h1>Sistema Integral de Salud UNACAR</h1>
+        <p>Evaluación de Estrés, Ansiedad y Depresión</p>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
+    <div class="form-container">
+        
+        <?php if (!empty($error_message)): ?>
+            <div class="alert alert-danger"><?php echo $error_message; ?></div>
+        <?php endif; ?>
 
+        <div class="instructions-box">
+            <h5 class="text-primary mb-3">Instrucciones:</h5>
+            <p>Por favor lea las siguientes afirmaciones e indique cuánto le ha ocurrido o afectado cada situación <strong>durante la semana pasada</strong>.</p>
+            <p class="mb-0">No hay respuestas correctas o incorrectas. Seleccione la opción que mejor describa su estado.</p>
+        </div>
+
+        <form action="DASS-21.php" method="post">
+            <div class="form-section">
+                <h4 class="section-title">Cuestionario</h4>
+                
+                <div class="questions-grid">
+                    <div class="question-card">
+                        <label class="question-label">1. Me ha costado mucho descargar la tensión</label>
+                        <?php renderOpcionesDASS('p1'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">2. Me di cuenta que tenía la boca seca</label>
+                        <?php renderOpcionesDASS('p2'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">3. No podía sentir ningún sentimiento positivo</label>
+                        <?php renderOpcionesDASS('p3'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">4. Se me hizo difícil respirar</label>
+                        <?php renderOpcionesDASS('p4'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">5. Se me hizo difícil tomar la iniciativa para hacer cosas</label>
+                        <?php renderOpcionesDASS('p5'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">6. Reaccioné exageradamente en ciertas situaciones</label>
+                        <?php renderOpcionesDASS('p6'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">7. Sentí que mis manos temblaban</label>
+                        <?php renderOpcionesDASS('p7'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">8. He sentido que estaba gastando una gran cantidad de energía</label>
+                        <?php renderOpcionesDASS('p8'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">9. Estaba preocupado por situaciones en las cuales podía tener pánico</label>
+                        <?php renderOpcionesDASS('p9'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">10. He sentido que no había nada que me ilusionara</label>
+                        <?php renderOpcionesDASS('p10'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">11. Me he sentido inquieto</label>
+                        <?php renderOpcionesDASS('p11'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">12. Se me hizo difícil relajarme</label>
+                        <?php renderOpcionesDASS('p12'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">13. Me sentí triste y deprimido</label>
+                        <?php renderOpcionesDASS('p13'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">14. No toleré nada que no me permitiera continuar con lo que estaba haciendo</label>
+                        <?php renderOpcionesDASS('p14'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">15. Sentí que estaba al punto de pánico</label>
+                        <?php renderOpcionesDASS('p15'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">16. No me pude entusiasmar por nada</label>
+                        <?php renderOpcionesDASS('p16'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">17. Sentí que valía muy poco como persona</label>
+                        <?php renderOpcionesDASS('p17'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">18. He tendido a sentirme enfadado con facilidad</label>
+                        <?php renderOpcionesDASS('p18'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">19. Sentí los latidos de mi corazón a pesar de no haber hecho esfuerzo físico</label>
+                        <?php renderOpcionesDASS('p19'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">20. Tuve miedo sin razón</label>
+                        <?php renderOpcionesDASS('p20'); ?>
+                    </div>
+
+                    <div class="question-card">
+                        <label class="question-label">21. Sentí que la vida no tenía ningún sentido</label>
+                        <?php renderOpcionesDASS('p21'); ?>
+                    </div>
+                </div> </div>
+
+            <div class="submit-container">
+                <button class="btn-submit" type="submit">Enviar Resultados</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>

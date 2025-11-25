@@ -2,8 +2,7 @@
 date_default_timezone_set('America/Mexico_City');
 session_start();
 
-require_once 'session_security.php';
-// Verifica si el usuario está autenticado
+
 if (!isset($_SESSION['usuario'])) {
   header('Location: login.php');
   exit();
@@ -15,13 +14,7 @@ if ($conn->connect_errno) {
     die("Error de conexión: " . $conn->connect_error);
 }
 
-// ✅ Verificar timeout de inactividad
-if (verificarTimeout(1800)) { // 30 minutos
-    cerrarSesionCompleta($conn, $_SESSION['usuario']);
-    $conn->close();
-    header('Location: login.php?error=timeout');
-    exit();
-}
+
 // Obtener cantidad de alumnos
 $sqlAlumnos = "SELECT COUNT(*) FROM alumnos";
 $resultAlumnos = $conn->query($sqlAlumnos);
@@ -229,6 +222,22 @@ $conn->close();
         </ul>
       </div>
 
+      <div class="menu-card position-relative" data-aos="fade-up" data-aos-delay="400" style="cursor: pointer;"
+        id="cardCredenciales">
+        <div class="w-100 d-flex flex-column align-items-center text-center">
+          <i class="bi bi-credit-card-2-front-fill"></i>
+          <h5 class="mt-3">Credenciales</h5>
+        </div>
+        <ul class="dropdown-menu dropdown-menu-center text-center" id="menuCredenciales">
+          <li><a class="dropdown-item d-flex align-items-center justify-content-center gap-5"
+              href="credencialesalumnos.html"><i class="bi bi-mortarboard"></i> Alumnos</a></li>
+          <li hidden><a class="dropdown-item" href="ListadoDocentes.html"><i class="bi bi-person-badge"></i> Docentes</a>
+          </li>
+          <li hidden><a class="dropdown-item" href="ListadoEmpleados.html"><i class="bi bi-briefcase"></i> Empleados</a>
+          </li>
+        </ul>
+      </div>
+
 
     <?php } ?>
   </main>
@@ -271,6 +280,7 @@ $conn->close();
 
         // Cerrar el otro dropdown si está abierto
         document.getElementById('menuBusqueda').classList.remove('show');
+        document.getElementById('menuCredenciales').classList.remove('show');
 
         // Toggle este dropdown
         menu.classList.toggle('show');
@@ -283,15 +293,29 @@ $conn->close();
 
         // Cerrar el otro dropdown si está abierto
         document.getElementById('menuResultados').classList.remove('show');
+        document.getElementById('menuCredenciales').classList.remove('show');
 
         // Toggle este dropdown
         menu.classList.toggle('show');
       });
 
-      // Cerrar dropdowns al hacer click fuera
+      document.getElementById('cardCredenciales').addEventListener('click', function(e){
+        e.stopPropagation();
+        const menu = document.getElementById('menuCredenciales');
+
+
+        document.getElementById('menuResultados').classList.remove('show');
+        document.getElementById('menuBusqueda').classList.remove('show');
+        
+        menu.classList.toggle('show');
+        
+      })
+
+      
       document.addEventListener('click', function () {
         document.getElementById('menuResultados').classList.remove('show');
         document.getElementById('menuBusqueda').classList.remove('show');
+        document.getElementById('menuCredenciales').classList.remove('show');
       });
     });
   </script>
